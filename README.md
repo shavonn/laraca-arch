@@ -69,6 +69,15 @@ artisan arty:controller <name>
 Extends `artisan make:controller`
 Default dir in config: `Http\Controllers`
 
+#### arty:event
+
+```php
+artisan arty:event <name>
+```
+
+Extends `artisan make:event`
+Default dir in config: `Events`
+
 #### arty:model
 
 ```php
