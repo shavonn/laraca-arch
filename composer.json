@@ -1,0 +1,53 @@
+{
+  "name": "handsomebrown/laraca",
+  "description": "Provides commands for an alternate Laravel application structure.",
+  "keywords": [
+    "handsomebrown",
+    "laraca"
+  ],
+  "homepage": "https://github.com/handsomebrown/laraca",
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Shavonn Brown",
+      "email": "dev@handsomebrown.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^8.0",
+    "illuminate/support": "^8.0"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^6.0",
+    "phpunit/phpunit": "^9.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "HandsomeBrown\\Laraca\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "HandsomeBrown\\Laraca\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "HandsomeBrown\\Laraca\\LaracaServiceProvider"
+      ],
+      "aliases": {
+        "Laraca": "HandsomeBrown\\Laraca\\LaracaFacade"
+      }
+    }
+  }
+}
