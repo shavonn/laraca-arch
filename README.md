@@ -216,7 +216,16 @@ artisan arty:rule <name>
 ```
 
 Extends `artisan make:rule`
-Default dir in config: `Rules`
+Default dir in config: `app/Rules`
+
+#### arty:scope
+
+```php
+artisan arty:scope <name>
+```
+
+Extends `artisan make:scope`
+Default dir in config: `app/Data/Models/Scopes`
 
 ### Testing
 

@@ -275,4 +275,17 @@ return [
         'path' => app_path('Rules'),
         'namespace' => app()->getNamespace().'Rules',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scope Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Scopes will be generated.
+    |
+    */
+    'scope' => [
+        'path' => app_path('Data/Models/Scopes'),
+        'namespace' => app()->getNamespace().'Data\\Models\\Scopes',
+    ],
 ];
