@@ -21,4 +21,12 @@ trait GeneratesClasses
     {
         return __DIR__."/../../Foundation/Console/stubs/generated/{$stub}";
     }
+
+    /**
+     * Return path to stub file.
+     */
+    public function getStubPath(string $stub): string
+    {
+        return __DIR__."/../../Foundation/Console/stubs/{$stub}";
+    }
 }
