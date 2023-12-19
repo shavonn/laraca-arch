@@ -60,6 +60,15 @@ Note:
 
 - This command will route the class generation. Rather than confuse, the blade file path is determined by the preexisting config value in `config/view.php`.
 
+#### arty:controller
+
+```php
+artisan arty:controller <name>
+```
+
+Extends `artisan make:controller`
+Default dir in config: `Http\Controllers`
+
 #### arty:model
 
 ```php
