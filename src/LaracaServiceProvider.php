@@ -2,10 +2,21 @@
 
 namespace HandsomeBrown\Laraca;
 
+use HandsomeBrown\Laraca\Foundation\Console\MakeModelCommand;
+use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\ServiceProvider;
 
 class LaracaServiceProvider extends ServiceProvider
 {
+    /**
+     * The commands to be registered.
+     *
+     * @var array
+     */
+    protected $commands = [
+        'MakeModel' => MakeModelCommand::class,
+    ];
+
     /**
      * Bootstrap the application services.
      */
@@ -40,7 +51,7 @@ class LaracaServiceProvider extends ServiceProvider
             ], 'lang');*/
 
             // Registering package commands.
-            // $this->commands([]);
+            $this->registerCommands();
         }
     }
 
@@ -56,5 +67,31 @@ class LaracaServiceProvider extends ServiceProvider
         $this->app->singleton('laraca', function () {
             return new Laraca;
         });
+    }
+
+    /**
+     * Register the given commands.
+     *
+     * @return void
+     */
+    public function registerCommands()
+    {
+        foreach ($this->commands as $commandName => $command) {
+            $method = "register{$commandName}Command";
+
+            if (method_exists($this, $method)) {
+                $this->{$method}();
+            } else {
+                if ($command instanceof GeneratorCommand) {
+                    $this->app->singleton($command, function ($app, $command) {
+                        return new ($command)($app['files']);
+                    });
+                } else {
+                    $this->app->singleton($command);
+                }
+            }
+        }
+
+        $this->commands(array_values($this->commands));
     }
 }

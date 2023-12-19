@@ -1,10 +1,10 @@
-# Build your Laravel application with an alternate structure
+# Laraca
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/handsomebrown/laraca.svg?style=flat-square)](https://packagist.org/packages/handsomebrown/laraca)
 [![Total Downloads](https://img.shields.io/packagist/dt/handsomebrown/laraca.svg?style=flat-square)](https://packagist.org/packages/handsomebrown/laraca)
 ![GitHub Actions](https://github.com/handsomebrown/laraca/actions/workflows/main.yml/badge.svg)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+The goal of this package is an alternate _configurable_ Laravel application structure with a few niceties thrown in.
 
 ## Installation
 
@@ -16,9 +16,20 @@ composer require handsomebrown/laraca
 
 ## Usage
 
+Meet `arty` ( obviously named after Laravel's `artisan`), the command namespace where you can find Laraca commands that wrap Laravel's Artisan command classes so you can have the application structure you want.
+
+Arty extends existing Laravel Artisan commands so they still have all of the arguments and options artisan commands do.
+
+### arty:model
+
+Extends `make:model`
+
 ```php
-// Usage description here
+artisan arty:model <name>
 ```
+
+- --all doesn't work _yet_
+- additional option of `--uuid` will add the HasUuids trait for you
 
 ### Testing
 
