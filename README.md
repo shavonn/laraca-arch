@@ -182,6 +182,15 @@ artisan arty:policy <name>
 Extends `artisan make:policy`
 Default dir in config: `Policies`
 
+#### arty:provider
+
+```php
+artisan arty:provider <name>
+```
+
+Extends `artisan make:provider`
+Default dir in config: `Providers`
+
 ### Testing
 
 ```bash

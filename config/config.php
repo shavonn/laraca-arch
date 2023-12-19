@@ -223,4 +223,17 @@ return [
         'path' => app_path('Policies'),
         'namespace' => app()->getNamespace().'Policies',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Provider Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Providers will be generated.
+    |
+    */
+    'provider' => [
+        'path' => app_path('Providers'),
+        'namespace' => app()->getNamespace().'Providers',
+    ],
 ];
