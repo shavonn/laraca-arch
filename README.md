@@ -162,7 +162,7 @@ artisan arty:notification <name>
 ```
 
 Extends `artisan make:notification`
-Default dir in config: `Notifications`
+Default dir in config: `app/Notifications`
 
 #### arty:observer
 
@@ -171,7 +171,7 @@ artisan arty:observer <name>
 ```
 
 Extends `artisan make:observer`
-Default dir in config: `Data/Observers`
+Default dir in config: `app/Data/Observers`
 
 #### arty:policy
 
@@ -180,7 +180,7 @@ artisan arty:policy <name>
 ```
 
 Extends `artisan make:policy`
-Default dir in config: `Policies`
+Default dir in config: `app/Policies`
 
 #### arty:provider
 
@@ -189,7 +189,16 @@ artisan arty:provider <name>
 ```
 
 Extends `artisan make:provider`
-Default dir in config: `Providers`
+Default dir in config: `app/Providers`
+
+#### arty:request
+
+```php
+artisan arty:request <name>
+```
+
+Extends `artisan make:request`
+Default dir in config: `app/Http/Requests`
 
 ### Testing
 

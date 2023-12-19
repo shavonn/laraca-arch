@@ -236,4 +236,17 @@ return [
         'path' => app_path('Providers'),
         'namespace' => app()->getNamespace().'Providers',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Request Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Requests will be generated.
+    |
+    */
+    'request' => [
+        'path' => app_path('Http/Requests'),
+        'namespace' => app()->getNamespace().'Http\\Requests',
+    ],
 ];

@@ -20,6 +20,7 @@ use HandsomeBrown\Laraca\Foundation\Console\ArtyNotificationCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyObserverCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyPolicyCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyProviderCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyRequestCommand;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\ServiceProvider;
 
@@ -49,6 +50,7 @@ class LaracaServiceProvider extends ServiceProvider
         'ArtyObserver' => ArtyObserverCommand::class,
         'ArtyPolicy' => ArtyPolicyCommand::class,
         'ArtyProvider' => ArtyProviderCommand::class,
+        'ArtyRequest' => ArtyRequestCommand::class,
     ];
 
     /**
