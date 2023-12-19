@@ -227,6 +227,15 @@ artisan arty:scope <name>
 Extends `artisan make:scope`
 Default dir in config: `app/Data/Models/Scopes`
 
+#### arty:seeder
+
+```php
+artisan arty:seeder <name>
+```
+
+Extends `artisan make:seeder`
+Default dir in config: `database/seeders`
+
 ### Testing
 
 ```bash

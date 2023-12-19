@@ -288,4 +288,17 @@ return [
         'path' => app_path('Data/Models/Scopes'),
         'namespace' => app()->getNamespace().'Data\\Models\\Scopes',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Seeder Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Seeders will be generated.
+    |
+    */
+    'seeder' => [
+        'path' => base_path('database/seeders'),
+        'namespace' => 'Database\\Seeders',
+    ],
 ];
