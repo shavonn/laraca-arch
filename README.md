@@ -164,6 +164,15 @@ artisan arty:notification <name>
 Extends `artisan make:notification`
 Default dir in config: `Notifications`
 
+#### arty:observer
+
+```php
+artisan arty:observer <name>
+```
+
+Extends `artisan make:observer`
+Default dir in config: `Data/Observers`
+
 ### Testing
 
 ```bash

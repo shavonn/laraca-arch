@@ -197,4 +197,17 @@ return [
         'path' => app_path('Notifications'),
         'namespace' => app()->getNamespace().'Notifications',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Observer Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Observers will be generated.
+    |
+    */
+    'observer' => [
+        'path' => app_path('Data/Observers'),
+        'namespace' => app()->getNamespace().'Data\\Observers',
+    ],
 ];
