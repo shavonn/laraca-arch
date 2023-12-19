@@ -12,6 +12,7 @@ use HandsomeBrown\Laraca\Foundation\Console\ArtyExceptionCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyFactoryCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyJobCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyListenerCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyMailCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyModelCommand;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\ServiceProvider;
@@ -34,6 +35,7 @@ class LaracaServiceProvider extends ServiceProvider
         'ArtyFactory' => ArtyFactoryCommand::class,
         'ArtyJob' => ArtyJobCommand::class,
         'ArtyListener' => ArtyListenerCommand::class,
+        'ArtyMail' => ArtyMailCommand::class,
         'ArtyModel' => ArtyModelCommand::class,
     ];
 

@@ -114,6 +114,15 @@ artisan arty:listener <name>
 Extends `artisan make:listener`
 Default dir in config: `Listeners`
 
+#### arty:mail
+
+```php
+artisan arty:mail <name>
+```
+
+Extends `artisan make:mail`
+Default dir in config: `Mail`
+
 #### arty:model
 
 ```php
