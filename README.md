@@ -155,6 +155,15 @@ Note:
 - `--all` doesn't work _yet_.
 - Additional option of `--uuid` will add the HasUuids trait for you.
 
+#### arty:notification
+
+```php
+artisan arty:notification <name>
+```
+
+Extends `artisan make:notification`
+Default dir in config: `Notifications`
+
 ### Testing
 
 ```bash

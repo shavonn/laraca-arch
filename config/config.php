@@ -184,4 +184,17 @@ return [
         'path' => app_path('Data/Models'),
         'namespace' => app()->getNamespace().'Data\\Models',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Notification Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Notifications will be generated.
+    |
+    */
+    'notification' => [
+        'path' => app_path('Notifications'),
+        'namespace' => app()->getNamespace().'Notifications',
+    ],
 ];
