@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace HandsomeBrown\Laraca\Foundation\Console;
 
 use Illuminate\Console\Command;
 

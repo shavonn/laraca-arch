@@ -2,9 +2,9 @@
 
 namespace HandsomeBrown\Laraca;
 
-use App\Console\Commands\ArtyChannelCommand;
-use App\Console\Commands\ArtyCommandCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyCastCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyChannelCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyCommandCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyModelCommand;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\ServiceProvider;
