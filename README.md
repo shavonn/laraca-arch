@@ -105,6 +105,15 @@ artisan arty:job <name>
 Extends `artisan make:job`
 Default dir in config: `Jobs`
 
+#### arty:listener
+
+```php
+artisan arty:listener <name>
+```
+
+Extends `artisan make:listener`
+Default dir in config: `Listeners`
+
 #### arty:model
 
 ```php
