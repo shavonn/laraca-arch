@@ -2,9 +2,9 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
-use Illuminate\Console\Command;
+use Illuminate\Foundation\Console\ConsoleMakeCommand;
 
-class ArtyCommandCommand extends Command
+class ArtyCommandCommand extends ConsoleMakeCommand
 {
     /**
      * The console command name.
