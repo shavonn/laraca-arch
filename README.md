@@ -87,6 +87,15 @@ artisan arty:exception <name>
 Extends `artisan make:exception`
 Default dir in config: `Exceptions`
 
+#### arty:factory
+
+```php
+artisan arty:factory <name>
+```
+
+Extends `artisan make:factory`
+Default dir in config: `database/factories`
+
 #### arty:model
 
 ```php
