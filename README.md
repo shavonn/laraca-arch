@@ -96,6 +96,15 @@ artisan arty:factory <name>
 Extends `artisan make:factory`
 Default dir in config: `database/factories`
 
+#### arty:job
+
+```php
+artisan arty:job <name>
+```
+
+Extends `artisan make:job`
+Default dir in config: `Jobs`
+
 #### arty:model
 
 ```php

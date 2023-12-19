@@ -10,6 +10,7 @@ use HandsomeBrown\Laraca\Foundation\Console\ArtyControllerCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyEventCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyExceptionCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyFactoryCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyJobCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyModelCommand;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\ServiceProvider;
@@ -30,6 +31,7 @@ class LaracaServiceProvider extends ServiceProvider
         'ArtyEvent' => ArtyEventCommand::class,
         'ArtyException' => ArtyExceptionCommand::class,
         'ArtyFactory' => ArtyFactoryCommand::class,
+        'ArtyJob' => ArtyJobCommand::class,
         'ArtyModel' => ArtyModelCommand::class,
     ];
 
