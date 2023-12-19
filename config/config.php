@@ -9,7 +9,7 @@ return [
     | Cast Path
     |--------------------------------------------------------------------------
     |
-    | This value is the path where Models will be generated.
+    | This value is the path where Casts will be generated.
     |
     */
     'cast' => [
@@ -22,12 +22,25 @@ return [
     | Channel Path
     |--------------------------------------------------------------------------
     |
-    | This value is the path where Models will be generated.
+    | This value is the path where Channels will be generated.
     |
     */
     'channel' => [
         'path' => app_path('Broadcasting'),
         'namespace' => app()->getNamespace().'Broadcasting',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Command Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Commands will be generated.
+    |
+    */
+    'command' => [
+        'path' => app_path('Console/Commands'),
+        'namespace' => app()->getNamespace().'Console\\Commands',
     ],
 
     /*
