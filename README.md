@@ -200,6 +200,15 @@ artisan arty:request <name>
 Extends `artisan make:request`
 Default dir in config: `app/Http/Requests`
 
+#### arty:resource
+
+```php
+artisan arty:resource <name>
+```
+
+Extends `artisan make:resource`
+Default dir in config: `app/Http/Resources`
+
 ### Testing
 
 ```bash

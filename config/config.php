@@ -249,4 +249,17 @@ return [
         'path' => app_path('Http/Requests'),
         'namespace' => app()->getNamespace().'Http\\Requests',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Resource Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Resources will be generated.
+    |
+    */
+    'resource' => [
+        'path' => app_path('Http/Resources'),
+        'namespace' => app()->getNamespace().'Http\\Resources',
+    ],
 ];
