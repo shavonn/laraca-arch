@@ -6,6 +6,7 @@ use HandsomeBrown\Laraca\Foundation\Console\ArtyCastCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyChannelCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyCommandCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyComponentCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyControllerCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyModelCommand;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\ServiceProvider;
@@ -22,6 +23,7 @@ class LaracaServiceProvider extends ServiceProvider
         'ArtyChannel' => ArtyChannelCommand::class,
         'ArtyCommand' => ArtyCommandCommand::class,
         'ArtyComponent' => ArtyComponentCommand::class,
+        'ArtyController' => ArtyControllerCommand::class,
         'ArtyModel' => ArtyModelCommand::class,
     ];
 
