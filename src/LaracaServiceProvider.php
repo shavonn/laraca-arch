@@ -2,6 +2,7 @@
 
 namespace HandsomeBrown\Laraca;
 
+use App\Console\Commands\ArtyChannelCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyCastCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyModelCommand;
 use Illuminate\Console\GeneratorCommand;
@@ -17,6 +18,7 @@ class LaracaServiceProvider extends ServiceProvider
     protected $commands = [
         'ArtyModel' => ArtyModelCommand::class,
         'ArtyCast' => ArtyCastCommand::class,
+        'ArtyChannel' => ArtyChannelCommand::class,
     ];
 
     /**
