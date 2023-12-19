@@ -2,7 +2,8 @@
 
 namespace HandsomeBrown\Laraca;
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeModelCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyCastCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyModelCommand;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +15,8 @@ class LaracaServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
-        'MakeModel' => MakeModelCommand::class,
+        'ArtyModel' => ArtyModelCommand::class,
+        'ArtyCast' => ArtyCastCommand::class,
     ];
 
     /**
