@@ -173,6 +173,15 @@ artisan arty:observer <name>
 Extends `artisan make:observer`
 Default dir in config: `Data/Observers`
 
+#### arty:policy
+
+```php
+artisan arty:policy <name>
+```
+
+Extends `artisan make:policy`
+Default dir in config: `Policies`
+
 ### Testing
 
 ```bash

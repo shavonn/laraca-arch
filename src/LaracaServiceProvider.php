@@ -18,6 +18,7 @@ use HandsomeBrown\Laraca\Foundation\Console\ArtyMigrationCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyModelCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyNotificationCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyObserverCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyPolicyCommand;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\ServiceProvider;
 
@@ -45,6 +46,7 @@ class LaracaServiceProvider extends ServiceProvider
         'ArtyModel' => ArtyModelCommand::class,
         'ArtyNotification' => ArtyNotificationCommand::class,
         'ArtyObserver' => ArtyObserverCommand::class,
+        'ArtyPolicy' => ArtyPolicyCommand::class,
     ];
 
     /**

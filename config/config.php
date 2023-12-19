@@ -152,7 +152,7 @@ return [
     | Middleware Path
     |--------------------------------------------------------------------------
     |
-    | This value is the path where Middlewares will be generated.
+    | This value is the path where Middleware will be generated.
     |
     */
     'middleware' => [
@@ -209,5 +209,18 @@ return [
     'observer' => [
         'path' => app_path('Data/Observers'),
         'namespace' => app()->getNamespace().'Data\\Observers',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Policy Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Policies will be generated.
+    |
+    */
+    'policy' => [
+        'path' => app_path('Policies'),
+        'namespace' => app()->getNamespace().'Policies',
     ],
 ];
