@@ -262,4 +262,17 @@ return [
         'path' => app_path('Http/Resources'),
         'namespace' => app()->getNamespace().'Http\\Resources',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Rule Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Rules will be generated.
+    |
+    */
+    'rule' => [
+        'path' => app_path('Rules'),
+        'namespace' => app()->getNamespace().'Rules',
+    ],
 ];

@@ -209,6 +209,15 @@ artisan arty:resource <name>
 Extends `artisan make:resource`
 Default dir in config: `app/Http/Resources`
 
+#### arty:rule
+
+```php
+artisan arty:rule <name>
+```
+
+Extends `artisan make:rule`
+Default dir in config: `Rules`
+
 ### Testing
 
 ```bash
