@@ -47,6 +47,19 @@ artisan arty:command <name>
 Extends `artisan make:command`
 Default dir in config: `Console\Commands`
 
+#### arty:component
+
+```php
+artisan arty:component <name>
+```
+
+Extends `artisan make:component`
+Default dir in config: `View\Components`
+
+Note:
+
+- This command will route the class generation. Rather than confuse, the blade file path is determined by the preexisting config value in `config/view.php`.
+
 #### arty:model
 
 ```php
@@ -58,8 +71,8 @@ Default dir in config: `Data\Models`
 
 Note:
 
-- `--all` doesn't work _yet_
-- additional option of `--uuid` will add the HasUuids trait for you
+- `--all` doesn't work _yet_.
+- Additional option of `--uuid` will add the HasUuids trait for you.
 
 ### Testing
 

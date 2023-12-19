@@ -2,16 +2,16 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
-use Illuminate\Foundation\Console\ChannelMakeCommand;
+use Illuminate\Foundation\Console\ComponentMakeCommand;
 
-class ArtyChannelCommand extends ChannelMakeCommand
+class ArtyComponentCommand extends ComponentMakeCommand
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'arty:channel';
+    protected $name = 'arty:component';
 
     /**
      * Get the default namespace for the class.
@@ -21,6 +21,6 @@ class ArtyChannelCommand extends ChannelMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return config('laraca.channel.namespace');
+        return config('laraca.component.namespace');
     }
 }
