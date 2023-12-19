@@ -20,17 +20,6 @@ Meet `arty` ( obviously named after Laravel's `artisan`), the command namespace 
 
 Arty extends existing Laravel Artisan commands so they still have all of the arguments and options artisan commands do.
 
-#### arty:model
-
-```php
-artisan arty:model <name>
-```
-
-Extends `artisan make:model`
-
-- `--all` doesn't work _yet_
-- additional option of `--uuid` will add the HasUuids trait for you
-
 #### arty:cast
 
 ```php
@@ -38,6 +27,30 @@ artisan arty:cast <name>
 ```
 
 Extends `artisan make:cast`
+Default dir in config: `Data\Casts`
+
+#### arty:channel
+
+```php
+artisan arty:channel <name>
+```
+
+Extends `artisan make:channel`
+Default dir in config: `Broadcasting`
+
+#### arty:model
+
+```php
+artisan arty:model <name>
+```
+
+Extends `artisan make:model`
+Default dir in config: `Data\Models`
+
+Note:
+
+- `--all` doesn't work _yet_
+- additional option of `--uuid` will add the HasUuids trait for you
 
 ### Testing
 
