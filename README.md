@@ -78,6 +78,15 @@ artisan arty:event <name>
 Extends `artisan make:event`
 Default dir in config: `Events`
 
+#### arty:exception
+
+```php
+artisan arty:exception <name>
+```
+
+Extends `artisan make:exception`
+Default dir in config: `Exceptions`
+
 #### arty:model
 
 ```php
