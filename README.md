@@ -67,7 +67,7 @@ artisan arty:controller <name>
 ```
 
 Extends `artisan make:controller`
-Default dir in config: `Http\Controllers`
+Default dir in config: `Http/Controllers`
 
 #### arty:event
 
@@ -123,6 +123,15 @@ artisan arty:mail <name>
 Extends `artisan make:mail`
 Default dir in config: `Mail`
 
+#### arty:middleware
+
+```php
+artisan arty:middleware <name>
+```
+
+Extends `artisan make:middleware`
+Default dir in config: `Http/Middlewares`
+
 #### arty:model
 
 ```php
@@ -130,7 +139,7 @@ artisan arty:model <name>
 ```
 
 Extends `artisan make:model`
-Default dir in config: `Data\Models`
+Default dir in config: `Data/Models`
 
 Note:
 
