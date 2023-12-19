@@ -6,23 +6,16 @@ use HandsomeBrown\Laraca\Console\Concerns\GeneratesClasses;
 use Illuminate\Foundation\Console\ModelMakeCommand;
 use Symfony\Component\Console\Input\InputOption;
 
-class MakeModelCommand extends ModelMakeCommand
+class ArtyModelCommand extends ModelMakeCommand
 {
     use GeneratesClasses;
 
     /**
-     * The name and signature of the console command.
+     * The console command name.
      *
      * @var string
      */
     protected $name = 'arty:model';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Create a new Eloquent model class';
 
     /**
      * Get the stub file for the generator.
