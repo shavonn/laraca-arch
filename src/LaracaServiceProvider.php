@@ -14,6 +14,7 @@ use HandsomeBrown\Laraca\Foundation\Console\ArtyJobCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyListenerCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyMailCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyMiddlewareCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyMigrationCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyModelCommand;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\ServiceProvider;
@@ -38,6 +39,7 @@ class LaracaServiceProvider extends ServiceProvider
         'ArtyListener' => ArtyListenerCommand::class,
         'ArtyMail' => ArtyMailCommand::class,
         'ArtyMiddleware' => ArtyMiddlewareCommand::class,
+        'ArtyMigration' => ArtyMigrationCommand::class,
         'ArtyModel' => ArtyModelCommand::class,
     ];
 
@@ -117,5 +119,20 @@ class LaracaServiceProvider extends ServiceProvider
         }
 
         $this->commands(array_values($this->commands));
+    }
+
+    /**
+     * Register the command.
+     *
+     * @return void
+     */
+    protected function registerArtyMigrationCommand()
+    {
+        $this->app->singleton(ArtyMigrationCommand::class, function ($app) {
+            $creator = $app['migration.creator'];
+            $composer = $app['composer'];
+
+            return new ArtyMigrationCommand($creator, $composer);
+        });
     }
 }

@@ -36,7 +36,7 @@ artisan arty:channel <name>
 ```
 
 Extends `artisan make:channel`
-Default dir in config: `Broadcasting`
+Default dir in config: `app/Broadcasting`
 
 #### arty:command
 
@@ -45,7 +45,7 @@ artisan arty:command <name>
 ```
 
 Extends `artisan make:command`
-Default dir in config: `Console\Commands`
+Default dir in config: `app/Console\Commands`
 
 #### arty:component
 
@@ -54,7 +54,7 @@ artisan arty:component <name>
 ```
 
 Extends `artisan make:component`
-Default dir in config: `View\Components`
+Default dir in config: `app/View\Components`
 
 Note:
 
@@ -67,7 +67,7 @@ artisan arty:controller <name>
 ```
 
 Extends `artisan make:controller`
-Default dir in config: `Http/Controllers`
+Default dir in config: `app/Http/Controllers`
 
 #### arty:event
 
@@ -76,7 +76,7 @@ artisan arty:event <name>
 ```
 
 Extends `artisan make:event`
-Default dir in config: `Events`
+Default dir in config: `app/Events`
 
 #### arty:exception
 
@@ -85,7 +85,7 @@ artisan arty:exception <name>
 ```
 
 Extends `artisan make:exception`
-Default dir in config: `Exceptions`
+Default dir in config: `app/xceptions`
 
 #### arty:factory
 
@@ -103,7 +103,7 @@ artisan arty:job <name>
 ```
 
 Extends `artisan make:job`
-Default dir in config: `Jobs`
+Default dir in config: `app/Jobs`
 
 #### arty:listener
 
@@ -112,7 +112,7 @@ artisan arty:listener <name>
 ```
 
 Extends `artisan make:listener`
-Default dir in config: `Listeners`
+Default dir in config: `app/Listeners`
 
 #### arty:mail
 
@@ -121,7 +121,7 @@ artisan arty:mail <name>
 ```
 
 Extends `artisan make:mail`
-Default dir in config: `Mail`
+Default dir in config: `app/Mail`
 
 #### arty:middleware
 
@@ -130,7 +130,16 @@ artisan arty:middleware <name>
 ```
 
 Extends `artisan make:middleware`
-Default dir in config: `Http/Middlewares`
+Default dir in config: `app/Http/Middlewares`
+
+#### arty:migration
+
+```php
+artisan arty:migration <name>
+```
+
+Extends `artisan make:migration`
+Default dir in config: `database/migrations`
 
 #### arty:model
 
@@ -139,7 +148,7 @@ artisan arty:model <name>
 ```
 
 Extends `artisan make:model`
-Default dir in config: `Data/Models`
+Default dir in config: `app/Data/Models`
 
 Note:
 
