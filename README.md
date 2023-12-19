@@ -38,6 +38,15 @@ artisan arty:channel <name>
 Extends `artisan make:channel`
 Default dir in config: `Broadcasting`
 
+#### arty:command
+
+```php
+artisan arty:command <name>
+```
+
+Extends `artisan make:command`
+Default dir in config: `Console\Commands`
+
 #### arty:model
 
 ```php
