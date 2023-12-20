@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\ConsoleMakeCommand;
 class ArtyCommandCommand extends ConsoleMakeCommand
 {
     /**
+     * name
      * The console command name.
      *
      * @var string
@@ -14,12 +15,12 @@ class ArtyCommandCommand extends ConsoleMakeCommand
     protected $name = 'arty:command';
 
     /**
+     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return config('laraca.command.namespace');
     }

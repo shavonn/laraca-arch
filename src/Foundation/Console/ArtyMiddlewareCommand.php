@@ -7,6 +7,7 @@ use Illuminate\Routing\Console\MiddlewareMakeCommand;
 class ArtyMiddlewareCommand extends MiddlewareMakeCommand
 {
     /**
+     * name
      * The console command name.
      *
      * @var string
@@ -14,12 +15,12 @@ class ArtyMiddlewareCommand extends MiddlewareMakeCommand
     protected $name = 'arty:middleware';
 
     /**
+     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return config('laraca.middleware.namespace');
     }

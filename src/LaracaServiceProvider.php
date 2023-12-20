@@ -33,9 +33,10 @@ use Illuminate\Support\ServiceProvider;
 class LaracaServiceProvider extends ServiceProvider
 {
     /**
+     * commands
      * The commands to be registered.
      *
-     * @var array
+     * @var array<string,mixed>
      */
     protected $commands = [
         'ArtyCast' => ArtyCastCommand::class,
@@ -66,7 +67,10 @@ class LaracaServiceProvider extends ServiceProvider
     ];
 
     /**
+     * boot
      * Bootstrap the application services.
+     *
+     * @return void
      */
     public function boot()
     {
@@ -104,20 +108,19 @@ class LaracaServiceProvider extends ServiceProvider
     }
 
     /**
+     * register
      * Register the application services.
+     *
+     * @return void
      */
     public function register()
     {
         // Automatically apply the package configuration
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laraca');
-
-        // Register the main class to use with the facade
-        $this->app->singleton('laraca', function () {
-            return new Laraca;
-        });
     }
 
     /**
+     * registerCommands
      * Register the given commands.
      *
      * @return void
@@ -131,7 +134,7 @@ class LaracaServiceProvider extends ServiceProvider
                 $this->{$method}();
             } else {
                 if ($command instanceof GeneratorCommand) {
-                    $this->app->singleton($command, function ($app, $command) {
+                    $this->app->singleton(($command)->getName() ?? '', function ($app, $command) {
                         return new ($command)($app['files']);
                     });
                 } else {
@@ -144,6 +147,7 @@ class LaracaServiceProvider extends ServiceProvider
     }
 
     /**
+     * registerArtyMigrationCommand
      * Register the command.
      *
      * @return void
@@ -159,7 +163,10 @@ class LaracaServiceProvider extends ServiceProvider
     }
 
     /**
+     * provides
      * Get the services provided by the provider.
+     *
+     * @return array<mixed>
      */
     public function provides(): array
     {

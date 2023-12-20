@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\CastMakeCommand;
 class ArtyCastCommand extends CastMakeCommand
 {
     /**
+     * name
      * The console command name.
      *
      * @var string
@@ -14,12 +15,12 @@ class ArtyCastCommand extends CastMakeCommand
     protected $name = 'arty:cast';
 
     /**
+     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return config('laraca.cast.namespace');
     }

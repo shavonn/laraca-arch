@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 class ArtySeederCommand extends SeederMakeCommand
 {
     /**
+     * name
      * The console command name.
      *
      * @var string
@@ -15,12 +16,12 @@ class ArtySeederCommand extends SeederMakeCommand
     protected $name = 'arty:seeder';
 
     /**
+     * getPath
      * Get the destination class path.
      *
      * @param  string  $name
-     * @return string
      */
-    protected function getPath($name)
+    protected function getPath($name): string
     {
         $name = str_replace('\\', '/', Str::replaceFirst($this->rootNamespace(), '', $name));
 
@@ -28,11 +29,10 @@ class ArtySeederCommand extends SeederMakeCommand
     }
 
     /**
+     * rootNamespace
      * Get the root namespace for the class.
-     *
-     * @return string
      */
-    protected function rootNamespace()
+    protected function rootNamespace(): string
     {
         return config('laraca.seeder.namespace');
     }

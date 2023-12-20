@@ -10,6 +10,7 @@ class ArtyViewCommand extends ViewMakeCommand
     use GeneratesClasses;
 
     /**
+     * name
      * The console command name.
      *
      * @var string

@@ -1,8 +1,8 @@
 <?php
 
 dataset('classes', [
-    'Test',
-    'MyDataObject',
-    'Something',
+    'Testy',
+    'DataThing',
+    'NewObjectOption',
     'PackageClass',
 ]);

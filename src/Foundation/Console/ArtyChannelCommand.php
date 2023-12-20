@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\ChannelMakeCommand;
 class ArtyChannelCommand extends ChannelMakeCommand
 {
     /**
+     * name
      * The console command name.
      *
      * @var string
@@ -14,12 +15,12 @@ class ArtyChannelCommand extends ChannelMakeCommand
     protected $name = 'arty:channel';
 
     /**
+     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return config('laraca.channel.namespace');
     }

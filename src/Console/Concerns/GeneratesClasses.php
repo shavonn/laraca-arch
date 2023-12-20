@@ -6,6 +6,11 @@ trait GeneratesClasses
 {
     /**
      * Replace the given string in the given file.
+     *
+     * replaceIn
+     *
+     * @param  string|array<string>  $search
+     * @param  string|array<string>  $replace
      */
     protected function replaceIn(string $path, string|array $search, string|array $replace): void
     {
@@ -16,6 +21,8 @@ trait GeneratesClasses
 
     /**
      * Return path to generated stub file.
+     *
+     * getGeneratedStubPath
      */
     public function getGeneratedStubPath(string $stub): string
     {
@@ -24,6 +31,8 @@ trait GeneratesClasses
 
     /**
      * Return path to stub file.
+     *
+     * getStubPath
      */
     public function getStubPath(string $stub): string
     {
@@ -32,6 +41,8 @@ trait GeneratesClasses
 
     /**
      * Get the first view directory path from the application configuration.
+     *
+     * viewPath
      *
      * @param  string  $path
      * @return string

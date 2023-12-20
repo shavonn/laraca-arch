@@ -7,6 +7,7 @@ use Illuminate\Database\Console\Migrations\MigrateMakeCommand;
 class ArtyMigrationCommand extends MigrateMakeCommand
 {
     /**
+     * signature
      * The console command signature.
      *
      * @var string
@@ -19,6 +20,7 @@ class ArtyMigrationCommand extends MigrateMakeCommand
         {--fullpath : Output the full path of the migration (Deprecated)}';
 
     /**
+     * getMigrationPath
      * Get migration path (either specified by '--path' option or default location).
      */
     protected function getMigrationPath(): string

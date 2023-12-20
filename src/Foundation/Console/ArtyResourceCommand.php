@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\ResourceMakeCommand;
 class ArtyResourceCommand extends ResourceMakeCommand
 {
     /**
+     * name
      * The console command name.
      *
      * @var string
@@ -14,12 +15,12 @@ class ArtyResourceCommand extends ResourceMakeCommand
     protected $name = 'arty:resource';
 
     /**
+     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return config('laraca.resource.namespace');
     }

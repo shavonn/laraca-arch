@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\JobMakeCommand;
 class ArtyJobCommand extends JobMakeCommand
 {
     /**
+     * name
      * The console command name.
      *
      * @var string
@@ -14,12 +15,12 @@ class ArtyJobCommand extends JobMakeCommand
     protected $name = 'arty:job';
 
     /**
+     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return config('laraca.job.namespace');
     }
