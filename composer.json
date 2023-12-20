@@ -37,7 +37,9 @@
     }
   },
   "scripts": {
-    "test": "vendor/bin/pest"
+    "test": "vendor/bin/pest",
+    "test-coverage": "vendor/bin/pest --coverage",
+    "format": "vendor/bin/pint"
   },
   "config": {
     "sort-packages": true,
@@ -54,5 +56,7 @@
         "Laraca": "HandsomeBrown\\Laraca\\LaracaFacade"
       }
     }
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
