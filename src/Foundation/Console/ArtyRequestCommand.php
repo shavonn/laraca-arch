@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\RequestMakeCommand;
 class ArtyRequestCommand extends RequestMakeCommand
 {
     /**
+     * name
      * The console command name.
      *
      * @var string
@@ -14,12 +15,12 @@ class ArtyRequestCommand extends RequestMakeCommand
     protected $name = 'arty:request';
 
     /**
+     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return config('laraca.request.namespace');
     }

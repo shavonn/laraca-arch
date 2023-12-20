@@ -7,6 +7,7 @@ use Illuminate\Routing\Console\ControllerMakeCommand;
 class ArtyControllerCommand extends ControllerMakeCommand
 {
     /**
+     * name
      * The console command name.
      *
      * @var string
@@ -14,12 +15,12 @@ class ArtyControllerCommand extends ControllerMakeCommand
     protected $name = 'arty:controller';
 
     /**
+     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return config('laraca.controller.namespace');
     }

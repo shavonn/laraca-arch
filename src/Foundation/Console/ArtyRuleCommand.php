@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\RuleMakeCommand;
 class ArtyRuleCommand extends RuleMakeCommand
 {
     /**
+     * name
      * The console command name.
      *
      * @var string
@@ -14,12 +15,12 @@ class ArtyRuleCommand extends RuleMakeCommand
     protected $name = 'arty:rule';
 
     /**
+     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return config('laraca.rule.namespace');
     }

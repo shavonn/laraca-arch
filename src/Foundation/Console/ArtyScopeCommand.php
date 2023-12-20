@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\ScopeMakeCommand;
 class ArtyScopeCommand extends ScopeMakeCommand
 {
     /**
+     * name
      * The console command name.
      *
      * @var string
@@ -14,12 +15,12 @@ class ArtyScopeCommand extends ScopeMakeCommand
     protected $name = 'arty:scope';
 
     /**
+     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return config('laraca.scope.namespace');
     }

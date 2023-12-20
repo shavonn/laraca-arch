@@ -7,6 +7,9 @@ use Orchestra\Testbench\TestCase;
 
 class LaracaTestCase extends TestCase
 {
+    /**
+     * setUp
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -14,6 +17,11 @@ class LaracaTestCase extends TestCase
         $this->withoutMockingConsoleOutput();
     }
 
+    /**
+     * getPackageProviders
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     */
     protected function getPackageProviders($app): array
     {
         return [

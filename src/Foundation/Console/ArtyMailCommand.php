@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\MailMakeCommand;
 class ArtyMailCommand extends MailMakeCommand
 {
     /**
+     * name
      * The console command name.
      *
      * @var string
@@ -14,12 +15,12 @@ class ArtyMailCommand extends MailMakeCommand
     protected $name = 'arty:mail';
 
     /**
+     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return config('laraca.mail.namespace');
     }

@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\PolicyMakeCommand;
 class ArtyPolicyCommand extends PolicyMakeCommand
 {
     /**
+     * name
      * The console command name.
      *
      * @var string
@@ -14,12 +15,12 @@ class ArtyPolicyCommand extends PolicyMakeCommand
     protected $name = 'arty:policy';
 
     /**
+     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return config('laraca.policy.namespace');
     }

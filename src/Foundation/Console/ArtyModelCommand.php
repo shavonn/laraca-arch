@@ -11,6 +11,7 @@ class ArtyModelCommand extends ModelMakeCommand
     use GeneratesClasses;
 
     /**
+     * name
      * The console command name.
      *
      * @var string
@@ -18,11 +19,10 @@ class ArtyModelCommand extends ModelMakeCommand
     protected $name = 'arty:model';
 
     /**
+     * getStub
      * Get the stub file for the generator.
-     *
-     * @return string
      */
-    protected function getStub()
+    protected function getStub(): string
     {
         $stub = parent::getStub();
 
@@ -52,22 +52,23 @@ class ArtyModelCommand extends ModelMakeCommand
     }
 
     /**
+     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return config('laraca.model.namespace');
     }
 
     /**
+     * getOptions
      * Get the console command options.
      *
-     * @return array
+     * @return array<array<string>>
      */
-    protected function getOptions()
+    protected function getOptions(): array
     {
         return array_merge(parent::getOptions(), [
             ['uuid', null, InputOption::VALUE_NONE, 'Create an Eloquent model with a uuid as the primary key.'],

@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 class ArtyTestCommand extends TestMakeCommand
 {
     /**
+     * name
      * The console command name.
      *
      * @var string
@@ -15,12 +16,12 @@ class ArtyTestCommand extends TestMakeCommand
     protected $name = 'arty:test';
 
     /**
+     * getPath
      * Get the destination class path.
      *
      * @param  string  $name
-     * @return string
      */
-    protected function getPath($name)
+    protected function getPath($name): string
     {
         $name = Str::replaceFirst($this->rootNamespace(), '', $name);
 
@@ -28,12 +29,12 @@ class ArtyTestCommand extends TestMakeCommand
     }
 
     /**
+     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         if ($this->option('unit')) {
             return config('laraca.test.namespace').'\Unit';

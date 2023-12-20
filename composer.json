@@ -1,59 +1,62 @@
 {
-  "name": "handsomebrown/laraca",
-  "description": "Provides commands to support an alternate Laravel application structure.",
-  "keywords": [
-    "handsomebrown",
-    "laravel",
-    "laraca"
-  ],
-  "homepage": "https://github.com/handsomebrown/laraca",
-  "license": "MIT",
-  "type": "library",
-  "authors": [
-    {
-      "name": "Shavonn Brown",
-      "email": "dev@handsomebrown.com",
-      "role": "Developer"
-    }
-  ],
-  "require": {
-    "php": "^8.1",
-    "illuminate/support": "^10.23.0"
-  },
-  "require-dev": {
-    "laravel/pint": "*",
-    "orchestra/testbench": "*",
-    "pestphp/pest": "*",
-    "pestphp/pest-plugin-laravel": "*"
-  },
-  "autoload": {
-    "psr-4": {
-      "HandsomeBrown\\Laraca\\": "src"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "HandsomeBrown\\Laraca\\Tests\\": "tests"
-    }
-  },
-  "scripts": {
-    "test": "vendor/bin/pest",
-    "test-coverage": "vendor/bin/pest --coverage",
-    "format": "vendor/bin/pint"
-  },
-  "config": {
-    "sort-packages": true,
-    "allow-plugins": {
-      "pestphp/pest-plugin": true
-    }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "HandsomeBrown\\Laraca\\LaracaServiceProvider"
-      ]
-    }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+    "name": "handsomebrown/laraca",
+    "description": "Provides commands to support an alternate Laravel application structure.",
+    "keywords": [
+        "handsomebrown",
+        "laravel",
+        "laraca"
+    ],
+    "homepage": "https://github.com/handsomebrown/laraca",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Shavonn Brown",
+            "email": "dev@handsomebrown.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "illuminate/support": "10.*"
+    },
+    "require-dev": {
+        "laravel/pint": "*",
+        "orchestra/testbench": "*",
+        "pestphp/pest": "*",
+        "pestphp/pest-plugin-laravel": "*",
+        "phpstan/phpstan": "^1.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "HandsomeBrown\\Laraca\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HandsomeBrown\\Laraca\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint",
+        "analyze": "vendor/bin/phpstan analyse"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "optimize-autoloader": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "HandsomeBrown\\Laraca\\LaracaServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

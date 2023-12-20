@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\EventMakeCommand;
 class ArtyEventCommand extends EventMakeCommand
 {
     /**
+     * name
      * The console command name.
      *
      * @var string
@@ -14,12 +15,12 @@ class ArtyEventCommand extends EventMakeCommand
     protected $name = 'arty:event';
 
     /**
+     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return config('laraca.event.namespace');
     }

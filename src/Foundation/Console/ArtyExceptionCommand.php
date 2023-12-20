@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\ExceptionMakeCommand;
 class ArtyExceptionCommand extends ExceptionMakeCommand
 {
     /**
+     * name
      * The console command name.
      *
      * @var string
@@ -14,12 +15,12 @@ class ArtyExceptionCommand extends ExceptionMakeCommand
     protected $name = 'arty:exception';
 
     /**
+     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace): string
     {
         return config('laraca.exception.namespace');
     }
