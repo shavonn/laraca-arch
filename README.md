@@ -14,6 +14,12 @@ You can install the package via composer:
 composer require handsomebrown/laraca
 ```
 
+You can publish the config file with:You can publish the config file with:k
+
+```
+php artisan vendor:publish --tag="laraca-config"
+```
+
 ## Usage
 
 Meet `arty` ( obviously named after Laravel's `artisan`), the command namespace where you can find Laraca commands that wrap Laravel's Artisan command classes so you can have the application structure you want.
@@ -85,7 +91,7 @@ artisan arty:exception <name>
 ```
 
 Extends `artisan make:exception`
-Default dir in config: `app/xceptions`
+Default dir in config: `app/Exceptions`
 
 #### arty:factory
 
