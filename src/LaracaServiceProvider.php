@@ -81,7 +81,7 @@ class LaracaServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('laraca.php'),
-            ], 'config');
+            ], 'laraca-config');
 
             // Publishing the views.
             /*$this->publishes([
