@@ -14,13 +14,13 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         php: [8.1]
-        illuminate: [10.*]
+        laravel: [10.*]
         stability: [prefer-lowest, prefer-stable]
         include:
-          - illuminate: 10.*
+          - laravel: 10.*
             testbench: 8.*
 
-    name: P${{ matrix.php }} - L${{ matrix.illuminate }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
@@ -37,27 +37,9 @@ jobs:
         run: |
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-
       - name: Install dependencies
         run: |
-          composer install --dev
-          composer require "illuminate/support:${{ matrix.illuminate }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
-
       - name: Execute tests
-        run: vendor/bin/pest --coverage-clover clover.xml
-
-      - name: Make code coverage badge
-        uses: timkrase/phpunit-coverage-badge@v1.2.1
-        with:
-          coverage_badge_path: output/coverage.svg
-          push_badge: false
-
-      - name: Git push to image-data branch
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          publish_dir: ./output
-          publish_branch: image-data
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          user_name: "github-actions[bot]"
-          user_email: "github-actions[bot]@users.noreply.github.com"
+        run: vendor/bin/pest
