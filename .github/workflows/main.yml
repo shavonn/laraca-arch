@@ -40,6 +40,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          composer install
           composer require "illuminate/support:${{ matrix.illuminate }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
