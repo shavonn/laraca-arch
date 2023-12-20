@@ -84,6 +84,96 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Exception Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Exceptions will be generated.
+    |
+    */
+    'exception' => [
+        'path' => app_path('Exceptions'),
+        'namespace' => app()->getNamespace().'Exceptions',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Factory Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Factories will be generated.
+    |
+    */
+    'factory' => [
+        'path' => app_path('database/factories'),
+        'namespace' => app()->getNamespace().'Database\\Factories',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Job Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Jobs will be generated.
+    |
+    */
+    'job' => [
+        'path' => app_path('Jobs'),
+        'namespace' => app()->getNamespace().'Jobs',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Listener Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Listeners will be generated.
+    |
+    */
+    'listener' => [
+        'path' => app_path('Listeners'),
+        'namespace' => app()->getNamespace().'Listeners',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Mail Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Mails will be generated.
+    |
+    */
+    'mail' => [
+        'path' => app_path('Mail'),
+        'namespace' => app()->getNamespace().'Mail',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Middleware Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Middleware will be generated.
+    |
+    */
+    'middleware' => [
+        'path' => app_path('Http/Middleware'),
+        'namespace' => app()->getNamespace().'Http\\Middleware',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Migration Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Migrations will be generated.
+    |
+    */
+    'migration' => [
+        'path' => base_path('database/migrations'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Model Path
     |--------------------------------------------------------------------------
     |
@@ -93,5 +183,147 @@ return [
     'model' => [
         'path' => app_path('Data/Models'),
         'namespace' => app()->getNamespace().'Data\\Models',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Notification Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Notifications will be generated.
+    |
+    */
+    'notification' => [
+        'path' => app_path('Notifications'),
+        'namespace' => app()->getNamespace().'Notifications',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Observer Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Observers will be generated.
+    |
+    */
+    'observer' => [
+        'path' => app_path('Data/Observers'),
+        'namespace' => app()->getNamespace().'Data\\Observers',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Policy Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Policies will be generated.
+    |
+    */
+    'policy' => [
+        'path' => app_path('Policies'),
+        'namespace' => app()->getNamespace().'Policies',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Provider Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Providers will be generated.
+    |
+    */
+    'provider' => [
+        'path' => app_path('Providers'),
+        'namespace' => app()->getNamespace().'Providers',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Request Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Requests will be generated.
+    |
+    */
+    'request' => [
+        'path' => app_path('Http/Requests'),
+        'namespace' => app()->getNamespace().'Http\\Requests',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Resource Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Resources will be generated.
+    |
+    */
+    'resource' => [
+        'path' => app_path('Http/Resources'),
+        'namespace' => app()->getNamespace().'Http\\Resources',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Rule Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Rules will be generated.
+    |
+    */
+    'rule' => [
+        'path' => app_path('Rules'),
+        'namespace' => app()->getNamespace().'Rules',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scope Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Scopes will be generated.
+    |
+    */
+    'scope' => [
+        'path' => app_path('Data/Models/Scopes'),
+        'namespace' => app()->getNamespace().'Data\\Models\\Scopes',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Seeder Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Seeders will be generated.
+    |
+    */
+    'seeder' => [
+        'path' => base_path('database/seeders'),
+        'namespace' => 'Database\\Seeders',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Test Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Tests will be generated.
+    |
+    */
+    'test' => [
+        'path' => base_path('tests'),
+        'namespace' => 'Tests',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | View Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Views will be generated.
+    |
+    */
+    'view' => [
+        'path' => base_path('resources/views'),
     ],
 ];

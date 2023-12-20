@@ -2,19 +2,16 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
-use HandsomeBrown\Laraca\Console\Concerns\GeneratesClasses;
-use Illuminate\Foundation\Console\ComponentMakeCommand;
+use Illuminate\Foundation\Console\ListenerMakeCommand;
 
-class ArtyComponentCommand extends ComponentMakeCommand
+class ArtyListenerCommand extends ListenerMakeCommand
 {
-    use GeneratesClasses;
-
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'arty:component';
+    protected $name = 'arty:listener';
 
     /**
      * Get the default namespace for the class.
@@ -24,6 +21,6 @@ class ArtyComponentCommand extends ComponentMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return config('laraca.component.namespace');
+        return config('laraca.listener.namespace');
     }
 }

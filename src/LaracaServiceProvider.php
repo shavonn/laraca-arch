@@ -8,7 +8,25 @@ use HandsomeBrown\Laraca\Foundation\Console\ArtyCommandCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyComponentCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyControllerCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyEventCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyExceptionCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyFactoryCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyJobCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyListenerCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyMailCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyMiddlewareCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyMigrationCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyModelCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyNotificationCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyObserverCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyPolicyCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyProviderCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyRequestCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyResourceCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyRuleCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyScopeCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtySeederCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyTestCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyViewCommand;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,7 +44,25 @@ class LaracaServiceProvider extends ServiceProvider
         'ArtyComponent' => ArtyComponentCommand::class,
         'ArtyController' => ArtyControllerCommand::class,
         'ArtyEvent' => ArtyEventCommand::class,
+        'ArtyException' => ArtyExceptionCommand::class,
+        'ArtyFactory' => ArtyFactoryCommand::class,
+        'ArtyJob' => ArtyJobCommand::class,
+        'ArtyListener' => ArtyListenerCommand::class,
+        'ArtyMail' => ArtyMailCommand::class,
+        'ArtyMiddleware' => ArtyMiddlewareCommand::class,
+        'ArtyMigration' => ArtyMigrationCommand::class,
         'ArtyModel' => ArtyModelCommand::class,
+        'ArtyNotification' => ArtyNotificationCommand::class,
+        'ArtyObserver' => ArtyObserverCommand::class,
+        'ArtyPolicy' => ArtyPolicyCommand::class,
+        'ArtyProvider' => ArtyProviderCommand::class,
+        'ArtyRequest' => ArtyRequestCommand::class,
+        'ArtyResource' => ArtyResourceCommand::class,
+        'ArtyRule' => ArtyRuleCommand::class,
+        'ArtyScope' => ArtyScopeCommand::class,
+        'ArtySeeder' => ArtySeederCommand::class,
+        'ArtyTest' => ArtyTestCommand::class,
+        'ArtyView' => ArtyViewCommand::class
     ];
 
     /**
@@ -105,5 +141,20 @@ class LaracaServiceProvider extends ServiceProvider
         }
 
         $this->commands(array_values($this->commands));
+    }
+
+    /**
+     * Register the command.
+     *
+     * @return void
+     */
+    protected function registerArtyMigrationCommand()
+    {
+        $this->app->singleton(ArtyMigrationCommand::class, function ($app) {
+            $creator = $app['migration.creator'];
+            $composer = $app['composer'];
+
+            return new ArtyMigrationCommand($creator, $composer);
+        });
     }
 }
