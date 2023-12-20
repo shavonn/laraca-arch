@@ -58,7 +58,7 @@ Default dir in config: `app/View\Components`
 
 Note:
 
-- This command will route the class generation. Rather than confuse, the blade file path is determined by the preexisting config value in `config/view.php`.
+- This command will use the laraca view path config value instead of the one set in `config/view.php` when generating the blade file.
 
 #### arty:controller
 

@@ -29,4 +29,17 @@ trait GeneratesClasses
     {
         return __DIR__."/../../Foundation/Console/stubs/{$stub}";
     }
+
+    /**
+     * Get the first view directory path from the application configuration.
+     *
+     * @param  string  $path
+     * @return string
+     */
+    protected function viewPath($path = '')
+    {
+        $views = config('laraca.view.path') ?? resource_path('views');
+
+        return $views.($path ? DIRECTORY_SEPARATOR.$path : $path);
+    }
 }

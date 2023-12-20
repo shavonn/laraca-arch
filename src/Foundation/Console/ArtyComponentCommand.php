@@ -2,10 +2,13 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
+use HandsomeBrown\Laraca\Console\Concerns\GeneratesClasses;
 use Illuminate\Foundation\Console\ComponentMakeCommand;
 
 class ArtyComponentCommand extends ComponentMakeCommand
 {
+    use GeneratesClasses;
+
     /**
      * The console command name.
      *
