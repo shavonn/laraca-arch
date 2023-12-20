@@ -62,7 +62,7 @@ class LaracaServiceProvider extends ServiceProvider
         'ArtyScope' => ArtyScopeCommand::class,
         'ArtySeeder' => ArtySeederCommand::class,
         'ArtyTest' => ArtyTestCommand::class,
-        'ArtyView' => ArtyViewCommand::class
+        'ArtyView' => ArtyViewCommand::class,
     ];
 
     /**
@@ -156,5 +156,13 @@ class LaracaServiceProvider extends ServiceProvider
 
             return new ArtyMigrationCommand($creator, $composer);
         });
+    }
+
+    /**
+     * Get the services provided by the provider.
+     */
+    public function provides(): array
+    {
+        return array_values($this->commands);
     }
 }

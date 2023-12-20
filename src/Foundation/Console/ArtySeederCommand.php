@@ -23,6 +23,7 @@ class ArtySeederCommand extends SeederMakeCommand
     protected function getPath($name)
     {
         $name = str_replace('\\', '/', Str::replaceFirst($this->rootNamespace(), '', $name));
+
         return config('laraca.seeder.path').$name.'.php';
     }
 

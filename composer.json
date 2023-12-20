@@ -18,12 +18,13 @@
   ],
   "require": {
     "php": "^8.1",
-    "illuminate/support": "^10.38"
+    "illuminate/support": "^10.23.0"
   },
   "require-dev": {
-    "laravel/pint": "^1.13",
-    "orchestra/testbench": "^8.0",
-    "phpunit/phpunit": "^10.1"
+    "laravel/pint": "*",
+    "orchestra/testbench": "*",
+    "pestphp/pest": "*",
+    "pestphp/pest-plugin-laravel": "*"
   },
   "autoload": {
     "psr-4": {
@@ -36,20 +37,23 @@
     }
   },
   "scripts": {
-    "test": "vendor/bin/phpunit",
-    "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    "test": "vendor/bin/pest",
+    "test-coverage": "vendor/bin/pest --coverage",
+    "format": "vendor/bin/pint"
   },
   "config": {
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
   },
   "extra": {
     "laravel": {
       "providers": [
         "HandsomeBrown\\Laraca\\LaracaServiceProvider"
-      ],
-      "aliases": {
-        "Laraca": "HandsomeBrown\\Laraca\\LaracaFacade"
-      }
+      ]
     }
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

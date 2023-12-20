@@ -24,4 +24,3 @@ class ArtyScopeCommand extends ScopeMakeCommand
         return config('laraca.scope.namespace');
     }
 }
-

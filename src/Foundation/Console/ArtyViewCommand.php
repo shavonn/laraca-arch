@@ -8,7 +8,7 @@ use Illuminate\Foundation\Console\ViewMakeCommand;
 class ArtyViewCommand extends ViewMakeCommand
 {
     use GeneratesClasses;
-    
+
     /**
      * The console command name.
      *
