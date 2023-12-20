@@ -51,10 +51,7 @@
     "laravel": {
       "providers": [
         "HandsomeBrown\\Laraca\\LaracaServiceProvider"
-      ],
-      "aliases": {
-        "Laraca": "HandsomeBrown\\Laraca\\LaracaFacade"
-      }
+      ]
     }
   },
   "minimum-stability": "dev",
