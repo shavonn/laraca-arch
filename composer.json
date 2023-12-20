@@ -40,7 +40,8 @@
     "scripts": {
         "test": "vendor/bin/pest",
         "test-coverage": "vendor/bin/pest --coverage",
-        "format": "vendor/bin/pint"
+        "format": "vendor/bin/pint",
+        "analyze": "vendor/bin/phpstan analyse"
     },
     "config": {
         "sort-packages": true,
