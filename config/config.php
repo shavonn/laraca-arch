@@ -314,4 +314,16 @@ return [
         'path' => base_path('tests'),
         'namespace' => 'Tests',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | View Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Views will be generated.
+    |
+    */
+    'view' => [
+        'path' => base_path('resources/views'),
+    ],
 ];

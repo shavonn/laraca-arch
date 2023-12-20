@@ -245,6 +245,15 @@ artisan arty:test <name>
 Extends `artisan make:test`
 Default dir in config: `tests`
 
+#### arty:view
+
+```php
+artisan arty:view <name>
+```
+
+Extends `artisan make:view`
+Default dir in config: `resources/views`
+
 ### Testing
 
 ```bash

@@ -26,6 +26,7 @@ use HandsomeBrown\Laraca\Foundation\Console\ArtyRuleCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyScopeCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtySeederCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyTestCommand;
+use HandsomeBrown\Laraca\Foundation\Console\ArtyViewCommand;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\ServiceProvider;
 
@@ -61,6 +62,7 @@ class LaracaServiceProvider extends ServiceProvider
         'ArtyScope' => ArtyScopeCommand::class,
         'ArtySeeder' => ArtySeederCommand::class,
         'ArtyTest' => ArtyTestCommand::class,
+        'ArtyView' => ArtyViewCommand::class
     ];
 
     /**
