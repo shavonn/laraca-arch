@@ -236,6 +236,15 @@ artisan arty:seeder <name>
 Extends `artisan make:seeder`
 Default dir in config: `database/seeders`
 
+#### arty:test
+
+```php
+artisan arty:test <name>
+```
+
+Extends `artisan make:test`
+Default dir in config: `tests`
+
 ### Testing
 
 ```bash

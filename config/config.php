@@ -301,4 +301,17 @@ return [
         'path' => base_path('database/seeders'),
         'namespace' => 'Database\\Seeders',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Test Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Tests will be generated.
+    |
+    */
+    'test' => [
+        'path' => base_path('tests'),
+        'namespace' => 'Tests',
+    ],
 ];
