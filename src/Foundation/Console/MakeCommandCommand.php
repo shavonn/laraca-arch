@@ -2,9 +2,9 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
-use Illuminate\Foundation\Console\MailMakeCommand;
+use Illuminate\Foundation\Console\ConsoleMakeCommand;
 
-class ArtyMailCommand extends MailMakeCommand
+class MakeCommandCommand extends ConsoleMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class ArtyMailCommand extends MailMakeCommand
      *
      * @var string
      */
-    protected $name = 'arty:mail';
+    protected $name = 'make:command';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class ArtyMailCommand extends MailMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.mail.namespace');
+        return config('laraca.command.namespace');
     }
 }

@@ -2,9 +2,9 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
-use Illuminate\Foundation\Console\RuleMakeCommand;
+use Illuminate\Foundation\Console\ObserverMakeCommand;
 
-class ArtyRuleCommand extends RuleMakeCommand
+class MakeObserverCommand extends ObserverMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class ArtyRuleCommand extends RuleMakeCommand
      *
      * @var string
      */
-    protected $name = 'arty:rule';
+    protected $name = 'make:observer';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class ArtyRuleCommand extends RuleMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.rule.namespace');
+        return config('laraca.observer.namespace');
     }
 }

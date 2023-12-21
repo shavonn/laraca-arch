@@ -33,6 +33,13 @@ use Illuminate\Support\ServiceProvider;
 class LaracaServiceProvider extends ServiceProvider
 {
     /**
+     * The application instance.
+     *
+     * @var \Illuminate\Foundation\Application
+     */
+    protected $app;
+
+    /**
      * commands
      * The commands to be registered.
      *
@@ -101,6 +108,8 @@ class LaracaServiceProvider extends ServiceProvider
             /*$this->publishes([
                 __DIR__.'/../resources/lang' => resource_path('lang/vendor/laraca'),
             ], 'lang');*/
+
+            $this->app->useDatabasePath(config('laraca.database.path'));
 
             // Registering package commands.
             $this->registerCommands();

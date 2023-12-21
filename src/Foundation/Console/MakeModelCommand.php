@@ -6,7 +6,7 @@ use HandsomeBrown\Laraca\Console\Concerns\GeneratesClasses;
 use Illuminate\Foundation\Console\ModelMakeCommand;
 use Symfony\Component\Console\Input\InputOption;
 
-class ArtyModelCommand extends ModelMakeCommand
+class MakeModelCommand extends ModelMakeCommand
 {
     use GeneratesClasses;
 
@@ -16,7 +16,7 @@ class ArtyModelCommand extends ModelMakeCommand
      *
      * @var string
      */
-    protected $name = 'arty:model';
+    protected $name = 'make:model';
 
     /**
      * getStub

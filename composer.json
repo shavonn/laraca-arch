@@ -1,10 +1,12 @@
 {
-    "name": "handsomebrown/laraca",
+    "name": "handsomebrown/laraca-arch",
     "description": "Provides commands to support an alternate Laravel application structure.",
     "keywords": [
         "handsomebrown",
         "laravel",
-        "laraca"
+        "laraca",
+        "laraca-arch",
+        "architecture"
     ],
     "homepage": "https://github.com/handsomebrown/laraca",
     "license": "MIT",

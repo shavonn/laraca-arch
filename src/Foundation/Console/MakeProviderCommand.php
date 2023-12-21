@@ -2,20 +2,17 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
-use HandsomeBrown\Laraca\Console\Concerns\GeneratesClasses;
-use Illuminate\Foundation\Console\ComponentMakeCommand;
+use Illuminate\Foundation\Console\ProviderMakeCommand;
 
-class ArtyComponentCommand extends ComponentMakeCommand
+class MakeProviderCommand extends ProviderMakeCommand
 {
-    use GeneratesClasses;
-
     /**
      * name
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'arty:component';
+    protected $name = 'make:provider';
 
     /**
      * getDefaultNamespace
@@ -25,6 +22,6 @@ class ArtyComponentCommand extends ComponentMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return strval(config('laraca.component.namespace'));
+        return config('laraca.provider.namespace');
     }
 }

@@ -2,9 +2,9 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
-use Illuminate\Foundation\Console\ResourceMakeCommand;
+use Illuminate\Foundation\Console\CastMakeCommand;
 
-class ArtyResourceCommand extends ResourceMakeCommand
+class MakeCastCommand extends CastMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class ArtyResourceCommand extends ResourceMakeCommand
      *
      * @var string
      */
-    protected $name = 'arty:resource';
+    protected $name = 'make:cast';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class ArtyResourceCommand extends ResourceMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.resource.namespace');
+        return config('laraca.cast.namespace');
     }
 }

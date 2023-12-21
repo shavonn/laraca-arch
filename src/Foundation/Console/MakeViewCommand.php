@@ -5,7 +5,7 @@ namespace HandsomeBrown\Laraca\Foundation\Console;
 use HandsomeBrown\Laraca\Console\Concerns\GeneratesClasses;
 use Illuminate\Foundation\Console\ViewMakeCommand;
 
-class ArtyViewCommand extends ViewMakeCommand
+class MakeViewCommand extends ViewMakeCommand
 {
     use GeneratesClasses;
 
@@ -15,5 +15,5 @@ class ArtyViewCommand extends ViewMakeCommand
      *
      * @var string
      */
-    protected $name = 'arty:view';
+    protected $name = 'make:view';
 }

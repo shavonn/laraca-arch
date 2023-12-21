@@ -2,9 +2,9 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
-use Illuminate\Foundation\Console\ScopeMakeCommand;
+use Illuminate\Routing\Console\ControllerMakeCommand;
 
-class ArtyScopeCommand extends ScopeMakeCommand
+class MakeControllerCommand extends ControllerMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class ArtyScopeCommand extends ScopeMakeCommand
      *
      * @var string
      */
-    protected $name = 'arty:scope';
+    protected $name = 'make:controller';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class ArtyScopeCommand extends ScopeMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.scope.namespace');
+        return config('laraca.controller.namespace');
     }
 }

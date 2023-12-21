@@ -3,8 +3,9 @@
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
 use Illuminate\Database\Console\Factories\FactoryMakeCommand;
+use Illuminate\Support\Str;
 
-class ArtyFactoryCommand extends FactoryMakeCommand
+class MakeFactoryCommand extends FactoryMakeCommand
 {
     /**
      * name
@@ -12,7 +13,20 @@ class ArtyFactoryCommand extends FactoryMakeCommand
      *
      * @var string
      */
-    protected $name = 'arty:factory';
+    protected $name = 'make:factory';
+
+    /**
+     * getPath
+     * Get the destination class path.
+     *
+     * @param  string  $name
+     */
+    protected function getPath($name): string
+    {
+        $name = str_replace('\\', '/', Str::replaceFirst($this->rootNamespace(), '', $name));
+
+        return config('laraca.factory.path')."/$name.php";
+    }
 
     /**
      * getNamespace

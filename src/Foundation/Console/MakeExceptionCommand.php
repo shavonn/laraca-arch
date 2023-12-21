@@ -2,9 +2,9 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
-use Illuminate\Foundation\Console\ChannelMakeCommand;
+use Illuminate\Foundation\Console\ExceptionMakeCommand;
 
-class ArtyChannelCommand extends ChannelMakeCommand
+class MakeExceptionCommand extends ExceptionMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class ArtyChannelCommand extends ChannelMakeCommand
      *
      * @var string
      */
-    protected $name = 'arty:channel';
+    protected $name = 'make:exception';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class ArtyChannelCommand extends ChannelMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.channel.namespace');
+        return config('laraca.exception.namespace');
     }
 }

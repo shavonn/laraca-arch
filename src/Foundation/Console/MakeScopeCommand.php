@@ -2,9 +2,9 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
-use Illuminate\Foundation\Console\NotificationMakeCommand;
+use Illuminate\Foundation\Console\ScopeMakeCommand;
 
-class ArtyNotificationCommand extends NotificationMakeCommand
+class MakeScopeCommand extends ScopeMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class ArtyNotificationCommand extends NotificationMakeCommand
      *
      * @var string
      */
-    protected $name = 'arty:notification';
+    protected $name = 'make:scope';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class ArtyNotificationCommand extends NotificationMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.notification.namespace');
+        return config('laraca.scope.namespace');
     }
 }

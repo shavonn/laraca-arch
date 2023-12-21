@@ -5,7 +5,7 @@ namespace HandsomeBrown\Laraca\Foundation\Console;
 use Illuminate\Database\Console\Seeds\SeederMakeCommand;
 use Illuminate\Support\Str;
 
-class ArtySeederCommand extends SeederMakeCommand
+class MakeSeederCommand extends SeederMakeCommand
 {
     /**
      * name
@@ -13,7 +13,7 @@ class ArtySeederCommand extends SeederMakeCommand
      *
      * @var string
      */
-    protected $name = 'arty:seeder';
+    protected $name = 'make:seeder';
 
     /**
      * getPath

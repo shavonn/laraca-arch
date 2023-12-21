@@ -2,9 +2,9 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
-use Illuminate\Foundation\Console\JobMakeCommand;
+use Illuminate\Foundation\Console\RuleMakeCommand;
 
-class ArtyJobCommand extends JobMakeCommand
+class MakeRuleCommand extends RuleMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class ArtyJobCommand extends JobMakeCommand
      *
      * @var string
      */
-    protected $name = 'arty:job';
+    protected $name = 'make:rule';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class ArtyJobCommand extends JobMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.job.namespace');
+        return config('laraca.rule.namespace');
     }
 }

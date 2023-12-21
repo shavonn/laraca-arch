@@ -2,9 +2,9 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
-use Illuminate\Foundation\Console\CastMakeCommand;
+use Illuminate\Foundation\Console\ChannelMakeCommand;
 
-class ArtyCastCommand extends CastMakeCommand
+class MakeChannelCommand extends ChannelMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class ArtyCastCommand extends CastMakeCommand
      *
      * @var string
      */
-    protected $name = 'arty:cast';
+    protected $name = 'make:channel';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class ArtyCastCommand extends CastMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.cast.namespace');
+        return config('laraca.channel.namespace');
     }
 }

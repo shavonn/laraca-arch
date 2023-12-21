@@ -2,9 +2,9 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
-use Illuminate\Foundation\Console\PolicyMakeCommand;
+use Illuminate\Foundation\Console\ListenerMakeCommand;
 
-class ArtyPolicyCommand extends PolicyMakeCommand
+class MakeListenerCommand extends ListenerMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class ArtyPolicyCommand extends PolicyMakeCommand
      *
      * @var string
      */
-    protected $name = 'arty:policy';
+    protected $name = 'make:listener';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class ArtyPolicyCommand extends PolicyMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.policy.namespace');
+        return config('laraca.listener.namespace');
     }
 }

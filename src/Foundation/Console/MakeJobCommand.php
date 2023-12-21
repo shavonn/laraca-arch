@@ -2,9 +2,9 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
-use Illuminate\Foundation\Console\ProviderMakeCommand;
+use Illuminate\Foundation\Console\JobMakeCommand;
 
-class ArtyProviderCommand extends ProviderMakeCommand
+class MakeJobCommand extends JobMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class ArtyProviderCommand extends ProviderMakeCommand
      *
      * @var string
      */
-    protected $name = 'arty:provider';
+    protected $name = 'make:job';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class ArtyProviderCommand extends ProviderMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.provider.namespace');
+        return config('laraca.job.namespace');
     }
 }

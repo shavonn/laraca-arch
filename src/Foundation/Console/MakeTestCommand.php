@@ -5,7 +5,7 @@ namespace HandsomeBrown\Laraca\Foundation\Console;
 use Illuminate\Foundation\Console\TestMakeCommand;
 use Illuminate\Support\Str;
 
-class ArtyTestCommand extends TestMakeCommand
+class MakeTestCommand extends TestMakeCommand
 {
     /**
      * name
@@ -13,7 +13,7 @@ class ArtyTestCommand extends TestMakeCommand
      *
      * @var string
      */
-    protected $name = 'arty:test';
+    protected $name = 'make:test';
 
     /**
      * getPath

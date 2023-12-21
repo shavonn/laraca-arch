@@ -6,6 +6,19 @@
 return [
     /*
     |--------------------------------------------------------------------------
+    | Database Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where Factories will be generated.
+    |
+    */
+    'database' => [
+        'path' => base_path('database'),
+        'namespace' => app()->getNamespace().'Database',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Cast Path
     |--------------------------------------------------------------------------
     |
@@ -104,7 +117,7 @@ return [
     |
     */
     'factory' => [
-        'path' => app_path('database/factories'),
+        'path' => base_path('database/factories'),
         'namespace' => app()->getNamespace().'Database\\Factories',
     ],
 

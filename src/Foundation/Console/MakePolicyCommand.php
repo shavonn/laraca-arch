@@ -2,9 +2,9 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
-use Illuminate\Routing\Console\MiddlewareMakeCommand;
+use Illuminate\Foundation\Console\PolicyMakeCommand;
 
-class ArtyMiddlewareCommand extends MiddlewareMakeCommand
+class MakePolicyCommand extends PolicyMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class ArtyMiddlewareCommand extends MiddlewareMakeCommand
      *
      * @var string
      */
-    protected $name = 'arty:middleware';
+    protected $name = 'make:policy';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class ArtyMiddlewareCommand extends MiddlewareMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.middleware.namespace');
+        return config('laraca.policy.namespace');
     }
 }
