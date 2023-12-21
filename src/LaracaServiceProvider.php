@@ -2,31 +2,31 @@
 
 namespace HandsomeBrown\Laraca;
 
-use HandsomeBrown\Laraca\Foundation\Console\ArtyCastCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyChannelCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyCommandCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyComponentCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyControllerCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyEventCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyExceptionCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyFactoryCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyJobCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyListenerCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyMailCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyMiddlewareCommand;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyMigrationCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyModelCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyNotificationCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyObserverCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyPolicyCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyProviderCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyRequestCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyResourceCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyRuleCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyScopeCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtySeederCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyTestCommand;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyViewCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeCastCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeChannelCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeCommandCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeComponentCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeControllerCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeEventCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeExceptionCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeFactoryCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeJobCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeListenerCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeMailCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeMiddlewareCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeModelCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeNotificationCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeObserverCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakePolicyCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeProviderCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeRequestCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeResourceCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeRuleCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeScopeCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeSeederCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeTestCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeViewCommand;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\ServiceProvider;
 
@@ -46,31 +46,31 @@ class LaracaServiceProvider extends ServiceProvider
      * @var array<string,mixed>
      */
     protected $commands = [
-        'ArtyCast' => ArtyCastCommand::class,
-        'ArtyChannel' => ArtyChannelCommand::class,
-        'ArtyCommand' => ArtyCommandCommand::class,
-        'ArtyComponent' => ArtyComponentCommand::class,
-        'ArtyController' => ArtyControllerCommand::class,
-        'ArtyEvent' => ArtyEventCommand::class,
-        'ArtyException' => ArtyExceptionCommand::class,
-        'ArtyFactory' => ArtyFactoryCommand::class,
-        'ArtyJob' => ArtyJobCommand::class,
-        'ArtyListener' => ArtyListenerCommand::class,
-        'ArtyMail' => ArtyMailCommand::class,
-        'ArtyMiddleware' => ArtyMiddlewareCommand::class,
         'ArtyMigration' => ArtyMigrationCommand::class,
-        'ArtyModel' => ArtyModelCommand::class,
-        'ArtyNotification' => ArtyNotificationCommand::class,
-        'ArtyObserver' => ArtyObserverCommand::class,
-        'ArtyPolicy' => ArtyPolicyCommand::class,
-        'ArtyProvider' => ArtyProviderCommand::class,
-        'ArtyRequest' => ArtyRequestCommand::class,
-        'ArtyResource' => ArtyResourceCommand::class,
-        'ArtyRule' => ArtyRuleCommand::class,
-        'ArtyScope' => ArtyScopeCommand::class,
-        'ArtySeeder' => ArtySeederCommand::class,
-        'ArtyTest' => ArtyTestCommand::class,
-        'ArtyView' => ArtyViewCommand::class,
+        'MakeCast' => MakeCastCommand::class,
+        'MakeChannel' => MakeChannelCommand::class,
+        'MakeCommand' => MakeCommandCommand::class,
+        'MakeComponent' => MakeComponentCommand::class,
+        'MakeController' => MakeControllerCommand::class,
+        'MakeEvent' => MakeEventCommand::class,
+        'MakeException' => MakeExceptionCommand::class,
+        'MakeFactory' => MakeFactoryCommand::class,
+        'MakeJob' => MakeJobCommand::class,
+        'MakeListener' => MakeListenerCommand::class,
+        'MakeMail' => MakeMailCommand::class,
+        'MakeMiddleware' => MakeMiddlewareCommand::class,
+        'MakeModel' => MakeModelCommand::class,
+        'MakeNotification' => MakeNotificationCommand::class,
+        'MakeObserver' => MakeObserverCommand::class,
+        'MakePolicy' => MakePolicyCommand::class,
+        'MakeProvider' => MakeProviderCommand::class,
+        'MakeRequest' => MakeRequestCommand::class,
+        'MakeResource' => MakeResourceCommand::class,
+        'MakeRule' => MakeRuleCommand::class,
+        'MakeScope' => MakeScopeCommand::class,
+        'MakeSeeder' => MakeSeederCommand::class,
+        'MakeTest' => MakeTestCommand::class,
+        'MakeView' => MakeViewCommand::class,
     ];
 
     /**
