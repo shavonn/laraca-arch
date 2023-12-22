@@ -25,6 +25,12 @@ class ArtyMigrationCommand extends MigrateMakeCommand
      */
     protected function getMigrationPath(): string
     {
-        return config('laraca.migration.path');
+        if (! is_null($targetPath = $this->input->getOption('path'))) {
+            return ! $this->usingRealPath()
+                            ? $this->laravel->basePath().'/'.$targetPath
+                            : $targetPath;
+        }
+
+        return $this->laravel->databasePath(config('laraca.migration.path'));
     }
 }

@@ -2,11 +2,14 @@
 
 namespace HandsomeBrown\Laraca\Tests;
 
-use HandsomeBrown\Laraca\LaracaServiceProvider;
+use Illuminate\Support\Facades\File;
+use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase;
 
 class LaracaTestCase extends TestCase
 {
+    use WithWorkbench;
+
     /**
      * setUp
      */
@@ -15,6 +18,24 @@ class LaracaTestCase extends TestCase
         parent::setUp();
 
         $this->withoutMockingConsoleOutput();
+
+        $this->afterApplicationCreated(function () {
+            if (! File::exists(app_path('Test'))) {
+                File::makeDirectory(app_path('Test'));
+            }
+            if (! File::exists(base_path('test'))) {
+                File::makeDirectory(base_path('test'));
+            }
+        });
+
+        $this->beforeApplicationDestroyed(function () {
+            if (File::exists(app_path('Test'))) {
+                File::deleteDirectories(app_path('Test'));
+            }
+            if (File::exists(base_path('test'))) {
+                File::deleteDirectories(base_path('test'));
+            }
+        });
     }
 
     /**
@@ -25,7 +46,7 @@ class LaracaTestCase extends TestCase
     protected function getPackageProviders($app): array
     {
         return [
-            LaracaServiceProvider::class,
+            LaracaTestServiceProvider::class,
         ];
     }
 }
