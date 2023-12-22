@@ -4,13 +4,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/handsomebrown/laraca-arch.svg?style=flat-square)](https://packagist.org/packages/handsomebrown/laraca-arch)
 ![GitHub Actions](https://github.com/handsomebrown/laraca-arch/actions/workflows/main.yml/badge.svg)
 
-The goal of this package is a _configurable_ Laravel application structure with a few niceties thrown in.
-
-Laraca Architect overwrites and extends Laravel Artisan commands. Hence, they still have all of the arguments and options artisan commands do, but use the directory structure you define in the Laraca config file.
-
-Caveats:
-
--   `make:migration` is omitted. You will need to use `arty:migration`. Why? This one is quite different from the others and more difficult to tinker with than I was willing to lend time to. It’s better just left as is.
+The goal of this package is a _configurable_ Laravel application structure with a few niceties thrown in. And I swear only tiny bits of my personal opinion made it into the default configuration. ;)
 
 ## Installation
 
@@ -27,6 +21,12 @@ php artisan vendor:publish --tag="laraca-config"
 ```
 
 ## Usage
+
+Laraca Architect overwrites and extends Laravel Artisan commands. Hence, they still have all of the arguments and options artisan commands do, but use the directory structure you define in the Laraca config file.
+
+Caveats:
+
+-   `make:migration` is omitted. You will need to use `arty:migration`. Why? This one is quite different from the others and more difficult to tinker with than I was willing to lend time to. It’s better just left as is.
 
 #### make:cast
 
