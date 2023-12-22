@@ -19,6 +19,11 @@ class LaracaTestCase extends TestCase
 
         $this->withoutMockingConsoleOutput();
 
+        $this->afterApplicationCreated(function () {
+            File::makeDirectory(app_path('Test'));
+            File::makeDirectory(base_path('test'));
+        });
+
         $this->beforeApplicationDestroyed(function () {
             File::deleteDirectories(app_path('Test'));
             File::deleteDirectories(base_path('test'));
