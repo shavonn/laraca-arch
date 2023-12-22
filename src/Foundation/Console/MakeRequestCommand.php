@@ -22,6 +22,6 @@ class MakeRequestCommand extends RequestMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.request.namespace');
+        return $rootNamespace.'\\'.config('laraca.request.namespace');
     }
 }

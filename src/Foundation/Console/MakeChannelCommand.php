@@ -22,6 +22,6 @@ class MakeChannelCommand extends ChannelMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.channel.namespace');
+        return $rootNamespace.'\\'.config('laraca.channel.namespace');
     }
 }

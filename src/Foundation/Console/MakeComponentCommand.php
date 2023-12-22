@@ -25,6 +25,8 @@ class MakeComponentCommand extends ComponentMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return strval(config('laraca.component.namespace'));
+        $this->info($rootNamespace.'\\'.config('laraca.component.namespace'));
+
+        return $rootNamespace.'\\'.config('laraca.component.namespace');
     }
 }

@@ -49,7 +49,7 @@ trait GeneratesClasses
      */
     protected function viewPath($path = '')
     {
-        $views = config('laraca.view.path') ?? resource_path('views');
+        $views = base_path(config('laraca.view.path'));
 
         return $views.($path ? DIRECTORY_SEPARATOR.$path : $path);
     }

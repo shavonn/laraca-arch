@@ -76,40 +76,15 @@ class LaracaServiceProvider extends ServiceProvider
     /**
      * boot
      * Bootstrap the application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        /*
-         * Optional methods to load your package assets
-         */
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'laraca');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'laraca');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
-
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('laraca.php'),
             ], 'laraca-config');
 
-            // Publishing the views.
-            /*$this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/laraca'),
-            ], 'views');*/
-
-            // Publishing assets.
-            /*$this->publishes([
-                __DIR__.'/../resources/assets' => public_path('vendor/laraca'),
-            ], 'assets');*/
-
-            // Publishing the translation files.
-            /*$this->publishes([
-                __DIR__.'/../resources/lang' => resource_path('lang/vendor/laraca'),
-            ], 'lang');*/
-
-            $this->app->useDatabasePath(config('laraca.database.path'));
+            $this->app->useDatabasePath(base_path(config('laraca.database.path')));
 
             // Registering package commands.
             $this->registerCommands();
@@ -119,10 +94,8 @@ class LaracaServiceProvider extends ServiceProvider
     /**
      * register
      * Register the application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         // Automatically apply the package configuration
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laraca');
@@ -131,10 +104,8 @@ class LaracaServiceProvider extends ServiceProvider
     /**
      * registerCommands
      * Register the given commands.
-     *
-     * @return void
      */
-    public function registerCommands()
+    public function registerCommands(): void
     {
         foreach ($this->commands as $commandName => $command) {
             $method = "register{$commandName}Command";
@@ -158,10 +129,8 @@ class LaracaServiceProvider extends ServiceProvider
     /**
      * registerArtyMigrationCommand
      * Register the command.
-     *
-     * @return void
      */
-    protected function registerArtyMigrationCommand()
+    protected function registerArtyMigrationCommand(): void
     {
         $this->app->singleton(ArtyMigrationCommand::class, function ($app) {
             $creator = $app['migration.creator'];

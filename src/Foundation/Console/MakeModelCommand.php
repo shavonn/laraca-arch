@@ -59,7 +59,7 @@ class MakeModelCommand extends ModelMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.model.namespace');
+        return $rootNamespace.'\\'.config('laraca.model.namespace');
     }
 
     /**

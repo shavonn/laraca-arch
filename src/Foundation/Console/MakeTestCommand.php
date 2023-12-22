@@ -21,11 +21,11 @@ class MakeTestCommand extends TestMakeCommand
      *
      * @param  string  $name
      */
-    protected function getPath($name): string
+    protected function getPath($name)
     {
         $name = Str::replaceFirst($this->rootNamespace(), '', $name);
 
-        return config('laraca.test.path').str_replace('\\', '/', $name).'.php';
+        return base_path(config('laraca.test.path')).str_replace('\\', '/', $name).'.php';
     }
 
     /**
@@ -41,5 +41,14 @@ class MakeTestCommand extends TestMakeCommand
         } else {
             return config('laraca.test.namespace').'\Feature';
         }
+    }
+
+    /**
+     * rootNamespace
+     * Get the root namespace for the class.
+     */
+    protected function rootNamespace(): string
+    {
+        return config('laraca.test.namespace');
     }
 }

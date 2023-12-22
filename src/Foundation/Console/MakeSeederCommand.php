@@ -25,7 +25,7 @@ class MakeSeederCommand extends SeederMakeCommand
     {
         $name = str_replace('\\', '/', Str::replaceFirst($this->rootNamespace(), '', $name));
 
-        return config('laraca.seeder.path').$name.'.php';
+        return $this->laravel->databasePath().DIRECTORY_SEPARATOR.config('laraca.seeder.path').$name.'.php';
     }
 
     /**

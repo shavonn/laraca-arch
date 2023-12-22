@@ -22,6 +22,6 @@ class MakeExceptionCommand extends ExceptionMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.exception.namespace');
+        return $rootNamespace.'\\'.config('laraca.exception.namespace');
     }
 }

@@ -22,6 +22,6 @@ class MakeObserverCommand extends ObserverMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.observer.namespace');
+        return $rootNamespace.'\\'.config('laraca.observer.namespace');
     }
 }

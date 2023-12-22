@@ -22,6 +22,6 @@ class MakeProviderCommand extends ProviderMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.provider.namespace');
+        return $rootNamespace.'\\'.config('laraca.provider.namespace');
     }
 }

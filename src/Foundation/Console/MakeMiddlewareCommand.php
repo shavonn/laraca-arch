@@ -22,6 +22,6 @@ class MakeMiddlewareCommand extends MiddlewareMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.middleware.namespace');
+        return $rootNamespace.'\\'.config('laraca.middleware.namespace');
     }
 }

@@ -22,6 +22,6 @@ class MakeJobCommand extends JobMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.job.namespace');
+        return $rootNamespace.'\\'.config('laraca.job.namespace');
     }
 }

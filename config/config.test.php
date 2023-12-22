@@ -14,8 +14,8 @@ return [
     |
     */
     'database' => [
-        'path' => 'database',
-        'namespace' => 'Database',
+        'path' => 'test/database',
+        'namespace' => 'Test\\Database',
     ],
 
     /*
@@ -27,8 +27,8 @@ return [
     |
     */
     'cast' => [
-        'path' => 'Data/Casts',
-        'namespace' => 'Data\\Casts',
+        'path' => 'Test/Data/Casts',
+        'namespace' => 'Test\\Data\\Casts',
     ],
 
     /*
@@ -40,8 +40,8 @@ return [
     |
     */
     'channel' => [
-        'path' => 'Broadcasting',
-        'namespace' => 'Broadcasting',
+        'path' => 'Test/Broadcasting',
+        'namespace' => 'Test\\Broadcasting',
     ],
 
     /*
@@ -53,8 +53,8 @@ return [
     |
     */
     'command' => [
-        'path' => 'Console/Commands',
-        'namespace' => 'Console\\Commands',
+        'path' => 'Test/Console/Commands',
+        'namespace' => 'Test\\Console\\Commands',
     ],
 
     /*
@@ -66,8 +66,8 @@ return [
     |
     */
     'component' => [
-        'path' => 'View/Components',
-        'namespace' => 'View\\Components',
+        'path' => 'Test/View/Components',
+        'namespace' => 'Test\\View\\Components',
     ],
 
     /*
@@ -79,8 +79,8 @@ return [
     |
     */
     'controller' => [
-        'path' => 'Http/Controllers',
-        'namespace' => 'Http\\Controllers',
+        'path' => 'Test/Http/Controllers',
+        'namespace' => 'Test\\Http\\Controllers',
     ],
 
     /*
@@ -92,8 +92,8 @@ return [
     |
     */
     'event' => [
-        'path' => 'Events',
-        'namespace' => 'Events',
+        'path' => 'Test/Events',
+        'namespace' => 'Test\\Events',
     ],
 
     /*
@@ -105,8 +105,8 @@ return [
     |
     */
     'exception' => [
-        'path' => 'Exceptions',
-        'namespace' => 'Exceptions',
+        'path' => 'Test/Exceptions',
+        'namespace' => 'Test\\Exceptions',
     ],
 
     /*
@@ -119,7 +119,7 @@ return [
     */
     'factory' => [
         'path' => 'factories',
-        'namespace' => 'Database\\Factories',
+        'namespace' => 'Test\\Database\\Factories',
     ],
 
     /*
@@ -131,8 +131,8 @@ return [
     |
     */
     'job' => [
-        'path' => 'Jobs',
-        'namespace' => 'Jobs',
+        'path' => 'Test/Jobs',
+        'namespace' => 'Test\\Jobs',
     ],
 
     /*
@@ -144,8 +144,8 @@ return [
     |
     */
     'listener' => [
-        'path' => 'Listeners',
-        'namespace' => 'Listeners',
+        'path' => 'Test/Listeners',
+        'namespace' => 'Test\\Listeners',
     ],
 
     /*
@@ -157,8 +157,8 @@ return [
     |
     */
     'mail' => [
-        'path' => 'Mail',
-        'namespace' => 'Mail',
+        'path' => 'Test/Mail',
+        'namespace' => 'Test\\Mail',
     ],
 
     /*
@@ -170,8 +170,8 @@ return [
     |
     */
     'middleware' => [
-        'path' => 'Http/Middleware',
-        'namespace' => 'Http\\Middleware',
+        'path' => 'Test/Http/Middleware',
+        'namespace' => 'Test\\Http\\Middleware',
     ],
 
     /*
@@ -195,8 +195,8 @@ return [
     |
     */
     'model' => [
-        'path' => 'Data/Models',
-        'namespace' => 'Data\\Models',
+        'path' => 'Test/Data/Models',
+        'namespace' => 'Test\\Data\\Models',
     ],
 
     /*
@@ -208,8 +208,8 @@ return [
     |
     */
     'notification' => [
-        'path' => 'Notifications',
-        'namespace' => 'Notifications',
+        'path' => 'Test/Notifications',
+        'namespace' => 'Test\\Notifications',
     ],
 
     /*
@@ -221,8 +221,8 @@ return [
     |
     */
     'observer' => [
-        'path' => 'Data/Observers',
-        'namespace' => 'Data\\Observers',
+        'path' => 'Test/Data/Observers',
+        'namespace' => 'Test\\Data\\Observers',
     ],
 
     /*
@@ -234,8 +234,8 @@ return [
     |
     */
     'policy' => [
-        'path' => 'Policies',
-        'namespace' => 'Policies',
+        'path' => 'Test/Policies',
+        'namespace' => 'Test\\Policies',
     ],
 
     /*
@@ -247,8 +247,8 @@ return [
     |
     */
     'provider' => [
-        'path' => 'Providers',
-        'namespace' => 'Providers',
+        'path' => 'Test/Providers',
+        'namespace' => 'Test\\Providers',
     ],
 
     /*
@@ -260,8 +260,8 @@ return [
     |
     */
     'request' => [
-        'path' => 'Http/Requests',
-        'namespace' => 'Http\\Requests',
+        'path' => 'Test/Http/Requests',
+        'namespace' => 'Test\\Http\\Requests',
     ],
 
     /*
@@ -273,8 +273,8 @@ return [
     |
     */
     'resource' => [
-        'path' => 'Http/Resources',
-        'namespace' => 'Http\\Resources',
+        'path' => 'Test/Http/Resources',
+        'namespace' => 'Test\\Http\\Resources',
     ],
 
     /*
@@ -286,8 +286,8 @@ return [
     |
     */
     'rule' => [
-        'path' => 'Rules',
-        'namespace' => 'Rules',
+        'path' => 'Test/Rules',
+        'namespace' => 'Test\\Rules',
     ],
 
     /*
@@ -299,8 +299,8 @@ return [
     |
     */
     'scope' => [
-        'path' => 'Data/Models/Scopes',
-        'namespace' => 'Data\\Models\\Scopes',
+        'path' => 'Test/Data/Models/Scopes',
+        'namespace' => 'Test\\Data\\Models\\Scopes',
     ],
 
     /*
@@ -313,7 +313,7 @@ return [
     */
     'seeder' => [
         'path' => 'seeders',
-        'namespace' => 'Database\\Seeders',
+        'namespace' => 'Test\\Database\\Seeders',
     ],
 
     /*
@@ -325,8 +325,8 @@ return [
     |
     */
     'test' => [
-        'path' => 'tests',
-        'namespace' => 'Tests',
+        'path' => 'test/tests',
+        'namespace' => 'Test\\Tests',
     ],
 
     /*
@@ -338,6 +338,6 @@ return [
     |
     */
     'view' => [
-        'path' => 'resources/views',
+        'path' => 'test/resources/views',
     ],
 ];

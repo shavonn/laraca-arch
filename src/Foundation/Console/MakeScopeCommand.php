@@ -22,6 +22,6 @@ class MakeScopeCommand extends ScopeMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.scope.namespace');
+        return $rootNamespace.'\\'.config('laraca.scope.namespace');
     }
 }

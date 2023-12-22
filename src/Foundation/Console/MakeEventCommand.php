@@ -22,6 +22,6 @@ class MakeEventCommand extends EventMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.event.namespace');
+        return $rootNamespace.'\\'.config('laraca.event.namespace');
     }
 }

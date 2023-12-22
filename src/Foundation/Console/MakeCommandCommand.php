@@ -22,6 +22,15 @@ class MakeCommandCommand extends ConsoleMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
+        return $rootNamespace.'\\'.config('laraca.command.namespace');
+    }
+
+    /**
+     * rootNamespace
+     * Get the root namespace for the class.
+     */
+    protected function rootNamespace(): string
+    {
         return config('laraca.command.namespace');
     }
 }

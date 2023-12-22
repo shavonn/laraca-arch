@@ -23,9 +23,9 @@ class MakeFactoryCommand extends FactoryMakeCommand
      */
     protected function getPath($name): string
     {
-        $name = str_replace('\\', '/', Str::replaceFirst($this->rootNamespace(), '', $name));
+        $name = (string) Str::of($name)->replaceFirst($this->rootNamespace(), '')->finish('Factory');
 
-        return config('laraca.factory.path')."/$name.php";
+        return $this->laravel->databasePath().DIRECTORY_SEPARATOR.config('laraca.factory.path')."/$name.php";
     }
 
     /**
@@ -36,6 +36,6 @@ class MakeFactoryCommand extends FactoryMakeCommand
      */
     protected function getNamespace($name): string
     {
-        return config('laraca.factory.namespace');
+        return $this->rootNamespace().'\\'.config('laraca.factory.namespace');
     }
 }

@@ -22,6 +22,6 @@ class MakeControllerCommand extends ControllerMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.controller.namespace');
+        return $rootNamespace.'\\'.config('laraca.controller.namespace');
     }
 }

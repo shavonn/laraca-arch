@@ -22,6 +22,6 @@ class MakeCastCommand extends CastMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.cast.namespace');
+        return $rootNamespace.'\\'.config('laraca.cast.namespace');
     }
 }

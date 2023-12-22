@@ -22,6 +22,6 @@ class MakeListenerCommand extends ListenerMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.listener.namespace');
+        return $rootNamespace.'\\'.config('laraca.listener.namespace');
     }
 }

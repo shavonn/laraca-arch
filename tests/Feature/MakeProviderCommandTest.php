@@ -1,15 +1,15 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\ArtyProviderCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeProviderCommand;
 use Illuminate\Support\Facades\File;
 
 it('create the Provider class when used', function (string $class) {
     $this->artisan(
-        ArtyProviderCommand::class,
+        MakeProviderCommand::class,
         ['name' => $class],
     );
 
     $this->assertTrue(File::exists(
-        path: app_path("Providers/$class.php"),
+        path: app_path("Test/Providers/$class.php"),
     ));
 })->with('classes');

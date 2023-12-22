@@ -22,6 +22,6 @@ class MakeResourceCommand extends ResourceMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.resource.namespace');
+        return $rootNamespace.'\\'.config('laraca.resource.namespace');
     }
 }

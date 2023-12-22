@@ -22,6 +22,6 @@ class MakePolicyCommand extends PolicyMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.policy.namespace');
+        return $rootNamespace.'\\'.config('laraca.policy.namespace');
     }
 }

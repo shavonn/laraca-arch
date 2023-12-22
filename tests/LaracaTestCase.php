@@ -2,7 +2,7 @@
 
 namespace HandsomeBrown\Laraca\Tests;
 
-use HandsomeBrown\Laraca\LaracaServiceProvider;
+use Illuminate\Support\Facades\File;
 use Orchestra\Testbench\TestCase;
 
 class LaracaTestCase extends TestCase
@@ -15,6 +15,14 @@ class LaracaTestCase extends TestCase
         parent::setUp();
 
         $this->withoutMockingConsoleOutput();
+
+        $this->beforeApplicationDestroyed(function () {
+            File::deleteDirectories(base_path('db'));
+            File::deleteDirectories(app_path('Test'));
+            File::deleteDirectories(base_path('test'));
+        });
+
+        // File::cleanDirectory(app_path());
     }
 
     /**
@@ -25,7 +33,7 @@ class LaracaTestCase extends TestCase
     protected function getPackageProviders($app): array
     {
         return [
-            LaracaServiceProvider::class,
+            LaracaTestServiceProvider::class,
         ];
     }
 }

@@ -22,6 +22,6 @@ class MakeRuleCommand extends RuleMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.rule.namespace');
+        return $rootNamespace.'\\'.config('laraca.rule.namespace');
     }
 }

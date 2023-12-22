@@ -22,6 +22,6 @@ class MakeMailCommand extends MailMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return config('laraca.mail.namespace');
+        return $rootNamespace.'\\'.config('laraca.mail.namespace');
     }
 }
