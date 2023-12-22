@@ -1,17 +1,23 @@
-# Laraca
+# Laraca Architect
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/handsomebrown/laraca.svg?style=flat-square)](https://packagist.org/packages/handsomebrown/laraca)
-[![Total Downloads](https://img.shields.io/packagist/dt/handsomebrown/laraca.svg?style=flat-square)](https://packagist.org/packages/handsomebrown/laraca)
-![GitHub Actions](https://github.com/handsomebrown/laraca/actions/workflows/main.yml/badge.svg)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/handsomebrown/laraca-arch.svg?style=flat-square)](https://packagist.org/packages/handsomebrown/laraca-arch)
+[![Total Downloads](https://img.shields.io/packagist/dt/handsomebrown/laraca-arch.svg?style=flat-square)](https://packagist.org/packages/handsomebrown/laraca-arch)
+![GitHub Actions](https://github.com/handsomebrown/laraca-arch/actions/workflows/main.yml/badge.svg)
 
-The goal of this package is an alternate _configurable_ Laravel application structure with a few niceties thrown in.
+The goal of this package is a _configurable_ Laravel application structure with a few niceties thrown in.
+
+Laraca Architect overwrites and extends Laravel Artisan commands. Hence, they still have all of the arguments and options artisan commands do, but use the directory structure you define in the Laraca config file.
+
+Caveats:
+
+-   `make:migration` is omitted. You will need to use `arty:migration`. Why? This one is quite different from the others and more difficult to tinker with than I was willing to lend time to. It’s better just left as is.
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require handsomebrown/laraca
+composer require handsomebrown/laraca-arch
 ```
 
 You can publish the config file with:You can publish the config file with:k
@@ -22,117 +28,113 @@ php artisan vendor:publish --tag="laraca-config"
 
 ## Usage
 
-Meet `arty` ( obviously named after Laravel's `artisan`), the command namespace where you can find Laraca commands that wrap Laravel's Artisan command classes so you can have the application structure you want.
-
-Arty extends existing Laravel Artisan commands so they still have all of the arguments and options artisan commands do.
-
-#### arty:cast
+#### make:cast
 
 ```php
-artisan arty:cast <name>
+artisan make:cast <name>
 ```
 
 Extends `artisan make:cast`
-Default dir in config: `Data\Casts`
+Default dir in config: `app/Data/Casts`
 
-#### arty:channel
+#### make:channel
 
 ```php
-artisan arty:channel <name>
+artisan make:channel <name>
 ```
 
 Extends `artisan make:channel`
 Default dir in config: `app/Broadcasting`
 
-#### arty:command
+#### make:command
 
 ```php
-artisan arty:command <name>
+artisan make:command <name>
 ```
 
 Extends `artisan make:command`
-Default dir in config: `app/Console\Commands`
+Default dir in config: `app/Console/Commands`
 
-#### arty:component
+#### make:component
 
 ```php
-artisan arty:component <name>
+artisan make:component <name>
 ```
 
 Extends `artisan make:component`
-Default dir in config: `app/View\Components`
+Default dir in config: `app/View/Components`
 
 Note:
 
-- This command will use the laraca view path config value instead of the one set in `config/view.php` when generating the blade file.
+-   This command will use the laraca view path config value instead of the one set in `config/view.php` when generating the blade file.
 
-#### arty:controller
+#### make:controller
 
 ```php
-artisan arty:controller <name>
+artisan make:controller <name>
 ```
 
 Extends `artisan make:controller`
 Default dir in config: `app/Http/Controllers`
 
-#### arty:event
+#### make:event
 
 ```php
-artisan arty:event <name>
+artisan make:event <name>
 ```
 
 Extends `artisan make:event`
 Default dir in config: `app/Events`
 
-#### arty:exception
+#### make:exception
 
 ```php
-artisan arty:exception <name>
+artisan make:exception <name>
 ```
 
 Extends `artisan make:exception`
 Default dir in config: `app/Exceptions`
 
-#### arty:factory
+#### make:factory
 
 ```php
-artisan arty:factory <name>
+artisan make:factory <name>
 ```
 
 Extends `artisan make:factory`
 Default dir in config: `database/factories`
 
-#### arty:job
+#### make:job
 
 ```php
-artisan arty:job <name>
+artisan make:job <name>
 ```
 
 Extends `artisan make:job`
 Default dir in config: `app/Jobs`
 
-#### arty:listener
+#### make:listener
 
 ```php
-artisan arty:listener <name>
+artisan make:listener <name>
 ```
 
 Extends `artisan make:listener`
 Default dir in config: `app/Listeners`
 
-#### arty:mail
+#### make:mail
 
 ```php
-artisan arty:mail <name>
+artisan make:mail <name>
 ```
 
 Extends `artisan make:mail`
 Default dir in config: `app/Mail`
 
-#### arty:middleware
+#### make:middleware
 
 ```php
-artisan arty:middleware <name>
+artisan make:middleware <name>
 ```
 
 Extends `artisan make:middleware`
@@ -141,16 +143,16 @@ Default dir in config: `app/Http/Middlewares`
 #### arty:migration
 
 ```php
-artisan arty:migration <name>
+artisan make:migration <name>
 ```
 
 Extends `artisan make:migration`
 Default dir in config: `database/migrations`
 
-#### arty:model
+#### make:model
 
 ```php
-artisan arty:model <name>
+artisan make:model <name>
 ```
 
 Extends `artisan make:model`
@@ -158,103 +160,103 @@ Default dir in config: `app/Data/Models`
 
 Note:
 
-- `--all` doesn't work _yet_.
-- Additional option of `--uuid` will add the HasUuids trait for you.
+-   `--all` doesn't work _yet_.
+-   Additional option of `--uuid` will add the HasUuids trait for you.
 
-#### arty:notification
+#### make:notification
 
 ```php
-artisan arty:notification <name>
+artisan make:notification <name>
 ```
 
 Extends `artisan make:notification`
 Default dir in config: `app/Notifications`
 
-#### arty:observer
+#### make:observer
 
 ```php
-artisan arty:observer <name>
+artisan make:observer <name>
 ```
 
 Extends `artisan make:observer`
 Default dir in config: `app/Data/Observers`
 
-#### arty:policy
+#### make:policy
 
 ```php
-artisan arty:policy <name>
+artisan make:policy <name>
 ```
 
 Extends `artisan make:policy`
 Default dir in config: `app/Policies`
 
-#### arty:provider
+#### make:provider
 
 ```php
-artisan arty:provider <name>
+artisan make:provider <name>
 ```
 
 Extends `artisan make:provider`
 Default dir in config: `app/Providers`
 
-#### arty:request
+#### make:request
 
 ```php
-artisan arty:request <name>
+artisan make:request <name>
 ```
 
 Extends `artisan make:request`
 Default dir in config: `app/Http/Requests`
 
-#### arty:resource
+#### make:resource
 
 ```php
-artisan arty:resource <name>
+artisan make:resource <name>
 ```
 
 Extends `artisan make:resource`
 Default dir in config: `app/Http/Resources`
 
-#### arty:rule
+#### make:rule
 
 ```php
-artisan arty:rule <name>
+artisan make:rule <name>
 ```
 
 Extends `artisan make:rule`
 Default dir in config: `app/Rules`
 
-#### arty:scope
+#### make:scope
 
 ```php
-artisan arty:scope <name>
+artisan make:scope <name>
 ```
 
 Extends `artisan make:scope`
 Default dir in config: `app/Data/Models/Scopes`
 
-#### arty:seeder
+#### make:seeder
 
 ```php
-artisan arty:seeder <name>
+artisan make:seeder <name>
 ```
 
 Extends `artisan make:seeder`
 Default dir in config: `database/seeders`
 
-#### arty:test
+#### make:test
 
 ```php
-artisan arty:test <name>
+artisan make:test <name>
 ```
 
 Extends `artisan make:test`
 Default dir in config: `tests`
 
-#### arty:view
+#### make:view
 
 ```php
-artisan arty:view <name>
+artisan make:view <name>
 ```
 
 Extends `artisan make:view`
@@ -280,8 +282,8 @@ If you discover any security related issues, please email dev@handsomebrown.com 
 
 ## Credits
 
-- [Shavonn Brown](https://github.com/handsomebrown)
-- [All Contributors](../../contributors)
+-   [Shavonn Brown](https://github.com/handsomebrown)
+-   [All Contributors](../../contributors)
 
 ## License
 
