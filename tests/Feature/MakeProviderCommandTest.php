@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeProviderCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeProviderCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 

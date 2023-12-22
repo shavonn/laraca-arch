@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeTestCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeTestCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 

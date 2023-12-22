@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeMailCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeMailCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 

@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeMiddlewareCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeMiddlewareCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 

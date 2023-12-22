@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeComponentCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeComponentCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;

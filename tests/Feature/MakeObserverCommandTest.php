@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeObserverCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeObserverCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 

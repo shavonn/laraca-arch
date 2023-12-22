@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakePolicyCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakePolicyCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 

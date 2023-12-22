@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeChannelCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeChannelCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 

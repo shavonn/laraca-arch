@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeScopeCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeScopeCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 

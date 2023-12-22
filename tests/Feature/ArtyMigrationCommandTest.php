@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\ArtyMigrationCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\ArtyMigrationCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;

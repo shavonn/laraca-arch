@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeRequestCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeRequestCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 

@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeExceptionCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeExceptionCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 

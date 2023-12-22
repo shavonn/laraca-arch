@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeNotificationCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeNotificationCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 

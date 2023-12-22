@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeListenerCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeListenerCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 

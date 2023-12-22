@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeFactoryCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeFactoryCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 

@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeResourceCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeResourceCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 

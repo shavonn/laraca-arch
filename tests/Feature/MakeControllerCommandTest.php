@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeControllerCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeControllerCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 

@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeSeederCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeSeederCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 

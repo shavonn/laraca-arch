@@ -1,6 +1,6 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeRuleCommand;
+use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeRuleCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
