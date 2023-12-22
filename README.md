@@ -1,8 +1,8 @@
 # Laraca Architect
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/handsomebrown/laraca.svg?style=flat-square)](https://packagist.org/packages/handsomebrown/laraca)
-[![Total Downloads](https://img.shields.io/packagist/dt/handsomebrown/laraca.svg?style=flat-square)](https://packagist.org/packages/handsomebrown/laraca)
-![GitHub Actions](https://github.com/handsomebrown/laraca/actions/workflows/main.yml/badge.svg)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/handsomebrown/laraca-arch.svg?style=flat-square)](https://packagist.org/packages/handsomebrown/laraca-arch)
+[![Total Downloads](https://img.shields.io/packagist/dt/handsomebrown/laraca-arch.svg?style=flat-square)](https://packagist.org/packages/handsomebrown/laraca-arch)
+![GitHub Actions](https://github.com/handsomebrown/laraca-arch/actions/workflows/main.yml/badge.svg)
 
 The goal of this package is a _configurable_ Laravel application structure with a few niceties thrown in.
 
