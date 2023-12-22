@@ -15,7 +15,6 @@ return [
     */
     'database' => [
         'path' => 'test/database',
-        'namespace' => 'Test\\Database',
     ],
 
     /*
@@ -24,11 +23,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Casts will be generated.
+    | Path from App\ root namespace.
     |
     */
     'cast' => [
-        'path' => 'Test/Data/Casts',
-        'namespace' => 'Test\\Data\\Casts',
+        'namespace' => 'Test\Data\Casts',
     ],
 
     /*
@@ -37,11 +36,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Channels will be generated.
+    | Path from App\ root namespace.
     |
     */
     'channel' => [
-        'path' => 'Test/Broadcasting',
-        'namespace' => 'Test\\Broadcasting',
+        'namespace' => 'Test\Broadcasting',
     ],
 
     /*
@@ -50,11 +49,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Commands will be generated.
+    | Path from App\ root namespace.
     |
     */
     'command' => [
-        'path' => 'Test/Console/Commands',
-        'namespace' => 'Test\\Console\\Commands',
+        'namespace' => 'Test\Console\Commands',
     ],
 
     /*
@@ -63,11 +62,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Components will be generated.
+    | Path from App\ root namespace.
     |
     */
     'component' => [
-        'path' => 'Test/View/Components',
-        'namespace' => 'Test\\View\\Components',
+        'namespace' => 'Test\View\Components',
     ],
 
     /*
@@ -76,11 +75,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Controllers will be generated.
+    | Path from App\ root namespace.
     |
     */
     'controller' => [
-        'path' => 'Test/Http/Controllers',
-        'namespace' => 'Test\\Http\\Controllers',
+        'namespace' => 'Test\Http\Controllers',
     ],
 
     /*
@@ -89,11 +88,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Events will be generated.
+    | Path from App\ root namespace.
     |
     */
     'event' => [
-        'path' => 'Test/Events',
-        'namespace' => 'Test\\Events',
+        'namespace' => 'Test\Events',
     ],
 
     /*
@@ -102,11 +101,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Exceptions will be generated.
+    | Path from App\ root namespace.
     |
     */
     'exception' => [
-        'path' => 'Test/Exceptions',
-        'namespace' => 'Test\\Exceptions',
+        'namespace' => 'Test\Exceptions',
     ],
 
     /*
@@ -115,11 +114,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Factories will be generated.
+    | Path from database root.
     |
     */
     'factory' => [
         'path' => 'factories',
-        'namespace' => 'Test\\Database\\Factories',
     ],
 
     /*
@@ -128,11 +127,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Jobs will be generated.
+    | Path from App\ root namespace.
     |
     */
     'job' => [
-        'path' => 'Test/Jobs',
-        'namespace' => 'Test\\Jobs',
+        'namespace' => 'Test\Jobs',
     ],
 
     /*
@@ -141,11 +140,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Listeners will be generated.
+    | Path from App\ root namespace.
     |
     */
     'listener' => [
-        'path' => 'Test/Listeners',
-        'namespace' => 'Test\\Listeners',
+        'namespace' => 'Test\Listeners',
     ],
 
     /*
@@ -154,11 +153,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Mails will be generated.
+    | Path from App\ root namespace.
     |
     */
     'mail' => [
-        'path' => 'Test/Mail',
-        'namespace' => 'Test\\Mail',
+        'namespace' => 'Test\Mail',
     ],
 
     /*
@@ -167,11 +166,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Middleware will be generated.
+    | Path from App\ root namespace.
     |
     */
     'middleware' => [
-        'path' => 'Test/Http/Middleware',
-        'namespace' => 'Test\\Http\\Middleware',
+        'namespace' => 'Test\Http\Middleware',
     ],
 
     /*
@@ -180,6 +179,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Migrations will be generated.
+    | Path from database root.
     |
     */
     'migration' => [
@@ -192,11 +192,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Models will be generated.
+    | Path from App\ root namespace.
     |
     */
     'model' => [
-        'path' => 'Test/Data/Models',
-        'namespace' => 'Test\\Data\\Models',
+        'namespace' => 'Test\Data\Models',
     ],
 
     /*
@@ -205,11 +205,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Notifications will be generated.
+    | Path from App\ root namespace.
     |
     */
     'notification' => [
-        'path' => 'Test/Notifications',
-        'namespace' => 'Test\\Notifications',
+        'namespace' => 'Test\Notifications',
     ],
 
     /*
@@ -218,11 +218,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Observers will be generated.
+    | Path from App\ root namespace.
     |
     */
     'observer' => [
-        'path' => 'Test/Data/Observers',
-        'namespace' => 'Test\\Data\\Observers',
+        'namespace' => 'Test\Data\Observers',
     ],
 
     /*
@@ -231,11 +231,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Policies will be generated.
+    | Path from App\ root namespace.
     |
     */
     'policy' => [
-        'path' => 'Test/Policies',
-        'namespace' => 'Test\\Policies',
+        'namespace' => 'Test\Policies',
     ],
 
     /*
@@ -244,11 +244,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Providers will be generated.
+    | Path from App\ root namespace.
     |
     */
     'provider' => [
-        'path' => 'Test/Providers',
-        'namespace' => 'Test\\Providers',
+        'namespace' => 'Test\Providers',
     ],
 
     /*
@@ -257,11 +257,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Requests will be generated.
+    | Path from App\ root namespace.
     |
     */
     'request' => [
-        'path' => 'Test/Http/Requests',
-        'namespace' => 'Test\\Http\\Requests',
+        'namespace' => 'Test\Http\Requests',
     ],
 
     /*
@@ -270,11 +270,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Resources will be generated.
+    | Path from App\ root namespace.
     |
     */
     'resource' => [
-        'path' => 'Test/Http/Resources',
-        'namespace' => 'Test\\Http\\Resources',
+        'namespace' => 'Test\Http\Resources',
     ],
 
     /*
@@ -283,11 +283,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Rules will be generated.
+    | Path from App\ root namespace.
     |
     */
     'rule' => [
-        'path' => 'Test/Rules',
-        'namespace' => 'Test\\Rules',
+        'namespace' => 'Test\Rules',
     ],
 
     /*
@@ -296,11 +296,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Scopes will be generated.
+    | Path from App\ root namespace.
     |
     */
     'scope' => [
-        'path' => 'Test/Data/Models/Scopes',
-        'namespace' => 'Test\\Data\\Models\\Scopes',
+        'namespace' => 'Test\Data\Models\Scopes',
     ],
 
     /*
@@ -309,11 +309,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Seeders will be generated.
+    | Path from database root.
     |
     */
     'seeder' => [
         'path' => 'seeders',
-        'namespace' => 'Test\\Database\\Seeders',
     ],
 
     /*
@@ -322,11 +322,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Tests will be generated.
+    | Path from project root.
     |
     */
     'test' => [
         'path' => 'test/tests',
-        'namespace' => 'Test\\Tests',
     ],
 
     /*
@@ -335,6 +335,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Views will be generated.
+    | Path from project root.
     |
     */
     'view' => [

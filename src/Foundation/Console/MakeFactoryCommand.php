@@ -2,11 +2,14 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
+use HandsomeBrown\Laraca\Console\Concerns\GeneratesClasses;
 use Illuminate\Database\Console\Factories\FactoryMakeCommand;
 use Illuminate\Support\Str;
 
 class MakeFactoryCommand extends FactoryMakeCommand
 {
+    use GeneratesClasses;
+
     /**
      * name
      * The console command name.
@@ -34,8 +37,8 @@ class MakeFactoryCommand extends FactoryMakeCommand
      *
      * @param  string  $name
      */
-    protected function getNamespace($name): string
+    protected function getNamespace($name)
     {
-        return $this->rootNamespace().'\\'.config('laraca.factory.namespace');
+        return $this->getDatabaseNamespace(config('laraca.factory.path'));
     }
 }

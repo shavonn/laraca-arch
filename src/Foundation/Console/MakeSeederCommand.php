@@ -2,11 +2,14 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
+use HandsomeBrown\Laraca\Console\Concerns\GeneratesClasses;
 use Illuminate\Database\Console\Seeds\SeederMakeCommand;
 use Illuminate\Support\Str;
 
 class MakeSeederCommand extends SeederMakeCommand
 {
+    use GeneratesClasses;
+
     /**
      * name
      * The console command name.
@@ -34,6 +37,6 @@ class MakeSeederCommand extends SeederMakeCommand
      */
     protected function rootNamespace(): string
     {
-        return config('laraca.seeder.namespace');
+        return $this->getDatabaseNamespace(config('laraca.seeder.path'));
     }
 }

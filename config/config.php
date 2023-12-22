@@ -15,7 +15,6 @@ return [
     */
     'database' => [
         'path' => 'database',
-        'namespace' => 'Database',
     ],
 
     /*
@@ -24,11 +23,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Casts will be generated.
+    | Path from App\ root namespace.
     |
     */
     'cast' => [
-        'path' => 'Data/Casts',
-        'namespace' => 'Data\\Casts',
+        'namespace' => 'Data\Casts',
     ],
 
     /*
@@ -37,10 +36,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Channels will be generated.
+    | Path from App\ root namespace.
     |
     */
     'channel' => [
-        'path' => 'Broadcasting',
         'namespace' => 'Broadcasting',
     ],
 
@@ -50,11 +49,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Commands will be generated.
+    | Path from App\ root namespace.
     |
     */
     'command' => [
-        'path' => 'Console/Commands',
-        'namespace' => 'Console\\Commands',
+        'namespace' => 'Console\Commands',
     ],
 
     /*
@@ -63,11 +62,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Components will be generated.
+    | Path from App\ root namespace.
     |
     */
     'component' => [
-        'path' => 'View/Components',
-        'namespace' => 'View\\Components',
+        'namespace' => 'View\Components',
     ],
 
     /*
@@ -76,11 +75,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Controllers will be generated.
+    | Path from App\ root namespace.
     |
     */
     'controller' => [
-        'path' => 'Http/Controllers',
-        'namespace' => 'Http\\Controllers',
+        'namespace' => 'Http\Controllers',
     ],
 
     /*
@@ -89,10 +88,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Events will be generated.
+    | Path from App\ root namespace.
     |
     */
     'event' => [
-        'path' => 'Events',
         'namespace' => 'Events',
     ],
 
@@ -102,10 +101,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Exceptions will be generated.
+    | Path from App\ root namespace.
     |
     */
     'exception' => [
-        'path' => 'Exceptions',
         'namespace' => 'Exceptions',
     ],
 
@@ -115,11 +114,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Factories will be generated.
+    | Path from database root.
     |
     */
     'factory' => [
         'path' => 'factories',
-        'namespace' => 'Database\\Factories',
     ],
 
     /*
@@ -128,10 +127,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Jobs will be generated.
+    | Path from App\ root namespace.
     |
     */
     'job' => [
-        'path' => 'Jobs',
         'namespace' => 'Jobs',
     ],
 
@@ -141,10 +140,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Listeners will be generated.
+    | Path from App\ root namespace.
     |
     */
     'listener' => [
-        'path' => 'Listeners',
         'namespace' => 'Listeners',
     ],
 
@@ -154,10 +153,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Mails will be generated.
+    | Path from App\ root namespace.
     |
     */
     'mail' => [
-        'path' => 'Mail',
         'namespace' => 'Mail',
     ],
 
@@ -167,11 +166,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Middleware will be generated.
+    | Path from App\ root namespace.
     |
     */
     'middleware' => [
-        'path' => 'Http/Middleware',
-        'namespace' => 'Http\\Middleware',
+        'namespace' => 'Http\Middleware',
     ],
 
     /*
@@ -180,6 +179,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Migrations will be generated.
+    | Path from database root.
     |
     */
     'migration' => [
@@ -192,11 +192,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Models will be generated.
+    | Path from App\ root namespace.
     |
     */
     'model' => [
-        'path' => 'Data/Models',
-        'namespace' => 'Data\\Models',
+        'namespace' => 'Data\Models',
     ],
 
     /*
@@ -205,10 +205,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Notifications will be generated.
+    | Path from App\ root namespace.
     |
     */
     'notification' => [
-        'path' => 'Notifications',
         'namespace' => 'Notifications',
     ],
 
@@ -218,11 +218,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Observers will be generated.
+    | Path from App\ root namespace.
     |
     */
     'observer' => [
-        'path' => 'Data/Observers',
-        'namespace' => 'Data\\Observers',
+        'namespace' => 'Data\Observers',
     ],
 
     /*
@@ -231,10 +231,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Policies will be generated.
+    | Path from App\ root namespace.
     |
     */
     'policy' => [
-        'path' => 'Policies',
         'namespace' => 'Policies',
     ],
 
@@ -244,10 +244,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Providers will be generated.
+    | Path from App\ root namespace.
     |
     */
     'provider' => [
-        'path' => 'Providers',
         'namespace' => 'Providers',
     ],
 
@@ -257,11 +257,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Requests will be generated.
+    | Path from App\ root namespace.
     |
     */
     'request' => [
-        'path' => 'Http/Requests',
-        'namespace' => 'Http\\Requests',
+        'namespace' => 'Http\Requests',
     ],
 
     /*
@@ -270,11 +270,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Resources will be generated.
+    | Path from App\ root namespace.
     |
     */
     'resource' => [
-        'path' => 'Http/Resources',
-        'namespace' => 'Http\\Resources',
+        'namespace' => 'Http\Resources',
     ],
 
     /*
@@ -283,10 +283,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Rules will be generated.
+    | Path from App\ root namespace.
     |
     */
     'rule' => [
-        'path' => 'Rules',
         'namespace' => 'Rules',
     ],
 
@@ -296,11 +296,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Scopes will be generated.
+    | Path from App\ root namespace.
     |
     */
     'scope' => [
-        'path' => 'Data/Models/Scopes',
-        'namespace' => 'Data\\Models\\Scopes',
+        'namespace' => 'Data\Models\Scopes',
     ],
 
     /*
@@ -309,11 +309,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Seeders will be generated.
+    | Path from database root.
     |
     */
     'seeder' => [
         'path' => 'seeders',
-        'namespace' => 'Database\\Seeders',
     ],
 
     /*
@@ -322,11 +322,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Tests will be generated.
+    | Path from project root.
     |
     */
     'test' => [
         'path' => 'tests',
-        'namespace' => 'Tests',
     ],
 
     /*
@@ -335,6 +335,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Views will be generated.
+    | Path from project root.
     |
     */
     'view' => [
