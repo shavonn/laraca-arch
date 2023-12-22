@@ -27,6 +27,7 @@ use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeScopeCommand;
 use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeSeederCommand;
 use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeTestCommand;
 use HandsomeBrown\Laraca\Foundation\Console\Artisan\MakeViewCommand;
+use HandsomeBrown\Laraca\Foundation\Console\MakeEnumCommand;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\ServiceProvider;
 
@@ -53,6 +54,7 @@ class LaracaServiceProvider extends ServiceProvider
         'MakeComponent' => MakeComponentCommand::class,
         'MakeController' => MakeControllerCommand::class,
         'MakeEvent' => MakeEventCommand::class,
+        'MakeEnum' => MakeEnumCommand::class,
         'MakeException' => MakeExceptionCommand::class,
         'MakeFactory' => MakeFactoryCommand::class,
         'MakeJob' => MakeJobCommand::class,
