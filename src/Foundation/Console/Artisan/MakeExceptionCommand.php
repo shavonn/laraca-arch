@@ -1,10 +1,10 @@
 <?php
 
-namespace HandsomeBrown\Laraca\Foundation\Console;
+namespace HandsomeBrown\Laraca\Foundation\Console\Artisan;
 
-use Illuminate\Foundation\Console\ResourceMakeCommand;
+use Illuminate\Foundation\Console\ExceptionMakeCommand;
 
-class MakeResourceCommand extends ResourceMakeCommand
+class MakeExceptionCommand extends ExceptionMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class MakeResourceCommand extends ResourceMakeCommand
      *
      * @var string
      */
-    protected $name = 'make:resource';
+    protected $name = 'make:exception';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class MakeResourceCommand extends ResourceMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\\'.config('laraca.resource.namespace');
+        return $rootNamespace.'\\'.config('laraca.exception.namespace');
     }
 }

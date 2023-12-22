@@ -1,10 +1,10 @@
 <?php
 
-namespace HandsomeBrown\Laraca\Foundation\Console;
+namespace HandsomeBrown\Laraca\Foundation\Console\Artisan;
 
-use Illuminate\Foundation\Console\ObserverMakeCommand;
+use Illuminate\Foundation\Console\ListenerMakeCommand;
 
-class MakeObserverCommand extends ObserverMakeCommand
+class MakeListenerCommand extends ListenerMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class MakeObserverCommand extends ObserverMakeCommand
      *
      * @var string
      */
-    protected $name = 'make:observer';
+    protected $name = 'make:listener';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class MakeObserverCommand extends ObserverMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\\'.config('laraca.observer.namespace');
+        return $rootNamespace.'\\'.config('laraca.listener.namespace');
     }
 }

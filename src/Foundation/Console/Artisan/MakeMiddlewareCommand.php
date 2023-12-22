@@ -1,10 +1,10 @@
 <?php
 
-namespace HandsomeBrown\Laraca\Foundation\Console;
+namespace HandsomeBrown\Laraca\Foundation\Console\Artisan;
 
-use Illuminate\Foundation\Console\EventMakeCommand;
+use Illuminate\Routing\Console\MiddlewareMakeCommand;
 
-class MakeEventCommand extends EventMakeCommand
+class MakeMiddlewareCommand extends MiddlewareMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class MakeEventCommand extends EventMakeCommand
      *
      * @var string
      */
-    protected $name = 'make:event';
+    protected $name = 'make:middleware';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class MakeEventCommand extends EventMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\\'.config('laraca.event.namespace');
+        return $rootNamespace.'\\'.config('laraca.middleware.namespace');
     }
 }

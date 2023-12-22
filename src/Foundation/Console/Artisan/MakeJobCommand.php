@@ -1,10 +1,10 @@
 <?php
 
-namespace HandsomeBrown\Laraca\Foundation\Console;
+namespace HandsomeBrown\Laraca\Foundation\Console\Artisan;
 
-use Illuminate\Foundation\Console\NotificationMakeCommand;
+use Illuminate\Foundation\Console\JobMakeCommand;
 
-class MakeNotificationCommand extends NotificationMakeCommand
+class MakeJobCommand extends JobMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class MakeNotificationCommand extends NotificationMakeCommand
      *
      * @var string
      */
-    protected $name = 'make:notification';
+    protected $name = 'make:job';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class MakeNotificationCommand extends NotificationMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\\'.config('laraca.notification.namespace');
+        return $rootNamespace.'\\'.config('laraca.job.namespace');
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace HandsomeBrown\Laraca\Foundation\Console;
+namespace HandsomeBrown\Laraca\Foundation\Console\Artisan;
 
-use Illuminate\Routing\Console\MiddlewareMakeCommand;
+use Illuminate\Foundation\Console\PolicyMakeCommand;
 
-class MakeMiddlewareCommand extends MiddlewareMakeCommand
+class MakePolicyCommand extends PolicyMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class MakeMiddlewareCommand extends MiddlewareMakeCommand
      *
      * @var string
      */
-    protected $name = 'make:middleware';
+    protected $name = 'make:policy';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class MakeMiddlewareCommand extends MiddlewareMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\\'.config('laraca.middleware.namespace');
+        return $rootNamespace.'\\'.config('laraca.policy.namespace');
     }
 }

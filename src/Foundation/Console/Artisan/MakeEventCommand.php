@@ -1,10 +1,10 @@
 <?php
 
-namespace HandsomeBrown\Laraca\Foundation\Console;
+namespace HandsomeBrown\Laraca\Foundation\Console\Artisan;
 
-use Illuminate\Foundation\Console\RequestMakeCommand;
+use Illuminate\Foundation\Console\EventMakeCommand;
 
-class MakeRequestCommand extends RequestMakeCommand
+class MakeEventCommand extends EventMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class MakeRequestCommand extends RequestMakeCommand
      *
      * @var string
      */
-    protected $name = 'make:request';
+    protected $name = 'make:event';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class MakeRequestCommand extends RequestMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\\'.config('laraca.request.namespace');
+        return $rootNamespace.'\\'.config('laraca.event.namespace');
     }
 }

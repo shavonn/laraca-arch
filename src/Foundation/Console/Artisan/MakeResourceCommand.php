@@ -1,10 +1,10 @@
 <?php
 
-namespace HandsomeBrown\Laraca\Foundation\Console;
+namespace HandsomeBrown\Laraca\Foundation\Console\Artisan;
 
-use Illuminate\Foundation\Console\JobMakeCommand;
+use Illuminate\Foundation\Console\ResourceMakeCommand;
 
-class MakeJobCommand extends JobMakeCommand
+class MakeResourceCommand extends ResourceMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class MakeJobCommand extends JobMakeCommand
      *
      * @var string
      */
-    protected $name = 'make:job';
+    protected $name = 'make:resource';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class MakeJobCommand extends JobMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\\'.config('laraca.job.namespace');
+        return $rootNamespace.'\\'.config('laraca.resource.namespace');
     }
 }

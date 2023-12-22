@@ -1,9 +1,11 @@
 <?php
 
-namespace HandsomeBrown\Laraca\Foundation\Console;
+namespace HandsomeBrown\Laraca\Foundation\Console\Artisan;
 
 use Illuminate\Database\Console\Migrations\MigrateMakeCommand;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'arty:migration')]
 class ArtyMigrationCommand extends MigrateMakeCommand
 {
     /**

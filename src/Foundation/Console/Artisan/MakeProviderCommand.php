@@ -1,10 +1,10 @@
 <?php
 
-namespace HandsomeBrown\Laraca\Foundation\Console;
+namespace HandsomeBrown\Laraca\Foundation\Console\Artisan;
 
-use Illuminate\Routing\Console\ControllerMakeCommand;
+use Illuminate\Foundation\Console\ProviderMakeCommand;
 
-class MakeControllerCommand extends ControllerMakeCommand
+class MakeProviderCommand extends ProviderMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class MakeControllerCommand extends ControllerMakeCommand
      *
      * @var string
      */
-    protected $name = 'make:controller';
+    protected $name = 'make:provider';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class MakeControllerCommand extends ControllerMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\\'.config('laraca.controller.namespace');
+        return $rootNamespace.'\\'.config('laraca.provider.namespace');
     }
 }

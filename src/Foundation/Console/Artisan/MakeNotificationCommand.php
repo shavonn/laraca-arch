@@ -1,10 +1,10 @@
 <?php
 
-namespace HandsomeBrown\Laraca\Foundation\Console;
+namespace HandsomeBrown\Laraca\Foundation\Console\Artisan;
 
-use Illuminate\Foundation\Console\MailMakeCommand;
+use Illuminate\Foundation\Console\NotificationMakeCommand;
 
-class MakeMailCommand extends MailMakeCommand
+class MakeNotificationCommand extends NotificationMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class MakeMailCommand extends MailMakeCommand
      *
      * @var string
      */
-    protected $name = 'make:mail';
+    protected $name = 'make:notification';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class MakeMailCommand extends MailMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\\'.config('laraca.mail.namespace');
+        return $rootNamespace.'\\'.config('laraca.notification.namespace');
     }
 }

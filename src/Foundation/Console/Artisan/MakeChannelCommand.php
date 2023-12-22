@@ -1,10 +1,10 @@
 <?php
 
-namespace HandsomeBrown\Laraca\Foundation\Console;
+namespace HandsomeBrown\Laraca\Foundation\Console\Artisan;
 
-use Illuminate\Foundation\Console\RuleMakeCommand;
+use Illuminate\Foundation\Console\ChannelMakeCommand;
 
-class MakeRuleCommand extends RuleMakeCommand
+class MakeChannelCommand extends ChannelMakeCommand
 {
     /**
      * name
@@ -12,7 +12,7 @@ class MakeRuleCommand extends RuleMakeCommand
      *
      * @var string
      */
-    protected $name = 'make:rule';
+    protected $name = 'make:channel';
 
     /**
      * getDefaultNamespace
@@ -22,6 +22,6 @@ class MakeRuleCommand extends RuleMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\\'.config('laraca.rule.namespace');
+        return $rootNamespace.'\\'.config('laraca.channel.namespace');
     }
 }

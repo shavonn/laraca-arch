@@ -1,6 +1,6 @@
 <?php
 
-namespace HandsomeBrown\Laraca\Foundation\Console;
+namespace HandsomeBrown\Laraca\Foundation\Console\Artisan;
 
 use Illuminate\Foundation\Console\CastMakeCommand;
 
