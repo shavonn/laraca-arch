@@ -352,7 +352,7 @@ return [
     |
     */
     'value' => [
-        'namespace' => 'Data\Models\Values',
+        'namespace' => 'Data\Values',
     ],
 
     /*
