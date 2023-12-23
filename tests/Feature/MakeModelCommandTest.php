@@ -35,4 +35,18 @@ describe('make:model', function () {
             path: app_path("$configPath/$class.php")))->toContain($configNamespace);
 
     })->with('classes');
+
+    it('should create a Model class with HasUuids trait', function (string $class) {
+        $this->artisan(
+            MakeModelCommand::class,
+            ['name' => $class,
+                '--uuid' => true],
+        );
+
+        $configPath = namespaceToPath(config('laraca.model.namespace'));
+
+        expect(File::get(
+            path: app_path("$configPath/$class.php")))->toContain('HasUuids');
+
+    })->with('classes');
 });

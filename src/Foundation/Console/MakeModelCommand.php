@@ -29,7 +29,7 @@ class MakeModelCommand extends ModelMakeCommand
         $stub = parent::getStub();
 
         if ($this->option('uuid')) {
-            $uuidStubPath = '/stubs/generated/model-uuid.stub';
+            $uuidStubPath = __DIR__.'/stubs/generated/model-uuid.stub';
 
             if (! file_exists($uuidStubPath)) {
                 copy($stub, $uuidStubPath);
@@ -47,7 +47,7 @@ class MakeModelCommand extends ModelMakeCommand
                 $this->replaceIn($uuidStubPath, $search, $replace);
             }
 
-            return $this->resolveLaracaStubPath($uuidStubPath);
+            return $uuidStubPath;
         }
 
         return $stub;
