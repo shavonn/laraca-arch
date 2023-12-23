@@ -252,6 +252,14 @@ artisan make:seeder <name>
 Extends `artisan make:seeder`
 Default dir in config: `database/seeders`
 
+#### make:structure
+
+```php
+artisan make:structure <name>
+```
+
+Generates full directory structure defined in the Laraca config file.
+
 #### make:test
 
 ```php
