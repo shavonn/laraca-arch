@@ -2,6 +2,11 @@
 
 /*
  * Laraca config
+ *
+ * parent => [key of another element || base || app]
+ * base = project root dir
+ * app = app root dir
+ *
  */
 return [
     /*
@@ -10,11 +15,12 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Factories will be generated.
-    | Path from project root.
+    | Requires 'path' key.
     |
     */
     'database' => [
         'path' => 'test/database',
+        'parent' => 'base',
     ],
 
     /*
@@ -23,11 +29,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Casts will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'cast' => [
         'namespace' => 'Test\Data\Casts',
+        'parent' => 'app',
     ],
 
     /*
@@ -36,11 +44,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Channels will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'channel' => [
         'namespace' => 'Test\Broadcasting',
+        'parent' => 'app',
     ],
 
     /*
@@ -49,11 +59,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Commands will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'command' => [
         'namespace' => 'Test\Console\Commands',
+        'parent' => 'app',
     ],
 
     /*
@@ -62,11 +74,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Components will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'component' => [
         'namespace' => 'Test\View\Components',
+        'parent' => 'app',
     ],
 
     /*
@@ -75,11 +89,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Controllers will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'controller' => [
         'namespace' => 'Test\Http\Controllers',
+        'parent' => 'app',
     ],
 
     /*
@@ -88,11 +104,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Events will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'event' => [
         'namespace' => 'Test\Events',
+        'parent' => 'app',
     ],
 
     /*
@@ -101,11 +119,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Enums will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'enum' => [
         'namespace' => 'Test\Enums',
+        'parent' => 'app',
     ],
 
     /*
@@ -114,11 +134,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Exceptions will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'exception' => [
         'namespace' => 'Test\Exceptions',
+        'parent' => 'app',
     ],
 
     /*
@@ -127,11 +149,12 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Factories will be generated.
-    | Path from database root.
+    | Requires 'path' key.
     |
     */
     'factory' => [
         'path' => 'factories',
+        'parent' => 'database',
     ],
 
     /*
@@ -140,11 +163,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Jobs will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'job' => [
         'namespace' => 'Test\Jobs',
+        'parent' => 'app',
     ],
 
     /*
@@ -153,11 +178,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Listeners will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'listener' => [
         'namespace' => 'Test\Listeners',
+        'parent' => 'app',
     ],
 
     /*
@@ -166,11 +193,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Mails will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'mail' => [
         'namespace' => 'Test\Mail',
+        'parent' => 'app',
     ],
 
     /*
@@ -179,11 +208,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Middleware will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'middleware' => [
         'namespace' => 'Test\Http\Middleware',
+        'parent' => 'app',
     ],
 
     /*
@@ -192,11 +223,12 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Migrations will be generated.
-    | Path from database root.
+    | Requires 'path' key.
     |
     */
     'migration' => [
         'path' => 'migrations',
+        'parent' => 'database',
     ],
 
     /*
@@ -205,11 +237,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Models will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'model' => [
         'namespace' => 'Test\Data\Models',
+        'parent' => 'app',
     ],
 
     /*
@@ -218,11 +252,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Notifications will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'notification' => [
         'namespace' => 'Test\Notifications',
+        'parent' => 'app',
     ],
 
     /*
@@ -231,11 +267,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Observers will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'observer' => [
         'namespace' => 'Test\Data\Observers',
+        'parent' => 'app',
     ],
 
     /*
@@ -244,11 +282,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Policies will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'policy' => [
         'namespace' => 'Test\Policies',
+        'parent' => 'app',
     ],
 
     /*
@@ -257,11 +297,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Providers will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'provider' => [
         'namespace' => 'Test\Providers',
+        'parent' => 'app',
     ],
 
     /*
@@ -270,11 +312,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Requests will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'request' => [
         'namespace' => 'Test\Http\Requests',
+        'parent' => 'app',
     ],
 
     /*
@@ -283,11 +327,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Resources will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'resource' => [
         'namespace' => 'Test\Http\Resources',
+        'parent' => 'app',
     ],
 
     /*
@@ -296,11 +342,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Rules will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'rule' => [
         'namespace' => 'Test\Rules',
+        'parent' => 'app',
     ],
 
     /*
@@ -309,11 +357,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Scopes will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'scope' => [
-        'namespace' => 'Test\Data\Models\Scopes',
+        'namespace' => 'Scopes',
+        'parent' => 'model',
     ],
 
     /*
@@ -322,11 +372,12 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Seeders will be generated.
-    | Path from database root.
+    | Requires 'path' key.
     |
     */
     'seeder' => [
         'path' => 'seeders',
+        'parent' => 'database',
     ],
 
     /*
@@ -335,11 +386,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Tests will be generated.
-    | Path from project root.
-    |
+    | Requires 'path' key.
     */
     'test' => [
         'path' => 'test/tests',
+        'parent' => 'base',
     ],
 
     /*
@@ -348,11 +399,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Values will be generated.
-    | Path from App\ root namespace.
+    | Requires 'namespace' key.
+    | Path after App\ root namespace.
     |
     */
     'value' => [
         'namespace' => 'Test\Data\Values',
+        'parent' => 'app',
     ],
 
     /*
@@ -361,10 +414,11 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Views will be generated.
-    | Path from project root.
+    | Requires 'path' key.
     |
     */
     'view' => [
         'path' => 'test/resources/views',
+        'parent' => 'base',
     ],
 ];
