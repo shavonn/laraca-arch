@@ -5,6 +5,15 @@ namespace HandsomeBrown\Laraca\Console\Concerns;
 trait HasLocalStub
 {
     /**
+     * getStubPath
+     * Return path to stub file.
+     */
+    public function getStubPath(string $stub): string
+    {
+        return __DIR__."/../../Foundation/Console/stubs/{$stub}";
+    }
+
+    /**
      * resolveStubPath
      * Resolve the fully-qualified path to the stub.
      *

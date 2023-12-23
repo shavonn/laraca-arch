@@ -1,0 +1,18 @@
+<?php 
+
+namespace {{ namespace }};
+
+class {{ class }}
+{
+    private mixed ${{ class_var }};
+
+    /**
+     * __construct
+     *
+     * @param mixed ${{ class_var }}
+     */
+    public function __construct(${{ class_var }}):void
+    {
+        $this->{{ class_var }} = ${{ class_var }}};
+    }
+}

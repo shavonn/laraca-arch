@@ -19,15 +19,6 @@ trait Generates
     }
 
     /**
-     * getStubPath
-     * Return path to stub file.
-     */
-    public function getStubPath(string $stub): string
-    {
-        return __DIR__."/../../Foundation/Console/stubs/{$stub}";
-    }
-
-    /**
      * viewPath
      * Get the first view directory path from the application configuration.
      *
