@@ -77,6 +77,14 @@ artisan make:controller <name>
 Extends `artisan make:controller`
 Default dir in config: `app/Http/Controllers`
 
+#### make:enum
+
+```php
+artisan make:enum <name>
+```
+
+Default dir in config: `app/Enums`
+
 #### make:event
 
 ```php
@@ -160,8 +168,8 @@ Default dir in config: `app/Data/Models`
 
 Note:
 
--   `--all` doesn't work _yet_.
--   Additional option of `--uuid` will add the HasUuids trait for you.
+-   The artisan `--all` for this command doesn't work _yet_.
+-   Additional option added of `--uuid` will add the HasUuids trait for you.
 
 #### make:notification
 
@@ -252,6 +260,14 @@ artisan make:test <name>
 
 Extends `artisan make:test`
 Default dir in config: `tests`
+
+#### make:value
+
+```php
+artisan make:value <name>
+```
+
+Default dir in config: `Data\Values`
 
 #### make:view
 
