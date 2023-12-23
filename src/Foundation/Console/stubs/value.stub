@@ -11,8 +11,8 @@ class {{ class }}
      *
      * @param mixed ${{ class_var }}
      */
-    public function __construct(${{ class_var }}):void
+    public function __construct(${{ class_var }})
     {
-        $this->{{ class_var }} = ${{ class_var }}};
+        $this->{{ class_var }} = ${{ class_var }};
     }
 }

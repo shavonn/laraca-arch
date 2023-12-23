@@ -65,12 +65,9 @@ class MakeValueCommand extends GeneratorCommand
     protected function buildClass($name)
     {
         $class = parent::buildClass($name);
-
         $classVar = Str::camel($this->getNameInput());
-        $search = ['{{ class_var }}'];
-        $replace = [$classVar];
 
-        $this->replaceIn($class, $search, $replace);
+        $class = str_replace('{{ class_var }}', $classVar, $class);
 
         return $class;
     }
