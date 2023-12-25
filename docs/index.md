@@ -9,7 +9,7 @@ hero:
     actions:
         - theme: brand
           text: Get Started
-          link: /markdown-examples
+          link: /package-install
         - theme: alt
           text: View on GitHub
           link: https://github.com/handsomebrown/laraca
