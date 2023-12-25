@@ -66,7 +66,7 @@ class MakeStructureCommand extends Command
             } else {
                 $state = ' already exists';
             }
-            array_push($messages, sprintf('Directory [%s] %s.', $paths['relative'], $state));
+            array_push($messages, sprintf('[%s] %s.', $paths['relative'], $state));
         }
 
         $this->components->bulletList($messages);

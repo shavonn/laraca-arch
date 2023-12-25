@@ -97,7 +97,7 @@ trait Generates
                 throw new MissingPathNamespaceKeyException();
             }
 
-            if (array_key_exists('parent', $current)) {
+            if (array_key_exists('parent', $current) && (bool) $current['parent']) {
                 $parentKey = $current['parent'];
 
                 if ($parentKey == 'app' || $parentKey == 'base') {
