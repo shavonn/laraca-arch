@@ -40,17 +40,21 @@ trait GetsConfigValues
     {
         [$pathArray, $root] = self::assemblePathArray($key);
 
+        if ($key === 'test') {
+            array_shift($pathArray);
+        }
+
         $pathArray = array_map(function ($dir) {
             return ucfirst($dir);
         }, $pathArray);
 
-        $path = implode('\\', $pathArray);
+        $namespace = implode('\\', $pathArray);
 
         if ($root == 'app') {
-            $path = app()->getNamespace().$path;
+            $namespace = app()->getNamespace().$namespace;
         }
 
-        return $path;
+        return $namespace;
     }
 
     /**
@@ -72,8 +76,6 @@ trait GetsConfigValues
         do {
             if (array_key_exists('path', $current)) {
                 $path = array_merge(explode('/', $current['path']), $path);
-            } elseif (array_key_exists('namespace', $current)) {
-                $path = array_merge(explode('\\', $current['namespace']), $path);
             } else {
                 // key config missing path or namespace value
                 throw new MissingPathNamespaceKeyException();

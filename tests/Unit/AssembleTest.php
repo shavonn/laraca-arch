@@ -5,7 +5,7 @@ use HandsomeBrown\Laraca\Exceptions\MissingPathNamespaceKeyException;
 use HandsomeBrown\Laraca\Exceptions\MissingRootPathException;
 use Illuminate\Support\Facades\Config;
 
-describe('assemble PathArray, Path, Namespace exceptions', function () {
+describe('assemble Path, Namespace exceptions', function () {
     it('should throw a MissingPathNamespaceKeyException when a key has no path or namespace', function () {
         Config::set('laraca.empty_key', []);
         Config::set('laraca.command.parent', 'empty_key');

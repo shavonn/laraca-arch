@@ -18,7 +18,7 @@ describe('make:test', function () {
         expect(File::exists($filePath))
             ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-        $configNamespace = assembleNamespace('test', false);
+        $configNamespace = fullNamespaceStr('Tests\Feature');
 
         expect(File::get($filePath))
             ->toContain($configNamespace);
@@ -38,6 +38,11 @@ describe('make:test', function () {
 
         expect(File::exists($filePath))
             ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
+
+        $configNamespace = fullNamespaceStr('Tests\Unit');
+
+        expect(File::get($filePath))
+            ->toContain($configNamespace);
 
     })->with('classes');
 });

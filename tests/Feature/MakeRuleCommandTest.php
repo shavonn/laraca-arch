@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:rule', function () {
     it('should create Rule class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.rule.namespace', 'Test\Rules');
+        Config::set('laraca.rule.path', 'Test/Rules');
         $this->artisan('make:rule',
             ['name' => $class]);
 
@@ -18,7 +18,7 @@ describe('make:rule', function () {
         expect(File::exists($filePath))
             ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-        $configNamespace = fullNamespaceStr(assembleNamespace('rule'));
+        $configNamespace = fullNamespaceStr('App\Test\Rules');
 
         expect(File::get($filePath))
             ->toContain($configNamespace);

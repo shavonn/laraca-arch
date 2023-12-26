@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:cast', function () {
     it('should create Cast class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.cast.namespace', 'Test\Data\Casts');
+        Config::set('laraca.cast.path', 'Test/Data/Casts');
         $this->artisan('make:cast',
             ['name' => $class]);
 
@@ -18,7 +18,7 @@ describe('make:cast', function () {
         expect(File::exists($filePath))
             ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-        $configNamespace = fullNamespaceStr(assembleNamespace('cast'));
+        $configNamespace = fullNamespaceStr('App\Test\Data\Casts');
 
         expect(File::get($filePath))
             ->toContain($configNamespace);

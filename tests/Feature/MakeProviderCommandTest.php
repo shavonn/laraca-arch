@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:provider', function () {
     it('should create Provider class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.provider.namespace', 'Test\Providers');
+        Config::set('laraca.provider.path', 'Test/Providers');
         $this->artisan('make:provider',
             ['name' => $class]);
 
@@ -18,7 +18,7 @@ describe('make:provider', function () {
         expect(File::exists($filePath))
             ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-        $configNamespace = fullNamespaceStr(assembleNamespace('provider'));
+        $configNamespace = fullNamespaceStr('App\Test\Providers');
 
         expect(File::get($filePath))
             ->toContain($configNamespace);

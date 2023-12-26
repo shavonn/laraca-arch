@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:channel', function () {
     it('should create Channel class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.channel.namespace', 'Test\Broadcasting');
+        Config::set('laraca.channel.path', 'Test/Broadcasting');
         $this->artisan('make:channel',
             ['name' => $class]);
 
@@ -18,7 +18,7 @@ describe('make:channel', function () {
         expect(File::exists($filePath))
             ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-        $configNamespace = fullNamespaceStr(assembleNamespace('channel'));
+        $configNamespace = fullNamespaceStr('App\Test\Broadcasting');
 
         expect(File::get($filePath))
             ->toContain($configNamespace);

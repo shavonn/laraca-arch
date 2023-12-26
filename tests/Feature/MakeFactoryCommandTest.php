@@ -18,7 +18,7 @@ describe('make:factory', function () {
         expect(File::exists($filePath))
             ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-        $configNamespace = fullNamespaceStr(assembleNamespace('factory', false));
+        $configNamespace = fullNamespaceStr('Test\Database\Factories');
 
         expect(File::get($filePath))
             ->toContain($configNamespace);

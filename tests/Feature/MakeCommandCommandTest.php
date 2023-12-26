@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:command', function () {
     it('should create Command class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.command.namespace', 'Test\Console\Commands');
+        Config::set('laraca.command.path', 'Test/Console/Commands');
         $this->artisan('make:command',
             ['name' => $class]);
 
@@ -18,7 +18,7 @@ describe('make:command', function () {
         expect(File::exists($filePath))
             ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-        $configNamespace = fullNamespaceStr(assembleNamespace('command'));
+        $configNamespace = fullNamespaceStr('App\Test\Console\Commands');
 
         expect(File::get($filePath))
             ->toContain($configNamespace);

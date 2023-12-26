@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:notification', function () {
     it('should create Notification class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.notification.namespace', 'Test\Notifications');
+        Config::set('laraca.notification.path', 'Test/Notifications');
         $this->artisan('make:notification',
             ['name' => $class]);
 
@@ -18,7 +18,7 @@ describe('make:notification', function () {
         expect(File::exists($filePath))
             ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-        $configNamespace = fullNamespaceStr(assembleNamespace('notification'));
+        $configNamespace = fullNamespaceStr('App\Test\Notifications');
 
         expect(File::get($filePath))
             ->toContain($configNamespace);
