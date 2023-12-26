@@ -2,11 +2,6 @@
 
 /*
  * Laraca config
- *
- * parent => [key of another element || base || app]
- * base = project root dir
- * app = app root dir
- *
  */
 return [
     /*
@@ -15,7 +10,6 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Factories will be generated.
-    | Requires 'path' key.
     |
     */
     'database' => [
@@ -29,12 +23,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Casts will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'cast' => [
-        'namespace' => 'Data\Casts',
+        'path' => 'Data/Casts',
         'parent' => 'app',
     ],
 
@@ -44,12 +36,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Channels will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'channel' => [
-        'namespace' => 'Broadcasting',
+        'path' => 'Broadcasting',
         'parent' => 'app',
     ],
 
@@ -59,12 +49,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Commands will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'command' => [
-        'namespace' => 'Console\Commands',
+        'path' => 'Console/Commands',
         'parent' => 'app',
     ],
 
@@ -74,12 +62,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Components will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'component' => [
-        'namespace' => 'View\Components',
+        'path' => 'View/Components',
         'parent' => 'app',
     ],
 
@@ -89,12 +75,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Controllers will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'controller' => [
-        'namespace' => 'Http\Controllers',
+        'path' => 'Http/Controllers',
         'parent' => 'app',
     ],
 
@@ -104,12 +88,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Events will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'event' => [
-        'namespace' => 'Events',
+        'path' => 'Events',
         'parent' => 'app',
     ],
 
@@ -119,12 +101,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Enums will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'enum' => [
-        'namespace' => 'Enums',
+        'path' => 'Enums',
         'parent' => 'app',
     ],
 
@@ -134,12 +114,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Exceptions will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'exception' => [
-        'namespace' => 'Exceptions',
+        'path' => 'Exceptions',
         'parent' => 'app',
     ],
 
@@ -149,7 +127,6 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Factories will be generated.
-    | Requires 'path' key.
     |
     */
     'factory' => [
@@ -163,12 +140,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Jobs will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'job' => [
-        'namespace' => 'Jobs',
+        'path' => 'Jobs',
         'parent' => 'app',
     ],
 
@@ -178,12 +153,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Listeners will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'listener' => [
-        'namespace' => 'Listeners',
+        'path' => 'Listeners',
         'parent' => 'app',
     ],
 
@@ -193,12 +166,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Mails will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'mail' => [
-        'namespace' => 'Mail',
+        'path' => 'Mail',
         'parent' => 'app',
     ],
 
@@ -208,12 +179,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Middleware will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'middleware' => [
-        'namespace' => 'Http\Middleware',
+        'path' => 'Http/Middleware',
         'parent' => 'app',
     ],
 
@@ -223,7 +192,6 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Migrations will be generated.
-    | Requires 'path' key.
     |
     */
     'migration' => [
@@ -237,12 +205,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Models will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'model' => [
-        'namespace' => 'Data\Models',
+        'path' => 'Data/Models',
         'parent' => 'app',
     ],
 
@@ -252,12 +218,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Notifications will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'notification' => [
-        'namespace' => 'Notifications',
+        'path' => 'Notifications',
         'parent' => 'app',
     ],
 
@@ -267,12 +231,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Observers will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'observer' => [
-        'namespace' => 'Data\Observers',
+        'path' => 'Data/Observers',
         'parent' => 'app',
     ],
 
@@ -282,12 +244,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Policies will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'policy' => [
-        'namespace' => 'Policies',
+        'path' => 'Policies',
         'parent' => 'app',
     ],
 
@@ -297,12 +257,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Providers will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'provider' => [
-        'namespace' => 'Providers',
+        'path' => 'Providers',
         'parent' => 'app',
     ],
 
@@ -312,12 +270,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Requests will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'request' => [
-        'namespace' => 'Http\Requests',
+        'path' => 'Http/Requests',
         'parent' => 'app',
     ],
 
@@ -327,12 +283,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Resources will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'resource' => [
-        'namespace' => 'Http\Resources',
+        'path' => 'Http/Resources',
         'parent' => 'app',
     ],
 
@@ -342,12 +296,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Rules will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'rule' => [
-        'namespace' => 'Rules',
+        'path' => 'Rules',
         'parent' => 'app',
     ],
 
@@ -357,12 +309,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Scopes will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'scope' => [
-        'namespace' => 'Scopes',
+        'path' => 'Scopes',
         'parent' => 'model',
     ],
 
@@ -372,7 +322,6 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Seeders will be generated.
-    | Requires 'path' key.
     |
     */
     'seeder' => [
@@ -386,7 +335,6 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Tests will be generated.
-    | Requires 'path' key.
     */
     'test' => [
         'path' => 'tests',
@@ -399,12 +347,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Values will be generated.
-    | Requires 'namespace' key.
-    | Path after App\ root namespace.
     |
     */
     'value' => [
-        'namespace' => 'Data\Values',
+        'path' => 'Data/Values',
         'parent' => 'app',
     ],
 
@@ -414,7 +360,6 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the path where Views will be generated.
-    | Requires 'path' key.
     |
     */
     'view' => [

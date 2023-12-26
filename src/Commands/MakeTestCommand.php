@@ -26,17 +26,8 @@ class MakeTestCommand extends TestMakeCommand
      */
     protected function getPath($name): string
     {
-        $name = Str::replace('\\', '/', Str::replaceFirst($this->rootNamespace(), '', $name));
+        $name = Str::replaceFirst($this->rootNamespace(), '', $name);
 
-        return self::assemblePath('test')."/$name.php";
-    }
-
-    /**
-     * rootNamespace
-     * Get the root namespace for the class.
-     */
-    protected function rootNamespace(): string
-    {
-        return self::assembleNamespace('test');
+        return self::assemblePath('test').str_replace('\\', '/', $name).'.php';
     }
 }

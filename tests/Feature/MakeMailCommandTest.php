@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:mail', function () {
     it('should create Mail class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.mail.namespace', 'Test\Mail');
+        Config::set('laraca.mail.path', 'Test/Mail');
         $this->artisan('make:mail',
             ['name' => $class]);
 
@@ -18,7 +18,7 @@ describe('make:mail', function () {
         expect(File::exists($filePath))
             ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-        $configNamespace = fullNamespaceStr(assembleNamespace('mail'));
+        $configNamespace = fullNamespaceStr('App\Test\Mail');
 
         expect(File::get($filePath))
             ->toContain($configNamespace);

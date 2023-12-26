@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 describe('make:component', function () {
     it('should create Component class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.component.namespace', 'Test\View\Components');
+        Config::set('laraca.component.path', 'Test/View/Components');
         Config::set('laraca.view.path', 'test/resources/views');
         $this->artisan('make:component',
             ['name' => $class]);
@@ -25,7 +25,7 @@ describe('make:component', function () {
         expect(File::exists(assemblePath('view')."/components/{$snake_class}.blade.php"))
             ->toBe(true, "File not created at expected path:\n".$result."\n\n");
 
-        $configNamespace = fullNamespaceStr(assembleNamespace('component'));
+        $configNamespace = fullNamespaceStr('App\Test\View\Components');
 
         expect(File::get($filePath))
             ->toContain($configNamespace);

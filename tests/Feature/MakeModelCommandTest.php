@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:model', function () {
     it('should create Model class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.model.namespace', 'Test\Data\Models');
+        Config::set('laraca.model.path', 'Test/Data/Models');
         $this->artisan('make:model',
             ['name' => $class]);
 
@@ -18,7 +18,7 @@ describe('make:model', function () {
         expect(File::exists($filePath))
             ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-        $configNamespace = fullNamespaceStr(assembleNamespace('model'));
+        $configNamespace = fullNamespaceStr('App\Test\Data\Models');
 
         expect(File::get($filePath))
             ->toContain($configNamespace);
@@ -26,7 +26,7 @@ describe('make:model', function () {
     })->with('classes');
 
     it('should create a Model class with HasUuids trait', function (string $class) {
-        Config::set('laraca.model.namespace', 'Test\Data\Models');
+        Config::set('laraca.model.path', 'Test/Data/Models');
         $this->artisan('make:model',
             ['name' => $class, '--uuid' => true]);
 

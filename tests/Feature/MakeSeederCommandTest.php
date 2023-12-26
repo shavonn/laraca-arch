@@ -18,7 +18,7 @@ describe('make:seeder', function () {
         expect(File::exists($filePath))
             ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-        $configNamespace = fullNamespaceStr(assembleNamespace('seeder', false));
+        $configNamespace = fullNamespaceStr('Test\Database\Seeders');
 
         expect(File::get($filePath))
             ->toContain($configNamespace);
