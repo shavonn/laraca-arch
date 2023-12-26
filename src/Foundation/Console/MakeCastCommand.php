@@ -2,10 +2,15 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
+use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
+use HandsomeBrown\Laraca\Console\Concerns\Generates;
 use Illuminate\Foundation\Console\CastMakeCommand;
 
 class MakeCastCommand extends CastMakeCommand
 {
+    use Generates;
+    use GetsConfigValues;
+
     /**
      * name
      * The console command name.
@@ -22,6 +27,6 @@ class MakeCastCommand extends CastMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\\'.config('laraca.cast.namespace');
+        return self::assembleNamespace('cast');
     }
 }

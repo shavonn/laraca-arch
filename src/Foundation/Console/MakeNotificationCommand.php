@@ -2,10 +2,13 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
+use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Foundation\Console\NotificationMakeCommand;
 
 class MakeNotificationCommand extends NotificationMakeCommand
 {
+    use GetsConfigValues;
+
     /**
      * name
      * The console command name.
@@ -22,6 +25,6 @@ class MakeNotificationCommand extends NotificationMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\\'.config('laraca.notification.namespace');
+        return self::assembleNamespace('notification');
     }
 }

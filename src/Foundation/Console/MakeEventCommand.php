@@ -2,10 +2,13 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
+use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Foundation\Console\EventMakeCommand;
 
 class MakeEventCommand extends EventMakeCommand
 {
+    use GetsConfigValues;
+
     /**
      * name
      * The console command name.
@@ -22,6 +25,6 @@ class MakeEventCommand extends EventMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\\'.config('laraca.event.namespace');
+        return self::assembleNamespace('event');
     }
 }

@@ -5,34 +5,22 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
 describe('make:scope', function () {
-    it('should create Scope class at path from namespace', function (string $class) {
-        $this->artisan(
-            MakeScopeCommand::class,
-            ['name' => $class],
-        );
+    it('should create Scope class with namespace at path created from configured namespace', function (string $class) {
+        $this->artisan(MakeScopeCommand::class,
+            ['name' => $class]);
 
-        $configPath = namespaceToPath(config('laraca.scope.namespace'));
-        $filePath = app_path("$configPath/$class.php");
+        $configPath = assemblePath('scope');
+        $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();
 
-        expect(File::exists(
-            path: $filePath,
-        ))->toBe(true, "File not created at expected path:\n".$filePath."\n".$result."\n\n");
+        expect(File::exists($filePath))
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-    })->with('classes');
+        $configNamespace = fullNamespaceStr(assembleNamespace('scope'));
 
-    it('should create a Scope class with the defined namespace', function (string $class) {
-        $this->artisan(
-            MakeScopeCommand::class,
-            ['name' => $class],
-        );
-
-        $configPath = namespaceToPath(config('laraca.scope.namespace'));
-        $configNamespace = fullNamespaceStr(config('laraca.scope.namespace'));
-
-        expect(File::get(
-            path: app_path("$configPath/$class.php")))->toContain($configNamespace);
+        expect(File::get($filePath))
+            ->toContain($configNamespace);
 
     })->with('classes');
 });

@@ -5,34 +5,22 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
 describe('make:resource', function () {
-    it('should create Resource class at path from namespace', function (string $class) {
-        $this->artisan(
-            MakeResourceCommand::class,
-            ['name' => $class],
-        );
+    it('should create Resource class with namespace at path created from configured namespace', function (string $class) {
+        $this->artisan(MakeResourceCommand::class,
+            ['name' => $class]);
 
-        $configPath = namespaceToPath(config('laraca.resource.namespace'));
-        $filePath = app_path("$configPath/$class.php");
+        $configPath = assemblePath('resource');
+        $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();
 
-        expect(File::exists(
-            path: $filePath,
-        ))->toBe(true, "File not created at expected path:\n".$filePath."\n".$result."\n\n");
+        expect(File::exists($filePath))
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-    })->with('classes');
+        $configNamespace = fullNamespaceStr(assembleNamespace('resource'));
 
-    it('should create a Resource class with the defined namespace', function (string $class) {
-        $this->artisan(
-            MakeResourceCommand::class,
-            ['name' => $class],
-        );
-
-        $configPath = namespaceToPath(config('laraca.resource.namespace'));
-        $configNamespace = fullNamespaceStr(config('laraca.resource.namespace'));
-
-        expect(File::get(
-            path: app_path("$configPath/$class.php")))->toContain($configNamespace);
+        expect(File::get($filePath))
+            ->toContain($configNamespace);
 
     })->with('classes');
 });

@@ -2,10 +2,13 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
+use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Foundation\Console\ObserverMakeCommand;
 
 class MakeObserverCommand extends ObserverMakeCommand
 {
+    use GetsConfigValues;
+
     /**
      * name
      * The console command name.
@@ -22,6 +25,6 @@ class MakeObserverCommand extends ObserverMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\\'.config('laraca.observer.namespace');
+        return self::assembleNamespace('observer');
     }
 }

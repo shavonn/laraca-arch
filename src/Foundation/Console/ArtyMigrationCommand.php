@@ -2,12 +2,15 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
+use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Database\Console\Migrations\MigrateMakeCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(name: 'arty:migration')]
 class ArtyMigrationCommand extends MigrateMakeCommand
 {
+    use GetsConfigValues;
+
     /**
      * signature
      * The console command signature.
@@ -33,6 +36,6 @@ class ArtyMigrationCommand extends MigrateMakeCommand
                             : $targetPath;
         }
 
-        return $this->laravel->databasePath(config('laraca.migration.path'));
+        return self::assemblePath('migration');
     }
 }

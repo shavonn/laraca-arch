@@ -2,7 +2,7 @@
 
 namespace HandsomeBrown\Laraca;
 
-use HandsomeBrown\Laraca\Concerns\GetsConfigPath;
+use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use HandsomeBrown\Laraca\Foundation\Console\ArtyMigrationCommand;
 use HandsomeBrown\Laraca\Foundation\Console\MakeCastCommand;
 use HandsomeBrown\Laraca\Foundation\Console\MakeChannelCommand;
@@ -36,7 +36,7 @@ use Illuminate\Support\ServiceProvider;
 
 class LaracaServiceProvider extends ServiceProvider
 {
-    use GetsConfigPath;
+    use GetsConfigValues;
 
     /**
      * The application instance.
@@ -93,13 +93,15 @@ class LaracaServiceProvider extends ServiceProvider
                 __DIR__.'/../config/config.php' => config_path('laraca.php'),
             ], 'laraca-config');
 
-            $this->app->useDatabasePath($this->assemblePath('database')['full']);
+            $this->app->useDatabasePath($this->assemblePath('database'));
 
             // Registering package commands.
             $this->registerCommands();
         }
 
-        $this->loadMigrationsFrom($this->assemblePath('migration')['full']);
+        $this->loadViewsFrom($this->assemblePath('view'), 'laraca');
+
+        $this->loadMigrationsFrom($this->assemblePath('migration'));
     }
 
     /**

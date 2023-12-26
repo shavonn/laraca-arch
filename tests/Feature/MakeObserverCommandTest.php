@@ -5,34 +5,22 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
 describe('make:observer', function () {
-    it('should create Observer class at path from namespace', function (string $class) {
-        $this->artisan(
-            MakeObserverCommand::class,
-            ['name' => $class],
-        );
+    it('should create Observer class with namespace at path created from configured namespace', function (string $class) {
+        $this->artisan(MakeObserverCommand::class,
+            ['name' => $class]);
 
-        $configPath = namespaceToPath(config('laraca.observer.namespace'));
-        $filePath = app_path("$configPath/$class.php");
+        $configPath = assemblePath('observer');
+        $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();
 
-        expect(File::exists(
-            path: $filePath,
-        ))->toBe(true, "File not created at expected path:\n".$filePath."\n".$result."\n\n");
+        expect(File::exists($filePath))
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-    })->with('classes');
+        $configNamespace = fullNamespaceStr(assembleNamespace('observer'));
 
-    it('should create a Observer class with the defined namespace', function (string $class) {
-        $this->artisan(
-            MakeObserverCommand::class,
-            ['name' => $class],
-        );
-
-        $configPath = namespaceToPath(config('laraca.observer.namespace'));
-        $configNamespace = fullNamespaceStr(config('laraca.observer.namespace'));
-
-        expect(File::get(
-            path: app_path("$configPath/$class.php")))->toContain($configNamespace);
+        expect(File::get($filePath))
+            ->toContain($configNamespace);
 
     })->with('classes');
 });

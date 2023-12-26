@@ -5,34 +5,22 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
 describe('make:controller', function () {
-    it('should create Controller class at path from namespace', function (string $class) {
-        $this->artisan(
-            MakeControllerCommand::class,
-            ['name' => $class],
-        );
+    it('should create Controller class with namespace at path created from configured namespace', function (string $class) {
+        $this->artisan(MakeControllerCommand::class,
+            ['name' => $class]);
 
-        $configPath = namespaceToPath(config('laraca.controller.namespace'));
-        $filePath = app_path("$configPath/$class.php");
+        $configPath = assemblePath('controller');
+        $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();
 
-        expect(File::exists(
-            path: $filePath,
-        ))->toBe(true, "File not created at expected path:\n".$filePath."\n".$result."\n\n");
+        expect(File::exists($filePath))
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-    })->with('classes');
+        $configNamespace = fullNamespaceStr(assembleNamespace('controller'));
 
-    it('should create a Controller class with the defined namespace', function (string $class) {
-        $this->artisan(
-            MakeControllerCommand::class,
-            ['name' => $class],
-        );
-
-        $configPath = namespaceToPath(config('laraca.controller.namespace'));
-        $configNamespace = fullNamespaceStr(config('laraca.controller.namespace'));
-
-        expect(File::get(
-            path: app_path("$configPath/$class.php")))->toContain($configNamespace);
+        expect(File::get($filePath))
+            ->toContain($configNamespace);
 
     })->with('classes');
 });

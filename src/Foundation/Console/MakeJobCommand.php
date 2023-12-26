@@ -2,10 +2,13 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
+use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Foundation\Console\JobMakeCommand;
 
 class MakeJobCommand extends JobMakeCommand
 {
+    use GetsConfigValues;
+
     /**
      * name
      * The console command name.
@@ -22,6 +25,6 @@ class MakeJobCommand extends JobMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\\'.config('laraca.job.namespace');
+        return self::assembleNamespace('job');
     }
 }

@@ -5,34 +5,22 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
 describe('make:seeder', function () {
-    it('should create Seeder class at path from namespace', function (string $class) {
-        $this->artisan(
-            MakeSeederCommand::class,
-            ['name' => $class],
-        );
+    it('should create Seeder class with namespace at path created from configured namespace', function (string $class) {
+        $this->artisan(MakeSeederCommand::class,
+            ['name' => $class]);
 
-        $configPath = getDatabasePath('laraca.seeder.path');
-        $filePath = base_path("$configPath/{$class}.php");
+        $configPath = assemblePath('seeder');
+        $filePath = "$configPath/{$class}.php";
 
         $result = Artisan::output();
 
-        expect(File::exists(
-            path: $filePath,
-        ))->toBe(true, "File not created at expected path:\n".$filePath."\n".$result."\n\n");
+        expect(File::exists($filePath))
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-    })->with('classes');
+        $configNamespace = fullNamespaceStr(assembleNamespace('seeder', false));
 
-    it('should create a Seeder class with the defined namespace', function (string $class) {
-        $this->artisan(
-            MakeSeederCommand::class,
-            ['name' => $class],
-        );
-
-        $configPath = getDatabasePath('laraca.seeder.path');
-        $configNamespace = fullNamespaceStr(pathToNamespace($configPath), false);
-
-        expect(File::get(
-            path: base_path("$configPath/{$class}.php")))->toContain($configNamespace);
+        expect(File::get($filePath))
+            ->toContain($configNamespace);
 
     })->with('classes');
 });

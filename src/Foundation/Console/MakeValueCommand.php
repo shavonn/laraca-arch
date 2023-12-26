@@ -2,6 +2,7 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
+use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use HandsomeBrown\Laraca\Console\Concerns\Generates;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
@@ -11,6 +12,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 class MakeValueCommand extends GeneratorCommand
 {
     use Generates;
+    use GetsConfigValues;
 
     /**
      * The console command name.
@@ -51,7 +53,7 @@ class MakeValueCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\\'.config('laraca.value.namespace');
+        return self::assembleNamespace('value');
     }
 
     /**

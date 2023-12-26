@@ -8,10 +8,9 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:structure', function () {
-    it('should create directory Structure from config', function (string $class) {
-        expect($this->artisan(
-            MakeStructureCommand::class,
-        ))->toBe(0);
+    it('should create directory Structure from config', function () {
+        expect($this->artisan(MakeStructureCommand::class))
+            ->toBe(0);
 
         $paths = [
             'test/database',
@@ -52,31 +51,25 @@ describe('make:structure', function () {
 
     })->with('classes');
 
-    it('should throw a MissingPathNamespaceKeyException when a key has no path or namespace', function (string $class) {
+    it('should throw a MissingPathNamespaceKeyException when a key has no path or namespace', function () {
         Config::set('laraca.empty_key', []);
         Config::set('laraca.command.parent', 'empty_key');
 
-        $this->artisan(
-            MakeStructureCommand::class,
-        );
+        $this->artisan(MakeStructureCommand::class);
 
     })->with('classes')->throws(MissingPathNamespaceKeyException::class);
 
-    it('should throw a InvalidConfigKeyException when a parent key does not exist in the config', function (string $class) {
+    it('should throw a InvalidConfigKeyException when a parent key does not exist in the config', function () {
         Config::set('laraca.model.parent', 'nonexistent_key');
 
-        $this->artisan(
-            MakeStructureCommand::class,
-        );
+        $this->artisan(MakeStructureCommand::class);
 
     })->with('classes')->throws(InvalidConfigKeyException::class);
 
-    it('should throw a MissingRootPathException when a tree does not lead to a base or app parent', function (string $class) {
+    it('should throw a MissingRootPathException when a tree does not lead to a base or app parent', function () {
         Config::set('laraca.model.parent', '');
 
-        $this->artisan(
-            MakeStructureCommand::class,
-        );
+        $this->artisan(MakeStructureCommand::class);
 
     })->with('classes')->throws(MissingRootPathException::class);
 });

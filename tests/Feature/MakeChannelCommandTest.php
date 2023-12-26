@@ -5,34 +5,22 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
 describe('make:channel', function () {
-    it('should create Channel class at path from namespace', function (string $class) {
-        $this->artisan(
-            MakeChannelCommand::class,
-            ['name' => $class],
-        );
+    it('should create Channel class with namespace at path created from configured namespace', function (string $class) {
+        $this->artisan(MakeChannelCommand::class,
+            ['name' => $class]);
 
-        $configPath = namespaceToPath(config('laraca.channel.namespace'));
-        $filePath = app_path("$configPath/$class.php");
+        $configPath = assemblePath('channel');
+        $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();
 
-        expect(File::exists(
-            path: $filePath,
-        ))->toBe(true, "File not created at expected path:\n".$filePath."\n".$result."\n\n");
+        expect(File::exists($filePath))
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-    })->with('classes');
+        $configNamespace = fullNamespaceStr(assembleNamespace('channel'));
 
-    it('should create a Channel class with the defined namespace', function (string $class) {
-        $this->artisan(
-            MakeChannelCommand::class,
-            ['name' => $class],
-        );
-
-        $configPath = namespaceToPath(config('laraca.channel.namespace'));
-        $configNamespace = fullNamespaceStr(config('laraca.channel.namespace'));
-
-        expect(File::get(
-            path: app_path("$configPath/$class.php")))->toContain($configNamespace);
+        expect(File::get($filePath))
+            ->toContain($configNamespace);
 
     })->with('classes');
 });
