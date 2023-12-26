@@ -46,7 +46,7 @@ class MakeModelCommand extends ModelMakeCommand
                     "use HasFactory, HasUuids;\n",
                 ];
 
-                $this->replaceIn($uuidStubPath, $search, $replace);
+                $this->files->replaceInFile($search, $replace, $uuidStubPath);
             }
 
             return $uuidStubPath;

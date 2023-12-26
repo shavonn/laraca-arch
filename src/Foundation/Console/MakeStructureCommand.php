@@ -69,6 +69,11 @@ class MakeStructureCommand extends Command
             } else {
                 $state = ' already exists';
             }
+
+            if ($this->files->isEmptyDirectory($fullPath)) {
+                $this->files->put($fullPath.'/.gitkeep', '');
+            }
+
             array_push($messages, sprintf('[%s] %s.', $relativePath, $state));
         }
 

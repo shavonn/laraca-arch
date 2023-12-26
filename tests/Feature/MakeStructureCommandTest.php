@@ -47,6 +47,10 @@ describe('make:structure', function () {
             $dirPath = base_path($p);
             expect(File::isDirectory($dirPath))
                 ->toBe(true, "Directory not created:\n".$dirPath."\n");
+
+            $keepFile = $dirPath.'/.gitkeep';
+            expect(File::exists($keepFile))
+                ->toBe(true, "File not created at expected path:\n".$keepFile."\n\n");
         }
 
     })->with('classes');
