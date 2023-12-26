@@ -8,9 +8,9 @@ These are Laravel Artisan commands I've wrapped so that your custom directory st
 
 Caveats:
 
--   `make:migration` isn't wrapped. You will need to use `arty:migration`. Why? This one is quite different from the others and more difficult to tinker with than I was willing to lend time to. It’s better just left as is, in my humble opinion.
+-   `make:migration` isn't wrapped. You will need to use `arti:migration`. Why? This one is quite different from the others and more difficult to tinker with than I was willing to lend time to. It’s better just left as is, in my humble opinion.
 
-## arty:migration
+## arti:migration
 
 ```shell
 artisan make:migration [name]

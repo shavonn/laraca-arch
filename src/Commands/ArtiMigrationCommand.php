@@ -6,8 +6,8 @@ use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Database\Console\Migrations\MigrateMakeCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
 
-#[AsCommand(name: 'arty:migration')]
-class ArtyMigrationCommand extends MigrateMakeCommand
+#[AsCommand(name: 'arti:migration')]
+class ArtiMigrationCommand extends MigrateMakeCommand
 {
     use GetsConfigValues;
 
@@ -17,7 +17,7 @@ class ArtyMigrationCommand extends MigrateMakeCommand
      *
      * @var string
      */
-    protected $signature = 'arty:migration {name : The name of the migration}
+    protected $signature = 'arti:migration {name : The name of the migration}
         {--create= : The table to be created}
         {--table= : The table to migrate}
         {--path= : The location where the migration file should be created}

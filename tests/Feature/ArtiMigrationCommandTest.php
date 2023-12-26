@@ -5,10 +5,10 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-describe('arty:migration', function () {
+describe('arti:migration', function () {
     it('should create the Migration class when used', function (string $class) {
         Config::set('laraca.database.path', 'test/database');
-        $this->artisan('arty:migration',
+        $this->artisan('arti:migration',
             ['name' => $class]);
 
         $now = now();
@@ -31,7 +31,7 @@ describe('arty:migration', function () {
 
     it('should create the Migration class using path option', function (string $class) {
         Config::set('laraca.database.path', 'test/database');
-        $this->artisan('arty:migration',
+        $this->artisan('arti:migration',
             ['name' => $class, '--path' => 'test/db/migrations']);
 
         $now = now()->format('Y_m_d_His');

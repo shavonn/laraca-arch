@@ -2,7 +2,7 @@
 
 namespace HandsomeBrown\Laraca;
 
-use HandsomeBrown\Laraca\Commands\ArtyMigrationCommand;
+use HandsomeBrown\Laraca\Commands\ArtiMigrationCommand;
 use HandsomeBrown\Laraca\Commands\MakeCastCommand;
 use HandsomeBrown\Laraca\Commands\MakeChannelCommand;
 use HandsomeBrown\Laraca\Commands\MakeCommandCommand;
@@ -52,7 +52,7 @@ class LaracaServiceProvider extends ServiceProvider
      * @var array<string,mixed>
      */
     protected $commands = [
-        'ArtyMigration' => ArtyMigrationCommand::class,
+        'ArtiMigration' => ArtiMigrationCommand::class,
         'MakeCast' => MakeCastCommand::class,
         'MakeChannel' => MakeChannelCommand::class,
         'MakeCommand' => MakeCommandCommand::class,
@@ -140,16 +140,16 @@ class LaracaServiceProvider extends ServiceProvider
     }
 
     /**
-     * registerArtyMigrationCommand
+     * registerArtiMigrationCommand
      * Register the command.
      */
-    protected function registerArtyMigrationCommand(): void
+    protected function registerArtiMigrationCommand(): void
     {
-        $this->app->singleton(ArtyMigrationCommand::class, function ($app) {
+        $this->app->singleton(ArtiMigrationCommand::class, function ($app) {
             $creator = $app['migration.creator'];
             $composer = $app['composer'];
 
-            return new ArtyMigrationCommand($creator, $composer);
+            return new ArtiMigrationCommand($creator, $composer);
         });
     }
 
