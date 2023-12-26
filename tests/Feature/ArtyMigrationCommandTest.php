@@ -5,42 +5,44 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-it('should create the Migration class when used', function (string $class) {
-    Config::set('laraca.database.path', 'test/database');
-    $this->artisan('arty:migration',
-        ['name' => $class]);
+describe('arty:migration', function () {
+    it('should create the Migration class when used', function (string $class) {
+        Config::set('laraca.database.path', 'test/database');
+        $this->artisan('arty:migration',
+            ['name' => $class]);
 
-    $now = now();
-    $datetimeSubSecond = $now->copy()->subSecond()->format('Y_m_d_His');
-    $datetimeNow = $now->format('Y_m_d_His');
+        $now = now();
+        $datetimeSubSecond = $now->copy()->subSecond()->format('Y_m_d_His');
+        $datetimeNow = $now->format('Y_m_d_His');
 
-    $snake_class = Str::snake($class);
-    $configPath = assemblePath('migration');
+        $snake_class = Str::snake($class);
+        $configPath = assemblePath('migration');
 
-    // accounts for second change variation that may occur in file name
-    $filePathSubSecond = "$configPath/{$datetimeSubSecond}_{$snake_class}.php";
-    $filePathNow = "$configPath/{$datetimeNow}_{$snake_class}.php";
+        // accounts for second change variation that may occur in file name
+        $filePathSubSecond = "$configPath/{$datetimeSubSecond}_{$snake_class}.php";
+        $filePathNow = "$configPath/{$datetimeNow}_{$snake_class}.php";
 
-    $result = Artisan::output();
+        $result = Artisan::output();
 
-    expect(File::exists($filePathNow) || File::exists($filePathSubSecond))
-        ->toBe(true, "File not created at expected path:\n".$filePathNow."\n".$filePathSubSecond."\n".$result."\n\n");
+        expect(File::exists($filePathNow) || File::exists($filePathSubSecond))
+            ->toBe(true, "File not created at expected path:\n".$filePathNow."\n".$filePathSubSecond."\n".$result."\n\n");
 
-})->with('classes');
+    })->with('classes');
 
-it('should create the Migration class using path option', function (string $class) {
-    Config::set('laraca.database.path', 'test/database');
-    $this->artisan('arty:migration',
-        ['name' => $class, '--path' => 'test/db/migrations']);
+    it('should create the Migration class using path option', function (string $class) {
+        Config::set('laraca.database.path', 'test/database');
+        $this->artisan('arty:migration',
+            ['name' => $class, '--path' => 'test/db/migrations']);
 
-    $now = now()->format('Y_m_d_His');
-    $snake_class = Str::snake($class);
+        $now = now()->format('Y_m_d_His');
+        $snake_class = Str::snake($class);
 
-    $filePath = base_path("test/db/migrations/{$now}_{$snake_class}.php");
+        $filePath = base_path("test/db/migrations/{$now}_{$snake_class}.php");
 
-    $result = Artisan::output();
+        $result = Artisan::output();
 
-    expect(File::exists($filePath))
-        ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
+        expect(File::exists($filePath))
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-})->with('classes');
+    })->with('classes');
+});

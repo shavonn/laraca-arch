@@ -42,9 +42,5 @@ function assembleNamespace($key): string
  */
 function fullNamespaceStr(string $namespace, bool $app = true): string
 {
-    if ($app) {
-        return 'namespace '.$namespace.';';
-    }
-
     return 'namespace '.$namespace.';';
 }
