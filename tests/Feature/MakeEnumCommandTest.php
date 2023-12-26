@@ -5,34 +5,22 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
 describe('make:enum', function () {
-    it('should create Enum class at path from namespace', function (string $class) {
-        $this->artisan(
-            MakeEnumCommand::class,
-            ['name' => $class],
-        );
+    it('should create Enum class with namespace at path created from configured namespace', function (string $class) {
+        $this->artisan(MakeEnumCommand::class,
+            ['name' => $class]);
 
-        $configPath = namespaceToPath(config('laraca.enum.namespace'));
-        $filePath = app_path("$configPath/$class.php");
+        $configPath = assemblePath('enum');
+        $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();
 
-        expect(File::exists(
-            path: $filePath,
-        ))->toBe(true, "File not created at expected path:\n".$filePath."\n".$result."\n\n");
+        expect(File::exists($filePath))
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-    })->with('classes');
+        $configNamespace = fullNamespaceStr(assembleNamespace('enum'));
 
-    it('should create a Enum class with the defined namespace', function (string $class) {
-        $this->artisan(
-            MakeEnumCommand::class,
-            ['name' => $class],
-        );
-
-        $configPath = namespaceToPath(config('laraca.enum.namespace'));
-        $configNamespace = fullNamespaceStr(config('laraca.enum.namespace'));
-
-        expect(File::get(
-            path: app_path("$configPath/$class.php")))->toContain($configNamespace);
+        expect(File::get($filePath))
+            ->toContain($configNamespace);
 
     })->with('classes');
 });

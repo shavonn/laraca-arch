@@ -2,12 +2,15 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
+use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(name: 'make:enum')]
 class MakeEnumCommand extends GeneratorCommand
 {
+    use GetsConfigValues;
+
     /**
      * The console command name.
      *
@@ -47,6 +50,6 @@ class MakeEnumCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\\'.config('laraca.enum.namespace');
+        return self::assembleNamespace('enum');
     }
 }

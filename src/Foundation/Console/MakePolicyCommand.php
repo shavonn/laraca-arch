@@ -2,10 +2,13 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
+use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Foundation\Console\PolicyMakeCommand;
 
 class MakePolicyCommand extends PolicyMakeCommand
 {
+    use GetsConfigValues;
+
     /**
      * name
      * The console command name.
@@ -22,6 +25,6 @@ class MakePolicyCommand extends PolicyMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\\'.config('laraca.policy.namespace');
+        return self::assembleNamespace('policy');
     }
 }

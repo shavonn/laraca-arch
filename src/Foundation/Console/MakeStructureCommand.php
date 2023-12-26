@@ -2,7 +2,7 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
-use HandsomeBrown\Laraca\Concerns\GetsConfigPath;
+use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use HandsomeBrown\Laraca\Console\Concerns\Generates;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
@@ -12,7 +12,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 class MakeStructureCommand extends Command
 {
     use Generates;
-    use GetsConfigPath;
+    use GetsConfigValues;
 
     /**
      * The console command name.
@@ -60,15 +60,16 @@ class MakeStructureCommand extends Command
         $this->components->info('Creating directy structure from Laraca config.');
 
         foreach (array_keys($config) as $key) {
-            $paths = $this->assemblePath($key);
+            $fullPath = self::assemblePath($key);
+            $relativePath = self::assemblePath($key, false);
 
-            if (! $this->files->isDirectory($paths['full'])) {
-                $this->files->makeDirectory($paths['full'], 0777, true, true);
+            if (! $this->files->isDirectory($fullPath)) {
+                $this->files->makeDirectory($fullPath, 0777, true, true);
                 $state = 'created';
             } else {
                 $state = ' already exists';
             }
-            array_push($messages, sprintf('[%s] %s.', $paths['relative'], $state));
+            array_push($messages, sprintf('[%s] %s.', $relativePath, $state));
         }
 
         $this->components->bulletList($messages);

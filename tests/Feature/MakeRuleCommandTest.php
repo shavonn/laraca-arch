@@ -5,34 +5,22 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
 describe('make:rule', function () {
-    it('should create Rule class at path from namespace', function (string $class) {
-        $this->artisan(
-            MakeRuleCommand::class,
-            ['name' => $class],
-        );
+    it('should create Rule class with namespace at path created from configured namespace', function (string $class) {
+        $this->artisan(MakeRuleCommand::class,
+            ['name' => $class]);
 
-        $configPath = namespaceToPath(config('laraca.rule.namespace'));
-        $filePath = app_path("$configPath/$class.php");
+        $configPath = assemblePath('rule');
+        $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();
 
-        expect(File::exists(
-            path: $filePath,
-        ))->toBe(true, "File not created at expected path:\n".$filePath."\n".$result."\n\n");
+        expect(File::exists($filePath))
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-    })->with('classes');
+        $configNamespace = fullNamespaceStr(assembleNamespace('rule'));
 
-    it('should create a Rule class with the defined namespace', function (string $class) {
-        $this->artisan(
-            MakeRuleCommand::class,
-            ['name' => $class],
-        );
-
-        $configPath = namespaceToPath(config('laraca.rule.namespace'));
-        $configNamespace = fullNamespaceStr(config('laraca.rule.namespace'));
-
-        expect(File::get(
-            path: app_path("$configPath/$class.php")))->toContain($configNamespace);
+        expect(File::get($filePath))
+            ->toContain($configNamespace);
 
     })->with('classes');
 });

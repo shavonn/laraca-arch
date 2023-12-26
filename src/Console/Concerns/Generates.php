@@ -31,42 +31,4 @@ trait Generates
 
         return $views.($path ? DIRECTORY_SEPARATOR.$path : $path);
     }
-
-    /**
-     * pathToNamespace
-     */
-    public function pathToNamespace(string $path): string
-    {
-        $strArry = explode('/', $path);
-        $strArry = array_map(function ($str) {
-            return ucfirst($str);
-        }, $strArry);
-
-        return implode('\\', $strArry);
-    }
-
-    /**
-     * namespaceToPath
-     */
-    public function namespaceToPath(string $path): string
-    {
-        $strArry = explode('\\', $path);
-        $strArry = array_map(function ($str) {
-            return ucfirst($str);
-        }, $strArry);
-
-        return implode('/', $strArry);
-    }
-
-    /**
-     * getDatabasePath
-     *
-     * @param  string  $path
-     */
-    protected function getDatabaseNamespace($path = ''): string
-    {
-        $path = config('laraca.database.path').($path ? DIRECTORY_SEPARATOR.$path : $path);
-
-        return $this->pathToNamespace($path);
-    }
 }

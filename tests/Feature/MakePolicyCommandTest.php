@@ -5,34 +5,22 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
 describe('make:policy', function () {
-    it('should create Policy class at path from namespace', function (string $class) {
-        $this->artisan(
-            MakePolicyCommand::class,
-            ['name' => $class],
-        );
+    it('should create Policy class with namespace at path created from configured namespace', function (string $class) {
+        $this->artisan(MakePolicyCommand::class,
+            ['name' => $class]);
 
-        $configPath = namespaceToPath(config('laraca.policy.namespace'));
-        $filePath = app_path("$configPath/$class.php");
+        $configPath = assemblePath('policy');
+        $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();
 
-        expect(File::exists(
-            path: $filePath,
-        ))->toBe(true, "File not created at expected path:\n".$filePath."\n".$result."\n\n");
+        expect(File::exists($filePath))
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-    })->with('classes');
+        $configNamespace = fullNamespaceStr(assembleNamespace('policy'));
 
-    it('should create a Policy class with the defined namespace', function (string $class) {
-        $this->artisan(
-            MakePolicyCommand::class,
-            ['name' => $class],
-        );
-
-        $configPath = namespaceToPath(config('laraca.policy.namespace'));
-        $configNamespace = fullNamespaceStr(config('laraca.policy.namespace'));
-
-        expect(File::get(
-            path: app_path("$configPath/$class.php")))->toContain($configNamespace);
+        expect(File::get($filePath))
+            ->toContain($configNamespace);
 
     })->with('classes');
 });

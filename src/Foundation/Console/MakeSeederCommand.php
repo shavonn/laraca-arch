@@ -2,6 +2,7 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
+use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use HandsomeBrown\Laraca\Console\Concerns\Generates;
 use Illuminate\Database\Console\Seeds\SeederMakeCommand;
 use Illuminate\Support\Str;
@@ -9,6 +10,7 @@ use Illuminate\Support\Str;
 class MakeSeederCommand extends SeederMakeCommand
 {
     use Generates;
+    use GetsConfigValues;
 
     /**
      * name
@@ -26,9 +28,9 @@ class MakeSeederCommand extends SeederMakeCommand
      */
     protected function getPath($name): string
     {
-        $name = str_replace('\\', '/', Str::replaceFirst($this->rootNamespace(), '', $name));
+        $name = Str::replace('\\', '/', Str::replaceFirst($this->rootNamespace(), '', $name));
 
-        return $this->laravel->databasePath().DIRECTORY_SEPARATOR.config('laraca.seeder.path').$name.'.php';
+        return self::assemblePath('seeder')."/$name.php";
     }
 
     /**
@@ -37,6 +39,6 @@ class MakeSeederCommand extends SeederMakeCommand
      */
     protected function rootNamespace(): string
     {
-        return $this->getDatabaseNamespace(config('laraca.seeder.path'));
+        return self::assembleNamespace('seeder');
     }
 }

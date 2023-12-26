@@ -2,12 +2,14 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
+use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use HandsomeBrown\Laraca\Console\Concerns\Generates;
 use Illuminate\Foundation\Console\ComponentMakeCommand;
 
 class MakeComponentCommand extends ComponentMakeCommand
 {
     use Generates;
+    use GetsConfigValues;
 
     /**
      * name
@@ -25,6 +27,6 @@ class MakeComponentCommand extends ComponentMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\\'.config('laraca.component.namespace');
+        return self::assembleNamespace('component');
     }
 }

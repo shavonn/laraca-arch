@@ -2,6 +2,7 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
+use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use HandsomeBrown\Laraca\Console\Concerns\Generates;
 use Illuminate\Database\Console\Factories\FactoryMakeCommand;
 use Illuminate\Support\Str;
@@ -9,6 +10,7 @@ use Illuminate\Support\Str;
 class MakeFactoryCommand extends FactoryMakeCommand
 {
     use Generates;
+    use GetsConfigValues;
 
     /**
      * name
@@ -26,9 +28,9 @@ class MakeFactoryCommand extends FactoryMakeCommand
      */
     protected function getPath($name): string
     {
-        $name = (string) Str::of($name)->replaceFirst($this->rootNamespace(), '')->finish('Factory');
+        $name = Str::of($name)->replaceFirst($this->rootNamespace(), '')->finish('Factory');
 
-        return $this->laravel->databasePath().DIRECTORY_SEPARATOR.config('laraca.factory.path')."/$name.php";
+        return self::assemblePath('factory')."/$name.php";
     }
 
     /**
@@ -39,6 +41,6 @@ class MakeFactoryCommand extends FactoryMakeCommand
      */
     protected function getNamespace($name)
     {
-        return $this->getDatabaseNamespace(config('laraca.factory.path'));
+        return self::assembleNamespace('factory');
     }
 }

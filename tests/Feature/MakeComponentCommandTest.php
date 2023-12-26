@@ -6,40 +6,27 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 describe('make:component', function () {
-    it('should create Component class at path from namespace', function (string $class) {
-        $this->artisan(
-            MakeComponentCommand::class,
-            ['name' => $class],
-        );
+    it('should create Component class with namespace at path created from configured namespace', function (string $class) {
+        $this->artisan(MakeComponentCommand::class,
+            ['name' => $class]);
 
-        $configPath = namespaceToPath(config('laraca.component.namespace'));
-        $filePath = app_path("$configPath/$class.php");
+        $configPath = assemblePath('component');
+        $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();
 
-        expect(File::exists(
-            path: $filePath,
-        ))->toBe(true, "File not created at expected path:\n".$filePath."\n".$result."\n\n");
+        expect(File::exists($filePath))
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
         $snake_class = Str::snake($class, '-');
 
-        expect(File::exists(
-            path: base_path(config('laraca.view.path')."/components/{$snake_class}.blade.php"),
-        ))->toBe(true, "File not created at expected path:\n".$result."\n\n");
+        expect(File::exists(assemblePath('view')."/components/{$snake_class}.blade.php"))
+            ->toBe(true, "File not created at expected path:\n".$result."\n\n");
 
-    })->with('classes');
+        $configNamespace = fullNamespaceStr(assembleNamespace('component'));
 
-    it('should create a Component class with the defined namespace', function (string $class) {
-        $this->artisan(
-            MakeComponentCommand::class,
-            ['name' => $class],
-        );
-
-        $configPath = namespaceToPath(config('laraca.component.namespace'));
-        $configNamespace = fullNamespaceStr(config('laraca.component.namespace'));
-
-        expect(File::get(
-            path: app_path("$configPath/$class.php")))->toContain($configNamespace);
+        expect(File::get($filePath))
+            ->toContain($configNamespace);
 
     })->with('classes');
 });

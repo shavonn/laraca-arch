@@ -5,34 +5,22 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
 describe('make:event', function () {
-    it('should create Event class at path from namespace', function (string $class) {
-        $this->artisan(
-            MakeEventCommand::class,
-            ['name' => $class],
-        );
+    it('should create Event class with namespace at path created from configured namespace', function (string $class) {
+        $this->artisan(MakeEventCommand::class,
+            ['name' => $class]);
 
-        $configPath = namespaceToPath(config('laraca.event.namespace'));
-        $filePath = app_path("$configPath/$class.php");
+        $configPath = assemblePath('event');
+        $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();
 
-        expect(File::exists(
-            path: $filePath,
-        ))->toBe(true, "File not created at expected path:\n".$filePath."\n".$result."\n\n");
+        expect(File::exists($filePath))
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-    })->with('classes');
+        $configNamespace = fullNamespaceStr(assembleNamespace('event'));
 
-    it('should create a Event class with the defined namespace', function (string $class) {
-        $this->artisan(
-            MakeEventCommand::class,
-            ['name' => $class],
-        );
-
-        $configPath = namespaceToPath(config('laraca.event.namespace'));
-        $configNamespace = fullNamespaceStr(config('laraca.event.namespace'));
-
-        expect(File::get(
-            path: app_path("$configPath/$class.php")))->toContain($configNamespace);
+        expect(File::get($filePath))
+            ->toContain($configNamespace);
 
     })->with('classes');
 });

@@ -15,25 +15,26 @@ use HandsomeBrown\Laraca\Tests\LaracaTestCase;
 
 uses(LaracaTestCase::class)->in(__DIR__);
 
+use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
+
 /**
- * namespaceToPath
+ * assemblePath
+ *
+ * @param  string  $key
  */
-function namespaceToPath(string $namespace): string
+function assemblePath($key, $getFull = true): string
 {
-    return str_replace('\\', '/', $namespace);
+    return GetsConfigValues::assemblePath($key, $getFull);
 }
 
 /**
- * pathToNamespace
+ * assembleNamespace
+ *
+ * @param  string  $key
  */
-function pathToNamespace(string $path): string
+function assembleNamespace($key): string
 {
-    $strArry = explode('/', $path);
-    $strArry = array_map(function ($str) {
-        return ucfirst($str);
-    }, $strArry);
-
-    return implode('\\', $strArry);
+    return GetsConfigValues::assembleNamespace($key);
 }
 
 /**
@@ -42,16 +43,8 @@ function pathToNamespace(string $path): string
 function fullNamespaceStr(string $namespace, bool $app = true): string
 {
     if ($app) {
-        return 'namespace '.app()->getNamespace().$namespace.';';
+        return 'namespace '.$namespace.';';
     }
 
     return 'namespace '.$namespace.';';
-}
-
-/**
- * getDatabasePath
- */
-function getDatabasePath(string $configKey): string
-{
-    return strtolower(config('laraca.database.path').DIRECTORY_SEPARATOR.config($configKey));
 }

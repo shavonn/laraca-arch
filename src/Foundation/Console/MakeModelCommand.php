@@ -2,6 +2,7 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
+use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use HandsomeBrown\Laraca\Console\Concerns\Generates;
 use HandsomeBrown\Laraca\Console\Concerns\HasLocalStub;
 use Illuminate\Foundation\Console\ModelMakeCommand;
@@ -10,6 +11,7 @@ use Symfony\Component\Console\Input\InputOption;
 class MakeModelCommand extends ModelMakeCommand
 {
     use Generates;
+    use GetsConfigValues;
     use HasLocalStub;
 
     /**
@@ -61,7 +63,7 @@ class MakeModelCommand extends ModelMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\\'.config('laraca.model.namespace');
+        return self::assembleNamespace('model');
     }
 
     /**

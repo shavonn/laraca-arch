@@ -2,6 +2,7 @@
 
 namespace HandsomeBrown\Laraca\Foundation\Console;
 
+use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use HandsomeBrown\Laraca\Console\Concerns\Generates;
 use Illuminate\Foundation\Console\TestMakeCommand;
 use Illuminate\Support\Str;
@@ -9,6 +10,7 @@ use Illuminate\Support\Str;
 class MakeTestCommand extends TestMakeCommand
 {
     use Generates;
+    use GetsConfigValues;
 
     /**
      * name
@@ -26,9 +28,9 @@ class MakeTestCommand extends TestMakeCommand
      */
     protected function getPath($name): string
     {
-        $name = Str::replaceFirst($this->rootNamespace(), '', $name);
+        $name = Str::replace('\\', '/', Str::replaceFirst($this->rootNamespace(), '', $name));
 
-        return base_path(config('laraca.test.path')).str_replace('\\', '/', $name).'.php';
+        return self::assemblePath('test')."/$name.php";
     }
 
     /**
@@ -37,6 +39,6 @@ class MakeTestCommand extends TestMakeCommand
      */
     protected function rootNamespace(): string
     {
-        return $this->pathToNamespace(config('laraca.test.path'));
+        return self::assembleNamespace('test');
     }
 }

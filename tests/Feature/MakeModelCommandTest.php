@@ -5,48 +5,33 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
 describe('make:model', function () {
-    it('should create Model class at path from namespace', function (string $class) {
-        $this->artisan(
-            MakeModelCommand::class,
-            ['name' => $class],
-        );
+    it('should create Model class with namespace at path created from configured namespace', function (string $class) {
+        $this->artisan(MakeModelCommand::class,
+            ['name' => $class]);
 
-        $configPath = namespaceToPath(config('laraca.model.namespace'));
-        $filePath = app_path("$configPath/$class.php");
+        $configPath = assemblePath('model');
+        $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();
 
-        expect(File::exists(
-            path: $filePath,
-        ))->toBe(true, "File not created at expected path:\n".$filePath."\n".$result."\n\n");
+        expect(File::exists($filePath))
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-    })->with('classes');
+        $configNamespace = fullNamespaceStr(assembleNamespace('model'));
 
-    it('should create a Model class with the defined namespace', function (string $class) {
-        $this->artisan(
-            MakeModelCommand::class,
-            ['name' => $class],
-        );
-
-        $configPath = namespaceToPath(config('laraca.model.namespace'));
-        $configNamespace = fullNamespaceStr(config('laraca.model.namespace'));
-
-        expect(File::get(
-            path: app_path("$configPath/$class.php")))->toContain($configNamespace);
+        expect(File::get($filePath))
+            ->toContain($configNamespace);
 
     })->with('classes');
 
     it('should create a Model class with HasUuids trait', function (string $class) {
-        $this->artisan(
-            MakeModelCommand::class,
-            ['name' => $class,
-                '--uuid' => true],
-        );
+        $this->artisan(MakeModelCommand::class,
+            ['name' => $class, '--uuid' => true]);
 
-        $configPath = namespaceToPath(config('laraca.model.namespace'));
+        $configPath = assemblePath('model');
 
-        expect(File::get(
-            path: app_path("$configPath/$class.php")))->toContain('HasUuids');
+        expect(File::get("$configPath/$class.php"))
+            ->toContain('HasUuids');
 
     })->with('classes');
 });

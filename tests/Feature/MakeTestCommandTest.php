@@ -5,52 +5,38 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
 describe('make:test', function () {
-    it('should create Test class at path from namespace', function (string $class) {
-        $this->artisan(
-            MakeTestCommand::class,
-            ['name' => $class],
-        );
+    it('should create Test class with namespace at path created from configured namespace', function (string $class) {
+        $this->artisan(MakeTestCommand::class,
+            ['name' => $class]);
 
-        $configPath = config('laraca.test.path');
-        $filePath = base_path("$configPath/Feature/$class.php");
+        $configPath = assemblePath('test');
+        $filePath = "$configPath/Feature/$class.php";
 
         $result = Artisan::output();
 
-        expect(File::exists(
-            path: $filePath,
-        ))->toBe(true, "File not created at expected path:\n".$filePath."\n".$result."\n\n");
+        expect(File::exists($filePath))
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
+
+        $configNamespace = assembleNamespace('test', false);
+
+        expect(File::get($filePath))
+            ->toContain($configNamespace);
 
     })->with('classes');
 
-    it('should create Test class at path from namespace with unit option', function (string $class) {
-        $this->artisan(
-            MakeTestCommand::class,
+    it('should create Test class with namespace at path created from configured namespace with unit option', function (string $class) {
+        $this->artisan(MakeTestCommand::class,
             ['name' => $class,
                 '--unit' => true],
         );
 
-        $configPath = config('laraca.test.path');
-        $filePath = base_path("$configPath/Unit/$class.php");
+        $configPath = assemblePath('test');
+        $filePath = "$configPath/Unit/$class.php";
 
         $result = Artisan::output();
 
-        expect(File::exists(
-            path: $filePath,
-        ))->toBe(true, "File not created at expected path:\n".$filePath."\n".$result."\n\n");
-
-    })->with('classes');
-
-    it('should create a Test class with the defined namespace', function (string $class) {
-        $this->artisan(
-            MakeTestCommand::class,
-            ['name' => $class],
-        );
-
-        $configPath = config('laraca.test.path');
-        $configNamespace = pathToNamespace($configPath);
-
-        expect(File::get(
-            path: base_path("$configPath/Feature/$class.php")))->toContain($configNamespace);
+        expect(File::exists($filePath))
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
     })->with('classes');
 });
