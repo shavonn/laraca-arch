@@ -166,9 +166,11 @@ Default dir in config: `app/Data/Models`
 
 -   The artisan `--all` for this command doesn't work _yet_.
 
-### Additional Option
+### Additions
 
--   `--uuid` will add the HasUuids trait to your model for you.
+| Option   |           Description            |
+| -------- | :------------------------------: |
+| `--uuid` | Adds the HasUuids trait to model |
 
 ## make:notification
 
