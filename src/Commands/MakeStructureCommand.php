@@ -5,6 +5,7 @@ namespace HandsomeBrown\Laraca\Commands;
 use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Config;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(name: 'make:structure')]
@@ -52,7 +53,7 @@ class MakeStructureCommand extends Command
      */
     public function handle()
     {
-        $config = config('laraca');
+        $config = Config::get('laraca');
         $messages = [];
 
         $this->components->info('Creating directy structure from Laraca config.');
