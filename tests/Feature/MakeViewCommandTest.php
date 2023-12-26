@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeViewCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:view', function () {
     it('should create View class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeViewCommand::class,
+        Config::set('laraca.view.path', 'test/resources/views');
+        $this->artisan('make:view',
             ['name' => $class]);
 
         $filePath = assemblePath('view')."/{$class}.blade.php";

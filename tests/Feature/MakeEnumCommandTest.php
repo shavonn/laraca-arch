@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeEnumCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:enum', function () {
     it('should create Enum class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeEnumCommand::class,
+        Config::set('laraca.enum.namespace', 'Test\Enums');
+        $this->artisan('make:enum',
             ['name' => $class]);
 
         $configPath = assemblePath('enum');

@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeMailCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:mail', function () {
     it('should create Mail class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeMailCommand::class,
+        Config::set('laraca.mail.namespace', 'Test\Mail');
+        $this->artisan('make:mail',
             ['name' => $class]);
 
         $configPath = assemblePath('mail');

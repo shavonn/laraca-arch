@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 it('should create the Migration class when used', function (string $class) {
+    Config::set('laraca.database.path', 'test/database');
     $this->artisan('arty:migration',
         ['name' => $class]);
 
@@ -27,6 +29,7 @@ it('should create the Migration class when used', function (string $class) {
 })->with('classes');
 
 it('should create the Migration class using path option', function (string $class) {
+    Config::set('laraca.database.path', 'test/database');
     $this->artisan('arty:migration',
         ['name' => $class, '--path' => 'test/db/migrations']);
 

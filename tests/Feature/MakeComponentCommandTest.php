@@ -1,13 +1,15 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeComponentCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 describe('make:component', function () {
     it('should create Component class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeComponentCommand::class,
+        Config::set('laraca.component.namespace', 'Test\View\Components');
+        Config::set('laraca.view.path', 'test/resources/views');
+        $this->artisan('make:component',
             ['name' => $class]);
 
         $configPath = assemblePath('component');

@@ -62,7 +62,7 @@ Default dir in config: `app/View/Components`
 
 ### Note
 
--   This command will use the laraca view path config value instead of the one set in `config/view.php` when generating the blade file.
+-   Depends on the [Config view key](/config#view)
 
 ## make:controller
 
@@ -297,3 +297,7 @@ artisan make:view [name]
 Extends `artisan make:view`
 
 Default dir in config: `resources/views`
+
+### Note
+
+-   Depends on the [Config view key](/config#view)

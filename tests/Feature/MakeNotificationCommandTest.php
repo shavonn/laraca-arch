@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeNotificationCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:notification', function () {
     it('should create Notification class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeNotificationCommand::class,
+        Config::set('laraca.notification.namespace', 'Test\Notifications');
+        $this->artisan('make:notification',
             ['name' => $class]);
 
         $configPath = assemblePath('notification');

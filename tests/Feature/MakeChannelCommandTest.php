@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeChannelCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:channel', function () {
     it('should create Channel class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeChannelCommand::class,
+        Config::set('laraca.channel.namespace', 'Test\Broadcasting');
+        $this->artisan('make:channel',
             ['name' => $class]);
 
         $configPath = assemblePath('channel');

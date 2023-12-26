@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeControllerCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:controller', function () {
     it('should create Controller class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeControllerCommand::class,
+        Config::set('laraca.controller.namespace', 'Test\Http\Controllers');
+        $this->artisan('make:controller',
             ['name' => $class]);
 
         $configPath = assemblePath('controller');

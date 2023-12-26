@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeCommandCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:command', function () {
     it('should create Command class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeCommandCommand::class,
+        Config::set('laraca.command.namespace', 'Test\Console\Commands');
+        $this->artisan('make:command',
             ['name' => $class]);
 
         $configPath = assemblePath('command');

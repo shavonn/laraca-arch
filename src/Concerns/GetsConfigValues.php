@@ -60,13 +60,16 @@ trait GetsConfigValues
      */
     protected static function assemblePathArray($key): array
     {
+        if (! Config::has('laraca.'.$key)) {
+            throw new InvalidConfigKeyException();
+        }
+
         $path = [];
         $current = Config::get('laraca.'.$key);
         $done = false;
         $base = 'base';
 
         do {
-
             if (array_key_exists('path', $current)) {
                 $path = array_merge(explode('/', $current['path']), $path);
             } elseif (array_key_exists('namespace', $current)) {
@@ -82,7 +85,7 @@ trait GetsConfigValues
                 if ($parentKey == 'app' || $parentKey == 'base') {
                     $base = $parentKey;
                     $done = true;
-                } elseif (array_key_exists($parentKey, Config::get('laraca'))) {
+                } elseif (Config::has('laraca.'.$parentKey)) {
                     $current = Config::get('laraca.'.$parentKey);
                 } else {
                     // parent key not found in config

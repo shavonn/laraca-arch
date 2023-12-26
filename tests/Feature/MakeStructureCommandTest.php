@@ -3,13 +3,36 @@
 use HandsomeBrown\Laraca\Exceptions\InvalidConfigKeyException;
 use HandsomeBrown\Laraca\Exceptions\MissingPathNamespaceKeyException;
 use HandsomeBrown\Laraca\Exceptions\MissingRootPathException;
-use HandsomeBrown\Laraca\Foundation\Console\MakeStructureCommand;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:structure', function () {
     it('should create directory Structure from config', function () {
-        expect($this->artisan(MakeStructureCommand::class))
+        Config::set('laraca.database.path', 'test/database');
+        Config::set('laraca.cast.namespace', 'Test\Data\Casts');
+        Config::set('laraca.channel.namespace', 'Test\Broadcasting');
+        Config::set('laraca.command.namespace', 'Test\Console\Commands');
+        Config::set('laraca.component.namespace', 'Test\View\Components');
+        Config::set('laraca.controller.namespace', 'Test\Http\Controllers');
+        Config::set('laraca.event.namespace', 'Test\Events');
+        Config::set('laraca.enum.namespace', 'Test\Enums');
+        Config::set('laraca.exception.namespace', 'Test\Exceptions');
+        Config::set('laraca.job.namespace', 'Test\Jobs');
+        Config::set('laraca.listener.namespace', 'Test\Listeners');
+        Config::set('laraca.mail.namespace', 'Test\Mail');
+        Config::set('laraca.middleware.namespace', 'Test\Http\Middleware');
+        Config::set('laraca.model.namespace', 'Test\Data\Models');
+        Config::set('laraca.notification.namespace', 'Test\Notifications');
+        Config::set('laraca.observer.namespace', 'Test\Data\Observers');
+        Config::set('laraca.policy.namespace', 'Test\Policies');
+        Config::set('laraca.provider.namespace', 'Test\Providers');
+        Config::set('laraca.request.namespace', 'Test\Http\Requests');
+        Config::set('laraca.resource.namespace', 'Test\Http\Resources');
+        Config::set('laraca.rule.namespace', 'Test\Rules');
+        Config::set('laraca.test.path', 'test/tests');
+        Config::set('laraca.value.namespace', 'Test\Data\Values');
+        Config::set('laraca.view.path', 'test/resources/views');
+        expect($this->artisan('make:structure'))
             ->toBe(0);
 
         $paths = [
@@ -59,21 +82,21 @@ describe('make:structure', function () {
         Config::set('laraca.empty_key', []);
         Config::set('laraca.command.parent', 'empty_key');
 
-        $this->artisan(MakeStructureCommand::class);
+        $this->artisan('make:structure');
 
     })->with('classes')->throws(MissingPathNamespaceKeyException::class);
 
     it('should throw a InvalidConfigKeyException when a parent key does not exist in the config', function () {
         Config::set('laraca.model.parent', 'nonexistent_key');
 
-        $this->artisan(MakeStructureCommand::class);
+        $this->artisan('make:structure');
 
     })->with('classes')->throws(InvalidConfigKeyException::class);
 
     it('should throw a MissingRootPathException when a tree does not lead to a base or app parent', function () {
         Config::set('laraca.model.parent', '');
 
-        $this->artisan(MakeStructureCommand::class);
+        $this->artisan('make:structure');
 
     })->with('classes')->throws(MissingRootPathException::class);
 });

@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeProviderCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:provider', function () {
     it('should create Provider class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeProviderCommand::class,
+        Config::set('laraca.provider.namespace', 'Test\Providers');
+        $this->artisan('make:provider',
             ['name' => $class]);
 
         $configPath = assemblePath('provider');

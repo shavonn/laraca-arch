@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeResourceCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:resource', function () {
     it('should create Resource class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeResourceCommand::class,
+        Config::set('laraca.resource.namespace', 'Test\Http\Resources');
+        $this->artisan('make:resource',
             ['name' => $class]);
 
         $configPath = assemblePath('resource');

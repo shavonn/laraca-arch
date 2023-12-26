@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeJobCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:job', function () {
     it('should create Job class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeJobCommand::class,
+        Config::set('laraca.job.namespace', 'Test\Jobs');
+        $this->artisan('make:job',
             ['name' => $class]);
 
         $configPath = assemblePath('job');

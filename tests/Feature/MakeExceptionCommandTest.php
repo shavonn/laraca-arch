@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeExceptionCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:exception', function () {
     it('should create Exception class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeExceptionCommand::class,
+        Config::set('laraca.exception.namespace', 'Test\Exceptions');
+        $this->artisan('make:exception',
             ['name' => $class]);
 
         $configPath = assemblePath('exception');

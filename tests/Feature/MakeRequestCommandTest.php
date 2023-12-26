@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeRequestCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:request', function () {
     it('should create Request class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeRequestCommand::class,
+        Config::set('laraca.request.namespace', 'Test\Http\Requests');
+        $this->artisan('make:request',
             ['name' => $class]);
 
         $configPath = assemblePath('request');

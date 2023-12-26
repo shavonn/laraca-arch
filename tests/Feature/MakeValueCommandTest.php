@@ -1,13 +1,14 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeValueCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 describe('make:value', function () {
     it('should create Value class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeValueCommand::class,
+        Config::set('laraca.value.namespace', 'Test\Data\Values');
+        $this->artisan('make:value',
             ['name' => $class]);
 
         $configPath = assemblePath('value');
