@@ -101,6 +101,8 @@ class LaracaServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom($this->assemblePath('view'), 'laraca');
 
+        $this->loadRoutesFrom($this->assemblePath('routes'), 'laraca');
+
         $this->loadMigrationsFrom($this->assemblePath('migration'));
     }
 
