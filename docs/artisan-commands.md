@@ -13,7 +13,7 @@ Caveats:
 ## arti:migration
 
 ```shell
-artisan make:migration [name]
+artisan arti:migration [name]
 ```
 
 Extends `artisan make:migration`
