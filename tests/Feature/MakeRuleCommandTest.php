@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeRuleCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:rule', function () {
     it('should create Rule class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeRuleCommand::class,
+        Config::set('laraca.rule.namespace', 'Test\Rules');
+        $this->artisan('make:rule',
             ['name' => $class]);
 
         $configPath = assemblePath('rule');

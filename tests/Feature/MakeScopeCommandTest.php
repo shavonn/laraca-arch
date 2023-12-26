@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeScopeCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:scope', function () {
     it('should create Scope class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeScopeCommand::class,
+        Config::set('laraca.model.namespace', 'Test\Data\Models');
+        $this->artisan('make:scope',
             ['name' => $class]);
 
         $configPath = assemblePath('scope');

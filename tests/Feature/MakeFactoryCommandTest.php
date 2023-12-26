@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeFactoryCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:factory', function () {
     it('should create Factory class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeFactoryCommand::class,
+        Config::set('laraca.database.path', 'test/database');
+        $this->artisan('make:factory',
             ['name' => $class]);
 
         $configPath = assemblePath('factory');

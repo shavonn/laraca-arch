@@ -2,35 +2,35 @@
 
 namespace HandsomeBrown\Laraca;
 
+use HandsomeBrown\Laraca\Commands\ArtiMigrationCommand;
+use HandsomeBrown\Laraca\Commands\MakeCastCommand;
+use HandsomeBrown\Laraca\Commands\MakeChannelCommand;
+use HandsomeBrown\Laraca\Commands\MakeCommandCommand;
+use HandsomeBrown\Laraca\Commands\MakeComponentCommand;
+use HandsomeBrown\Laraca\Commands\MakeControllerCommand;
+use HandsomeBrown\Laraca\Commands\MakeEnumCommand;
+use HandsomeBrown\Laraca\Commands\MakeEventCommand;
+use HandsomeBrown\Laraca\Commands\MakeExceptionCommand;
+use HandsomeBrown\Laraca\Commands\MakeFactoryCommand;
+use HandsomeBrown\Laraca\Commands\MakeJobCommand;
+use HandsomeBrown\Laraca\Commands\MakeListenerCommand;
+use HandsomeBrown\Laraca\Commands\MakeMailCommand;
+use HandsomeBrown\Laraca\Commands\MakeMiddlewareCommand;
+use HandsomeBrown\Laraca\Commands\MakeModelCommand;
+use HandsomeBrown\Laraca\Commands\MakeNotificationCommand;
+use HandsomeBrown\Laraca\Commands\MakeObserverCommand;
+use HandsomeBrown\Laraca\Commands\MakePolicyCommand;
+use HandsomeBrown\Laraca\Commands\MakeProviderCommand;
+use HandsomeBrown\Laraca\Commands\MakeRequestCommand;
+use HandsomeBrown\Laraca\Commands\MakeResourceCommand;
+use HandsomeBrown\Laraca\Commands\MakeRuleCommand;
+use HandsomeBrown\Laraca\Commands\MakeScopeCommand;
+use HandsomeBrown\Laraca\Commands\MakeSeederCommand;
+use HandsomeBrown\Laraca\Commands\MakeStructureCommand;
+use HandsomeBrown\Laraca\Commands\MakeTestCommand;
+use HandsomeBrown\Laraca\Commands\MakeValueCommand;
+use HandsomeBrown\Laraca\Commands\MakeViewCommand;
 use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
-use HandsomeBrown\Laraca\Foundation\Console\ArtyMigrationCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeCastCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeChannelCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeCommandCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeComponentCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeControllerCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeEnumCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeEventCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeExceptionCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeFactoryCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeJobCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeListenerCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeMailCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeMiddlewareCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeModelCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeNotificationCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeObserverCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakePolicyCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeProviderCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeRequestCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeResourceCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeRuleCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeScopeCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeSeederCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeStructureCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeTestCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeValueCommand;
-use HandsomeBrown\Laraca\Foundation\Console\MakeViewCommand;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\ServiceProvider;
 
@@ -52,7 +52,7 @@ class LaracaServiceProvider extends ServiceProvider
      * @var array<string,mixed>
      */
     protected $commands = [
-        'ArtyMigration' => ArtyMigrationCommand::class,
+        'ArtiMigration' => ArtiMigrationCommand::class,
         'MakeCast' => MakeCastCommand::class,
         'MakeChannel' => MakeChannelCommand::class,
         'MakeCommand' => MakeCommandCommand::class,
@@ -101,8 +101,6 @@ class LaracaServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom($this->assemblePath('view'), 'laraca');
 
-        $this->loadRoutesFrom($this->assemblePath('routes'), 'laraca');
-
         $this->loadMigrationsFrom($this->assemblePath('migration'));
     }
 
@@ -142,16 +140,16 @@ class LaracaServiceProvider extends ServiceProvider
     }
 
     /**
-     * registerArtyMigrationCommand
+     * registerArtiMigrationCommand
      * Register the command.
      */
-    protected function registerArtyMigrationCommand(): void
+    protected function registerArtiMigrationCommand(): void
     {
-        $this->app->singleton(ArtyMigrationCommand::class, function ($app) {
+        $this->app->singleton(ArtiMigrationCommand::class, function ($app) {
             $creator = $app['migration.creator'];
             $composer = $app['composer'];
 
-            return new ArtyMigrationCommand($creator, $composer);
+            return new ArtiMigrationCommand($creator, $composer);
         });
     }
 

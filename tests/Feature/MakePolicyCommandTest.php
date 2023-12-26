@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakePolicyCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:policy', function () {
     it('should create Policy class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakePolicyCommand::class,
+        Config::set('laraca.policy.namespace', 'Test\Policies');
+        $this->artisan('make:policy',
             ['name' => $class]);
 
         $configPath = assemblePath('policy');

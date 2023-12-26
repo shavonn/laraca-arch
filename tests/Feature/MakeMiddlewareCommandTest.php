@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeMiddlewareCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:middleware', function () {
     it('should create Middleware class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeMiddlewareCommand::class,
+        Config::set('laraca.middleware.namespace', 'Test\Http\Middleware');
+        $this->artisan('make:middleware',
             ['name' => $class]);
 
         $configPath = assemblePath('middleware');

@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeListenerCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:listener', function () {
     it('should create Listener class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeListenerCommand::class,
+        Config::set('laraca.listener.namespace', 'Test\Listeners');
+        $this->artisan('make:listener',
             ['name' => $class]);
 
         $configPath = assemblePath('listener');

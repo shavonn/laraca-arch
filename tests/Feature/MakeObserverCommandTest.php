@@ -1,12 +1,13 @@
 <?php
 
-use HandsomeBrown\Laraca\Foundation\Console\MakeObserverCommand;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:observer', function () {
     it('should create Observer class with namespace at path created from configured namespace', function (string $class) {
-        $this->artisan(MakeObserverCommand::class,
+        Config::set('laraca.observer.namespace', 'Test\Data\Observers');
+        $this->artisan('make:observer',
             ['name' => $class]);
 
         $configPath = assemblePath('observer');

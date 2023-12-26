@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:cast', function () {
     it('should create Cast class with namespace at path created from configured namespace', function (string $class) {
+        Config::set('laraca.cast.namespace', 'Test\Data\Casts');
         $this->artisan('make:cast',
             ['name' => $class]);
 

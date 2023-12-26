@@ -8,12 +8,12 @@ These are Laravel Artisan commands I've wrapped so that your custom directory st
 
 Caveats:
 
--   `make:migration` isn't wrapped. You will need to use `arty:migration`. Why? This one is quite different from the others and more difficult to tinker with than I was willing to lend time to. It’s better just left as is, in my humble opinion.
+-   `make:migration` isn't wrapped. You will need to use `arti:migration`. Why? This one is quite different from the others and more difficult to tinker with than I was willing to lend time to. It’s better just left as is, in my humble opinion.
 
-## arty:migration
+## arti:migration
 
 ```shell
-artisan make:migration [name]
+artisan arti:migration [name]
 ```
 
 Extends `artisan make:migration`
@@ -62,7 +62,7 @@ Default dir in config: `app/View/Components`
 
 ### Note
 
--   This command will use the laraca view path config value instead of the one set in `config/view.php` when generating the blade file.
+-   Depends on the [Config view key](/config#view)
 
 ## make:controller
 
@@ -297,3 +297,7 @@ artisan make:view [name]
 Extends `artisan make:view`
 
 Default dir in config: `resources/views`
+
+### Note
+
+-   Depends on the [Config view key](/config#view)
