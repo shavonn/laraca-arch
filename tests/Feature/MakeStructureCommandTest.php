@@ -78,7 +78,7 @@ describe('make:structure', function () {
 
     })->with('classes');
 
-    it('should throw a MissingPathNamespaceKeyException when a key has no path or namespace', function () {
+    it('throws a MissingPathNamespaceKeyException when a key has no path or namespace', function () {
         Config::set('laraca.empty_key', []);
         Config::set('laraca.command.parent', 'empty_key');
 
@@ -86,14 +86,14 @@ describe('make:structure', function () {
 
     })->with('classes')->throws(MissingPathNamespaceKeyException::class);
 
-    it('should throw a InvalidConfigKeyException when a parent key does not exist in the config', function () {
+    it('throws an InvalidConfigKeyException when a parent key does not exist in the config', function () {
         Config::set('laraca.model.parent', 'nonexistent_key');
 
         $this->artisan('make:structure');
 
     })->with('classes')->throws(InvalidConfigKeyException::class);
 
-    it('should throw a MissingRootPathException when a tree does not lead to a base or app parent', function () {
+    it('throws a MissingRootPathException when a tree does not lead to a base or app parent', function () {
         Config::set('laraca.model.parent', '');
 
         $this->artisan('make:structure');

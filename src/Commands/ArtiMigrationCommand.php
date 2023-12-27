@@ -2,14 +2,13 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Database\Console\Migrations\MigrateMakeCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(name: 'arti:migration')]
 class ArtiMigrationCommand extends MigrateMakeCommand
 {
-    use GetsConfigValues;
+    use LaracaCommand;
 
     /**
      * signature

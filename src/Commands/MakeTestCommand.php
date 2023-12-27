@@ -2,13 +2,12 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Foundation\Console\TestMakeCommand;
 use Illuminate\Support\Str;
 
 class MakeTestCommand extends TestMakeCommand
 {
-    use GetsConfigValues;
+    use LaracaCommand;
 
     /**
      * name

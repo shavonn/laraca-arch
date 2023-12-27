@@ -2,14 +2,13 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(name: 'make:enum')]
 class MakeEnumCommand extends GeneratorCommand
 {
-    use GetsConfigValues;
+    use LaracaCommand;
 
     /**
      * The console command name.
