@@ -3,6 +3,7 @@
 namespace HandsomeBrown\Laraca;
 
 use HandsomeBrown\Laraca\Commands\ArtiMigrationCommand;
+use HandsomeBrown\Laraca\Commands\InitStructureCommand;
 use HandsomeBrown\Laraca\Commands\MakeCastCommand;
 use HandsomeBrown\Laraca\Commands\MakeChannelCommand;
 use HandsomeBrown\Laraca\Commands\MakeCommandCommand;
@@ -26,7 +27,6 @@ use HandsomeBrown\Laraca\Commands\MakeResourceCommand;
 use HandsomeBrown\Laraca\Commands\MakeRuleCommand;
 use HandsomeBrown\Laraca\Commands\MakeScopeCommand;
 use HandsomeBrown\Laraca\Commands\MakeSeederCommand;
-use HandsomeBrown\Laraca\Commands\MakeStructureCommand;
 use HandsomeBrown\Laraca\Commands\MakeTestCommand;
 use HandsomeBrown\Laraca\Commands\MakeValueCommand;
 use HandsomeBrown\Laraca\Commands\MakeViewCommand;
@@ -76,7 +76,7 @@ class LaracaServiceProvider extends ServiceProvider
         'MakeRule' => MakeRuleCommand::class,
         'MakeScope' => MakeScopeCommand::class,
         'MakeSeeder' => MakeSeederCommand::class,
-        'MakeStructure' => MakeStructureCommand::class,
+        'MakeStructure' => InitStructureCommand::class,
         'MakeTest' => MakeTestCommand::class,
         'MakeValue' => MakeValueCommand::class,
         'MakeView' => MakeViewCommand::class,
