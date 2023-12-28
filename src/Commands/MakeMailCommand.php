@@ -2,12 +2,11 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Foundation\Console\MailMakeCommand;
 
 class MakeMailCommand extends MailMakeCommand
 {
-    use GetsConfigValues;
+    use LaracaCommand;
 
     /**
      * name
@@ -25,6 +24,6 @@ class MakeMailCommand extends MailMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return self::assembleNamespace('mail');
+        return $this->getClassNamespace('mail');
     }
 }

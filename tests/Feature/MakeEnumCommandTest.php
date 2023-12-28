@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:enum', function () {
-    it('should create Enum class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.enum.path', 'Test/Enums');
+    it('should create Enum class with namespace and path created from configured vals', function (string $class) {
+        Config::set('laraca.structure.enum.path', 'Test/Enums');
         $this->artisan('make:enum',
             ['name' => $class]);
 
-        $configPath = assemblePath('enum');
+        $configPath = assembleFullPath('enum');
         $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();

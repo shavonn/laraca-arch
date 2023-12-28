@@ -2,12 +2,11 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Foundation\Console\RequestMakeCommand;
 
 class MakeRequestCommand extends RequestMakeCommand
 {
-    use GetsConfigValues;
+    use LaracaCommand;
 
     /**
      * name
@@ -25,6 +24,6 @@ class MakeRequestCommand extends RequestMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return self::assembleNamespace('request');
+        return $this->getClassNamespace('request');
     }
 }

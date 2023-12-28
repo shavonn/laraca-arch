@@ -2,13 +2,12 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Foundation\Console\TestMakeCommand;
 use Illuminate\Support\Str;
 
 class MakeTestCommand extends TestMakeCommand
 {
-    use GetsConfigValues;
+    use LaracaCommand;
 
     /**
      * name
@@ -28,6 +27,6 @@ class MakeTestCommand extends TestMakeCommand
     {
         $name = Str::replaceFirst($this->rootNamespace(), '', $name);
 
-        return self::assemblePath('test').str_replace('\\', '/', $name).'.php';
+        return self::assembleFullPath('test').Str::replace('\\', '/', $name).'.php';
     }
 }

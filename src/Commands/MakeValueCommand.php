@@ -2,7 +2,6 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -10,7 +9,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 #[AsCommand(name: 'make:value')]
 class MakeValueCommand extends GeneratorCommand
 {
-    use GetsConfigValues;
+    use LaracaCommand;
 
     /**
      * The console command name.
@@ -51,7 +50,7 @@ class MakeValueCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return self::assembleNamespace('value');
+        return $this->getClassNamespace('value');
     }
 
     /**
@@ -67,7 +66,7 @@ class MakeValueCommand extends GeneratorCommand
         $class = parent::buildClass($name);
         $classVar = Str::camel($this->getNameInput());
 
-        $class = str_replace('{{ class_var }}', $classVar, $class);
+        $class = Str::replace('{{ class_var }}', $classVar, $class);
 
         return $class;
     }

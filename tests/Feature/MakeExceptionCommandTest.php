@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:exception', function () {
-    it('should create Exception class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.exception.path', 'Test/Exceptions');
+    it('should create Exception class with namespace and path created from configured vals', function (string $class) {
+        Config::set('laraca.structure.exception.path', 'Test/Exceptions');
         $this->artisan('make:exception',
             ['name' => $class]);
 
-        $configPath = assemblePath('exception');
+        $configPath = assembleFullPath('exception');
         $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();

@@ -2,13 +2,12 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Database\Console\Seeds\SeederMakeCommand;
 use Illuminate\Support\Str;
 
 class MakeSeederCommand extends SeederMakeCommand
 {
-    use GetsConfigValues;
+    use LaracaCommand;
 
     /**
      * name
@@ -28,7 +27,7 @@ class MakeSeederCommand extends SeederMakeCommand
     {
         $name = Str::replace('\\', '/', Str::replaceFirst($this->rootNamespace(), '', $name));
 
-        return self::assemblePath('seeder')."/$name.php";
+        return self::assembleFullPath('seeder')."/$name.php";
     }
 
     /**
@@ -37,6 +36,6 @@ class MakeSeederCommand extends SeederMakeCommand
      */
     protected function rootNamespace(): string
     {
-        return self::assembleNamespace('seeder');
+        return $this->getClassNamespace('seeder');
     }
 }

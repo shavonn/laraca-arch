@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:observer', function () {
-    it('should create Observer class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.observer.path', 'Test/Data/Observers');
+    it('should create Observer class with namespace and path created from configured vals', function (string $class) {
+        Config::set('laraca.structure.observer.path', 'Test/Data/Observers');
         $this->artisan('make:observer',
             ['name' => $class]);
 
-        $configPath = assemblePath('observer');
+        $configPath = assembleFullPath('observer');
         $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();

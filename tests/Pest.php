@@ -22,9 +22,9 @@ use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
  *
  * @param  string  $key
  */
-function assemblePath($key, $getFull = true): string
+function assembleFullPath($key, $domain = null): string
 {
-    return GetsConfigValues::assemblePath($key, $getFull);
+    return GetsConfigValues::assembleFullPath($key, $domain);
 }
 
 /**

@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 describe('arti:migration', function () {
     it('should create the Migration class when used', function (string $class) {
-        Config::set('laraca.database.path', 'test/database');
+        Config::set('laraca.structure.database.path', 'test/database');
         $this->artisan('arti:migration',
             ['name' => $class]);
 
@@ -16,7 +16,7 @@ describe('arti:migration', function () {
         $datetimeNow = $now->format('Y_m_d_His');
 
         $snake_class = Str::snake($class);
-        $configPath = assemblePath('migration');
+        $configPath = assembleFullPath('migration');
 
         // accounts for second change variation that may occur in file name
         $filePathSubSecond = "$configPath/{$datetimeSubSecond}_{$snake_class}.php";
@@ -30,7 +30,7 @@ describe('arti:migration', function () {
     })->with('classes');
 
     it('should create the Migration class using path option', function (string $class) {
-        Config::set('laraca.database.path', 'test/database');
+        Config::set('laraca.structure.database.path', 'test/database');
         $this->artisan('arti:migration',
             ['name' => $class, '--path' => 'test/db/migrations']);
 

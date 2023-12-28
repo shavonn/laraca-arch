@@ -2,12 +2,11 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Routing\Console\ControllerMakeCommand;
 
 class MakeControllerCommand extends ControllerMakeCommand
 {
-    use GetsConfigValues;
+    use LaracaCommand;
 
     /**
      * name
@@ -25,6 +24,6 @@ class MakeControllerCommand extends ControllerMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return self::assembleNamespace('controller');
+        return $this->getClassNamespace('controller');
     }
 }

@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:factory', function () {
-    it('should create Factory class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.database.path', 'test/database');
+    it('should create Factory class with namespace and path created from configured vals', function (string $class) {
+        Config::set('laraca.structure.database.path', 'test/database');
         $this->artisan('make:factory',
             ['name' => $class]);
 
-        $configPath = assemblePath('factory');
+        $configPath = assembleFullPath('factory');
         $filePath = "$configPath/{$class}Factory.php";
 
         $result = Artisan::output();

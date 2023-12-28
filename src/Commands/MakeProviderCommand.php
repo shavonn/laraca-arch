@@ -2,12 +2,11 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Foundation\Console\ProviderMakeCommand;
 
 class MakeProviderCommand extends ProviderMakeCommand
 {
-    use GetsConfigValues;
+    use LaracaCommand;
 
     /**
      * name
@@ -25,6 +24,6 @@ class MakeProviderCommand extends ProviderMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return self::assembleNamespace('provider');
+        return $this->getClassNamespace('provider');
     }
 }

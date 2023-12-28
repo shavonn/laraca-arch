@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:request', function () {
-    it('should create Request class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.request.path', 'Test/Http/Requests');
+    it('should create Request class with namespace and path created from configured vals', function (string $class) {
+        Config::set('laraca.structure.request.path', 'Test/Http/Requests');
         $this->artisan('make:request',
             ['name' => $class]);
 
-        $configPath = assemblePath('request');
+        $configPath = assembleFullPath('request');
         $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();

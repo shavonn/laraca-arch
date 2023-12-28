@@ -2,12 +2,11 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Foundation\Console\ChannelMakeCommand;
 
 class MakeChannelCommand extends ChannelMakeCommand
 {
-    use GetsConfigValues;
+    use LaracaCommand;
 
     /**
      * name
@@ -25,6 +24,6 @@ class MakeChannelCommand extends ChannelMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return self::assembleNamespace('channel');
+        return $this->getClassNamespace('channel');
     }
 }

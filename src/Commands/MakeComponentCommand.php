@@ -3,13 +3,12 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Concerns\CreatesView;
-use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Foundation\Console\ComponentMakeCommand;
 
 class MakeComponentCommand extends ComponentMakeCommand
 {
     use CreatesView;
-    use GetsConfigValues;
+    use LaracaCommand;
 
     /**
      * name
@@ -27,6 +26,6 @@ class MakeComponentCommand extends ComponentMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return self::assembleNamespace('component');
+        return $this->getClassNamespace('component');
     }
 }

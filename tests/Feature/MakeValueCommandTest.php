@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 describe('make:value', function () {
-    it('should create Value class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.value.path', 'Test/Data/Values');
+    it('should create Value class with namespace and path created from configured vals', function (string $class) {
+        Config::set('laraca.structure.value.path', 'Test/Data/Values');
         $this->artisan('make:value',
             ['name' => $class]);
 
-        $configPath = assemblePath('value');
+        $configPath = assembleFullPath('value');
         $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();

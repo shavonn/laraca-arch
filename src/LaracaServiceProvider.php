@@ -93,15 +93,15 @@ class LaracaServiceProvider extends ServiceProvider
                 __DIR__.'/../config/config.php' => config_path('laraca.php'),
             ], 'laraca-config');
 
-            $this->app->useDatabasePath($this->assemblePath('database'));
+            $this->app->useDatabasePath($this->assembleFullPath('database'));
 
             // Registering package commands.
             $this->registerCommands();
         }
 
-        $this->loadViewsFrom($this->assemblePath('view'), 'laraca');
+        $this->loadViewsFrom($this->assembleFullPath('view'), 'laraca');
 
-        $this->loadMigrationsFrom($this->assemblePath('migration'));
+        $this->loadMigrationsFrom($this->assembleFullPath('migration'));
     }
 
     /**

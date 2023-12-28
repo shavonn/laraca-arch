@@ -2,12 +2,11 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Routing\Console\MiddlewareMakeCommand;
 
 class MakeMiddlewareCommand extends MiddlewareMakeCommand
 {
-    use GetsConfigValues;
+    use LaracaCommand;
 
     /**
      * name
@@ -25,6 +24,6 @@ class MakeMiddlewareCommand extends MiddlewareMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return self::assembleNamespace('middleware');
+        return $this->getClassNamespace('middleware');
     }
 }

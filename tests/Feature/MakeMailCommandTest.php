@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:mail', function () {
-    it('should create Mail class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.mail.path', 'Test/Mail');
+    it('should create Mail class with namespace and path created from configured vals', function (string $class) {
+        Config::set('laraca.structure.mail.path', 'Test/Mail');
         $this->artisan('make:mail',
             ['name' => $class]);
 
-        $configPath = assemblePath('mail');
+        $configPath = assembleFullPath('mail');
         $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();

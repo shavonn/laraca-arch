@@ -19,6 +19,19 @@ export default defineConfig({
                 ],
             },
             {
+                text: "Config",
+                items: [
+                    {
+                        text: "Structure",
+                        link: "/config-structure",
+                    },
+                    {
+                        text: "Domains",
+                        link: "/config-domains",
+                    },
+                ],
+            },
+            {
                 text: "Command Reference",
                 items: [
                     {

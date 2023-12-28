@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:model', function () {
-    it('should create Model class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.model.path', 'Test/Data/Models');
+    it('should create Model class with namespace and path created from configured vals', function (string $class) {
+        Config::set('laraca.structure.model.path', 'Test/Data/Models');
         $this->artisan('make:model',
             ['name' => $class]);
 
-        $configPath = assemblePath('model');
+        $configPath = assembleFullPath('model');
         $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();
@@ -26,11 +26,11 @@ describe('make:model', function () {
     })->with('classes');
 
     it('should create a Model class with HasUuids trait', function (string $class) {
-        Config::set('laraca.model.path', 'Test/Data/Models');
+        Config::set('laraca.structure.model.path', 'Test/Data/Models');
         $this->artisan('make:model',
             ['name' => $class, '--uuid' => true]);
 
-        $configPath = assemblePath('model');
+        $configPath = assembleFullPath('model');
 
         expect(File::get("$configPath/$class.php"))
             ->toContain('HasUuids');

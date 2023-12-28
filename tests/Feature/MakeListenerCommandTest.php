@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:listener', function () {
-    it('should create Listener class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.listener.path', 'Test/Listeners');
+    it('should create Listener class with namespace and path created from configured vals', function (string $class) {
+        Config::set('laraca.structure.listener.path', 'Test/Listeners');
         $this->artisan('make:listener',
             ['name' => $class]);
 
-        $configPath = assemblePath('listener');
+        $configPath = assembleFullPath('listener');
         $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();

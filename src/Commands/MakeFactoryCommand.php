@@ -2,13 +2,12 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
 use Illuminate\Database\Console\Factories\FactoryMakeCommand;
 use Illuminate\Support\Str;
 
 class MakeFactoryCommand extends FactoryMakeCommand
 {
-    use GetsConfigValues;
+    use LaracaCommand;
 
     /**
      * name
@@ -28,7 +27,7 @@ class MakeFactoryCommand extends FactoryMakeCommand
     {
         $name = Str::of($name)->replaceFirst($this->rootNamespace(), '')->finish('Factory');
 
-        return self::assemblePath('factory')."/$name.php";
+        return self::assembleFullPath('factory')."/$name.php";
     }
 
     /**
@@ -39,6 +38,6 @@ class MakeFactoryCommand extends FactoryMakeCommand
      */
     protected function getNamespace($name)
     {
-        return self::assembleNamespace('factory');
+        return $this->getClassNamespace('factory');
     }
 }

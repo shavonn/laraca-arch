@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:command', function () {
-    it('should create Command class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.command.path', 'Test/Console/Commands');
+    it('should create Command class with namespace and path created from configured vals', function (string $class) {
+        Config::set('laraca.structure.command.path', 'Test/Console/Commands');
         $this->artisan('make:command',
             ['name' => $class]);
 
-        $configPath = assemblePath('command');
+        $configPath = assembleFullPath('command');
         $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();
