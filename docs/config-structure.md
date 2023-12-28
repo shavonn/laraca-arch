@@ -50,6 +50,47 @@ Additional keys can be added to the `structure` to serve as parent directories.
 
 Results: `app/Data/Models`
 
+## Default config structure
+
+```
+Laravel root
+├── app
+│   ├── Broadcasting
+│   ├── Console
+│   │   └── Commands
+│   ├── Data
+│   │   ├── Casts
+│   │   ├── Models
+│   │       └── Scopes
+│   │   ├── Observers
+│   │   └── Values
+│   ├── Enums
+│   ├── Events
+│   ├── Exceptions
+│   ├── Http
+│   │   ├── Controllers
+│   │   ├── Middleware
+│   │   ├── Requests
+│   │   └── Resources
+│   ├── Jobs
+│   ├── Listeners
+│   ├── Mail
+│   ├── Notifications
+│   ├── Policies
+│   ├── Providers
+│   ├── Rules
+│   └── View
+│       └── Components
+├── database
+│   ├── factories
+│   ├── migrations
+│   └── seeders
+├── resources
+│   └── views
+├── routes
+└── tests
+```
+
 ## Things to Know
 
 ### You can unset view

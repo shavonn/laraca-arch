@@ -7,7 +7,7 @@ When enabled, it adds an optional `domain` argument to all of Laraca's make comm
 ```php
     'domains' => [
         'enabled' => true,
-        'parent_dir' => 'Domain', // dir name or null
+        'parent_dir' => 'Domains', // dir name or null
     ],
 ```
 
@@ -17,6 +17,6 @@ When enabled, it adds an optional `domain` argument to all of Laraca's make comm
 
 Examples:
 
--   `'parent_dir' => 'Domain'` => `(app/Domain/Foo)`
+-   `'parent_dir' => 'Domains'` => `(app/Domains/Foo)`
 -   `'parent_dir' => 'Service'` => `(app/Service/Foo)`
 -   `'parent_dir' => null` => `(app/Foo)`
