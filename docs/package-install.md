@@ -4,7 +4,7 @@
 
 Install the package via composer:
 
-```shell
+```bash
 composer require handsomebrown/laraca-arch
 ```
 
@@ -12,6 +12,6 @@ composer require handsomebrown/laraca-arch
 
 If you want to depart from the default structure in this package, which I imagine many will, publish the config file with:
 
-```shell
+```bash
 php artisan vendor:publish --tag="laraca-config"
 ```
