@@ -62,7 +62,7 @@ Default dir in config: `app/View/Components`
 
 ### Note
 
--   Depends on the [Config view key](/config#view)
+-   Depends on the [Config view key](/config-structure#view)
 
 ## make:controller
 
@@ -300,4 +300,4 @@ Default dir in config: `resources/views`
 
 ### Note
 
--   Depends on the [Config view key](/config#view)
+-   Depends on the [Config view key](/config-structure#view)
