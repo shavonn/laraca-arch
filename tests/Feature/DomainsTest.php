@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\File;
 describe('use domains', function () {
     it('should use domain settings in path/namespace when enabled and domain arg', function (string $class, string $domain) {
         Config::set('laraca.domains.enabled', true);
-        Config::set('laraca.domains.parent_dir', 'TestDomain');
+        Config::set('laraca.domains.parent_dir', 'TestDomains');
         $this->artisan('make:controller',
             ['name' => $class,
                 'domain' => $domain]);
