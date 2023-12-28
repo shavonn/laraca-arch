@@ -12,11 +12,7 @@ export default defineConfig({
         sidebar: [
             {
                 text: "Getting Started",
-                items: [
-                    { text: "What is this for?", link: "/what-is-this-for" },
-                    { text: "Package Install", link: "/package-install" },
-                    { text: "Config", link: "/config" },
-                ],
+                items: [{ text: "Installation", link: "/installation" }],
             },
             {
                 text: "Config",
@@ -32,7 +28,7 @@ export default defineConfig({
                 ],
             },
             {
-                text: "Command Reference",
+                text: "CLI Reference",
                 items: [
                     {
                         text: "Artisan Commands",
@@ -47,7 +43,10 @@ export default defineConfig({
         ],
 
         socialLinks: [
-            { icon: "github", link: "https://github.com/vuejs/vitepress" },
+            {
+                icon: "github",
+                link: "https://github.com/handsomebrown/laraca-arch",
+            },
         ],
     },
 });

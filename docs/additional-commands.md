@@ -6,6 +6,16 @@ outline: deep
 
 Additional, custom artisan commands provided by this package.
 
+## domain:list\*
+
+This command is only available when domains are enabled _and_ a `parent_dir` is set.
+
+```bash
+artisan domain:list
+```
+
+Generates full list of domain names.
+
 ## init:structure
 
 ```bash

@@ -2,8 +2,6 @@
 
 If you're interested in domain-driven design or even separating your application into microservices in a monolith, enabling domains can do that with you.
 
-When enabled, it adds an optional `domain` argument to all of Laraca's make commands.
-
 ```php
     'domains' => [
         'enabled' => true,
@@ -20,3 +18,13 @@ Examples:
 -   `'parent_dir' => 'Domains'` => `(app/Domains/Foo)`
 -   `'parent_dir' => 'Service'` => `(app/Service/Foo)`
 -   `'parent_dir' => null` => `(app/Foo)`
+
+## Use with make commands
+
+When enabled, it adds an optional `domain` argument to all of Laraca's make commands so **if** you want the file to generate in a particular domain, just pass it as the second arg.
+
+`artisan make:controller FavoritesContoller` **`Favorites`**
+
+## Associated commands
+
+[domain:list](/additional-commands#domain-list)
