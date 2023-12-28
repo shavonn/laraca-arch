@@ -6,26 +6,26 @@ outline: deep
 
 Additional, custom artisan commands provided by this package.
 
+## init:structure
+
+```bash
+artisan init:structure
+```
+
+Generates full directory structure defined in the Laraca config file.
+
 ## make:enum
 
-```shell
+```bash
 artisan make:enum [name]
 ```
 
 Default dir in config: `app/Enums`
 
-## make:structure
-
-```shell
-artisan make:structure [name]
-```
-
-Generates full directory structure defined in the Laraca config file.
-
 ## make:value
 
-```shell
+```bash
 artisan make:value [name]
 ```
 
-Default dir in config: `Data\Values`
+Default dir in config: `Data/Values`

@@ -12,7 +12,7 @@ Caveats:
 
 ## arti:migration
 
-```shell
+```bash
 artisan arti:migration [name]
 ```
 
@@ -22,7 +22,7 @@ Default dir in config: `database/migrations`
 
 ## make:cast
 
-```shell
+```bash
 artisan make:cast [name]
 ```
 
@@ -32,7 +32,7 @@ Default dir in config: `app/Data/Casts`
 
 ## make:channel
 
-```shell
+```bash
 artisan make:channel [name]
 ```
 
@@ -42,7 +42,7 @@ Default dir in config: `app/Broadcasting`
 
 ## make:command
 
-```shell
+```bash
 artisan make:command [name]
 ```
 
@@ -52,7 +52,7 @@ Default dir in config: `app/Console/Commands`
 
 ## make:component
 
-```shell
+```bash
 artisan make:component [name]
 ```
 
@@ -66,7 +66,7 @@ Default dir in config: `app/View/Components`
 
 ## make:controller
 
-```shell
+```bash
 artisan make:controller [name]
 ```
 
@@ -76,7 +76,7 @@ Default dir in config: `app/Http/Controllers`
 
 ## make:enum
 
-```shell
+```bash
 artisan make:enum [name]
 ```
 
@@ -84,7 +84,7 @@ Default dir in config: `app/Enums`
 
 ## make:event
 
-```shell
+```bash
 artisan make:event [name]
 ```
 
@@ -94,7 +94,7 @@ Default dir in config: `app/Events`
 
 ## make:exception
 
-```shell
+```bash
 artisan make:exception [name]
 ```
 
@@ -104,7 +104,7 @@ Default dir in config: `app/Exceptions`
 
 ## make:factory
 
-```shell
+```bash
 artisan make:factory [name]
 ```
 
@@ -114,7 +114,7 @@ Default dir in config: `database/factories`
 
 ## make:job
 
-```shell
+```bash
 artisan make:job [name]
 ```
 
@@ -124,7 +124,7 @@ Default dir in config: `app/Jobs`
 
 ## make:listener
 
-```shell
+```bash
 artisan make:listener [name]
 ```
 
@@ -134,7 +134,7 @@ Default dir in config: `app/Listeners`
 
 ## make:mail
 
-```shell
+```bash
 artisan make:mail [name]
 ```
 
@@ -144,7 +144,7 @@ Default dir in config: `app/Mail`
 
 ## make:middleware
 
-```shell
+```bash
 artisan make:middleware [name]
 ```
 
@@ -154,7 +154,7 @@ Default dir in config: `app/Http/Middlewares`
 
 ## make:model
 
-```shell
+```bash
 artisan make:model [name]
 ```
 
@@ -174,7 +174,7 @@ Default dir in config: `app/Data/Models`
 
 ## make:notification
 
-```shell
+```bash
 artisan make:notification [name]
 ```
 
@@ -184,7 +184,7 @@ Default dir in config: `app/Notifications`
 
 ## make:observer
 
-```shell
+```bash
 artisan make:observer [name]
 ```
 
@@ -194,7 +194,7 @@ Default dir in config: `app/Data/Observers`
 
 ## make:policy
 
-```shell
+```bash
 artisan make:policy [name]
 ```
 
@@ -204,7 +204,7 @@ Default dir in config: `app/Policies`
 
 ## make:provider
 
-```shell
+```bash
 artisan make:provider [name]
 ```
 
@@ -214,7 +214,7 @@ Default dir in config: `app/Providers`
 
 ## make:request
 
-```shell
+```bash
 artisan make:request [name]
 ```
 
@@ -224,7 +224,7 @@ Default dir in config: `app/Http/Requests`
 
 ## make:resource
 
-```shell
+```bash
 artisan make:resource [name]
 ```
 
@@ -234,7 +234,7 @@ Default dir in config: `app/Http/Resources`
 
 ## make:rule
 
-```shell
+```bash
 artisan make:rule [name]
 ```
 
@@ -244,7 +244,7 @@ Default dir in config: `app/Rules`
 
 ## make:scope
 
-```shell
+```bash
 artisan make:scope [name]
 ```
 
@@ -254,7 +254,7 @@ Default dir in config: `app/Data/Models/Scopes`
 
 ## make:seeder
 
-```shell
+```bash
 artisan make:seeder [name]
 ```
 
@@ -262,17 +262,9 @@ Extends `artisan make:seeder`
 
 Default dir in config: `database/seeders`
 
-## make:structure
-
-```shell
-artisan make:structure [name]
-```
-
-Generates full directory structure defined in the Laraca config file.
-
 ## make:test
 
-```shell
+```bash
 artisan make:test [name]
 ```
 
@@ -282,15 +274,15 @@ Default dir in config: `tests`
 
 ## make:value
 
-```shell
+```bash
 artisan make:value [name]
 ```
 
-Default dir in config: `Data\Values`
+Default dir in config: `app/Data/Values`
 
 ## make:view
 
-```shell
+```bash
 artisan make:view [name]
 ```
 

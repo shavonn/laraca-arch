@@ -7,8 +7,8 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Config;
 use Symfony\Component\Console\Attribute\AsCommand;
 
-#[AsCommand(name: 'make:structure')]
-class MakeStructureCommand extends Command
+#[AsCommand(name: 'init:structure')]
+class InitStructureCommand extends Command
 {
     use LaracaCommand;
 
@@ -17,7 +17,7 @@ class MakeStructureCommand extends Command
      *
      * @var string
      */
-    protected $name = 'make:structure';
+    protected $name = 'init:structure';
 
     /**
      * The console command description.
