@@ -8,19 +8,19 @@ describe('use domains', function () {
     it('should use domain settings in path/namespace when enabled and domain arg', function (string $class, string $domain) {
         Config::set('laraca.domains.enabled', true);
         Config::set('laraca.domains.parent_dir', 'TestDomain');
-        $this->artisan('make:cast',
+        $this->artisan('make:controller',
             ['name' => $class,
                 'domain' => $domain]);
 
         $result = Artisan::output();
 
-        $configPath = assembleFullPath('cast', $domain);
+        $configPath = assembleFullPath('controller', $domain);
         $filePath = "$configPath/$class.php";
 
         expect(File::exists($filePath))
             ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-        $configNamespace = fullNamespaceStr("App\TestDomain\\".ucfirst($domain)."\Data\Casts");
+        $configNamespace = fullNamespaceStr("App\TestDomain\\".ucfirst($domain)."\Http\Controllers");
 
         expect(File::get($filePath))
             ->toContain($configNamespace);
@@ -30,11 +30,11 @@ describe('use domains', function () {
     it('should not use domain settings in path/namespace when enabled and no domain arg', function (string $class) {
         Config::set('laraca.domains.enabled', true);
         Config::set('laraca.domains.parent_dir', 'TestDomain');
-        Config::set('laraca.structure.cast.path', 'Test/Data/Casts');
-        $this->artisan('make:cast',
+        Config::set('laraca.structure.controller.path', 'Test/Http/Controllers');
+        $this->artisan('make:controller',
             ['name' => $class]);
 
-        $configPath = assembleFullPath('cast');
+        $configPath = assembleFullPath('controller');
         $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();
@@ -42,7 +42,7 @@ describe('use domains', function () {
         expect(File::exists($filePath))
             ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-        $configNamespace = fullNamespaceStr('App\Test\Data\Casts');
+        $configNamespace = fullNamespaceStr('App\Test\Http\Controllers');
 
         expect(File::get($filePath))
             ->toContain($configNamespace);

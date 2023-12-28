@@ -125,7 +125,7 @@ trait GetsConfigValues
                 if ($parentKey == 'app' || $parentKey == 'base') {
 
                     if (self::domainsEnabled() && $domain) {
-                        array_unshift($path, $domain);
+                        array_unshift($path, ucfirst($domain));
 
                         if (self::domainParentDir()) {
                             array_unshift($path, self::domainParentDir());
