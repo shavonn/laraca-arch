@@ -4,12 +4,12 @@ layout: home
 
 hero:
     name: "Laraca Architect"
-    text: "A package for customizing Laravel application architecture."
+    text: "A package for customizing Laravel application architecture through configuration."
     tagline: Keep the magic of artisan and enjoy an alternate directory structure.
     actions:
         - theme: brand
           text: Get Started
-          link: /package-install
+          link: /installation
         - theme: alt
           text: View on GitHub
           link: https://github.com/handsomebrown/laraca
