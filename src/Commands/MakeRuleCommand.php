@@ -24,6 +24,6 @@ class MakeRuleCommand extends RuleMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return self::assembleNamespace('rule');
+        return $this->getClassNamespace('rule');
     }
 }

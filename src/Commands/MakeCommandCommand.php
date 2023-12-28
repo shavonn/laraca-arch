@@ -24,6 +24,6 @@ class MakeCommandCommand extends ConsoleMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return self::assembleNamespace('command');
+        return $this->getClassNamespace('command');
     }
 }

@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:job', function () {
-    it('should create Job class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.job.path', 'Test/Jobs');
+    it('should create Job class with namespace and path created from configured vals', function (string $class) {
+        Config::set('laraca.structure.job.path', 'Test/Jobs');
         $this->artisan('make:job',
             ['name' => $class]);
 
-        $configPath = assemblePath('job');
+        $configPath = assembleFullPath('job');
         $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();

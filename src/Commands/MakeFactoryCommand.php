@@ -27,7 +27,7 @@ class MakeFactoryCommand extends FactoryMakeCommand
     {
         $name = Str::of($name)->replaceFirst($this->rootNamespace(), '')->finish('Factory');
 
-        return self::assemblePath('factory')."/$name.php";
+        return self::assembleFullPath('factory')."/$name.php";
     }
 
     /**
@@ -38,6 +38,6 @@ class MakeFactoryCommand extends FactoryMakeCommand
      */
     protected function getNamespace($name)
     {
-        return self::assembleNamespace('factory');
+        return $this->getClassNamespace('factory');
     }
 }

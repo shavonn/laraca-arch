@@ -16,13 +16,12 @@ trait CreatesView
         $views = parent::viewPath($path);
 
         try {
-            $laracaViewsPath = $this->assemblePath('view');
-            $this->components->info('Using laraca.view config path.');
-            $views = $laracaViewsPath;
+            $laracaViewsPath = $this->assembleFullPath('view');
+            $views = $laracaViewsPath.'/'.$path;
         } catch (\Throwable $th) {
             $this->components->info('Using config.view config path.');
         }
 
-        return $views.($path ? DIRECTORY_SEPARATOR.$path : $path);
+        return $views;
     }
 }

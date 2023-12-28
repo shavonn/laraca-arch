@@ -24,6 +24,6 @@ class MakePolicyCommand extends PolicyMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return self::assembleNamespace('policy');
+        return $this->getClassNamespace('policy');
     }
 }

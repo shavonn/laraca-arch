@@ -24,6 +24,6 @@ class MakeJobCommand extends JobMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return self::assembleNamespace('job');
+        return $this->getClassNamespace('job');
     }
 }

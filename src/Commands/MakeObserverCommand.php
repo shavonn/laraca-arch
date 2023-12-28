@@ -24,6 +24,6 @@ class MakeObserverCommand extends ObserverMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return self::assembleNamespace('observer');
+        return $this->getClassNamespace('observer');
     }
 }

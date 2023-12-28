@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:provider', function () {
-    it('should create Provider class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.provider.path', 'Test/Providers');
+    it('should create Provider class with namespace and path created from configured vals', function (string $class) {
+        Config::set('laraca.structure.provider.path', 'Test/Providers');
         $this->artisan('make:provider',
             ['name' => $class]);
 
-        $configPath = assemblePath('provider');
+        $configPath = assembleFullPath('provider');
         $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();

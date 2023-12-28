@@ -24,6 +24,6 @@ class MakeListenerCommand extends ListenerMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return self::assembleNamespace('listener');
+        return $this->getClassNamespace('listener');
     }
 }

@@ -24,6 +24,6 @@ class MakeExceptionCommand extends ExceptionMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return self::assembleNamespace('exception');
+        return $this->getClassNamespace('exception');
     }
 }

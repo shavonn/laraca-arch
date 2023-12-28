@@ -35,6 +35,6 @@ class ArtiMigrationCommand extends MigrateMakeCommand
                             : $targetPath;
         }
 
-        return self::assemblePath('migration');
+        return self::assembleFullPath('migration');
     }
 }

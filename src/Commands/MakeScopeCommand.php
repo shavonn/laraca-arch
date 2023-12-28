@@ -24,6 +24,6 @@ class MakeScopeCommand extends ScopeMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return self::assembleNamespace('scope');
+        return $this->getClassNamespace('scope');
     }
 }

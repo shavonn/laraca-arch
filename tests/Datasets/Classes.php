@@ -1,8 +1,10 @@
 <?php
 
-dataset('classes', [
-    'Testy',
-    'DataThing',
-    'NewObjectOption',
-    'PackageClass',
-]);
+dataset('classes', function () {
+    return [
+        'Testy',
+        'dataThing',
+        'New_Object',
+        'PackageClass',
+    ];
+});

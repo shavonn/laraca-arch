@@ -49,6 +49,6 @@ class MakeEnumCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return self::assembleNamespace('enum');
+        return $this->getClassNamespace('enum');
     }
 }

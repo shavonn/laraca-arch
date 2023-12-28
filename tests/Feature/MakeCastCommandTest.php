@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:cast', function () {
-    it('should create Cast class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.cast.path', 'Test/Data/Casts');
+    it('should create Cast class with namespace and path created from configured vals', function (string $class) {
+        Config::set('laraca.structure.cast.path', 'Test/Data/Casts');
         $this->artisan('make:cast',
             ['name' => $class]);
 
-        $configPath = assemblePath('cast');
+        $configPath = assembleFullPath('cast');
         $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();

@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:channel', function () {
-    it('should create Channel class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.channel.path', 'Test/Broadcasting');
+    it('should create Channel class with namespace and path created from configured vals', function (string $class) {
+        Config::set('laraca.structure.channel.path', 'Test/Broadcasting');
         $this->artisan('make:channel',
             ['name' => $class]);
 
-        $configPath = assemblePath('channel');
+        $configPath = assembleFullPath('channel');
         $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();

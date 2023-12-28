@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:policy', function () {
-    it('should create Policy class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.policy.path', 'Test/Policies');
+    it('should create Policy class with namespace and path created from configured vals', function (string $class) {
+        Config::set('laraca.structure.policy.path', 'Test/Policies');
         $this->artisan('make:policy',
             ['name' => $class]);
 
-        $configPath = assemblePath('policy');
+        $configPath = assembleFullPath('policy');
         $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();

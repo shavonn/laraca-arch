@@ -50,7 +50,7 @@ class MakeValueCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return self::assembleNamespace('value');
+        return $this->getClassNamespace('value');
     }
 
     /**
@@ -66,7 +66,7 @@ class MakeValueCommand extends GeneratorCommand
         $class = parent::buildClass($name);
         $classVar = Str::camel($this->getNameInput());
 
-        $class = str_replace('{{ class_var }}', $classVar, $class);
+        $class = Str::replace('{{ class_var }}', $classVar, $class);
 
         return $class;
     }

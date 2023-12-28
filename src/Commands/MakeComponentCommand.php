@@ -26,6 +26,6 @@ class MakeComponentCommand extends ComponentMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return self::assembleNamespace('component');
+        return $this->getClassNamespace('component');
     }
 }

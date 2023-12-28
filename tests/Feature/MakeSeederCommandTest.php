@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:seeder', function () {
-    it('should create Seeder class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.database.path', 'test/database');
+    it('should create Seeder class with namespace and path created from configured vals', function (string $class) {
+        Config::set('laraca.structure.database.path', 'test/database');
         $this->artisan('make:seeder',
             ['name' => $class]);
 
-        $configPath = assemblePath('seeder');
+        $configPath = assembleFullPath('seeder');
         $filePath = "$configPath/{$class}.php";
 
         $result = Artisan::output();

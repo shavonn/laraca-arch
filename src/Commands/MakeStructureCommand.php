@@ -52,14 +52,14 @@ class MakeStructureCommand extends Command
      */
     public function handle()
     {
-        $config = Config::get('laraca');
+        $config = Config::get('laraca.structure');
         $messages = [];
 
         $this->components->info('Creating directy structure from Laraca config.');
 
         foreach (array_keys($config) as $key) {
-            $fullPath = self::assemblePath($key);
-            $relativePath = self::assemblePath($key, false);
+            $fullPath = self::assembleFullPath($key);
+            $relativePath = self::assembleRelativePath($key);
 
             if (! $this->files->isDirectory($fullPath)) {
                 $this->files->makeDirectory($fullPath, 0777, true, true);

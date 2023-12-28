@@ -27,6 +27,6 @@ class MakeTestCommand extends TestMakeCommand
     {
         $name = Str::replaceFirst($this->rootNamespace(), '', $name);
 
-        return self::assemblePath('test').str_replace('\\', '/', $name).'.php';
+        return self::assembleFullPath('test').Str::replace('\\', '/', $name).'.php';
     }
 }

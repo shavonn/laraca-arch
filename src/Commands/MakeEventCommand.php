@@ -24,6 +24,6 @@ class MakeEventCommand extends EventMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return self::assembleNamespace('event');
+        return $this->getClassNamespace('event');
     }
 }

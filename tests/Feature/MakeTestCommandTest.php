@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:test', function () {
-    it('should create Test class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.test.path', 'test/tests');
+    it('should create Test class with namespace and path created from configured vals', function (string $class) {
+        Config::set('laraca.structure.test.path', 'test/tests');
         $this->artisan('make:test',
             ['name' => $class]);
 
-        $configPath = assemblePath('test');
+        $configPath = assembleFullPath('test');
         $filePath = "$configPath/Feature/$class.php";
 
         $result = Artisan::output();
@@ -25,13 +25,13 @@ describe('make:test', function () {
 
     })->with('classes');
 
-    it('should create Test class with namespace at path created from configured namespace with unit option', function (string $class) {
+    it('should create Test class with namespace and path created from configured vals with unit option', function (string $class) {
         $this->artisan('make:test',
             ['name' => $class,
                 '--unit' => true],
         );
 
-        $configPath = assemblePath('test');
+        $configPath = assembleFullPath('test');
         $filePath = "$configPath/Unit/$class.php";
 
         $result = Artisan::output();

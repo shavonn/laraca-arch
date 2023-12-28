@@ -24,6 +24,6 @@ class MakeMiddlewareCommand extends MiddlewareMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return self::assembleNamespace('middleware');
+        return $this->getClassNamespace('middleware');
     }
 }

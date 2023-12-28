@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 describe('make:notification', function () {
-    it('should create Notification class with namespace at path created from configured namespace', function (string $class) {
-        Config::set('laraca.notification.path', 'Test/Notifications');
+    it('should create Notification class with namespace and path created from configured vals', function (string $class) {
+        Config::set('laraca.structure.notification.path', 'Test/Notifications');
         $this->artisan('make:notification',
             ['name' => $class]);
 
-        $configPath = assemblePath('notification');
+        $configPath = assembleFullPath('notification');
         $filePath = "$configPath/$class.php";
 
         $result = Artisan::output();

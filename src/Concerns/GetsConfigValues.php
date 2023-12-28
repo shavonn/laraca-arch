@@ -10,21 +10,60 @@ use Illuminate\Support\Facades\Config;
 trait GetsConfigValues
 {
     /**
-     * assemblePath
+     * Using domains
+     */
+    public static function domainsEnabled(): bool
+    {
+        $domainsEnabled = Config::get('laraca.domains.enabled');
+
+        return $domainsEnabled;
+    }
+
+    /**
+     * Domain parent dir
+     */
+    public static function domainParentDir(): string
+    {
+        $parentDir = Config::get('laraca.domains.parent_dir');
+
+        return $parentDir;
+    }
+
+    /**
+     * assembleRelativePath
      *
      * @param  string  $key
      * @param  bool  $full
      */
-    public static function assemblePath($key, $full = true): string
+    public static function assembleRelativePath($key, $domain = null): string
     {
-        [$pathArray, $root] = self::assemblePathArray($key);
+        [$pathArray, $root] = self::assemblePathArray($key, $domain);
 
         $path = implode('/', $pathArray);
 
         if ($root == 'app') {
-            $path = $full ? app_path($path) : 'app/'.$path;
+            $path = 'app/'.$path;
+        }
+
+        return $path;
+    }
+
+    /**
+     * assembleFullPath
+     *
+     * @param  string  $key
+     * @param  string  $domain
+     */
+    public static function assembleFullPath($key, $domain = null): string
+    {
+        [$pathArray, $root] = self::assemblePathArray($key, $domain);
+
+        $path = implode('/', $pathArray);
+
+        if ($root == 'app') {
+            $path = app_path($path);
         } elseif ($root == 'base') {
-            $path = $full ? base_path($path) : $path;
+            $path = base_path($path);
         }
 
         return $path;
@@ -34,11 +73,11 @@ trait GetsConfigValues
      * assembleNamespace
      *
      * @param  string  $key
-     * @param  bool  $full
+     * @param  string  $domain
      */
-    public static function assembleNamespace($key): string
+    public static function assembleNamespace($key, $domain = null): string
     {
-        [$pathArray, $root] = self::assemblePathArray($key);
+        [$pathArray, $root] = self::assemblePathArray($key, $domain);
 
         if ($key === 'test') {
             array_shift($pathArray);
@@ -62,16 +101,15 @@ trait GetsConfigValues
      *
      * @param  string,string  $key
      */
-    protected static function assemblePathArray($key): array
+    protected static function assemblePathArray($key, $domain = null): array
     {
-        if (! Config::has('laraca.'.$key)) {
+        if (! Config::has('laraca.structure.'.$key)) {
             throw new InvalidConfigKeyException();
         }
 
         $path = [];
-        $current = Config::get('laraca.'.$key);
+        $current = Config::get('laraca.structure.'.$key);
         $done = false;
-        $base = 'base';
 
         do {
             if (array_key_exists('path', $current)) {
@@ -85,10 +123,19 @@ trait GetsConfigValues
                 $parentKey = $current['parent'];
 
                 if ($parentKey == 'app' || $parentKey == 'base') {
+
+                    if (self::domainsEnabled() && $domain) {
+                        array_unshift($path, $domain);
+
+                        if (self::domainParentDir()) {
+                            array_unshift($path, self::domainParentDir());
+                        }
+                    }
+
                     $base = $parentKey;
                     $done = true;
-                } elseif (Config::has('laraca.'.$parentKey)) {
-                    $current = Config::get('laraca.'.$parentKey);
+                } elseif (Config::has('laraca.structure.'.$parentKey)) {
+                    $current = Config::get('laraca.structure.'.$parentKey);
                 } else {
                     // parent key not found in config
                     throw new InvalidConfigKeyException();
