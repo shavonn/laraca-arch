@@ -20,7 +20,7 @@ describe('use domains', function () {
         expect(File::exists($filePath))
             ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
 
-        $configNamespace = fullNamespaceStr("App\TestDomain\\".ucfirst($domain)."\Http\Controllers");
+        $configNamespace = fullNamespaceStr("App\TestDomains\\".ucfirst($domain)."\Http\Controllers");
 
         expect(File::get($filePath))
             ->toContain($configNamespace);
@@ -29,7 +29,7 @@ describe('use domains', function () {
 
     it('should not use domain settings in path/namespace when enabled and no domain arg', function (string $class) {
         Config::set('laraca.domains.enabled', true);
-        Config::set('laraca.domains.parent_dir', 'TestDomain');
+        Config::set('laraca.domains.parent_dir', 'TestDomains');
         Config::set('laraca.structure.controller.path', 'Test/Http/Controllers');
         $this->artisan('make:controller',
             ['name' => $class]);
