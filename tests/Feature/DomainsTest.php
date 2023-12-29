@@ -12,13 +12,13 @@ describe('use domains', function () {
             ['name' => $class,
                 'domain' => $domain]);
 
-        $result = Artisan::output();
+        $output = Artisan::output();
 
         $configPath = assembleFullPath('controller', $domain);
         $filePath = "$configPath/$class.php";
 
         expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
 
         $configNamespace = fullNamespaceStr("App\TestDomains\\".ucfirst($domain)."\Http\Controllers");
 
@@ -37,10 +37,10 @@ describe('use domains', function () {
         $configPath = assembleFullPath('controller');
         $filePath = "$configPath/$class.php";
 
-        $result = Artisan::output();
+        $output = Artisan::output();
 
         expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
 
         $configNamespace = fullNamespaceStr('App\Test\Http\Controllers');
 

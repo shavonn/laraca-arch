@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 namespace {{ namespace }};
 
-enum {{ class }}
+interface {{ class }}
 {
     //
 }

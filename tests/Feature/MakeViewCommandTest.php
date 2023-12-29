@@ -12,10 +12,10 @@ describe('make:view', function () {
 
         $filePath = assembleFullPath('view')."/{$class}.blade.php";
 
-        $result = Artisan::output();
+        $output = Artisan::output();
 
         expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
 
     })->with('classes');
 
@@ -24,12 +24,12 @@ describe('make:view', function () {
         $this->artisan('make:view',
             ['name' => $class]);
 
-        $result = Artisan::output();
+        $output = Artisan::output();
 
         $filePath = base_path("resources/views/{$class}.blade.php");
 
         expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
 
     })->with('classes');
 });
