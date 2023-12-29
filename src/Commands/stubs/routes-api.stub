@@ -1,0 +1,23 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
+/*
+|--------------------------------------------------------------------------
+| {{ service }} api routes
+|--------------------------------------------------------------------------
+*/
+
+// prefix: /api/{{ slug }}
+Route::middleware('api')->group(['prefix' => '{{ slug }}'], function() {
+    // namespace {{ controller_namespace }}
+    Route::get('/', function() {
+        return response()->json(['path' => '/api/{{ slug }}']);
+    });
+
+    Route::middleware('auth:api')->get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+});

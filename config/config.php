@@ -180,7 +180,7 @@ return [
                 'job',
                 'middleware',
                 'provider',
-                'routes',
+                'route',
                 'test',
                 'view',
             ],
@@ -271,17 +271,6 @@ return [
         */
         'request' => [
             'path' => 'Http/Requests',
-            'parent' => 'app',
-        ],
-
-        /*
-        |--------------------------------------------------------------------------
-        | Resource Path
-        |--------------------------------------------------------------------------
-        | make:resource
-        */
-        'resource' => [
-            'path' => 'Http/Resources',
             'parent' => 'app',
         ],
 

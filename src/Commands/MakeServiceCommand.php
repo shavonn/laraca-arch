@@ -61,22 +61,10 @@ class MakeServiceCommand extends LaracaGeneratorCommand
         }
 
         if (windows_os()) {
-            $path = str_replace('/', '\\', $servicePath);
+            $servicePath = str_replace('/', '\\', $servicePath);
         }
 
         $this->components->info(sprintf('%s [%s] and interface [%s] created successfully.', $info, $servicePath, $interfacePath));
-    }
-
-    /**
-     * Get the destination class path.
-     *
-     * @param  string  $name
-     */
-    protected function getPath($name): string
-    {
-        $name = Str::replaceFirst($this->rootNamespace(), '', $name);
-
-        return self::assembleFullPath('service')."/$name.php";
     }
 
     /**
@@ -96,15 +84,6 @@ class MakeServiceCommand extends LaracaGeneratorCommand
         $stub = str_replace($search, $replace, $stub);
 
         return $stub;
-    }
-
-    /**
-     * rootNamespace
-     * Get the root namespace for the class.
-     */
-    protected function rootNamespace(): string
-    {
-        return $this->getClassNamespace('service');
     }
 
     /**

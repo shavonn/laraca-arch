@@ -4,7 +4,7 @@ namespace HandsomeBrown\Laraca;
 
 use HandsomeBrown\Laraca\Commands\ArtiMigrationCommand;
 use HandsomeBrown\Laraca\Commands\DomainListCommand;
-use HandsomeBrown\Laraca\Commands\InitMicroCommand;
+use HandsomeBrown\Laraca\Commands\InitMicroserviceCommand;
 use HandsomeBrown\Laraca\Commands\InitStructureCommand;
 use HandsomeBrown\Laraca\Commands\MakeCastCommand;
 use HandsomeBrown\Laraca\Commands\MakeChannelCommand;
@@ -57,7 +57,7 @@ class LaracaServiceProvider extends ServiceProvider
      */
     protected $commands = [
         'ArtiMigration' => ArtiMigrationCommand::class,
-        'InitMicro' => InitMicroCommand::class,
+        'InitMicroservice' => InitMicroserviceCommand::class,
         'InitStructure' => InitStructureCommand::class,
         'MakeCast' => MakeCastCommand::class,
         'MakeChannel' => MakeChannelCommand::class,

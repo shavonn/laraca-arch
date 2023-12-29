@@ -3,7 +3,6 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Domainable;
-use HandsomeBrown\Laraca\Commands\Traits\HasLocalStub;
 use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Foundation\Console\ModelMakeCommand;
 use Symfony\Component\Console\Input\InputOption;
@@ -11,7 +10,6 @@ use Symfony\Component\Console\Input\InputOption;
 class MakeModelCommand extends ModelMakeCommand
 {
     use Domainable, LaracaCommand;
-    use HasLocalStub;
 
     /**
      * name

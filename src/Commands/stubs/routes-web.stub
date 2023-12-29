@@ -1,0 +1,20 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| {{ service }} web routes
+|--------------------------------------------------------------------------
+*/
+
+// prefix: /{{ slug }}
+Route::middleware('web')->group(['prefix' => '{{ slug }}'], function() {
+    // namespace {{ controller_namespace }}
+    // Route::get('/', 'SomethingController@index');
+
+    Route::get('/', function() {
+        return view('{{ slug }}::welcome');
+    });
+
+});

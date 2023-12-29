@@ -27,6 +27,29 @@ describe('use domains', function () {
 
     })->with('classes', 'domains');
 
+    it('should not use parent domain when path is null', function (string $class, string $domain) {
+        Config::set('laraca.struct.domain.enabled', true);
+        Config::set('laraca.struct.domain.path', null);
+        Config::set('laraca.struct.enum.path', 'Test/Enums');
+        $this->artisan('make:enum',
+            ['name' => $class,
+                'domain' => $domain]);
+
+        $configPath = assembleFullPath('enum', $domain);
+        $filePath = "$configPath/$class.php";
+
+        $output = Artisan::output();
+
+        expect(File::exists($filePath))
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
+
+        $configNamespace = fullNamespaceStr('App\\'.ucfirst($domain)."\Test\Enums");
+
+        expect(File::get($filePath))
+            ->toContain($configNamespace);
+
+    })->with('classes', 'domains');
+
     it('should not use domain settings in path/namespace when enabled and no domain arg', function (string $class) {
         Config::set('laraca.struct.domain.enabled', true);
         Config::set('laraca.struct.domain.path', 'TestDomains');

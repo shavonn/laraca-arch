@@ -22,7 +22,7 @@ trait GetsConfigValues
     /**
      * Domain parent dir
      */
-    public static function domainParentDir(): string
+    public static function domainParentDir(): ?string
     {
         $parentDir = Config::get('laraca.struct.domain.path');
 
@@ -77,7 +77,7 @@ trait GetsConfigValues
      * @param  string  $key
      * @param  string  $domain
      */
-    public static function assembleNamespace($key, $domain = null): string
+    public static function assembleNamespace($key, $domain = null, $withRoot = true): string
     {
         [$pathArray, $root] = self::assemblePathArray($key, $domain);
 
@@ -91,7 +91,7 @@ trait GetsConfigValues
 
         $namespace = implode('\\', $pathArray);
 
-        if ($root == 'app') {
+        if ($root == 'app' && $withRoot) {
             $namespace = app()->getNamespace().$namespace;
         }
 

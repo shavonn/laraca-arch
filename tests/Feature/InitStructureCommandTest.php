@@ -76,7 +76,7 @@ describe('init:structure', function () {
                 ->toBe(true, "File not created at expected path:\n".$keepFile."\n\n");
         }
 
-    })->with('classes');
+    });
 
     it('throws a MissingPathNamespaceKeyException when a key has no path or namespace', function () {
         Config::set('laraca.struct.empty_key', []);
@@ -84,19 +84,19 @@ describe('init:structure', function () {
 
         $this->artisan('init:structure');
 
-    })->with('classes')->throws(MissingPathNamespaceKeyException::class);
+    })->throws(MissingPathNamespaceKeyException::class);
 
     it('throws an InvalidConfigKeyException when a parent key does not exist in the config', function () {
         Config::set('laraca.struct.model.parent', 'nonexistent_key');
 
         $this->artisan('init:structure');
 
-    })->with('classes')->throws(InvalidConfigKeyException::class);
+    })->throws(InvalidConfigKeyException::class);
 
     it('throws a MissingRootPathException when a tree does not lead to a base or app parent', function () {
         Config::set('laraca.struct.model.parent', '');
 
         $this->artisan('init:structure');
 
-    })->with('classes')->throws(MissingRootPathException::class);
+    })->throws(MissingRootPathException::class);
 });
