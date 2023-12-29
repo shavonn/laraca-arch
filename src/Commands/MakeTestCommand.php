@@ -20,15 +20,14 @@ class MakeTestCommand extends TestMakeCommand
     protected $name = 'make:test';
 
     /**
-     * getPath
      * Get the destination class path.
      *
      * @param  string  $name
      */
     protected function getPath($name): string
     {
-        $name = Str::replaceFirst($this->rootNamespace(), '', $name);
+        $name = Str::of($name)->replaceFirst($this->rootNamespace(), '')->replace('\\', '/');
 
-        return self::assembleFullPath('test').Str::replace('\\', '/', $name).'.php';
+        return self::assembleFullPath('test')."/$name.php";
     }
 }

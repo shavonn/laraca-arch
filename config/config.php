@@ -172,7 +172,7 @@ return [
         | make:micro
         */
         'microservice' => [
-            'path' => 'Services',
+            'path' => 'Microservices',
             'parent' => 'app',
             'elements' => [
                 'command',

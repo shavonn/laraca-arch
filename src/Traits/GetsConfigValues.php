@@ -106,7 +106,7 @@ trait GetsConfigValues
     protected static function assemblePathArray($key, $domain = null): array
     {
         if (! Config::has('laraca.struct.'.$key)) {
-            throw new InvalidConfigKeyException();
+            throw new InvalidConfigKeyException($key);
         }
 
         $path = [];
@@ -118,7 +118,7 @@ trait GetsConfigValues
                 $path = array_merge(explode('/', $current['path']), $path);
             } else {
                 // key config missing path or namespace value
-                throw new MissingPathNamespaceKeyException();
+                throw new MissingPathNamespaceKeyException($key);
             }
 
             if (array_key_exists('parent', $current) && (bool) $current['parent']) {
@@ -140,11 +140,11 @@ trait GetsConfigValues
                     $current = Config::get('laraca.struct.'.$parentKey);
                 } else {
                     // parent key not found in config
-                    throw new InvalidConfigKeyException();
+                    throw new InvalidConfigKeyException($parentKey);
                 }
             } else {
                 // path has led up to parent never finding 'base' or 'app' as a root
-                throw new MissingRootPathException();
+                throw new MissingRootPathException($key);
             }
 
         } while ($done !== true);

@@ -19,14 +19,13 @@ class MakeSeederCommand extends SeederMakeCommand
     protected $name = 'make:seeder';
 
     /**
-     * getPath
      * Get the destination class path.
      *
      * @param  string  $name
      */
     protected function getPath($name): string
     {
-        $name = Str::replace('\\', '/', Str::replaceFirst($this->rootNamespace(), '', $name));
+        $name = Str::of($name)->replaceFirst($this->rootNamespace(), '')->replace('\\', '/');
 
         return self::assembleFullPath('seeder')."/$name.php";
     }

@@ -5,12 +5,12 @@ namespace HandsomeBrown\Laraca\Commands;
 use HandsomeBrown\Laraca\Commands\Traits\Domainable;
 use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Console\Concerns\CreatesMatchingTest;
-use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Input\InputArgument;
 
 #[AsCommand(name: 'make:service')]
-class MakeServiceCommand extends GeneratorCommand
+class MakeServiceCommand extends LaracaGeneratorCommand
 {
     use Domainable, LaracaCommand;
 
@@ -44,23 +44,13 @@ class MakeServiceCommand extends GeneratorCommand
      */
     public function handle()
     {
-        if ($this->isReservedName($this->getNameInput())) {
-            $this->components->error('The name "'.$this->getNameInput().'" is reserved by PHP.');
+        $name = $this->getClassName($this->input->getArgument('name'));
+        $name = Str::of($name)->endsWith('Service') ? $name : Str::of($name)->finish('Service');
 
-            return false;
-        }
-
-        $name = $this->getServiceName();
         $interface = Str::of($name)->finish('Interface');
 
-        $servicePath = $this->getPath($name);
-        $interfacePath = $this->getPath($interface);
-
-        $this->makeDirectory($servicePath);
-        $this->files->put($servicePath, $this->sortImports($this->build($name, $this->getStub())));
-
-        $this->makeDirectory($interfacePath);
-        $this->files->put($interfacePath, $this->sortImports($this->build($interface, __DIR__.'/stubs/interface.stub')));
+        $interfacePath = $this->makeFile($interface, __DIR__.'/stubs/interface.stub');
+        $servicePath = $this->makeFile($name, __DIR__.'/stubs/service.stub');
 
         $info = $this->type;
 
@@ -78,26 +68,6 @@ class MakeServiceCommand extends GeneratorCommand
     }
 
     /**
-     * Get the stub file for the generator.
-     *
-     * @return string
-     */
-    protected function getStub()
-    {
-        return __DIR__.'/stubs/service.stub';
-    }
-
-    /**
-     * Get the destination class path.
-     */
-    protected function getServiceName(): string
-    {
-        $name = $this->qualifyClass(ucfirst($this->input->getArgument('name')));
-
-        return Str::of($name)->endsWith('Service') ? $name : Str::of($name)->finish('Service');
-    }
-
-    /**
      * Get the destination class path.
      *
      * @param  string  $name
@@ -106,23 +76,7 @@ class MakeServiceCommand extends GeneratorCommand
     {
         $name = Str::replaceFirst($this->rootNamespace(), '', $name);
 
-        return self::assembleFullPath('service').Str::replace('\\', '/', $name).'.php';
-    }
-
-    /**
-     * Build the class with the given name.
-     *
-     * @param  string  $name
-     * @param  string  $stub
-     * @return string
-     *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
-     */
-    protected function build($name, $stub)
-    {
-        $stub = $this->files->get($stub);
-
-        return $this->replaceNamespace($stub, $name)->replaceClass($stub, $name);
+        return self::assembleFullPath('service')."/$name.php";
     }
 
     /**
@@ -134,12 +88,14 @@ class MakeServiceCommand extends GeneratorCommand
      */
     protected function replaceNamespace(&$stub, $name)
     {
-        parent::replaceNamespace($stub, $name);
+        $interface = Str::of($name)->finish('Interface');
 
-        $interface = Str::of($name)->replaceFirst($this->rootNamespace(), '')->replace('\\', '')->finish('Interface');
-        $stub = str_replace('{{ interface }}', $interface, $stub);
+        $search = ['{{ namespace }}', '{{ class }}', '{{ interface }}'];
+        $replace = [$this->assembleNamespace('service'), $name, $interface];
 
-        return $this;
+        $stub = str_replace($search, $replace, $stub);
+
+        return $stub;
     }
 
     /**
@@ -149,5 +105,17 @@ class MakeServiceCommand extends GeneratorCommand
     protected function rootNamespace(): string
     {
         return $this->getClassNamespace('service');
+    }
+
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return [
+            ['name', InputArgument::REQUIRED, 'The name of the '.strtolower($this->type)],
+        ];
     }
 }
