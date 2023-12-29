@@ -75,6 +75,12 @@ class InitMicroCommand extends Command
 
         $this->makeDirs($servicePath);
 
+        // service providers - base, route, broadcast
+
+        // route files
+
+        // welcome view
+
         $this->components->info('Service created successfully.');
 
         return Command::SUCCESS;

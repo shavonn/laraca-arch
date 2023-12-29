@@ -49,41 +49,52 @@ class MakeServiceCommand extends GeneratorCommand
 
             return false;
         }
-        $name = ucfirst($this->getNameInput());
-        $name = $this->qualifyClass($name);
-        $name = Str::of($name)->endsWith('Service') ? $name : Str::of($name)->finish('Service');
-        $path = $this->getPath($name);
 
-        $interfaceName = Str::of($name)->finish('Interface');
-        $interfacePath = $this->getPath($interfaceName);
+        $name = $this->getServiceName();
+        $interface = Str::of($name)->finish('Interface');
 
-        if ((! $this->hasOption('force') ||
-             ! $this->option('force')) &&
-             $this->alreadyExists($this->getNameInput())) {
-            $this->components->error($this->type.' already exists.');
+        $servicePath = $this->getPath($name);
+        $interfacePath = $this->getPath($interface);
 
-            return false;
-        }
-
-        $this->makeDirectory($path);
-        $this->files->put($path, $this->sortImports($this->buildClass($name)));
+        $this->makeDirectory($servicePath);
+        $this->files->put($servicePath, $this->sortImports($this->build($name, $this->getStub())));
 
         $this->makeDirectory($interfacePath);
-        $this->files->put($interfacePath, $this->sortImports($this->buildInterface($interfaceName)));
+        $this->files->put($interfacePath, $this->sortImports($this->build($interface, __DIR__.'/stubs/interface.stub')));
 
         $info = $this->type;
 
         if (in_array(CreatesMatchingTest::class, class_uses_recursive($this))) {
-            if ($this->handleTestCreation($path)) {
+            if ($this->handleTestCreation($servicePath)) {
                 $info .= ' and test';
             }
         }
 
         if (windows_os()) {
-            $path = str_replace('/', '\\', $path);
+            $path = str_replace('/', '\\', $servicePath);
         }
 
-        $this->components->info(sprintf('%s [%s] and interface [%s] created successfully.', $info, $path, $interfacePath));
+        $this->components->info(sprintf('%s [%s] and interface [%s] created successfully.', $info, $servicePath, $interfacePath));
+    }
+
+    /**
+     * Get the stub file for the generator.
+     *
+     * @return string
+     */
+    protected function getStub()
+    {
+        return __DIR__.'/stubs/service.stub';
+    }
+
+    /**
+     * Get the destination class path.
+     */
+    protected function getServiceName(): string
+    {
+        $name = $this->qualifyClass(ucfirst($this->input->getArgument('name')));
+
+        return Str::of($name)->endsWith('Service') ? $name : Str::of($name)->finish('Service');
     }
 
     /**
@@ -99,36 +110,19 @@ class MakeServiceCommand extends GeneratorCommand
     }
 
     /**
-     * Parse the class name and format according to the root namespace.
+     * Build the class with the given name.
      *
      * @param  string  $name
+     * @param  string  $stub
      * @return string
-     */
-    protected function qualifyClass($name)
-    {
-        $name = parent::qualifyClass($name);
-
-        return Str::ucfirst($name);
-    }
-
-    /**
-     * Get the stub file for the generator.
      *
-     * @return string
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    protected function getStub()
+    protected function build($name, $stub)
     {
-        return __DIR__.'/stubs/service.stub';
-    }
+        $stub = $this->files->get($stub);
 
-    /**
-     * Get the stub file for the generator.
-     *
-     * @return string
-     */
-    protected function getInterfaceStub()
-    {
-        return __DIR__.'/stubs/interface.stub';
+        return $this->replaceNamespace($stub, $name)->replaceClass($stub, $name);
     }
 
     /**
@@ -146,21 +140,6 @@ class MakeServiceCommand extends GeneratorCommand
         $stub = str_replace('{{ interface }}', $interface, $stub);
 
         return $this;
-    }
-
-    /**
-     * Build the class with the given name.
-     *
-     * @param  string  $name
-     * @return string
-     *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
-     */
-    protected function buildInterface($name)
-    {
-        $stub = $this->files->get($this->getInterfaceStub());
-
-        return $this->replaceNamespace($stub, $name)->replaceClass($stub, $name);
     }
 
     /**
