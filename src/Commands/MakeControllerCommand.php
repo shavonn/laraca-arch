@@ -2,11 +2,13 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
+use HandsomeBrown\Laraca\Commands\Traits\Domainable;
+use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Routing\Console\ControllerMakeCommand;
 
 class MakeControllerCommand extends ControllerMakeCommand
 {
-    use LaracaCommand;
+    use Domainable, LaracaCommand;
 
     /**
      * name

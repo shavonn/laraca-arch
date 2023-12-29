@@ -28,10 +28,11 @@ use HandsomeBrown\Laraca\Commands\MakeResourceCommand;
 use HandsomeBrown\Laraca\Commands\MakeRuleCommand;
 use HandsomeBrown\Laraca\Commands\MakeScopeCommand;
 use HandsomeBrown\Laraca\Commands\MakeSeederCommand;
+use HandsomeBrown\Laraca\Commands\MakeServiceCommand;
 use HandsomeBrown\Laraca\Commands\MakeTestCommand;
 use HandsomeBrown\Laraca\Commands\MakeValueCommand;
 use HandsomeBrown\Laraca\Commands\MakeViewCommand;
-use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
+use HandsomeBrown\Laraca\Traits\GetsConfigValues;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
@@ -77,6 +78,7 @@ class LaracaServiceProvider extends ServiceProvider
         'MakeResource' => MakeResourceCommand::class,
         'MakeRule' => MakeRuleCommand::class,
         'MakeScope' => MakeScopeCommand::class,
+        'MakeService' => MakeServiceCommand::class,
         'MakeSeeder' => MakeSeederCommand::class,
         'MakeStructure' => InitStructureCommand::class,
         'MakeTest' => MakeTestCommand::class,

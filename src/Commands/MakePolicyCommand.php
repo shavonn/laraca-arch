@@ -2,11 +2,13 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
+use HandsomeBrown\Laraca\Commands\Traits\Domainable;
+use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Foundation\Console\PolicyMakeCommand;
 
 class MakePolicyCommand extends PolicyMakeCommand
 {
-    use LaracaCommand;
+    use Domainable, LaracaCommand;
 
     /**
      * name

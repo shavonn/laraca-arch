@@ -1,7 +1,5 @@
 <?php
 
-use HandsomeBrown\Laraca\Tests\LaracaTestCase;
-
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -13,9 +11,7 @@ use HandsomeBrown\Laraca\Tests\LaracaTestCase;
 |
 */
 
-uses(LaracaTestCase::class)->in(__DIR__);
-
-use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
+uses(HandsomeBrown\Laraca\Tests\LaracaTestCase::class)->in(__DIR__);
 
 /**
  * assemblePath
@@ -24,7 +20,7 @@ use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
  */
 function assembleFullPath($key, $domain = null): string
 {
-    return GetsConfigValues::assembleFullPath($key, $domain);
+    return HandsomeBrown\Laraca\Traits\GetsConfigValues::assembleFullPath($key, $domain);
 }
 
 /**
@@ -34,7 +30,7 @@ function assembleFullPath($key, $domain = null): string
  */
 function assembleNamespace($key): string
 {
-    return GetsConfigValues::assembleNamespace($key);
+    return HandsomeBrown\Laraca\Traits\GetsConfigValues::assembleNamespace($key);
 }
 
 /**

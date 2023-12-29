@@ -2,14 +2,16 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Concerns\HasLocalStub;
+use HandsomeBrown\Laraca\Commands\Traits\Domainable;
+use HandsomeBrown\Laraca\Commands\Traits\HasLocalStub;
+use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Foundation\Console\ModelMakeCommand;
 use Symfony\Component\Console\Input\InputOption;
 
 class MakeModelCommand extends ModelMakeCommand
 {
+    use Domainable, LaracaCommand;
     use HasLocalStub;
-    use LaracaCommand;
 
     /**
      * name
@@ -39,7 +41,7 @@ class MakeModelCommand extends ModelMakeCommand
                 ];
 
                 $replace = [
-                    "use Illuminate\Database\Eloquent\Concerns\HasUuids;\nuse Illuminate\Database\Eloquent\Model;\n",
+                    "use Illuminate\Database\Eloquent\Traits\HasUuids;\nuse Illuminate\Database\Eloquent\Model;\n",
                     "use HasFactory, HasUuids;\n",
                 ];
 

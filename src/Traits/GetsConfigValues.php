@@ -1,6 +1,6 @@
 <?php
 
-namespace HandsomeBrown\Laraca\Concerns;
+namespace HandsomeBrown\Laraca\Traits;
 
 use HandsomeBrown\Laraca\Exceptions\InvalidConfigKeyException;
 use HandsomeBrown\Laraca\Exceptions\MissingPathNamespaceKeyException;

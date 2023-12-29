@@ -1,6 +1,6 @@
 <?php
 
-namespace HandsomeBrown\Laraca\Concerns;
+namespace HandsomeBrown\Laraca\Commands\Traits;
 
 trait CreatesView
 {

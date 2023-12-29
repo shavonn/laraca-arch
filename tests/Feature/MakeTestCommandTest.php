@@ -13,10 +13,10 @@ describe('make:test', function () {
         $configPath = assembleFullPath('test');
         $filePath = "$configPath/Feature/$class.php";
 
-        $result = Artisan::output();
+        $output = Artisan::output();
 
         expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
 
         $configNamespace = fullNamespaceStr('Tests\Feature');
 
@@ -34,10 +34,10 @@ describe('make:test', function () {
         $configPath = assembleFullPath('test');
         $filePath = "$configPath/Unit/$class.php";
 
-        $result = Artisan::output();
+        $output = Artisan::output();
 
         expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
 
         $configNamespace = fullNamespaceStr('Tests\Unit');
 

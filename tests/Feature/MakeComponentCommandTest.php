@@ -15,10 +15,10 @@ describe('make:component', function () {
         $configPath = assembleFullPath('component');
         $filePath = "$configPath/$class.php";
 
-        $result = Artisan::output();
+        $output = Artisan::output();
 
         expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$result."\n\n");
+            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
 
         $configNamespace = fullNamespaceStr('App\Test\View\Components');
 
@@ -29,7 +29,7 @@ describe('make:component', function () {
         $viewPath = assembleFullPath('view')."/components/{$snake_class}.blade.php";
 
         expect(File::exists($viewPath))
-            ->toBe(true, "File not created at expected path:\n".$viewPath."\nCommand result:\n".$result."\n\n");
+            ->toBe(true, "File not created at expected path:\n".$viewPath."\nCommand result:\n".$output."\n\n");
 
     })->with('classes');
 
@@ -39,13 +39,13 @@ describe('make:component', function () {
         $this->artisan('make:component',
             ['name' => $class]);
 
-        $result = Artisan::output();
+        $output = Artisan::output();
 
         $snake_class = Str::snake($class, '-');
         $viewPath = base_path("resources/views/components/{$snake_class}.blade.php");
 
         expect(File::exists($viewPath))
-            ->toBe(true, "File not created at expected path:\n".$viewPath."\nCommand result:\n".$result."\n\n");
+            ->toBe(true, "File not created at expected path:\n".$viewPath."\nCommand result:\n".$output."\n\n");
 
     })->with('classes');
 });
