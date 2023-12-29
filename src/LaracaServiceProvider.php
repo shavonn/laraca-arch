@@ -32,7 +32,7 @@ use HandsomeBrown\Laraca\Commands\MakeServiceCommand;
 use HandsomeBrown\Laraca\Commands\MakeTestCommand;
 use HandsomeBrown\Laraca\Commands\MakeValueCommand;
 use HandsomeBrown\Laraca\Commands\MakeViewCommand;
-use HandsomeBrown\Laraca\Concerns\GetsConfigValues;
+use HandsomeBrown\Laraca\Traits\GetsConfigValues;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;

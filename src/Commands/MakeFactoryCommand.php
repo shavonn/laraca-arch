@@ -2,6 +2,7 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
+use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Database\Console\Factories\FactoryMakeCommand;
 use Illuminate\Support\Str;
 

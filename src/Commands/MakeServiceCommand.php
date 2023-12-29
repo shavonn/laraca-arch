@@ -2,6 +2,8 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
+use HandsomeBrown\Laraca\Commands\Traits\Domainable;
+use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Console\Concerns\CreatesMatchingTest;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
@@ -10,7 +12,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 #[AsCommand(name: 'make:service')]
 class MakeServiceCommand extends GeneratorCommand
 {
-    use LaracaCommand;
+    use Domainable, LaracaCommand;
 
     /**
      * The console command name.
@@ -48,7 +50,7 @@ class MakeServiceCommand extends GeneratorCommand
             return false;
         }
 
-        $name = $this->qualifyClass($this->getNameInput());
+        $name = ucfirst($this->qualifyClass($this->getNameInput()));
         $name = Str::of($name)->endsWith('Service') ? $name : Str::of($name)->finish('Service');
         $path = $this->getPath($name);
 

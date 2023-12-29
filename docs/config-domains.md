@@ -21,7 +21,7 @@ Examples:
 
 ## Use with make commands
 
-When enabled, it adds an optional `domain` argument to all of Laraca's make commands so **if** you want the file to generate in a particular domain, just pass it as the second arg.
+When enabled, it adds an optional `domain` argument to all of Laraca's make commands except (Factories,Migrations, Providers, and Seeders) so **if** you want the file to generate in a particular domain, just pass it as the second arg.
 
 `artisan make:controller FavoritesContoller` **`Favorites`**
 

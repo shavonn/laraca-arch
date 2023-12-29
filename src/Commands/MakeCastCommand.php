@@ -2,11 +2,13 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
+use HandsomeBrown\Laraca\Commands\Traits\Domainable;
+use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Foundation\Console\CastMakeCommand;
 
 class MakeCastCommand extends CastMakeCommand
 {
-    use LaracaCommand;
+    use Domainable, LaracaCommand;
 
     /**
      * name

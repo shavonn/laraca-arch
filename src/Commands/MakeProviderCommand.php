@@ -2,6 +2,7 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
+use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Foundation\Console\ProviderMakeCommand;
 
 class MakeProviderCommand extends ProviderMakeCommand
