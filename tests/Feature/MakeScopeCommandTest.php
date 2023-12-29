@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:scope', function () {
     it('should create Scope class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.model.path', 'Test/Data/Models');
+        Config::set('laraca.struct.model.path', 'Test/Data/Models');
         $this->artisan('make:scope',
             ['name' => $class]);
 

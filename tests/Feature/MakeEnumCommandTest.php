@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:enum', function () {
     it('should create Enum class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.enum.path', 'Test/Enums');
+        Config::set('laraca.struct.enum.path', 'Test/Enums');
         $this->artisan('make:enum',
             ['name' => $class]);
 

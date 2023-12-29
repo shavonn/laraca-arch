@@ -57,7 +57,7 @@ class DomainListCommand extends Command
     {
         $domains = [];
 
-        $domainDir = Config::get('laraca.domains.parent_dir');
+        $domainDir = Config::get('laraca.struct.domain.path');
         $domainPath = app_path($domainDir);
 
         if ($this->files->isDirectory($domainPath)) {

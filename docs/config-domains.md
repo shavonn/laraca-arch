@@ -5,19 +5,20 @@ If you're interested in domain-driven design or even separating your application
 ```php
     'domains' => [
         'enabled' => true,
-        'parent_dir' => 'Domains', // dir name or null
+        'path' => 'Domains', // dir name or null
+        'parent' => 'app',
     ],
 ```
 
-| Option       |                               Description                               |
-| ------------ | :---------------------------------------------------------------------: |
-| `parent_dir` | The directory you want to use as a parent. It can be whatever you like. |
+| Option |                               Description                               |
+| ------ | :---------------------------------------------------------------------: |
+| `path` | The directory you want to use as a parent. It can be whatever you like. |
 
 Examples:
 
--   `'parent_dir' => 'Domains'` => `(app/Domains/Foo)`
--   `'parent_dir' => 'Service'` => `(app/Service/Foo)`
--   `'parent_dir' => null` => `(app/Foo)`
+-   `'path' => 'Domains'` => `(app/Domains/Foo)`
+-   `'path' => 'Service'` => `(app/Service/Foo)`
+-   `'path' => null` => `(app/Foo)`
 
 ## Use with make commands
 

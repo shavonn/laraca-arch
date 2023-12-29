@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:provider', function () {
     it('should create Provider class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.provider.path', 'Test/Providers');
+        Config::set('laraca.struct.provider.path', 'Test/Providers');
         $this->artisan('make:provider',
             ['name' => $class]);
 

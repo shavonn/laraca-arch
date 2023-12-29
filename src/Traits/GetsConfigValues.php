@@ -14,7 +14,7 @@ trait GetsConfigValues
      */
     public static function domainsEnabled(): bool
     {
-        $domainsEnabled = Config::get('laraca.domains.enabled');
+        $domainsEnabled = Config::get('laraca.struct.domain.enabled');
 
         return $domainsEnabled;
     }
@@ -24,7 +24,7 @@ trait GetsConfigValues
      */
     public static function domainParentDir(): string
     {
-        $parentDir = Config::get('laraca.domains.parent_dir');
+        $parentDir = Config::get('laraca.struct.domain.path');
 
         return $parentDir;
     }
@@ -105,12 +105,12 @@ trait GetsConfigValues
      */
     protected static function assemblePathArray($key, $domain = null): array
     {
-        if (! Config::has('laraca.structure.'.$key)) {
+        if (! Config::has('laraca.struct.'.$key)) {
             throw new InvalidConfigKeyException();
         }
 
         $path = [];
-        $current = Config::get('laraca.structure.'.$key);
+        $current = Config::get('laraca.struct.'.$key);
         $done = false;
 
         do {
@@ -136,8 +136,8 @@ trait GetsConfigValues
 
                     $base = $parentKey;
                     $done = true;
-                } elseif (Config::has('laraca.structure.'.$parentKey)) {
-                    $current = Config::get('laraca.structure.'.$parentKey);
+                } elseif (Config::has('laraca.struct.'.$parentKey)) {
+                    $current = Config::get('laraca.struct.'.$parentKey);
                 } else {
                     // parent key not found in config
                     throw new InvalidConfigKeyException();

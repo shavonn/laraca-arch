@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:exception', function () {
     it('should create Exception class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.exception.path', 'Test/Exceptions');
+        Config::set('laraca.struct.exception.path', 'Test/Exceptions');
         $this->artisan('make:exception',
             ['name' => $class]);
 

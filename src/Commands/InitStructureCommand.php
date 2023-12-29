@@ -53,7 +53,7 @@ class InitStructureCommand extends Command
      */
     public function handle()
     {
-        $config = Config::get('laraca.structure');
+        $config = Config::get('laraca.struct');
         $messages = [];
 
         $this->components->info('Creating directory structure from Laraca config.');

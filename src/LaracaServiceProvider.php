@@ -101,8 +101,8 @@ class LaracaServiceProvider extends ServiceProvider
 
             $this->app->useDatabasePath($this->assembleFullPath('database'));
 
-            $domainsEnabled = Config::get('laraca.domains.enabled');
-            $domainsParentDir = Config::get('laraca.domains.parent_dir');
+            $domainsEnabled = Config::get('laraca.struct.domain.enabled');
+            $domainsParentDir = Config::get('laraca.struct.domain.path');
 
             if ($domainsEnabled && $domainsParentDir) {
                 $this->commands['DomainList'] = DomainListCommand::class;

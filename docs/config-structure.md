@@ -6,7 +6,7 @@ outline: deep
 
 Generally, every key in the config corresponds to a fairly obvious command.
 
-Ex: `cast` key in `structure` corresponds to `make:cast`
+Ex: `cast` key in `struct` corresponds to `make:cast`
 
 ## Buildng Your Structure
 
@@ -35,7 +35,7 @@ Results: `app/Data/Models`
 
 ### Via Parent
 
-Additional keys can be added to the `structure` to serve as parent directories.
+Additional keys can be added to the `struct` to serve as parent directories.
 
 ```php
 'data' => [

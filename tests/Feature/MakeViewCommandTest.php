@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:view', function () {
     it('should create blade file at package configured path', function (string $class) {
-        Config::set('laraca.structure.view.path', 'test/resources/views');
+        Config::set('laraca.struct.view.path', 'test/resources/views');
         $this->artisan('make:view',
             ['name' => $class]);
 

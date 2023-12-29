@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:mail', function () {
     it('should create Mail class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.mail.path', 'Test/Mail');
+        Config::set('laraca.struct.mail.path', 'Test/Mail');
         $this->artisan('make:mail',
             ['name' => $class]);
 

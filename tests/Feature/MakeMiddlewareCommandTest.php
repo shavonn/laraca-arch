@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:middleware', function () {
     it('should create Middleware class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.middleware.path', 'Test/Http/Middleware');
+        Config::set('laraca.struct.middleware.path', 'Test/Http/Middleware');
         $this->artisan('make:middleware',
             ['name' => $class]);
 

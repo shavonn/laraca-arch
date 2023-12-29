@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:service', function () {
     it('should create Service class and interface with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.service.path', 'Test/Services');
+        Config::set('laraca.struct.service.path', 'Test/Services');
         $this->artisan('make:service',
             ['name' => $class]);
 

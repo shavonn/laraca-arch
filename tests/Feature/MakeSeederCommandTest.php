@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:seeder', function () {
     it('should create Seeder class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.database.path', 'test/database');
+        Config::set('laraca.struct.database.path', 'test/database');
         $this->artisan('make:seeder',
             ['name' => $class]);
 

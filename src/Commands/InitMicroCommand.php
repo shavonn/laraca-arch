@@ -73,7 +73,19 @@ class InitMicroCommand extends Command
         $name = ucfirst($this->input->getArgument('name'));
         $servicePath = "$servicePath/$name";
 
-        $contains = Config::get('laraca.structure.microservice.elements');
+        $this->makeDirs($servicePath);
+
+        $this->components->info('Service created successfully.');
+
+        return Command::SUCCESS;
+    }
+
+    /**
+     * Get the console command arguments.
+     */
+    protected function makeDirs(string $servicePath): void
+    {
+        $contains = Config::get('laraca.struct.microservice.elements');
 
         foreach ($contains as $element) {
             switch ($element) {
@@ -92,10 +104,6 @@ class InitMicroCommand extends Command
                 $this->files->makeDirectory($path, 0777, true, true);
             }
         }
-
-        $this->components->info('Service created successfully.');
-
-        return Command::SUCCESS;
     }
 
     /**

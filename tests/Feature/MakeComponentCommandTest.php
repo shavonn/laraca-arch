@@ -7,8 +7,8 @@ use Illuminate\Support\Str;
 
 describe('make:component', function () {
     it('should create Component class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.component.path', 'Test/View/Components');
-        Config::set('laraca.structure.view.path', 'test/resources/views');
+        Config::set('laraca.struct.component.path', 'Test/View/Components');
+        Config::set('laraca.struct.view.path', 'test/resources/views');
         $this->artisan('make:component',
             ['name' => $class]);
 
@@ -34,8 +34,8 @@ describe('make:component', function () {
     })->with('classes');
 
     it('should create blade file at Laravel configured path when view not set in laraca config', function (string $class) {
-        Config::set('laraca.structure.component.path', 'Test/View/Components');
-        Config::offsetUnset('laraca.structure.view');
+        Config::set('laraca.struct.component.path', 'Test/View/Components');
+        Config::offsetUnset('laraca.struct.view');
         $this->artisan('make:component',
             ['name' => $class]);
 

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:resource', function () {
     it('should create Resource class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.resource.path', 'Test/Http/Resources');
+        Config::set('laraca.struct.resource.path', 'Test/Http/Resources');
         $this->artisan('make:resource',
             ['name' => $class]);
 
