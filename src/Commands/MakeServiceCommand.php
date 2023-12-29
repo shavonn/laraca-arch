@@ -49,8 +49,8 @@ class MakeServiceCommand extends GeneratorCommand
 
             return false;
         }
-
-        $name = ucfirst($this->qualifyClass($this->getNameInput()));
+        $name = ucfirst($this->getNameInput());
+        $name = $this->qualifyClass($name);
         $name = Str::of($name)->endsWith('Service') ? $name : Str::of($name)->finish('Service');
         $path = $this->getPath($name);
 
@@ -96,6 +96,19 @@ class MakeServiceCommand extends GeneratorCommand
         $name = Str::replaceFirst($this->rootNamespace(), '', $name);
 
         return self::assembleFullPath('service').Str::replace('\\', '/', $name).'.php';
+    }
+
+    /**
+     * Parse the class name and format according to the root namespace.
+     *
+     * @param  string  $name
+     * @return string
+     */
+    protected function qualifyClass($name)
+    {
+        $name = parent::qualifyClass($name);
+
+        return Str::ucfirst($name);
     }
 
     /**
