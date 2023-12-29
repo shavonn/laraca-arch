@@ -35,13 +35,13 @@ trait GetsConfigValues
      * @param  string  $key
      * @param  bool  $full
      */
-    public static function assembleRelativePath($key, $domain = null): string
+    public static function assembleRelativePath($key, $domain = null, $withRoot = true): string
     {
         [$pathArray, $root] = self::assemblePathArray($key, $domain);
 
         $path = implode('/', $pathArray);
 
-        if ($root == 'app') {
+        if ($root == 'app' && $withRoot) {
             $path = 'app/'.$path;
         }
 
@@ -54,16 +54,18 @@ trait GetsConfigValues
      * @param  string  $key
      * @param  string  $domain
      */
-    public static function assembleFullPath($key, $domain = null): string
+    public static function assembleFullPath($key, $domain = null, $withRoot = true): string
     {
         [$pathArray, $root] = self::assemblePathArray($key, $domain);
 
         $path = implode('/', $pathArray);
 
-        if ($root == 'app') {
-            $path = app_path($path);
-        } elseif ($root == 'base') {
-            $path = base_path($path);
+        if ($withRoot) {
+            if ($root == 'app') {
+                $path = app_path($path);
+            } elseif ($root == 'base') {
+                $path = base_path($path);
+            }
         }
 
         return $path;
@@ -99,7 +101,7 @@ trait GetsConfigValues
     /**
      * assemblePathArray
      *
-     * @param  string,string  $key
+     * @param  string  $key
      */
     protected static function assemblePathArray($key, $domain = null): array
     {

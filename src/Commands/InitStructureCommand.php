@@ -56,7 +56,7 @@ class InitStructureCommand extends Command
         $config = Config::get('laraca.structure');
         $messages = [];
 
-        $this->components->info('Creating directy structure from Laraca config.');
+        $this->components->info('Creating directory structure from Laraca config.');
 
         foreach (array_keys($config) as $key) {
             $fullPath = self::assembleFullPath($key);

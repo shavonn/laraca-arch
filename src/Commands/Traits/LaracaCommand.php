@@ -16,7 +16,7 @@ trait LaracaCommand
     protected function getClassNamespace($key): string
     {
         if ($this->input->hasArgument('domain')) {
-            $domain = $this->input->getArgument('domain');
+            $domain = ucfirst($this->input->getArgument('domain'));
             if (self::domainsEnabled() && $domain) {
                 return self::assembleNamespace($key, $domain);
             }
