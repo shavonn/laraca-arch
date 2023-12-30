@@ -9,10 +9,10 @@ describe('domain:list', function () {
         Config::set('laraca.struct.domain.path', 'TestDomains');
         $this->artisan('make:controller',
             ['name' => $class,
-                'domain' => $domain]);
+                '--domain' => $domain]);
         $this->artisan('make:job',
             ['name' => $class,
-                'domain' => $domain]);
+                '--domain' => $domain]);
 
         $this->artisan('domain:list');
 

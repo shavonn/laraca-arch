@@ -30,14 +30,31 @@ trait GetsConfigValues
     }
 
     /**
-     * assembleRelativePath
-     *
-     * @param  string  $key
-     * @param  bool  $full
+     * Using domains
      */
-    public static function assembleRelativePath($key, $domain = null, $withRoot = true): string
+    public static function microservicesEnabled(): bool
     {
-        [$pathArray, $root] = self::assemblePathArray($key, $domain);
+        $microservicesEnabled = Config::get('laraca.struct.microservice.enabled');
+
+        return $microservicesEnabled;
+    }
+
+    /**
+     * Domain parent dir
+     */
+    public static function microserviceParentDir(): ?string
+    {
+        $parentDir = Config::get('laraca.struct.microservice.path');
+
+        return $parentDir;
+    }
+
+    /**
+     * assembleRelativePath
+     */
+    public static function assembleRelativePath(string $key, ?string $domain = null, ?string $service = null, bool $withRoot = true): string
+    {
+        [$pathArray, $root] = self::assemblePathArray($key, $domain, $service);
 
         $path = implode('/', $pathArray);
 
@@ -50,13 +67,10 @@ trait GetsConfigValues
 
     /**
      * assembleFullPath
-     *
-     * @param  string  $key
-     * @param  string  $domain
      */
-    public static function assembleFullPath($key, $domain = null, $withRoot = true): string
+    public static function assembleFullPath(string $key, ?string $domain = null, ?string $service = null, bool $withRoot = true): string
     {
-        [$pathArray, $root] = self::assemblePathArray($key, $domain);
+        [$pathArray, $root] = self::assemblePathArray($key, $domain, $service);
 
         $path = implode('/', $pathArray);
 
@@ -73,13 +87,10 @@ trait GetsConfigValues
 
     /**
      * assembleNamespace
-     *
-     * @param  string  $key
-     * @param  string  $domain
      */
-    public static function assembleNamespace($key, $domain = null, $withRoot = true): string
+    public static function assembleNamespace(string $key, ?string $domain = null, ?string $service = null, bool $withRoot = true): string
     {
-        [$pathArray, $root] = self::assemblePathArray($key, $domain);
+        [$pathArray, $root] = self::assemblePathArray($key, $domain, $service);
 
         if ($key === 'test') {
             array_shift($pathArray);
@@ -100,10 +111,8 @@ trait GetsConfigValues
 
     /**
      * assemblePathArray
-     *
-     * @param  string  $key
      */
-    protected static function assemblePathArray($key, $domain = null): array
+    protected static function assemblePathArray(string $key, ?string $domain = null, ?string $service = null): array
     {
         if (! Config::has('laraca.struct.'.$key)) {
             throw new InvalidConfigKeyException($key);
@@ -131,6 +140,14 @@ trait GetsConfigValues
 
                         if (self::domainParentDir()) {
                             array_unshift($path, self::domainParentDir());
+                        }
+                    }
+
+                    if (self::microservicesEnabled() && $service) {
+                        array_unshift($path, ucfirst($service));
+
+                        if (self::microserviceParentDir()) {
+                            array_unshift($path, self::microserviceParentDir());
                         }
                     }
 

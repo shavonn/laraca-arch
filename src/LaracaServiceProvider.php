@@ -35,7 +35,6 @@ use HandsomeBrown\Laraca\Commands\MakeValueCommand;
 use HandsomeBrown\Laraca\Commands\MakeViewCommand;
 use HandsomeBrown\Laraca\Traits\GetsConfigValues;
 use Illuminate\Console\GeneratorCommand;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 class LaracaServiceProvider extends ServiceProvider
@@ -101,10 +100,7 @@ class LaracaServiceProvider extends ServiceProvider
 
             $this->app->useDatabasePath($this->assembleFullPath('database'));
 
-            $domainsEnabled = Config::get('laraca.struct.domain.enabled');
-            $domainsParentDir = Config::get('laraca.struct.domain.path');
-
-            if ($domainsEnabled && $domainsParentDir) {
+            if ($this->domainsEnabled() && $this->domainParentDir()) {
                 $this->commands['DomainList'] = DomainListCommand::class;
             }
 

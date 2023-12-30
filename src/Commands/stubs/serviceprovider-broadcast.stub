@@ -4,7 +4,6 @@ namespace {{ namespace }}\Providers;
 
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\ServiceProvider;
-{{ use }}
 
 class BroadcastServiceProvider extends ServiceProvider
 {

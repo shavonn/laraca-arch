@@ -2,7 +2,7 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Commands\Traits\Domainable;
+use HandsomeBrown\Laraca\Commands\Traits\Directable;
 use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Console\Concerns\CreatesMatchingTest;
 use Illuminate\Support\Str;
@@ -12,7 +12,7 @@ use Symfony\Component\Console\Input\InputArgument;
 #[AsCommand(name: 'make:service')]
 class MakeServiceCommand extends LaracaGeneratorCommand
 {
-    use Domainable, LaracaCommand;
+    use Directable, LaracaCommand;
 
     /**
      * The console command name.

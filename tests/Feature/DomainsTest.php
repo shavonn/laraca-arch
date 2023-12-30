@@ -10,17 +10,17 @@ describe('use domains', function () {
         Config::set('laraca.struct.domain.path', 'TestDomains');
         $this->artisan('make:controller',
             ['name' => $class,
-                'domain' => $domain]);
+                '--domain' => $domain]);
 
         $output = Artisan::output();
 
         $configPath = assembleFullPath('controller', $domain);
         $filePath = "$configPath/$class.php";
 
+        $configNamespace = fullNamespaceStr("App\TestDomains\\".ucfirst($domain)."\Http\Controllers");
+
         expect(File::exists($filePath))
             ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
-
-        $configNamespace = fullNamespaceStr("App\TestDomains\\".ucfirst($domain)."\Http\Controllers");
 
         expect(File::get($filePath))
             ->toContain($configNamespace);
@@ -33,17 +33,17 @@ describe('use domains', function () {
         Config::set('laraca.struct.enum.path', 'Test/Enums');
         $this->artisan('make:enum',
             ['name' => $class,
-                'domain' => $domain]);
+                '--domain' => $domain]);
 
         $configPath = assembleFullPath('enum', $domain);
         $filePath = "$configPath/$class.php";
+
+        $configNamespace = fullNamespaceStr('App\\'.ucfirst($domain)."\Test\Enums");
 
         $output = Artisan::output();
 
         expect(File::exists($filePath))
             ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
-
-        $configNamespace = fullNamespaceStr('App\\'.ucfirst($domain)."\Test\Enums");
 
         expect(File::get($filePath))
             ->toContain($configNamespace);
@@ -60,12 +60,12 @@ describe('use domains', function () {
         $configPath = assembleFullPath('controller');
         $filePath = "$configPath/$class.php";
 
+        $configNamespace = fullNamespaceStr('App\Test\Http\Controllers');
+
         $output = Artisan::output();
 
         expect(File::exists($filePath))
             ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
-
-        $configNamespace = fullNamespaceStr('App\Test\Http\Controllers');
 
         expect(File::get($filePath))
             ->toContain($configNamespace);

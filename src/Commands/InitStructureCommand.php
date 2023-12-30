@@ -37,7 +37,10 @@ class InitStructureCommand extends LaracaGeneratorCommand
         foreach (array_keys($config) as $key) {
             if ($key == 'domain' && ! $config['domain']['enabled']) {
                 continue;
+            } elseif ($key == 'microservice' && ! $config['microservice']['enabled']) {
+                continue;
             }
+
             $fullPath = self::assembleFullPath($key);
 
             $this->makeEmptyDirectory($fullPath);

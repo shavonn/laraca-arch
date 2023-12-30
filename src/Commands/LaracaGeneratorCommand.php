@@ -3,7 +3,6 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
-use HandsomeBrown\Laraca\Exceptions\StubNotFoundException;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
@@ -122,8 +121,6 @@ class LaracaGeneratorCommand extends Command
 
         $stub = $this->files->get($stub);
 
-        $this->additionalTags($stub);
-
         $content = $this->replaceTags($stub, $name);
         $this->files->put($path, $content);
 
@@ -141,27 +138,6 @@ class LaracaGeneratorCommand extends Command
         $stub = str_replace($search, $replace, $stub);
 
         return $stub;
-    }
-
-    /**
-     * Add additional template tags
-     */
-    protected function additionalTags(string &$stub): void
-    {
-    }
-
-    /**
-     * Get Laravel stub path
-     */
-    protected function getLaravelStub(string $stub): string
-    {
-        switch ($stub) {
-            case 'provider':
-                return __DIR__.'/../../vendor/laravel/framework/src/Illuminate/Foundation/Console/stubs/provider.stub';
-
-            default:
-                throw new StubNotFoundException();
-        }
     }
 
     /**

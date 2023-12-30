@@ -15,10 +15,17 @@ trait LaracaCommand
      */
     protected function getClassNamespace($key): string
     {
-        if ($this->input->hasArgument('domain')) {
-            $domain = ucfirst($this->input->getArgument('domain'));
-            if (self::domainsEnabled() && $domain) {
-                return self::assembleNamespace($key, $domain);
+        if ($this->input->hasOption('domain')) {
+            $domainName = ucfirst($this->input->getOption('domain'));
+            if (self::domainsEnabled() && $domainName) {
+                return self::assembleNamespace($key, $domainName);
+            }
+        }
+
+        if ($this->input->hasOption('service')) {
+            $serviceName = ucfirst($this->input->getOption('service'));
+            if (self::microservicesEnabled() && $serviceName) {
+                return self::assembleNamespace($key, null, $serviceName);
             }
         }
 

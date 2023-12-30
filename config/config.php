@@ -172,19 +172,9 @@ return [
         | make:micro
         */
         'microservice' => [
+            'enabled' => true,
             'path' => 'Microservices',
             'parent' => 'app',
-            'elements' => [
-                'channel',
-                'command',
-                'controller',
-                'job',
-                'middleware',
-                'provider',
-                'route',
-                'test',
-                'view',
-            ],
         ],
 
         /*
