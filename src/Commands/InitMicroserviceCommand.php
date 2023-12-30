@@ -172,7 +172,6 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
         $name = Str::of($name)->replaceFirst($this->rootNamespace(), '')->replace('\\', '/');
 
         $path = $this->servicePath;
-        echo 'service ' . $path . "\n\n";
 
         switch ($name) {
             case 'BroadcastServiceProvider':
@@ -190,7 +189,7 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
             default:
                 $path = $path . "/$name.php";
         }
-        echo $path . "\n\n";
+
         array_push($this->generated, $path);
 
         return $path;
