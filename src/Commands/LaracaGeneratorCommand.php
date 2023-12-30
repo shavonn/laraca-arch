@@ -122,7 +122,7 @@ class LaracaGeneratorCommand extends Command
 
         $stub = $this->files->get($stub);
 
-        $this->addAdditionalTags($stub);
+        $this->additionalTags($stub);
 
         $content = $this->replaceTags($stub, $name);
         $this->files->put($path, $content);
@@ -146,7 +146,7 @@ class LaracaGeneratorCommand extends Command
     /**
      * Add additional template tags
      */
-    protected function addAdditionalTags(string &$stub): void
+    protected function additionalTags(string &$stub): void
     {
     }
 

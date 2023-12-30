@@ -35,6 +35,9 @@ class InitStructureCommand extends LaracaGeneratorCommand
         $this->components->info('Creating directory structure from Laraca config.');
 
         foreach (array_keys($config) as $key) {
+            if ($key == 'domain' && ! $config['domain']['enabled']) {
+                continue;
+            }
             $fullPath = self::assembleFullPath($key);
 
             $this->makeEmptyDirectory($fullPath);

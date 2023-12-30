@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -9,12 +10,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 // prefix: /{{ slug }}
-Route::middleware('web')->group(['prefix' => '{{ slug }}'], function() {
-    // namespace {{ controller_namespace }}
-    // Route::get('/', 'SomethingController@index');
+// namespace {{ controller_namespace }}
 
-    Route::get('/', function() {
-        return view('{{ slug }}::welcome');
-    });
+// Route::get('/', 'SomethingController@index');
 
+Route::get('/', function() {
+    return View::make('{{ service }}::welcome');
 });

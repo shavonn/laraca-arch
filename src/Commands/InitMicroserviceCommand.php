@@ -67,38 +67,20 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
 
         $this->makeDirectories();
 
-        $providers = $this->makeProviders();
+        $this->makeProviders();
 
         $this->makeRouteFiles();
 
-        // welcome view
+        $elements = Config::get('laraca.struct.microservice.elements');
 
-        $this->components->info('Service created successfully.');
-        $this->components->bulletList($providers);
+        if (in_array('route', $elements)) {
+            $this->makeFile('welcome', __DIR__.'/stubs/welcome.stub');
+        }
+
+        $this->components->info('Microservice created successfully.');
+        $this->components->info('Don\'t forget to <info>'.$this->serviceName.'ServiceProvider.php</info> to providers in <info>app.php</info>');
 
         return Command::SUCCESS;
-    }
-
-    /**
-     * Add additional template tags
-     */
-    protected function addAdditionalTags(string &$stub): void
-    {
-        $searchRegister = 'public function register(): void
-    {
-        //';
-        $searchBoost = 'public function boot(): void
-    {
-        //';
-        $searchUse = 'use Illuminate\Support\ServiceProvider;';
-
-        $register = "public function register(): void\n\t{\n\t\t{{ register }}";
-        $boot = "public function boot(): void\n\t{\n\t\t{{ boot }}";
-        $use = "use Illuminate\Support\ServiceProvider;\n{{ use }}";
-
-        $search = [$searchRegister, $searchBoost, $searchUse];
-        $replace = [$register, $boot, $use];
-        $stub = str_replace($search, $replace, $stub);
     }
 
     /**
@@ -110,14 +92,26 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
         $controllerNamespace = $this->assembleNamespace('controller', null, false);
         $controllerNamespace = "$namespace\\$controllerNamespace";
 
-        if ($name == 'BroadcastServiceProvider') {
-            $namespace = "$namespace\Providers";
-        } elseif ($name == 'RouteServiceProvider') {
-            $namespace = "$namespace\Providers";
+        $elements = Config::get('laraca.struct.microservice.elements');
+
+        $use = '';
+
+        if ($name == $this->serviceName.'ServiceProvider') {
+            if (in_array('route', $elements)) {
+                $use = $use."use $namespace\Providers\RouteServiceProvider;\n";
+            }
+
+            if (in_array('channel', $elements)) {
+                $use = $use."use $namespace\Providers\BroadcastServiceProvider;\n";
+            }
+
+            if (in_array('view', $elements) || in_array('component', $elements)) {
+                $use = $use."use Illuminate\Support\Facades\View;\n";
+            }
         }
 
-        $search = ['{{ namespace }}', '{{ class }}', '{{ slug }}', '{{ service }}', '{{ controller_namespace }}'];
-        $replace = [$namespace, $name, Str::slug($this->serviceName), $this->serviceName, $controllerNamespace];
+        $search = ['{{ namespace }}', '{{ slug }}', '{{ service }}', '{{ controller_namespace }}', '{{ use }}'];
+        $replace = [$namespace, Str::slug($this->serviceName), $this->serviceName, $controllerNamespace, $use];
 
         $stub = str_replace($search, $replace, $stub);
 
@@ -168,64 +162,42 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
     /**
      * Get the console command arguments.
      */
-    protected function makeProviders(): array
+    protected function makeProviders()
     {
         $providers = [];
         $elements = Config::get('laraca.struct.microservice.elements');
 
-        $stubPath = $this->getLaravelStub('provider');
-
-        $serviceProviderName = Str::of($this->serviceName)->finish('ServiceProvider');
-        $serviceProvider = $this->makeFile($serviceProviderName, $stubPath);
-
-        $search = ['{{ register }}', '{{ boot }}', '{{ use }}'];
+        $search = ['{{ register }}', '{{ boot }}'];
 
         $register = '';
         $boot = '';
-        $use = '';
 
         if (in_array('route', $elements)) {
-            $routeProvider = $this->makeFile('RouteServiceProvider', $stubPath);
-            $routeBoot = $this->files->get(__DIR__.'/stubs/snippets/routeservice_boot.stub');
-
-            $replace = ['', $routeBoot];
-            $this->files->replaceInFile($search, $replace, $routeProvider);
-
-            $register = $register.'$this->app->register(RouteServiceProvider::class);'."\n";
-            $use = $use.'use '.$this->rootNamespace()."\Providers\RouteServiceProvider;\n";
+            $routeProvider = $this->makeFile('RouteServiceProvider', __DIR__.'/stubs/serviceprovider-route.stub');
             array_push($providers, $routeProvider);
 
-            $this->makeFile('web', __DIR__.'/stubs/routes-web.stub');
-            $this->makeFile('api', __DIR__.'/stubs/routes-api.stub');
+            $register = $register.'$this->app->register(RouteServiceProvider::class);'."\n";
         }
 
         if (in_array('channel', $elements)) {
-            $broadcastProvider = $this->makeFile('BroadcastServiceProvider', $stubPath);
-            $broadcastBoot = $this->files->get(__DIR__.'/stubs/snippets/broadcastservice_boot.stub');
-            $broadcastUse = "use Illuminate\Support\Facades\Broadcast;";
-
-            $replace = ['', $broadcastBoot, $broadcastUse];
-            $this->files->replaceInFile($search, $replace, $broadcastProvider);
+            $broadcastProvider = $this->makeFile('BroadcastServiceProvider', __DIR__.'/stubs/serviceprovider-broadcast.stub');
+            array_push($providers, $broadcastProvider);
 
             $register = $register ? $register."\t\t" : $register;
             $register = $register.'$this->app->register(BroadcastServiceProvider::class);'."\n";
-            $use = $use.'use '.$this->rootNamespace()."\Providers\BroadcastServiceProvider;\n";
-            array_push($providers, $broadcastProvider);
-
-            $this->makeFile('channels', __DIR__.'/stubs/routes-channels.stub');
         }
 
         if (in_array('view', $elements) || in_array('component', $elements)) {
-            $register = $register ? $register."\n\n\t\t" : $register;
-            $register = $register."View::addNamespace('".Str::slug($this->serviceName)."', realpath(__DIR__.'/../resources/views'));";
-            $use = $use."use Illuminate\Support\Facades\View;\n";
+            $register = $register ? $register."\n\t\t" : $register;
+            $register = $register."View::addNamespace('".$this->serviceName."', realpath(__DIR__.'/../resources/views'));";
         }
 
+        $serviceProviderName = Str::of($this->serviceName)->finish('ServiceProvider');
+        $serviceProvider = $this->makeFile($serviceProviderName, __DIR__.'/stubs/serviceprovider.stub');
         array_push($providers, $serviceProvider);
-        $replace = [$register, $boot, $use];
-        $this->files->replaceInFile($search, $replace, $serviceProvider);
 
-        return $providers;
+        $replace = [$register, ($boot ? $boot : '//')];
+        $this->files->replaceInFile($search, $replace, $serviceProvider);
     }
 
     /**
@@ -237,11 +209,21 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
 
         $path = $this->servicePath;
 
-        if ($name == 'BroadcastServiceProvider' || $name == 'RouteServiceProvider') {
-            $path = $path.'/Providers';
-        }
-        if ($name == 'web' || $name == 'api' || $name == 'channels') {
-            $path = $path.'/routes';
+        switch ($name) {
+            case 'BroadcastServiceProvider':
+            case 'RouteServiceProvider':
+                $path = $path.'/Providers';
+                break;
+            case 'api':
+            case 'channels':
+            case 'web':
+                $path = $path.'/routes';
+                break;
+            case 'welcome':
+                echo $path."/resources/views/$name.blade.php";
+
+                return $path = $path."/resources/views/$name.blade.php";
+                break;
         }
 
         return $path."/$name.php";

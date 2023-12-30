@@ -48,6 +48,7 @@ describe('init:micro', function () {
             $servicePath = app_path("Test/Microservices/$class/".$class.'ServiceProvider.php');
             $routeServicePath = app_path("Test/Microservices/$class/Providers/RouteServiceProvider.php");
             $broadcastServicePath = app_path("Test/Microservices/$class/Providers/BroadcastServiceProvider.php");
+            $welcomePath = app_path("Test/Microservices/$class/resources/views/welcome.blade.php");
             $routesPath = app_path("Test/Microservices/$class/routes/");
 
             $serviceNamespace = fullNamespaceStr("App\\Test\\Microservices\\$class");
@@ -63,7 +64,7 @@ describe('init:micro', function () {
                 ->toBe(true, "File not created at expected path:\n".$routeServicePath."\nCommand result:\n".$output."\n\n");
             expect(File::get($routeServicePath))
                 ->toContain($providerNamespace)
-                ->toContain('$this->loadRoutesFrom(__DIR__.\'/../routes/web.php\');');
+                ->toContain('require __DIR__.\'/../routes/web.php\';');
 
             expect(File::exists($broadcastServicePath))
                 ->toBe(true, "File not created at expected path:\n".$broadcastServicePath."\nCommand result:\n".$output."\n\n");
@@ -75,19 +76,22 @@ describe('init:micro', function () {
                 ->toBe(true, "File not created at expected path:\n".$routesPath.'web.php'."\nCommand result:\n".$output."\n\n");
             expect(File::get($routesPath.'web.php'))
                 ->toContain($slug)
-                ->toContain('Route::middleware(\'web\')->group([\'prefix\' => \''.$slug.'\'], function() {');
+                ->toContain("prefix: /$slug");
 
             expect(File::exists($routesPath.'api.php'))
                 ->toBe(true, "File not created at expected path:\n".$routesPath.'api.php'."\nCommand result:\n".$output."\n\n");
             expect(File::get($routesPath.'api.php'))
                 ->toContain($slug)
-                ->toContain('Route::middleware(\'api\')->group([\'prefix\' => \''.$slug.'\'], function() {');
+                ->toContain("/api/$slug");
 
             expect(File::exists($routesPath.'channels.php'))
                 ->toBe(true, "File not created at expected path:\n".$routesPath.'api.php'."\nCommand result:\n".$output."\n\n");
             expect(File::get($routesPath.'channels.php'))
                 ->toContain($class)
                 ->toContain('Broadcast::channel(\''.$class.'.User.{id}\', function ($user, $id) {');
+
+            expect(File::exists($welcomePath))
+                ->toBe(true, "File not created at expected path:\n".$welcomePath."\nCommand result:\n".$output."\n\n");
         }
     })->with('classes');
 
@@ -105,7 +109,6 @@ describe('init:micro', function () {
         $output = Artisan::output();
 
         $class = ucfirst($class);
-        $slug = Str::slug(ucfirst($class));
 
         $paths = [
             "app/Test/Microservices/$class/Providers",
@@ -121,6 +124,7 @@ describe('init:micro', function () {
             $servicePath = app_path("Test/Microservices/$class/".$class.'ServiceProvider.php');
             $routeServicePath = app_path("Test/Microservices/$class/Providers/RouteServiceProvider.php");
             $broadcastServicePath = app_path("Test/Microservices/$class/Providers/BroadcastServiceProvider.php");
+            $welcomePath = app_path("Test/Microservices/$class/resources/views/welcome.blade.php");
             $routesPath = app_path("Test/Microservices/$class/routes/");
 
             $serviceNamespace = fullNamespaceStr("App\\Test\\Microservices\\$class");
@@ -136,12 +140,16 @@ describe('init:micro', function () {
                 ->toBe(true, "File not created at expected path:\n".$routeServicePath."\nCommand result:\n".$output."\n\n");
             expect(File::get($routeServicePath))
                 ->toContain($providerNamespace)
-                ->toContain('$this->loadRoutesFrom(__DIR__.\'/../routes/web.php\');');
+                ->toContain('require __DIR__.\'/../routes/web.php\';');
 
             expect(! File::exists($broadcastServicePath))
-                ->toBe(true, "File not created at expected path:\n".$broadcastServicePath."\nCommand result:\n".$output."\n\n");
+                ->toBe(true, "File should not have been generated:\n".$broadcastServicePath."\nCommand result:\n".$output."\n\n");
+
             expect(! File::exists($routesPath.'channels.php'))
-                ->toBe(true, "File not created at expected path:\n".$routesPath.'api.php'."\nCommand result:\n".$output."\n\n");
+                ->toBe(true, "File should not have been generated:\n".$routesPath.'api.php'."\nCommand result:\n".$output."\n\n");
+
+            expect(File::exists($welcomePath))
+                ->toBe(true, "File not created at expected path:\n".$welcomePath."\nCommand result:\n".$output."\n\n");
         }
     })->with('classes');
 
@@ -159,7 +167,6 @@ describe('init:micro', function () {
         $output = Artisan::output();
 
         $class = ucfirst($class);
-        $slug = Str::slug(ucfirst($class));
 
         $paths = [
             "app/Test/Microservices/$class/Console/Commands",
@@ -176,6 +183,7 @@ describe('init:micro', function () {
             $routeServicePath = app_path("Test/Microservices/$class/Providers/RouteServiceProvider.php");
             $broadcastServicePath = app_path("Test/Microservices/$class/Providers/BroadcastServiceProvider.php");
             $routesPath = app_path("Test/Microservices/$class/routes/");
+            $welcomePath = app_path("Test/Microservices/$class/resources/views/welcome.blade.php");
 
             $serviceNamespace = fullNamespaceStr("App\\Test\\Microservices\\$class");
 
@@ -183,22 +191,27 @@ describe('init:micro', function () {
                 ->toBe(true, "File not created at expected path:\n".$servicePath."\nCommand result:\n".$output."\n\n");
 
             expect(File::get($servicePath))
-                ->toContain($serviceNamespace);
+                ->toContain($serviceNamespace)
+                ->not->toContain('BroadcastServicProvider')
+                ->not->toContain('RouteServiceProvider');
 
             expect(! File::exists($routeServicePath))
-                ->toBe(true, "File not created at expected path:\n".$routeServicePath."\nCommand result:\n".$output."\n\n");
+                ->toBe(true, "File should not have been generated:\n".$routeServicePath."\nCommand result:\n".$output."\n\n");
 
             expect(! File::exists($broadcastServicePath))
-                ->toBe(true, "File not created at expected path:\n".$broadcastServicePath."\nCommand result:\n".$output."\n\n");
+                ->toBe(true, "File should not have been generated:\n".$broadcastServicePath."\nCommand result:\n".$output."\n\n");
 
             expect(! File::exists($routesPath.'web.php'))
-                ->toBe(true, "File not created at expected path:\n".$routesPath.'web.php'."\nCommand result:\n".$output."\n\n");
+                ->toBe(true, "File should not have been generated:\n".$routesPath.'web.php'."\nCommand result:\n".$output."\n\n");
 
             expect(! File::exists($routesPath.'api.php'))
-                ->toBe(true, "File not created at expected path:\n".$routesPath.'api.php'."\nCommand result:\n".$output."\n\n");
+                ->toBe(true, "File should not have been generated:\n".$routesPath.'api.php'."\nCommand result:\n".$output."\n\n");
 
             expect(! File::exists($routesPath.'channels.php'))
-                ->toBe(true, "File not created at expected path:\n".$routesPath.'api.php'."\nCommand result:\n".$output."\n\n");
+                ->toBe(true, "File should not have been generated:\n".$routesPath.'api.php'."\nCommand result:\n".$output."\n\n");
+
+            expect(! File::exists($welcomePath))
+                ->toBe(true, "File should not have been generated:\n".$welcomePath."\nCommand result:\n".$output."\n\n");
         }
     })->with('classes');
 });

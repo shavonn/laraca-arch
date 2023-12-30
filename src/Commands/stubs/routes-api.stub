@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -10,14 +10,12 @@ use Illuminate\Http\Request;
 */
 
 // prefix: /api/{{ slug }}
-Route::middleware('api')->group(['prefix' => '{{ slug }}'], function() {
-    // namespace {{ controller_namespace }}
-    Route::get('/', function() {
-        return response()->json(['path' => '/api/{{ slug }}']);
-    });
+// namespace: {{ controller_namespace }}
 
-    Route::middleware('auth:api')->get('/user', function (Request $request) {
-        return $request->user();
-    });
+Route::get('/', function() {
+    return response()->json(['path' => '/api/{{ slug }}']);
+});
 
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
 });

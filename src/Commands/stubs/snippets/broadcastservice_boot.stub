@@ -1,3 +1,0 @@
-Broadcast::routes();
-
-        require __DIR__.'/../routes/channels.php';

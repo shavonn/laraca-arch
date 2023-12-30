@@ -175,6 +175,7 @@ return [
             'path' => 'Microservices',
             'parent' => 'app',
             'elements' => [
+                'channel',
                 'command',
                 'controller',
                 'job',
