@@ -46,14 +46,14 @@ class MakeServiceCommand extends LaracaGeneratorCommand
     {
         $name = $this->getClassName($this->input->getArgument('name'));
 
-        if (! parent::handle()) {
+        if (!parent::handle()) {
             return false;
         }
 
         $interface = Str::of($name)->finish('Interface');
 
-        $interfacePath = $this->makeFile($interface, __DIR__.'/stubs/interface.stub');
-        $servicePath = $this->makeFile($name, __DIR__.'/stubs/service.stub');
+        $interfacePath = $this->makeFile($interface, __DIR__ . '/stubs/interface.stub');
+        $servicePath = $this->makeFile($name, __DIR__ . '/stubs/service.stub');
 
         $info = $this->type;
 
@@ -75,11 +75,7 @@ class MakeServiceCommand extends LaracaGeneratorCommand
      */
     protected function getClassName($name): string
     {
-        $name = ltrim($name, '\\/');
-
-        $name = str_replace('/', '\\', $name);
-
-        $name = ucfirst($name);
+        $name = parent::getClassName($name);
 
         return Str::of($name)->endsWith('Service') ? $name : Str::of($name)->finish('Service');
     }
@@ -111,7 +107,7 @@ class MakeServiceCommand extends LaracaGeneratorCommand
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The name of the '.strtolower($this->type)],
+            ['name', InputArgument::REQUIRED, 'The name of the ' . strtolower($this->type)],
         ];
     }
 }
