@@ -45,7 +45,10 @@ class MakeServiceCommand extends LaracaGeneratorCommand
     public function handle()
     {
         $name = $this->getClassName($this->input->getArgument('name'));
-        $name = Str::of($name)->endsWith('Service') ? $name : Str::of($name)->finish('Service');
+
+        if (! parent::handle()) {
+            return false;
+        }
 
         $interface = Str::of($name)->finish('Interface');
 
@@ -65,6 +68,20 @@ class MakeServiceCommand extends LaracaGeneratorCommand
         }
 
         $this->components->info(sprintf('%s [%s] and interface [%s] created successfully.', $info, $servicePath, $interfacePath));
+    }
+
+    /**
+     * Get the class name
+     */
+    protected function getClassName($name): string
+    {
+        $name = ltrim($name, '\\/');
+
+        $name = str_replace('/', '\\', $name);
+
+        $name = ucfirst($name);
+
+        return Str::of($name)->endsWith('Service') ? $name : Str::of($name)->finish('Service');
     }
 
     /**

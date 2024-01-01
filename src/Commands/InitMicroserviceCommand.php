@@ -3,7 +3,6 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -47,30 +46,19 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
     protected $servicePath = '';
 
     /**
-     * Generated files.
-     *
-     * @var array
-     */
-    protected $generated = [];
-
-    /**
      * Execute the console command.
      *
      * @return bool|null
      */
     public function handle()
     {
-        if ($this->input->hasOption('domain')) {
-            $domainName = ucfirst($this->input->getOption('domain'));
-            if (self::domainsEnabled() && $domainName) {
-                $servicePath = self::assembleFullPath('microservice', $domainName);
-            }
-        } else {
-            $servicePath = $this->assembleFullPath('microservice');
-        }
-
-        $this->serviceName = ucfirst($this->input->getArgument('name'));
+        $this->serviceName = $this->getClassName($this->input->getArgument('name'));
+        $servicePath = $this->getGenerationPath('microservice');
         $this->servicePath = "$servicePath/$this->serviceName";
+
+        if (! parent::handle()) {
+            return false;
+        }
 
         $this->makeDirectories();
 
@@ -78,11 +66,11 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
 
         $this->makeRouteFiles();
 
-        $this->makeFile('welcome', __DIR__ . '/stubs/welcome.stub');
+        $this->makeFile('welcome', __DIR__.'/stubs/welcome.stub');
 
         $this->components->bulletList($this->generated);
         $this->components->info('Microservice created successfully.');
-        $this->components->info('Don\'t forget to <info>' . $this->serviceName . 'ServiceProvider.php</info> to providers in <info>app.php</info>');
+        $this->components->info('Don\'t forget to <info>'.$this->serviceName.'ServiceProvider.php</info> to providers in <info>app.php</info>');
 
         return Command::SUCCESS;
     }
@@ -92,7 +80,7 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
      */
     protected function replaceTags(string &$stub, string $name): string
     {
-        $namespace = $this->rootNamespace();
+        $namespace = $this->getDefaultNamespace($this->rootNamespace());
         $controllerNamespace = $this->assembleNamespace('controller', null, $this->serviceName);
 
         $search = ['{{ namespace }}', '{{ slug }}', '{{ service }}', '{{ controller_namespace }}'];
@@ -108,9 +96,9 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
      */
     protected function makeRouteFiles(): void
     {
-        $this->makeFile('web', __DIR__ . '/stubs/routes-web.stub');
-        $this->makeFile('api', __DIR__ . '/stubs/routes-api.stub');
-        $this->makeFile('channels', __DIR__ . '/stubs/routes-channels.stub');
+        $this->makeFile('web', __DIR__.'/stubs/routes-web.stub');
+        $this->makeFile('api', __DIR__.'/stubs/routes-api.stub');
+        $this->makeFile('channels', __DIR__.'/stubs/routes-channels.stub');
     }
 
     /**
@@ -133,10 +121,10 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
                     $path = "$this->servicePath/routes";
                     break;
                 case 'test':
-                    $path = "$this->servicePath/" . $this->assembleRelativePath('test', null, null, false);
+                    $path = "$this->servicePath/".$this->assembleRelativePath('test', null, null, false);
                     break;
                 case 'view':
-                    $path = "$this->servicePath/" . $this->assembleRelativePath('view', null, null, false);
+                    $path = "$this->servicePath/".$this->assembleRelativePath('view', null, null, false);
                     break;
 
                 default:
@@ -154,14 +142,14 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
     protected function makeProviders()
     {
         // RouteServiceProvider
-        $routeProvider = $this->makeFile('RouteServiceProvider', __DIR__ . '/stubs/serviceprovider-route.stub');
+        $this->makeFile('RouteServiceProvider', __DIR__.'/stubs/serviceprovider-route.stub');
 
         // BroadcastServiceProvider
-        $broadcastProvider = $this->makeFile('BroadcastServiceProvider', __DIR__ . '/stubs/serviceprovider-broadcast.stub');
+        $this->makeFile('BroadcastServiceProvider', __DIR__.'/stubs/serviceprovider-broadcast.stub');
 
         // Root ServiceProvider
         $serviceProviderName = Str::of($this->serviceName)->finish('ServiceProvider');
-        $serviceProvider = $this->makeFile($serviceProviderName, __DIR__ . '/stubs/serviceprovider.stub');
+        $this->makeFile($serviceProviderName, __DIR__.'/stubs/serviceprovider.stub');
     }
 
     /**
@@ -169,41 +157,48 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
      */
     protected function getPath(string $name): string
     {
-        $name = Str::of($name)->replaceFirst($this->rootNamespace(), '')->replace('\\', '/');
+        $name = Str::of($name)->replaceFirst($this->getDefaultNamespace($this->rootNamespace()), '')->replace('\\', '/');
 
         $path = $this->servicePath;
 
         switch ($name) {
             case 'BroadcastServiceProvider':
             case 'RouteServiceProvider':
-                $path = $this->assembleFullPath('provider', null, $this->serviceName) . "/$name.php";
+                $path = $this->assembleFullPath('provider', null, $this->serviceName)."/$name.php";
                 break;
             case 'api':
             case 'channels':
             case 'web':
-                $path = $path . "/routes/$name.php";
+                $path = $path."/routes/$name.php";
                 break;
             case 'welcome':
-                $path = app_path($this->assembleRelativePath('view', null, $this->serviceName) . "/$name.blade.php");
+                $path = app_path($this->assembleRelativePath('view', null, $this->serviceName)."/$name.blade.php");
                 break;
             default:
-                $path = $path . "/$name.php";
+                $path = $path."/$name.php";
         }
-
-        array_push($this->generated, $path);
 
         return $path;
     }
 
-    /**
-     * rootNamespace
-     * Get the root namespace for the class.
-     */
-    protected function rootNamespace(): string
+    protected function getDefaultNamespace($rootNamespace): string
     {
-        $namespace = parent::rootNamespace();
+        $path = $this->assembleNamespace('microservice');
 
-        return "$namespace\\$this->serviceName";
+        return "$path\\$this->serviceName";
+    }
+
+    /**
+     * Determine if the class already exists.
+     *
+     * @param  string  $rawName
+     * @return bool
+     */
+    protected function alreadyExists($rawName)
+    {
+        $serviceProviderName = Str::of($this->serviceName)->finish('ServiceProvider');
+
+        return $this->files->exists($this->getPath($serviceProviderName));
     }
 
     /**
@@ -214,7 +209,7 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The name of the ' . strtolower($this->type)],
+            ['name', InputArgument::REQUIRED, 'The name of the '.strtolower($this->type)],
         ];
     }
 }

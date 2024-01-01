@@ -6,6 +6,7 @@ use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
+use Symfony\Component\Console\Input\InputOption;
 
 class LaracaGeneratorCommand extends Command
 {
@@ -33,6 +34,13 @@ class LaracaGeneratorCommand extends Command
     protected $key;
 
     /**
+     * Generated files.
+     *
+     * @var array
+     */
+    protected $generated = [];
+
+    /**
      * Create a new controller creator command instance.
      *
      * @return void
@@ -40,21 +48,30 @@ class LaracaGeneratorCommand extends Command
     public function __construct(Filesystem $files)
     {
         parent::__construct();
-        $this->key = strtolower($this->type);
 
+        $this->key = strtolower($this->type);
         $this->files = $files;
     }
 
     /**
-     * Get the class name
+     * Execute the console command.
+     *
+     * @return bool|null
+     *
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    protected function getClassName($name): string
+    public function handle()
     {
-        $name = ltrim($name, '\\/');
+        if ((! $this->hasOption('force') ||
+                ! $this->option('force')) &&
+            $this->alreadyExists($this->input->getArgument('name'))
+        ) {
+            $this->components->error($this->type.' already exists.');
 
-        $name = str_replace('/', '\\', $name);
+            return false;
+        }
 
-        return ucfirst($name);
+        return true;
     }
 
     /**
@@ -124,6 +141,8 @@ class LaracaGeneratorCommand extends Command
         $content = $this->replaceTags($stub, $name);
         $this->files->put($path, $content);
 
+        array_push($this->generated, $path);
+
         return $path;
     }
 
@@ -151,11 +170,46 @@ class LaracaGeneratorCommand extends Command
     }
 
     /**
-     * rootNamespace
-     * Get the root namespace for the class.
+     * Get the default namespace for the class.
+     *
+     * @param  string  $rootNamespace
+     * @return string
      */
-    protected function rootNamespace(): string
+    protected function getDefaultNamespace($rootNamespace)
     {
         return $this->getClassNamespace($this->key);
+    }
+
+    /**
+     * Determine if the class already exists.
+     *
+     * @param  string  $rawName
+     * @return bool
+     */
+    protected function alreadyExists($rawName)
+    {
+        return $this->files->exists($this->getPath($this->getClassName($rawName)));
+    }
+
+    /**
+     * Get the root namespace for the class.
+     *
+     * @return string
+     */
+    protected function rootNamespace()
+    {
+        return $this->laravel->getNamespace();
+    }
+
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return [
+            ['force', 'f', InputOption::VALUE_NONE, 'Create the '.strtolower($this->type).' even if it already exists'],
+        ];
     }
 }
