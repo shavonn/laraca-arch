@@ -26,6 +26,6 @@ class MakeCastCommand extends CastMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getClassNamespace('cast');
+        return $this->getFullNamespace('cast');
     }
 }

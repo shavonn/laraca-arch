@@ -52,7 +52,7 @@ class MakeValueCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $this->getClassNamespace('value');
+        return $this->getFullNamespace('value');
     }
 
     /**

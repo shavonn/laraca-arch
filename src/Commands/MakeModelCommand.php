@@ -60,7 +60,7 @@ class MakeModelCommand extends ModelMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getClassNamespace('model');
+        return $this->getFullNamespace('model');
     }
 
     /**

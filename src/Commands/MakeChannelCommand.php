@@ -26,6 +26,6 @@ class MakeChannelCommand extends ChannelMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getClassNamespace('channel');
+        return $this->getFullNamespace('channel');
     }
 }

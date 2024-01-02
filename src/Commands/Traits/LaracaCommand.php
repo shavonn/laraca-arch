@@ -26,27 +26,40 @@ trait LaracaCommand
     }
 
     /**
-     * Get the namespace with the possibility of domain or service flags
-     *
-     * @param  string  $key
+     * Get domain and service values
      */
-    protected function getClassNamespace($key): string
+    protected function gatherPathAssets(): array
     {
+        $domain = null;
+        $service = null;
+
         if ($this->input->hasOption('domain')) {
             $domainName = $this->getClassName($this->input->getOption('domain'));
             if (self::domainsEnabled() && $domainName) {
-                return self::assembleNamespace($key, $domainName);
+                $domain = $domainName;
             }
         }
 
         if ($this->input->hasOption('service')) {
             $serviceName = $this->getClassName($this->input->getOption('service'));
             if (self::microservicesEnabled() && $serviceName) {
-                return self::assembleNamespace($key, null, $serviceName);
+                $service = $serviceName;
             }
         }
 
-        return self::assembleNamespace($key);
+        return [$domain, $service];
+    }
+
+    /**
+     * Get the namespace with the possibility of domain or service flags
+     *
+     * @param  string  $key
+     */
+    protected function getFullNamespace($key): string
+    {
+        [$domain, $service] = $this->gatherPathAssets();
+
+        return self::assembleNamespace($key, $domain, $service);
     }
 
     /**
@@ -54,22 +67,30 @@ trait LaracaCommand
      *
      * @param  string  $key
      */
-    protected function getGenerationPath($key): string
+    protected function getBasePath($key): string
     {
-        if ($this->input->hasOption('domain')) {
-            $domainName = $this->getClassName($this->input->getOption('domain'));
-            if (self::domainsEnabled() && $domainName) {
-                return self::assembleFullPath($key, $domainName);
+        return self::assembleBasePath($key);
+    }
+
+    /**
+     * Get the path with the possibility of domain or service flags
+     */
+    public function getFullPath(string $key, bool $withRoot = true): string
+    {
+        [$domain, $service] = $this->gatherPathAssets();
+
+        [$pathArray, $root] = self::assemblePathArray($key, $domain, $service);
+
+        $path = implode('/', $pathArray);
+
+        if ($withRoot) {
+            if ($root == 'app') {
+                $path = app_path($path);
+            } elseif ($root == 'base') {
+                $path = base_path($path);
             }
         }
 
-        if ($this->input->hasOption('service')) {
-            $serviceName = $this->getClassName($this->input->getOption('service'));
-            if (self::microservicesEnabled() && $serviceName) {
-                return self::assembleFullPath($key, null, $serviceName);
-            }
-        }
-
-        return self::assembleFullPath($key);
+        return $path;
     }
 }

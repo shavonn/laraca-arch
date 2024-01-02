@@ -33,4 +33,20 @@ describe('make:service', function () {
         expect(File::get($interfaceFilePath))
             ->toContain($configNamespace);
     })->with('classes');
+
+    it('should not allow the same service to be created twice', function (string $class) {
+        Config::set('laraca.struct.service.path', 'Test/Services');
+        $this->artisan(
+            'make:service',
+            ['name' => $class]
+        );
+
+        $this->artisan(
+            'make:service',
+            ['name' => $class]
+        );
+
+        $output = Artisan::output();
+        expect($output)->toContain('already exists');
+    })->with('classes');
 });

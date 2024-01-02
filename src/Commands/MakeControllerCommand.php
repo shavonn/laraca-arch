@@ -26,6 +26,6 @@ class MakeControllerCommand extends ControllerMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getClassNamespace('controller');
+        return $this->getFullNamespace('controller');
     }
 }

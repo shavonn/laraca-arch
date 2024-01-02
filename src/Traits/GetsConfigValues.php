@@ -50,22 +50,6 @@ trait GetsConfigValues
     }
 
     /**
-     * assembleRelativePath
-     */
-    public static function assembleRelativePath(string $key, ?string $domain = null, ?string $service = null, bool $withRoot = true): string
-    {
-        [$pathArray, $root] = self::assemblePathArray($key, $domain, $service);
-
-        $path = implode('/', $pathArray);
-
-        if ($root == 'app' && $withRoot) {
-            $path = 'app/'.$path;
-        }
-
-        return $path;
-    }
-
-    /**
      * assembleFullPath
      */
     public static function assembleFullPath(string $key, ?string $domain = null, ?string $service = null, bool $withRoot = true): string
@@ -86,6 +70,18 @@ trait GetsConfigValues
     }
 
     /**
+     * assembleBasePath
+     */
+    public static function assembleBasePath(string $key): string
+    {
+        [$pathArray, $root] = self::assembleBasePathArray($key);
+
+        $path = implode('/', $pathArray);
+
+        return $path;
+    }
+
+    /**
      * assembleNamespace
      */
     public static function assembleNamespace(string $key, ?string $domain = null, ?string $service = null, bool $withRoot = true): string
@@ -97,7 +93,7 @@ trait GetsConfigValues
         }
 
         $pathArray = array_map(function ($dir) {
-            return ucfirst($dir);
+            return str_replace('/', '\\', ucfirst($dir));
         }, $pathArray);
 
         $namespace = implode('\\', $pathArray);
@@ -118,13 +114,43 @@ trait GetsConfigValues
             throw new InvalidConfigKeyException($key);
         }
 
-        $path = [];
+        [$pathArray, $root] = self::assembleBasePathArray($key);
+
+        if (self::microservicesEnabled() && $service) {
+            array_unshift($pathArray, ucfirst($service));
+
+            if (self::microserviceParentDir()) {
+                array_unshift($pathArray, self::microserviceParentDir());
+            }
+        }
+
+        if (self::domainsEnabled() && $domain) {
+            array_unshift($pathArray, ucfirst($domain));
+
+            if (self::domainParentDir()) {
+                array_unshift($pathArray, self::domainParentDir());
+            }
+        }
+
+        return [$pathArray, $root];
+    }
+
+    /**
+     * assemblePathArray
+     */
+    protected static function assembleBasePathArray(string $key): array
+    {
+        if (! Config::has('laraca.struct.'.$key)) {
+            throw new InvalidConfigKeyException($key);
+        }
+
+        $pathArray = [];
         $current = Config::get('laraca.struct.'.$key);
         $done = false;
 
         do {
             if (array_key_exists('path', $current)) {
-                $path = array_merge(explode('/', $current['path']), $path);
+                $pathArray = array_merge(explode('/', $current['path']), $pathArray);
             } else {
                 // key config missing path or namespace value
                 throw new MissingPathNamespaceKeyException($key);
@@ -134,24 +160,7 @@ trait GetsConfigValues
                 $parentKey = $current['parent'];
 
                 if ($parentKey == 'app' || $parentKey == 'base') {
-
-                    if (self::domainsEnabled() && $domain) {
-                        array_unshift($path, ucfirst($domain));
-
-                        if (self::domainParentDir()) {
-                            array_unshift($path, self::domainParentDir());
-                        }
-                    }
-
-                    if (self::microservicesEnabled() && $service) {
-                        array_unshift($path, ucfirst($service));
-
-                        if (self::microserviceParentDir()) {
-                            array_unshift($path, self::microserviceParentDir());
-                        }
-                    }
-
-                    $base = $parentKey;
+                    $root = $parentKey;
                     $done = true;
                 } elseif (Config::has('laraca.struct.'.$parentKey)) {
                     $current = Config::get('laraca.struct.'.$parentKey);
@@ -166,6 +175,6 @@ trait GetsConfigValues
 
         } while ($done !== true);
 
-        return [$path, $base];
+        return [$pathArray, $root];
     }
 }
