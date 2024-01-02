@@ -1,39 +1,39 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
+
+use function Pest\Laravel\artisan;
 
 describe('make:model', function () {
     it('should create Model class with namespace and path created from configured vals', function (string $class) {
         Config::set('laraca.struct.model.path', 'Test/Data/Models');
-        $this->artisan('make:model',
-            ['name' => $class]);
 
-        $configPath = assembleFullPath('model');
-        $filePath = "$configPath/$class.php";
+        artisan('make:model', ['name' => $class]);
 
-        $output = Artisan::output();
+        $modelPath = app_path("Test/Data/Models/$class.php");
 
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
+        expect($modelPath)->toBeFile();
 
-        $configNamespace = fullNamespaceStr('App\Test\Data\Models');
-
-        expect(File::get($filePath))
-            ->toContain($configNamespace);
-
+        expect(File::get($modelPath))->toContain(
+            'namespace App\Test\Data\Models;',
+            "class $class",
+        );
     })->with('classes');
 
     it('should create a Model class with HasUuids trait', function (string $class) {
         Config::set('laraca.struct.model.path', 'Test/Data/Models');
-        $this->artisan('make:model',
-            ['name' => $class, '--uuid' => true]);
 
-        $configPath = assembleFullPath('model');
+        artisan('make:model', ['name' => $class, '--uuid' => true]);
 
-        expect(File::get("$configPath/$class.php"))
-            ->toContain('HasUuids');
+        $modelPath = app_path("Test/Data/Models/$class.php");
 
+        expect($modelPath)->toBeFile();
+
+        expect(File::get($modelPath))->toContain(
+            'namespace App\Test\Data\Models;',
+            "class $class",
+            'HasUuids',
+        );
     })->with('classes');
 });
