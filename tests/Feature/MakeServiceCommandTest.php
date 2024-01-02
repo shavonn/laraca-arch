@@ -7,8 +7,10 @@ use Illuminate\Support\Facades\File;
 describe('make:service', function () {
     it('should create Service class and interface with namespace and path created from configured vals', function (string $class) {
         Config::set('laraca.struct.service.path', 'Test/Services');
-        $this->artisan('make:service',
-            ['name' => $class]);
+        $this->artisan(
+            'make:service',
+            ['name' => $class]
+        );
 
         $class = ucfirst($class);
         $configPath = assembleFullPath('service');
@@ -30,6 +32,5 @@ describe('make:service', function () {
 
         expect(File::get($interfaceFilePath))
             ->toContain($configNamespace);
-
     })->with('classes');
 });
