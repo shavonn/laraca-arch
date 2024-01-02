@@ -25,6 +25,6 @@ class MakeProviderCommand extends ProviderMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getClassNamespace('provider');
+        return $this->getFullNamespace('provider');
     }
 }

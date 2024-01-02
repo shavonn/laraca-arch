@@ -36,6 +36,6 @@ class MakeSeederCommand extends SeederMakeCommand
      */
     protected function rootNamespace(): string
     {
-        return $this->getClassNamespace('seeder');
+        return $this->getFullNamespace('seeder');
     }
 }

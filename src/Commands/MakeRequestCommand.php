@@ -26,6 +26,6 @@ class MakeRequestCommand extends RequestMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getClassNamespace('request');
+        return $this->getFullNamespace('request');
     }
 }

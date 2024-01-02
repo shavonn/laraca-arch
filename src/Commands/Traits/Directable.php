@@ -21,7 +21,7 @@ trait Directable
             ]);
         }
 
-        if (self::microservicesEnabled()) {
+        if (self::microservicesEnabled() && $this->type !== 'Microservice') {
             $options = array_merge($options, [
                 ['service', 'serv', InputOption::VALUE_REQUIRED, 'The name of the service.'],
             ]);

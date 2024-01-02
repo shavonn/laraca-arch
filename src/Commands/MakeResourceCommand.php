@@ -26,6 +26,6 @@ class MakeResourceCommand extends ResourceMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getClassNamespace('resource');
+        return $this->getFullNamespace('resource');
     }
 }

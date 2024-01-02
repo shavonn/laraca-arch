@@ -26,6 +26,6 @@ class MakeMailCommand extends MailMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getClassNamespace('mail');
+        return $this->getFullNamespace('mail');
     }
 }

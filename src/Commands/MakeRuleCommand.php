@@ -26,6 +26,6 @@ class MakeRuleCommand extends RuleMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getClassNamespace('rule');
+        return $this->getFullNamespace('rule');
     }
 }

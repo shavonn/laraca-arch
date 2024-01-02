@@ -177,7 +177,7 @@ class LaracaGeneratorCommand extends Command
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $this->getClassNamespace($this->key);
+        return $this->getFullNamespace($this->key);
     }
 
     /**

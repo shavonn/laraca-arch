@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Symfony\Component\Console\Exception\InvalidOptionException;
+
+use function Pest\Laravel\artisan;
 
 describe('init:micro', function () {
     it('should implement microservice with selected elements', function (string $class) {
@@ -47,6 +50,9 @@ describe('init:micro', function () {
         expect(File::get($servicePath))
             ->toContain($serviceNamespace);
 
+        expect(File::exists(app_path("Test/Microservices/$class/Providers/RouteServiceProvider.php")))
+            ->toBe(true, "File not created at expected path:\n".$routeServicePath."\nCommand result:\n".$output."\n\n");
+
         expect(File::exists($routeServicePath))
             ->toBe(true, "File not created at expected path:\n".$routeServicePath."\nCommand result:\n".$output."\n\n");
         expect(File::get($routeServicePath))
@@ -80,4 +86,44 @@ describe('init:micro', function () {
         expect(File::exists($welcomePath))
             ->toBe(true, "File not created at expected path:\n".$welcomePath."\nCommand result:\n".$output."\n\n");
     })->with('classes');
+
+    it('should not allow the same microservice to be created twice', function (string $class) {
+        config(['laraca.struct.microservice.path' => 'Test/Microservices']);
+        $this->artisan(
+            'init:micro',
+            ['name' => $class]
+        );
+
+        $this->artisan(
+            'init:micro',
+            ['name' => $class]
+        );
+
+        $output = Artisan::output();
+        expect($output)->toContain('already exists');
+    })->with('classes');
+
+    it('should create microservice in domain', function () {
+        config(['laraca.struct.domain.enabled' => true]);
+        config(['laraca.struct.domain.path' => 'Test/Domains']);
+
+        artisan('init:micro', ['name' => 'FooCreated', '--domain' => 'Foo']);
+
+        $serviceProviderPath = app_path('Test/Domains/Foo/Microservices/FooCreated/FooCreatedServiceProvider.php');
+
+        expect($serviceProviderPath)->toBeFile();
+
+        expect(File::get($serviceProviderPath))->toContain(
+            'namespace App\Test\Domains\Foo\Microservices\FooCreated;',
+            'class FooCreated',
+        );
+    });
+
+    it('should not create a service with service flag', function () {
+        config(['laraca.struct.domain.enabled' => true]);
+        config(['laraca.struct.domain.path' => 'Test/Domains']);
+
+        artisan('init:micro', ['name' => 'FooCreated', '--service' => 'Foo']);
+
+    })->throws(InvalidOptionException::class);
 });

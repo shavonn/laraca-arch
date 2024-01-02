@@ -38,6 +38,6 @@ class MakeFactoryCommand extends FactoryMakeCommand
      */
     protected function getNamespace($name)
     {
-        return $this->getClassNamespace('factory');
+        return $this->getFullNamespace('factory');
     }
 }

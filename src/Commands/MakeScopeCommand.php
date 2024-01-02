@@ -26,6 +26,6 @@ class MakeScopeCommand extends ScopeMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getClassNamespace('scope');
+        return $this->getFullNamespace('scope');
     }
 }

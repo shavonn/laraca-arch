@@ -26,6 +26,6 @@ class MakeNotificationCommand extends NotificationMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getClassNamespace('notification');
+        return $this->getFullNamespace('notification');
     }
 }
