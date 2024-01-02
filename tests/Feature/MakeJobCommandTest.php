@@ -1,27 +1,23 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
+
+use function Pest\Laravel\artisan;
 
 describe('make:job', function () {
     it('should create Job class with namespace and path created from configured vals', function (string $class) {
         Config::set('laraca.struct.job.path', 'Test/Jobs');
-        $this->artisan('make:job',
-            ['name' => $class]);
 
-        $configPath = assembleFullPath('job');
-        $filePath = "$configPath/$class.php";
+        artisan('make:job', ['name' => $class]);
 
-        $output = Artisan::output();
+        $jobPath = app_path("Test/Jobs/$class.php");
 
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
+        expect($jobPath)->toBeFile();
 
-        $configNamespace = fullNamespaceStr('App\Test\Jobs');
-
-        expect(File::get($filePath))
-            ->toContain($configNamespace);
-
+        expect(File::get($jobPath))->toContain(
+            'namespace App\Test\Jobs;',
+            "class $class",
+        );
     })->with('classes');
 });
