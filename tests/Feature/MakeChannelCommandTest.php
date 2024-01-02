@@ -1,27 +1,23 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
+
+use function Pest\Laravel\artisan;
 
 describe('make:channel', function () {
     it('should create Channel class with namespace and path created from configured vals', function (string $class) {
         Config::set('laraca.struct.channel.path', 'Test/Broadcasting');
-        $this->artisan('make:channel',
-            ['name' => $class]);
 
-        $configPath = assembleFullPath('channel');
-        $filePath = "$configPath/$class.php";
+        artisan('make:channel', ['name' => $class]);
 
-        $output = Artisan::output();
+        $channelPath = app_path("Test/Broadcasting/$class.php");
 
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
+        expect($channelPath)->toBeFile();
 
-        $configNamespace = fullNamespaceStr('App\Test\Broadcasting');
-
-        expect(File::get($filePath))
-            ->toContain($configNamespace);
-
+        expect(File::get($channelPath))->toContain(
+            'namespace App\Test\Broadcasting;',
+            "class $class",
+        );
     })->with('classes');
 });

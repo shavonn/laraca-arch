@@ -1,27 +1,23 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
+
+use function Pest\Laravel\artisan;
 
 describe('make:enum', function () {
     it('should create Enum class with namespace and path created from configured vals', function (string $class) {
         Config::set('laraca.struct.enum.path', 'Test/Enums');
-        $this->artisan('make:enum',
-            ['name' => $class]);
 
-        $configPath = assembleFullPath('enum');
-        $filePath = "$configPath/$class.php";
+        artisan('make:enum', ['name' => $class]);
 
-        $output = Artisan::output();
+        $enumPath = app_path("Test/Enums/$class.php");
 
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
+        expect($enumPath)->toBeFile();
 
-        $configNamespace = fullNamespaceStr('App\Test\Enums');
-
-        expect(File::get($filePath))
-            ->toContain($configNamespace);
-
+        expect(File::get($enumPath))->toContain(
+            'namespace App\Test\Enums;',
+            "enum $class",
+        );
     })->with('classes');
 });
