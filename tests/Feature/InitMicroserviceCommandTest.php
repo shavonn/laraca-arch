@@ -88,7 +88,8 @@ describe('init:micro', function () {
     })->with('classes');
 
     it('should not allow the same microservice to be created twice', function (string $class) {
-        config(['laraca.struct.microservice.path' => 'Test/Microservices']);
+        Config::set('laraca.struct.microservice.path', 'Test/Microservices');
+
         $this->artisan(
             'init:micro',
             ['name' => $class]
@@ -104,26 +105,26 @@ describe('init:micro', function () {
     })->with('classes');
 
     it('should create microservice in domain', function () {
-        config(['laraca.struct.domain.enabled' => true]);
-        config(['laraca.struct.domain.path' => 'Test/Domains']);
+        Config::set('laraca.struct.domain.enabled', true);
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
-        artisan('init:micro', ['name' => 'FooCreated', '--domain' => 'Foo']);
+        artisan('init:micro', ['name' => 'FooCreated', '--domain' => 'Bar']);
 
-        $serviceProviderPath = app_path('Test/Domains/Foo/Microservices/FooCreated/FooCreatedServiceProvider.php');
+        $serviceProviderPath = app_path('Test/Domains/Bar/Microservices/FooCreated/FooCreatedServiceProvider.php');
 
         expect($serviceProviderPath)->toBeFile();
 
         expect(File::get($serviceProviderPath))->toContain(
-            'namespace App\Test\Domains\Foo\Microservices\FooCreated;',
+            'namespace App\Test\Domains\Bar\Microservices\FooCreated;',
             'class FooCreated',
         );
     });
 
     it('should not create a service with service flag', function () {
-        config(['laraca.struct.domain.enabled' => true]);
-        config(['laraca.struct.domain.path' => 'Test/Domains']);
+        Config::set('laraca.struct.domain.enabled', true);
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
-        artisan('init:micro', ['name' => 'FooCreated', '--service' => 'Foo']);
+        artisan('init:micro', ['name' => 'FooCreated', '--service' => 'Bar']);
 
     })->throws(InvalidOptionException::class);
 });

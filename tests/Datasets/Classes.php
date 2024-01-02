@@ -2,9 +2,7 @@
 
 dataset('classes', function () {
     return [
-        'Testy',
+        'Tester',
         'dataThing',
-        'New_Object',
-        'PackageClass',
     ];
 });

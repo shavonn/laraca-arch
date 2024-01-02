@@ -4,10 +4,13 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
+use function Pest\Laravel\artisan;
+
 describe('make:view', function () {
     it('should create blade file at package configured path', function (string $class) {
         Config::set('laraca.struct.view.path', 'test/resources/views');
-        $this->artisan('make:view',
+
+        artisan('make:view',
             ['name' => $class]);
 
         $filePath = assembleFullPath('view')."/{$class}.blade.php";
@@ -19,17 +22,14 @@ describe('make:view', function () {
 
     })->with('classes');
 
-    it('should create blade file at Laravel configured path when view not set in laraca config', function (string $class) {
+    it('should create blade file at Laravel configured path when view not set in laraca config', function () {
         Config::offsetUnset('view');
-        $this->artisan('make:view',
-            ['name' => $class]);
 
-        $output = Artisan::output();
+        $name = 'foo';
 
-        $filePath = base_path("resources/views/{$class}.blade.php");
+        artisan('make:view', ['name' => $name]);
+        $viewPath = base_path("resources/views/{$name}.blade.php");
 
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
-
-    })->with('classes');
+        expect($viewPath)->toBeFile("File not created at expected path:\n$viewPath");
+    });
 });

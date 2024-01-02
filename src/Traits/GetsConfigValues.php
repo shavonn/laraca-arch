@@ -88,10 +88,6 @@ trait GetsConfigValues
     {
         [$pathArray, $root] = self::assemblePathArray($key, $domain, $service);
 
-        if ($key === 'test') {
-            array_shift($pathArray);
-        }
-
         $pathArray = array_map(function ($dir) {
             return str_replace('/', '\\', ucfirst($dir));
         }, $pathArray);
@@ -116,19 +112,28 @@ trait GetsConfigValues
 
         [$pathArray, $root] = self::assembleBasePathArray($key);
 
-        if (self::microservicesEnabled() && $service) {
-            array_unshift($pathArray, ucfirst($service));
+        if (self::microservicesEnabled() || self::domainsEnabled()) {
+            if ($service || $domain) {
+                if ($service) {
+                    array_unshift($pathArray, ucfirst($service));
 
-            if (self::microserviceParentDir()) {
-                array_unshift($pathArray, self::microserviceParentDir());
-            }
-        }
+                    if (self::microserviceParentDir()) {
+                        array_unshift($pathArray, self::microserviceParentDir());
+                    }
+                }
 
-        if (self::domainsEnabled() && $domain) {
-            array_unshift($pathArray, ucfirst($domain));
+                if ($domain) {
+                    array_unshift($pathArray, ucfirst($domain));
 
-            if (self::domainParentDir()) {
-                array_unshift($pathArray, self::domainParentDir());
+                    if (self::domainParentDir()) {
+                        array_unshift($pathArray, self::domainParentDir());
+                    }
+
+                }
+
+                if ($root == 'base') {
+                    $root = 'app';
+                }
             }
         }
 

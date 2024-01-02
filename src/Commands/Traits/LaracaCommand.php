@@ -3,6 +3,7 @@
 namespace HandsomeBrown\Laraca\Commands\Traits;
 
 use HandsomeBrown\Laraca\Traits\GetsConfigValues;
+use Illuminate\Support\Str;
 
 trait LaracaCommand
 {
@@ -75,22 +76,41 @@ trait LaracaCommand
     /**
      * Get the path with the possibility of domain or service flags
      */
-    public function getFullPath(string $key, bool $withRoot = true): string
+    public function getFullPath(string $key, $withRoot = true): string
     {
         [$domain, $service] = $this->gatherPathAssets();
 
-        [$pathArray, $root] = self::assemblePathArray($key, $domain, $service);
+        return self::assembleFullPath($key, $domain, $service, $withRoot);
+    }
 
-        $path = implode('/', $pathArray);
-
-        if ($withRoot) {
-            if ($root == 'app') {
-                $path = app_path($path);
-            } elseif ($root == 'base') {
-                $path = base_path($path);
-            }
+    /**
+     * Create the matching test case if requested.
+     *
+     * @param  string  $path
+     */
+    protected function handleTestCreation($path): bool
+    {
+        if (! $this->option('test') && ! $this->option('pest')) {
+            return false;
         }
 
-        return $path;
+        $filename = Str::of(basename($path))->remove('.php')->finish('Test');
+
+        $args = [
+            'name' => $filename,
+            '--pest' => $this->option('pest'),
+        ];
+
+        [$domain, $service] = $this->gatherPathAssets();
+
+        if ($domain) {
+            $args['--domain'] = $domain;
+        }
+
+        if ($service) {
+            $args['--service'] = $service;
+        }
+
+        return $this->callSilent('make:test', $args) == 0;
     }
 }
