@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:event', function () {
     it('should create Event class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.event.path', 'Test/Events');
+        Config::set('laraca.struct.event.path', 'Test/Events');
         $this->artisan('make:event',
             ['name' => $class]);
 

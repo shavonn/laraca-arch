@@ -2,17 +2,17 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Commands\Traits\Domainable;
+use HandsomeBrown\Laraca\Commands\Traits\Directable;
 use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Console\Concerns\CreatesMatchingTest;
-use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Input\InputArgument;
 
 #[AsCommand(name: 'make:service')]
-class MakeServiceCommand extends GeneratorCommand
+class MakeServiceCommand extends LaracaGeneratorCommand
 {
-    use Domainable, LaracaCommand;
+    use Directable, LaracaCommand;
 
     /**
      * The console command name.
@@ -44,91 +44,40 @@ class MakeServiceCommand extends GeneratorCommand
      */
     public function handle()
     {
-        if ($this->isReservedName($this->getNameInput())) {
-            $this->components->error('The name "'.$this->getNameInput().'" is reserved by PHP.');
+        $name = $this->getClassName($this->input->getArgument('name'));
 
-            return false;
-        }
-        $name = ucfirst($this->getNameInput());
-        $name = $this->qualifyClass($name);
-        $name = Str::of($name)->endsWith('Service') ? $name : Str::of($name)->finish('Service');
-        $path = $this->getPath($name);
-
-        $interfaceName = Str::of($name)->finish('Interface');
-        $interfacePath = $this->getPath($interfaceName);
-
-        if ((! $this->hasOption('force') ||
-             ! $this->option('force')) &&
-             $this->alreadyExists($this->getNameInput())) {
-            $this->components->error($this->type.' already exists.');
-
+        if (! parent::handle()) {
             return false;
         }
 
-        $this->makeDirectory($path);
-        $this->files->put($path, $this->sortImports($this->buildClass($name)));
+        $interface = Str::of($name)->finish('Interface');
 
-        $this->makeDirectory($interfacePath);
-        $this->files->put($interfacePath, $this->sortImports($this->buildInterface($interfaceName)));
+        $interfacePath = $this->makeFile($interface, __DIR__.'/stubs/interface.stub');
+        $servicePath = $this->makeFile($name, __DIR__.'/stubs/service.stub');
 
         $info = $this->type;
 
         if (in_array(CreatesMatchingTest::class, class_uses_recursive($this))) {
-            if ($this->handleTestCreation($path)) {
+            if ($this->handleTestCreation($servicePath)) {
                 $info .= ' and test';
             }
         }
 
         if (windows_os()) {
-            $path = str_replace('/', '\\', $path);
+            $servicePath = str_replace('/', '\\', $servicePath);
         }
 
-        $this->components->info(sprintf('%s [%s] and interface [%s] created successfully.', $info, $path, $interfacePath));
+        $this->components->info(sprintf('%s [%s] and interface [%s] created successfully.', $info, $servicePath, $interfacePath));
     }
 
     /**
-     * Get the destination class path.
-     *
-     * @param  string  $name
+     * Get the class name
      */
-    protected function getPath($name): string
+    protected function getClassName($name): string
     {
-        $name = Str::replaceFirst($this->rootNamespace(), '', $name);
+        $name = parent::getClassName($name);
 
-        return self::assembleFullPath('service').Str::replace('\\', '/', $name).'.php';
-    }
-
-    /**
-     * Parse the class name and format according to the root namespace.
-     *
-     * @param  string  $name
-     * @return string
-     */
-    protected function qualifyClass($name)
-    {
-        $name = parent::qualifyClass($name);
-
-        return Str::ucfirst($name);
-    }
-
-    /**
-     * Get the stub file for the generator.
-     *
-     * @return string
-     */
-    protected function getStub()
-    {
-        return __DIR__.'/stubs/service.stub';
-    }
-
-    /**
-     * Get the stub file for the generator.
-     *
-     * @return string
-     */
-    protected function getInterfaceStub()
-    {
-        return __DIR__.'/stubs/interface.stub';
+        return Str::of($name)->endsWith('Service') ? $name : Str::of($name)->finish('Service');
     }
 
     /**
@@ -140,35 +89,25 @@ class MakeServiceCommand extends GeneratorCommand
      */
     protected function replaceNamespace(&$stub, $name)
     {
-        parent::replaceNamespace($stub, $name);
+        $interface = Str::of($name)->finish('Interface');
 
-        $interface = Str::of($name)->replaceFirst($this->rootNamespace(), '')->replace('\\', '')->finish('Interface');
-        $stub = str_replace('{{ interface }}', $interface, $stub);
+        $search = ['{{ namespace }}', '{{ class }}', '{{ interface }}'];
+        $replace = [$this->assembleNamespace('service'), $name, $interface];
 
-        return $this;
+        $stub = str_replace($search, $replace, $stub);
+
+        return $stub;
     }
 
     /**
-     * Build the class with the given name.
+     * Get the console command arguments.
      *
-     * @param  string  $name
-     * @return string
-     *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @return array
      */
-    protected function buildInterface($name)
+    protected function getArguments()
     {
-        $stub = $this->files->get($this->getInterfaceStub());
-
-        return $this->replaceNamespace($stub, $name)->replaceClass($stub, $name);
-    }
-
-    /**
-     * rootNamespace
-     * Get the root namespace for the class.
-     */
-    protected function rootNamespace(): string
-    {
-        return $this->getClassNamespace('service');
+        return [
+            ['name', InputArgument::REQUIRED, 'The name of the '.strtolower($this->type)],
+        ];
     }
 }

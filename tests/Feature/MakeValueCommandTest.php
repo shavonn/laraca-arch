@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 describe('make:value', function () {
     it('should create Value class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.value.path', 'Test/Data/Values');
+        Config::set('laraca.struct.value.path', 'Test/Data/Values');
         $this->artisan('make:value',
             ['name' => $class]);
 

@@ -2,13 +2,13 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Commands\Traits\Domainable;
+use HandsomeBrown\Laraca\Commands\Traits\Directable;
 use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Foundation\Console\ListenerMakeCommand;
 
 class MakeListenerCommand extends ListenerMakeCommand
 {
-    use Domainable, LaracaCommand;
+    use Directable, LaracaCommand;
 
     /**
      * name

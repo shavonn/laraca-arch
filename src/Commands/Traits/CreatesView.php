@@ -5,8 +5,8 @@ namespace HandsomeBrown\Laraca\Commands\Traits;
 trait CreatesView
 {
     /**
-     * viewPath
      * Get the first view directory path from the application configuration.
+     * Laravel func
      *
      * @param  string  $path
      * @return string

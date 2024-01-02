@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:cast', function () {
     it('should create Cast class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.cast.path', 'Test/Data/Casts');
+        Config::set('laraca.struct.cast.path', 'Test/Data/Casts');
         $this->artisan('make:cast',
             ['name' => $class]);
 

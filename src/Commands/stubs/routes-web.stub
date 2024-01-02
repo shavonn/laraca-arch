@@ -1,0 +1,19 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
+
+/*
+|--------------------------------------------------------------------------
+| {{ service }} web routes
+|--------------------------------------------------------------------------
+*/
+
+// prefix: /{{ slug }}
+// namespace {{ controller_namespace }}
+
+// Route::get('/', 'SomethingController@index');
+
+Route::get('/', function() {
+    return View::make('{{ service }}::welcome');
+});

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:channel', function () {
     it('should create Channel class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.channel.path', 'Test/Broadcasting');
+        Config::set('laraca.struct.channel.path', 'Test/Broadcasting');
         $this->artisan('make:channel',
             ['name' => $class]);
 

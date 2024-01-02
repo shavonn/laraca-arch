@@ -1,0 +1,13 @@
+<?php
+
+use Illuminate\Support\Facades\Broadcast;
+
+/*
+|--------------------------------------------------------------------------
+| {{ service }} broadcast channels
+|--------------------------------------------------------------------------
+*/
+
+Broadcast::channel('{{ service }}.User.{id}', function ($user, $id) {
+    return (int) $user->id === (int) $id;
+});

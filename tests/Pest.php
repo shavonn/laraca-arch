@@ -18,9 +18,9 @@ uses(HandsomeBrown\Laraca\Tests\LaracaTestCase::class)->in(__DIR__);
  *
  * @param  string  $key
  */
-function assembleFullPath($key, $domain = null): string
+function assembleFullPath($key, $domain = null, $service = null): string
 {
-    return HandsomeBrown\Laraca\Traits\GetsConfigValues::assembleFullPath($key, $domain);
+    return HandsomeBrown\Laraca\Traits\GetsConfigValues::assembleFullPath($key, $domain, $service);
 }
 
 /**
@@ -36,7 +36,7 @@ function assembleNamespace($key): string
 /**
  * fullNamespaceStr
  */
-function fullNamespaceStr(string $namespace, bool $app = true): string
+function fullNamespaceStr(string $namespace): string
 {
     return 'namespace '.$namespace.';';
 }

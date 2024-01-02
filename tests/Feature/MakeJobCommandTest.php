@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:job', function () {
     it('should create Job class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.job.path', 'Test/Jobs');
+        Config::set('laraca.struct.job.path', 'Test/Jobs');
         $this->artisan('make:job',
             ['name' => $class]);
 

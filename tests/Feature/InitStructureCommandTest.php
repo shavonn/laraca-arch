@@ -8,30 +8,30 @@ use Illuminate\Support\Facades\File;
 
 describe('init:structure', function () {
     it('should create directory Structure from config', function () {
-        Config::set('laraca.structure.database.path', 'test/database');
-        Config::set('laraca.structure.cast.path', 'Test/Data/Casts');
-        Config::set('laraca.structure.channel.path', 'Test/Broadcasting');
-        Config::set('laraca.structure.command.path', 'Test/Console/Commands');
-        Config::set('laraca.structure.component.path', 'Test/View/Components');
-        Config::set('laraca.structure.controller.path', 'Test/Http/Controllers');
-        Config::set('laraca.structure.event.path', 'Test/Events');
-        Config::set('laraca.structure.enum.path', 'Test/Enums');
-        Config::set('laraca.structure.exception.path', 'Test/Exceptions');
-        Config::set('laraca.structure.job.path', 'Test/Jobs');
-        Config::set('laraca.structure.listener.path', 'Test/Listeners');
-        Config::set('laraca.structure.mail.path', 'Test/Mail');
-        Config::set('laraca.structure.middleware.path', 'Test/Http/Middleware');
-        Config::set('laraca.structure.model.path', 'Test/Data/Models');
-        Config::set('laraca.structure.notification.path', 'Test/Notifications');
-        Config::set('laraca.structure.observer.path', 'Test/Data/Observers');
-        Config::set('laraca.structure.policy.path', 'Test/Policies');
-        Config::set('laraca.structure.provider.path', 'Test/Providers');
-        Config::set('laraca.structure.request.path', 'Test/Http/Requests');
-        Config::set('laraca.structure.resource.path', 'Test/Http/Resources');
-        Config::set('laraca.structure.rule.path', 'Test/Rules');
-        Config::set('laraca.structure.test.path', 'test/tests');
-        Config::set('laraca.structure.value.path', 'Test/Data/Values');
-        Config::set('laraca.structure.view.path', 'test/resources/views');
+        Config::set('laraca.struct.database.path', 'test/database');
+        Config::set('laraca.struct.cast.path', 'Test/Data/Casts');
+        Config::set('laraca.struct.channel.path', 'Test/Broadcasting');
+        Config::set('laraca.struct.command.path', 'Test/Console/Commands');
+        Config::set('laraca.struct.component.path', 'Test/View/Components');
+        Config::set('laraca.struct.controller.path', 'Test/Http/Controllers');
+        Config::set('laraca.struct.event.path', 'Test/Events');
+        Config::set('laraca.struct.enum.path', 'Test/Enums');
+        Config::set('laraca.struct.exception.path', 'Test/Exceptions');
+        Config::set('laraca.struct.job.path', 'Test/Jobs');
+        Config::set('laraca.struct.listener.path', 'Test/Listeners');
+        Config::set('laraca.struct.mail.path', 'Test/Mail');
+        Config::set('laraca.struct.middleware.path', 'Test/Http/Middleware');
+        Config::set('laraca.struct.model.path', 'Test/Data/Models');
+        Config::set('laraca.struct.notification.path', 'Test/Notifications');
+        Config::set('laraca.struct.observer.path', 'Test/Data/Observers');
+        Config::set('laraca.struct.policy.path', 'Test/Policies');
+        Config::set('laraca.struct.provider.path', 'Test/Providers');
+        Config::set('laraca.struct.request.path', 'Test/Http/Requests');
+        Config::set('laraca.struct.resource.path', 'Test/Http/Resources');
+        Config::set('laraca.struct.rule.path', 'Test/Rules');
+        Config::set('laraca.struct.test.path', 'test/tests');
+        Config::set('laraca.struct.value.path', 'Test/Data/Values');
+        Config::set('laraca.struct.view.path', 'test/resources/views');
         expect($this->artisan('init:structure'))
             ->toBe(0);
 
@@ -76,27 +76,27 @@ describe('init:structure', function () {
                 ->toBe(true, "File not created at expected path:\n".$keepFile."\n\n");
         }
 
-    })->with('classes');
+    });
 
     it('throws a MissingPathNamespaceKeyException when a key has no path or namespace', function () {
-        Config::set('laraca.structure.empty_key', []);
-        Config::set('laraca.structure.command.parent', 'empty_key');
+        Config::set('laraca.struct.empty_key', []);
+        Config::set('laraca.struct.command.parent', 'empty_key');
 
         $this->artisan('init:structure');
 
-    })->with('classes')->throws(MissingPathNamespaceKeyException::class);
+    })->throws(MissingPathNamespaceKeyException::class);
 
     it('throws an InvalidConfigKeyException when a parent key does not exist in the config', function () {
-        Config::set('laraca.structure.model.parent', 'nonexistent_key');
+        Config::set('laraca.struct.model.parent', 'nonexistent_key');
 
         $this->artisan('init:structure');
 
-    })->with('classes')->throws(InvalidConfigKeyException::class);
+    })->throws(InvalidConfigKeyException::class);
 
     it('throws a MissingRootPathException when a tree does not lead to a base or app parent', function () {
-        Config::set('laraca.structure.model.parent', '');
+        Config::set('laraca.struct.model.parent', '');
 
         $this->artisan('init:structure');
 
-    })->with('classes')->throws(MissingRootPathException::class);
+    })->throws(MissingRootPathException::class);
 });

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:notification', function () {
     it('should create Notification class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.notification.path', 'Test/Notifications');
+        Config::set('laraca.struct.notification.path', 'Test/Notifications');
         $this->artisan('make:notification',
             ['name' => $class]);
 

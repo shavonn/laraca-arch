@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:command', function () {
     it('should create Command class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.command.path', 'Test/Console/Commands');
+        Config::set('laraca.struct.command.path', 'Test/Console/Commands');
         $this->artisan('make:command',
             ['name' => $class]);
 

@@ -4,6 +4,7 @@ namespace HandsomeBrown\Laraca;
 
 use HandsomeBrown\Laraca\Commands\ArtiMigrationCommand;
 use HandsomeBrown\Laraca\Commands\DomainListCommand;
+use HandsomeBrown\Laraca\Commands\InitMicroserviceCommand;
 use HandsomeBrown\Laraca\Commands\InitStructureCommand;
 use HandsomeBrown\Laraca\Commands\MakeCastCommand;
 use HandsomeBrown\Laraca\Commands\MakeChannelCommand;
@@ -34,7 +35,6 @@ use HandsomeBrown\Laraca\Commands\MakeValueCommand;
 use HandsomeBrown\Laraca\Commands\MakeViewCommand;
 use HandsomeBrown\Laraca\Traits\GetsConfigValues;
 use Illuminate\Console\GeneratorCommand;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 class LaracaServiceProvider extends ServiceProvider
@@ -56,6 +56,8 @@ class LaracaServiceProvider extends ServiceProvider
      */
     protected $commands = [
         'ArtiMigration' => ArtiMigrationCommand::class,
+        'InitMicroservice' => InitMicroserviceCommand::class,
+        'InitStructure' => InitStructureCommand::class,
         'MakeCast' => MakeCastCommand::class,
         'MakeChannel' => MakeChannelCommand::class,
         'MakeCommand' => MakeCommandCommand::class,
@@ -80,7 +82,6 @@ class LaracaServiceProvider extends ServiceProvider
         'MakeScope' => MakeScopeCommand::class,
         'MakeService' => MakeServiceCommand::class,
         'MakeSeeder' => MakeSeederCommand::class,
-        'MakeStructure' => InitStructureCommand::class,
         'MakeTest' => MakeTestCommand::class,
         'MakeValue' => MakeValueCommand::class,
         'MakeView' => MakeViewCommand::class,
@@ -99,10 +100,7 @@ class LaracaServiceProvider extends ServiceProvider
 
             $this->app->useDatabasePath($this->assembleFullPath('database'));
 
-            $domainsEnabled = Config::get('laraca.domains.enabled');
-            $domainsParentDir = Config::get('laraca.domains.parent_dir');
-
-            if ($domainsEnabled && $domainsParentDir) {
+            if ($this->domainsEnabled() && $this->domainParentDir()) {
                 $this->commands['DomainList'] = DomainListCommand::class;
             }
 

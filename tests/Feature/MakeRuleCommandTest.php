@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:rule', function () {
     it('should create Rule class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.rule.path', 'Test/Rules');
+        Config::set('laraca.struct.rule.path', 'Test/Rules');
         $this->artisan('make:rule',
             ['name' => $class]);
 

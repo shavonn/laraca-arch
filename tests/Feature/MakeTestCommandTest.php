@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:test', function () {
     it('should create Test class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.test.path', 'test/tests');
+        Config::set('laraca.struct.test.path', 'test/tests');
         $this->artisan('make:test',
             ['name' => $class]);
 

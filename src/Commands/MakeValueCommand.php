@@ -2,7 +2,7 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Commands\Traits\Domainable;
+use HandsomeBrown\Laraca\Commands\Traits\Directable;
 use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 #[AsCommand(name: 'make:value')]
 class MakeValueCommand extends GeneratorCommand
 {
-    use Domainable, LaracaCommand;
+    use Directable, LaracaCommand;
 
     /**
      * The console command name.

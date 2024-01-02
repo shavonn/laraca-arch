@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 describe('arti:migration', function () {
     it('should create the Migration class when used', function (string $class) {
-        Config::set('laraca.structure.database.path', 'test/database');
+        Config::set('laraca.struct.database.path', 'test/database');
         $this->artisan('arti:migration',
             ['name' => $class]);
 
@@ -30,7 +30,7 @@ describe('arti:migration', function () {
     })->with('classes');
 
     it('should create the Migration class using path option', function (string $class) {
-        Config::set('laraca.structure.database.path', 'test/database');
+        Config::set('laraca.struct.database.path', 'test/database');
         $this->artisan('arti:migration',
             ['name' => $class, '--path' => 'test/db/migrations']);
 

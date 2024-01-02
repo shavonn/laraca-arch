@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:request', function () {
     it('should create Request class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.request.path', 'Test/Http/Requests');
+        Config::set('laraca.struct.request.path', 'Test/Http/Requests');
         $this->artisan('make:request',
             ['name' => $class]);
 

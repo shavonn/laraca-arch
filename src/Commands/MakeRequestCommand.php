@@ -2,13 +2,13 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Commands\Traits\Domainable;
+use HandsomeBrown\Laraca\Commands\Traits\Directable;
 use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Foundation\Console\RequestMakeCommand;
 
 class MakeRequestCommand extends RequestMakeCommand
 {
-    use Domainable, LaracaCommand;
+    use Directable, LaracaCommand;
 
     /**
      * name

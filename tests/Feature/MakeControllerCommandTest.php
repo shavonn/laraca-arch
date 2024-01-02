@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:controller', function () {
     it('should create Controller class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.controller.path', 'Test/Http/Controllers');
+        Config::set('laraca.struct.controller.path', 'Test/Http/Controllers');
         $this->artisan('make:controller',
             ['name' => $class]);
 

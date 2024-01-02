@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:policy', function () {
     it('should create Policy class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.policy.path', 'Test/Policies');
+        Config::set('laraca.struct.policy.path', 'Test/Policies');
         $this->artisan('make:policy',
             ['name' => $class]);
 

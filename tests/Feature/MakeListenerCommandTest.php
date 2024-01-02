@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:listener', function () {
     it('should create Listener class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.listener.path', 'Test/Listeners');
+        Config::set('laraca.struct.listener.path', 'Test/Listeners');
         $this->artisan('make:listener',
             ['name' => $class]);
 

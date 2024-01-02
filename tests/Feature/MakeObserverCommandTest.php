@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 describe('make:observer', function () {
     it('should create Observer class with namespace and path created from configured vals', function (string $class) {
-        Config::set('laraca.structure.observer.path', 'Test/Data/Observers');
+        Config::set('laraca.struct.observer.path', 'Test/Data/Observers');
         $this->artisan('make:observer',
             ['name' => $class]);
 
