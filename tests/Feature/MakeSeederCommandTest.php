@@ -1,27 +1,23 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
+
+use function Pest\Laravel\artisan;
 
 describe('make:seeder', function () {
     it('should create Seeder class with namespace and path created from configured vals', function (string $class) {
         Config::set('laraca.struct.database.path', 'test/database');
-        $this->artisan('make:seeder',
-            ['name' => $class]);
 
-        $configPath = assembleFullPath('seeder');
-        $filePath = "$configPath/{$class}.php";
+        artisan('make:seeder', ['name' => $class]);
 
-        $output = Artisan::output();
+        $seederPath = base_path("test/database/seeders/$class.php");
 
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
+        expect($seederPath)->toBeFile();
 
-        $configNamespace = fullNamespaceStr('Test\Database\Seeders');
-
-        expect(File::get($filePath))
-            ->toContain($configNamespace);
-
+        expect(File::get($seederPath))->toContain(
+            'namespace Test\Database\Seeders;',
+            "class $class",
+        );
     })->with('classes');
 });

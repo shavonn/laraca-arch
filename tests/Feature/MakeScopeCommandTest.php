@@ -1,27 +1,23 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
+
+use function Pest\Laravel\artisan;
 
 describe('make:scope', function () {
     it('should create Scope class with namespace and path created from configured vals', function (string $class) {
         Config::set('laraca.struct.model.path', 'Test/Data/Models');
-        $this->artisan('make:scope',
-            ['name' => $class]);
 
-        $configPath = assembleFullPath('scope');
-        $filePath = "$configPath/$class.php";
+        artisan('make:scope', ['name' => $class]);
 
-        $output = Artisan::output();
+        $scopePath = app_path("Test/Data/Models/Scopes/$class.php");
 
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
+        expect($scopePath)->toBeFile();
 
-        $configNamespace = fullNamespaceStr('App\Test\Data\Models\Scopes');
-
-        expect(File::get($filePath))
-            ->toContain($configNamespace);
-
+        expect(File::get($scopePath))->toContain(
+            'namespace App\Test\Data\Models\Scopes;',
+            "class $class",
+        );
     })->with('classes');
 });

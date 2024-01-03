@@ -1,28 +1,23 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
+
+use function Pest\Laravel\artisan;
 
 describe('make:value', function () {
     it('should create Value class with namespace and path created from configured vals', function (string $class) {
         Config::set('laraca.struct.value.path', 'Test/Data/Values');
-        $this->artisan('make:value',
-            ['name' => $class]);
 
-        $configPath = assembleFullPath('value');
-        $filePath = "$configPath/$class.php";
+        artisan('make:value', ['name' => $class]);
 
-        $output = Artisan::output();
+        $valuePath = app_path("Test/Data/Values/$class.php");
 
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
+        expect($valuePath)->toBeFile();
 
-        $configNamespace = fullNamespaceStr('App\Test\Data\Values');
-
-        expect(File::get($filePath))
-            ->toContain($configNamespace, Str::camel($class));
-
+        expect(File::get($valuePath))->toContain(
+            'namespace App\Test\Data\Values;',
+            "class $class",
+        );
     })->with('classes');
 });

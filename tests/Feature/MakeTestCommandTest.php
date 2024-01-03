@@ -1,48 +1,38 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
+
+use function Pest\Laravel\artisan;
 
 describe('make:test', function () {
     it('should create Test class with namespace and path created from configured vals', function (string $class) {
         Config::set('laraca.struct.test.path', 'test/tests');
-        $this->artisan('make:test',
-            ['name' => $class]);
 
-        $configPath = assembleFullPath('test');
-        $filePath = "$configPath/Feature/$class.php";
+        artisan('make:test', ['name' => $class]);
 
-        $output = Artisan::output();
+        $testPath = base_path("test/tests/Feature/$class.php");
 
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
+        expect($testPath)->toBeFile();
 
-        $configNamespace = fullNamespaceStr('Tests\Feature');
-
-        expect(File::get($filePath))
-            ->toContain($configNamespace);
-
+        expect(File::get($testPath))->toContain(
+            'namespace Tests\Feature;',
+            "class $class",
+        );
     })->with('classes');
 
     it('should create Test class with namespace and path created from configured vals with unit option', function (string $class) {
-        $this->artisan('make:test',
-            ['name' => $class,
-                '--unit' => true],
+        Config::set('laraca.struct.test.path', 'test/tests');
+
+        artisan('make:test', ['name' => $class, '--unit' => true]);
+
+        $testPath = base_path("test/tests/Unit/$class.php");
+
+        expect($testPath)->toBeFile();
+
+        expect(File::get($testPath))->toContain(
+            'namespace Tests\Unit;',
+            "class $class",
         );
-
-        $configPath = assembleFullPath('test');
-        $filePath = "$configPath/Unit/$class.php";
-
-        $output = Artisan::output();
-
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
-
-        $configNamespace = fullNamespaceStr('Tests\Unit');
-
-        expect(File::get($filePath))
-            ->toContain($configNamespace);
-
     })->with('classes');
 });
