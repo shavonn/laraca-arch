@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
@@ -10,10 +11,14 @@ describe('make:observer', function () {
         Config::set('laraca.struct.observer.path', 'Test/Data/Observers');
 
         artisan('make:observer', ['name' => $class]);
+        $output = Artisan::output();
+
+        $class = ucfirst($class);
 
         $observerPath = app_path("Test/Data/Observers/$class.php");
 
-        expect($observerPath)->toBeFile();
+        expect($observerPath)
+            ->toBeFile("File not created at expected path:\n$observerPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($observerPath))->toContain(
             'namespace App\Test\Data\Observers;',

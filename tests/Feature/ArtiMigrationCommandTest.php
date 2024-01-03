@@ -5,44 +5,52 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
+use function Pest\Laravel\artisan;
+
 describe('arti:migration', function () {
     it('should create the Migration class when used', function (string $class) {
         Config::set('laraca.struct.database.path', 'test/database');
-        $this->artisan('arti:migration',
-            ['name' => $class]);
 
-        $now = now();
-        $datetimeSubSecond = $now->copy()->subSecond()->format('Y_m_d_His');
-        $datetimeNow = $now->format('Y_m_d_His');
-
-        $snake_class = Str::snake($class);
-        $configPath = assembleFullPath('migration');
-
-        // accounts for second change variation that may occur in file name
-        $filePathSubSecond = "$configPath/{$datetimeSubSecond}_{$snake_class}.php";
-        $filePathNow = "$configPath/{$datetimeNow}_{$snake_class}.php";
+        artisan('arti:migration', ['name' => $class]);
 
         $output = Artisan::output();
 
-        expect(File::exists($filePathNow) || File::exists($filePathSubSecond))
-            ->toBe(true, "File not created at expected path:\n".$filePathNow."\n".$filePathSubSecond."\n".$output."\n\n");
+        $now = now();
+        $subSecond = $now->copy()->subSecond()->format('Y_m_d_His');
+        $now = $now->format('Y_m_d_His');
 
+        $snake_class = Str::snake($class);
+
+        $migrationsPath = base_path('test/database/migrations');
+
+        // account for second change variation that may occur in file name
+        $migrationPath1 = "$migrationsPath/{$subSecond}_{$snake_class}.php";
+        $migrationPath2 = "$migrationsPath/{$now}_{$snake_class}.php";
+
+        expect(File::exists($migrationPath1) || File::exists($migrationPath2))
+            ->toBe(true, "File not created at expected path:\n$migrationPath1\n$migrationPath2\n$output\n\n");
     })->with('classes');
 
     it('should create the Migration class using path option', function (string $class) {
         Config::set('laraca.struct.database.path', 'test/database');
-        $this->artisan('arti:migration',
-            ['name' => $class, '--path' => 'test/db/migrations']);
 
-        $now = now()->format('Y_m_d_His');
-        $snake_class = Str::snake($class);
-
-        $filePath = base_path("test/db/migrations/{$now}_{$snake_class}.php");
-
+        artisan('arti:migration', ['name' => $class, '--path' => 'test/db/migrations']);
         $output = Artisan::output();
 
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
+        $now = now();
+        $subSecond = $now->copy()->subSecond()->format('Y_m_d_His');
+        $now = $now->format('Y_m_d_His');
+
+        $snake_class = Str::snake($class);
+
+        $migrationsPath = base_path('test/db/migrations');
+
+        // account for second change variation that may occur in file name
+        $migrationPath1 = "$migrationsPath/{$subSecond}_{$snake_class}.php";
+        $migrationPath2 = "$migrationsPath/{$now}_{$snake_class}.php";
+
+        expect(File::exists($migrationPath1) || File::exists($migrationPath2))
+            ->toBe(true, "File not created at expected path:\n$migrationPath1\n$migrationPath2\n$output\n\n");
 
     })->with('classes');
 });

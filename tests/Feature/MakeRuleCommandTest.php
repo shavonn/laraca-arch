@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
@@ -10,10 +11,14 @@ describe('make:rule', function () {
         Config::set('laraca.struct.rule.path', 'Test/Rules');
 
         artisan('make:rule', ['name' => $class]);
+        $output = Artisan::output();
+
+        $class = ucfirst($class);
 
         $rulePath = app_path("Test/Rules/$class.php");
 
-        expect($rulePath)->toBeFile();
+        expect($rulePath)
+            ->toBeFile("File not created at expected path:\n$rulePath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($rulePath))->toContain(
             'namespace App\Test\Rules;',

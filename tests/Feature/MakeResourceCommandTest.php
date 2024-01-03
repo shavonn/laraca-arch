@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
@@ -10,10 +11,14 @@ describe('make:resource', function () {
         Config::set('laraca.struct.resource.path', 'Test/Http/Resources');
 
         artisan('make:resource', ['name' => $class]);
+        $output = Artisan::output();
+
+        $class = ucfirst($class);
 
         $resourcePath = app_path("Test/Http/Resources/$class.php");
 
-        expect($resourcePath)->toBeFile();
+        expect($resourcePath)
+            ->toBeFile("File not created at expected path:\n$resourcePath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($resourcePath))->toContain(
             'namespace App\Test\Http\Resources;',

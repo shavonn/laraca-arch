@@ -9,6 +9,19 @@ trait LaracaCommand
 {
     use GetsConfigValues;
 
+    /**
+     * Parse the class name and format according to the root namespace.
+     *
+     * @param  string  $name
+     * @return string
+     */
+    protected function qualifyClass($name)
+    {
+        $name = ucfirst($name);
+
+        return parent::qualifyClass($name);
+    }
+
     public function hasParents()
     {
         return (bool) class_parents($this);

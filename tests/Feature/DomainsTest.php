@@ -4,49 +4,49 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
+use function Pest\Laravel\artisan;
+
 describe('use domains', function () {
     it('should use domain settings in path/namespace when enabled and domain arg', function (string $class, string $domain) {
         Config::set('laraca.struct.domain.enabled', true);
-        Config::set('laraca.struct.domain.path', 'TestDomains');
-        $this->artisan('make:controller',
-            ['name' => $class,
-                '--domain' => $domain]);
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
+        artisan('make:controller', ['name' => $class, '--domain' => $domain]);
         $output = Artisan::output();
 
-        $configPath = assembleFullPath('controller', $domain);
-        $filePath = "$configPath/$class.php";
+        $class = ucfirst($class);
+        $domain = ucfirst($domain);
 
-        $configNamespace = fullNamespaceStr("App\TestDomains\\".ucfirst($domain)."\Http\Controllers");
+        $contollerPath = app_path("Test/Domains/$domain/Http/Controllers/$class.php");
 
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
+        expect($contollerPath)
+            ->toBeFile("File not created at expected path:\n$contollerPath\n\nOutput results:\n$output\n=====\n");
 
-        expect(File::get($filePath))
-            ->toContain($configNamespace);
-
+        expect(File::get($contollerPath))->toContain(
+            "App\Test\Domains\\$domain\Http\Controllers",
+            "class $class",
+        );
     })->with('classes', 'domains');
 
     it('should not use parent domain when path is null', function (string $class, string $domain) {
         Config::set('laraca.struct.domain.enabled', true);
         Config::set('laraca.struct.domain.path', null);
-        Config::set('laraca.struct.enum.path', 'Test/Enums');
-        $this->artisan('make:enum',
-            ['name' => $class,
-                '--domain' => $domain]);
 
-        $configPath = assembleFullPath('enum', $domain);
-        $filePath = "$configPath/$class.php";
-
-        $configNamespace = fullNamespaceStr('App\\'.ucfirst($domain)."\Test\Enums");
-
+        artisan('make:enum', ['name' => $class, '--domain' => $domain]);
         $output = Artisan::output();
 
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
+        $class = ucfirst($class);
+        $domain = ucfirst($domain);
 
-        expect(File::get($filePath))
-            ->toContain($configNamespace);
+        $enumPath = app_path("$domain/Enums/$class.php");
+
+        expect($enumPath)
+            ->toBeFile("File not created at expected path:\n$enumPath\n\nOutput results:\n$output\n=====\n");
+
+        expect(File::get($enumPath))->toContain(
+            "App\\$domain\Enums",
+            "enum $class",
+        );
 
     })->with('classes', 'domains');
 
@@ -54,21 +54,21 @@ describe('use domains', function () {
         Config::set('laraca.struct.domain.enabled', true);
         Config::set('laraca.struct.domain.path', 'TestDomains');
         Config::set('laraca.struct.controller.path', 'Test/Http/Controllers');
-        $this->artisan('make:controller',
-            ['name' => $class]);
 
-        $configPath = assembleFullPath('controller');
-        $filePath = "$configPath/$class.php";
-
-        $configNamespace = fullNamespaceStr('App\Test\Http\Controllers');
-
+        artisan('make:controller', ['name' => $class]);
         $output = Artisan::output();
 
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
+        $class = ucfirst($class);
 
-        expect(File::get($filePath))
-            ->toContain($configNamespace);
+        $contollerPath = app_path("Test/Http/Controllers/$class.php");
+
+        expect($contollerPath)
+            ->toBeFile("File not created at expected path:\n$contollerPath\n\nOutput results:\n$output\n=====\n");
+
+        expect(File::get($contollerPath))->toContain(
+            "App\Test\Http\Controllers",
+            "class $class",
+        );
 
     })->with('classes');
 });

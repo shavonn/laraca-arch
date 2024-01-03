@@ -11,20 +11,23 @@ describe('make:service', function () {
         Config::set('laraca.struct.service.path', 'Test/Services');
 
         artisan('make:service', ['name' => $class]);
+        $output = Artisan::output();
 
         $class = ucfirst($class);
 
         $servicePath = app_path("Test/Services/{$class}Service.php");
         $interfacePath = app_path("Test/Services/{$class}ServiceInterface.php");
 
-        expect($servicePath)->toBeFile();
+        expect($servicePath)
+            ->toBeFile("File not created at expected path:\n$servicePath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($servicePath))->toContain(
             'namespace App\Test\Services;',
             "class $class",
         );
 
-        expect($interfacePath)->toBeFile();
+        expect($interfacePath)
+            ->toBeFile("File not created at expected path:\n$interfacePath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($interfacePath))->toContain(
             'namespace App\Test\Services;',

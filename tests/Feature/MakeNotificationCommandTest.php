@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
@@ -10,10 +11,14 @@ describe('make:notification', function () {
         Config::set('laraca.struct.notification.path', 'Test/Notifications');
 
         artisan('make:notification', ['name' => $class]);
+        $output = Artisan::output();
+
+        $class = ucfirst($class);
 
         $notificationPath = app_path("Test/Notifications/$class.php");
 
-        expect($notificationPath)->toBeFile();
+        expect($notificationPath)
+            ->toBeFile("File not created at expected path:\n$notificationPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($notificationPath))->toContain(
             'namespace App\Test\Notifications;',
