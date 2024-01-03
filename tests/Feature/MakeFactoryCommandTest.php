@@ -4,24 +4,25 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
+use function Pest\Laravel\artisan;
+
 describe('make:factory', function () {
     it('should create Factory class with namespace and path created from configured vals', function (string $class) {
         Config::set('laraca.struct.database.path', 'test/database');
-        $this->artisan('make:factory',
-            ['name' => $class]);
 
-        $configPath = assembleFullPath('factory');
-        $filePath = "$configPath/{$class}Factory.php";
+        $class = ucfirst($class);
 
+        artisan('make:factory', ['name' => $class]);
         $output = Artisan::output();
 
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
+        $factoryPath = base_path("test/database/factories/{$class}Factory.php");
 
-        $configNamespace = fullNamespaceStr('Test\Database\Factories');
+        expect($factoryPath)
+            ->toBeFile("File not created at expected path:\n$factoryPath\n\nOutput results:\n$output\n=====\n");
 
-        expect(File::get($filePath))
-            ->toContain($configNamespace);
-
+        expect(File::get($factoryPath))->toContain(
+            'namespace Test\Database\Factories;',
+            "class $class",
+        );
     })->with('classes');
 });

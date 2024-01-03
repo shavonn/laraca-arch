@@ -3,8 +3,11 @@
 use HandsomeBrown\Laraca\Exceptions\InvalidConfigKeyException;
 use HandsomeBrown\Laraca\Exceptions\MissingPathNamespaceKeyException;
 use HandsomeBrown\Laraca\Exceptions\MissingRootPathException;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
+
+use function Pest\Laravel\artisan;
 
 describe('init:structure', function () {
     it('should create directory Structure from config', function () {
@@ -32,8 +35,9 @@ describe('init:structure', function () {
         Config::set('laraca.struct.test.path', 'test/tests');
         Config::set('laraca.struct.value.path', 'Test/Data/Values');
         Config::set('laraca.struct.view.path', 'test/resources/views');
-        expect($this->artisan('init:structure'))
-            ->toBe(0);
+
+        artisan('init:structure');
+        $output = Artisan::output();
 
         $paths = [
             'test/database',
@@ -72,31 +76,30 @@ describe('init:structure', function () {
                 ->toBe(true, "Directory not created:\n".$dirPath."\n");
 
             $keepFile = $dirPath.'/.gitkeep';
-            expect(File::exists($keepFile))
-                ->toBe(true, "File not created at expected path:\n".$keepFile."\n\n");
+            expect($keepFile)
+                ->toBeFile("File not created at expected path:\n$keepFile\n\nOutput results:\n$output\n=====\n");
         }
-
     });
 
     it('throws a MissingPathNamespaceKeyException when a key has no path or namespace', function () {
         Config::set('laraca.struct.empty_key', []);
         Config::set('laraca.struct.command.parent', 'empty_key');
 
-        $this->artisan('init:structure');
+        artisan('init:structure');
 
     })->throws(MissingPathNamespaceKeyException::class);
 
     it('throws an InvalidConfigKeyException when a parent key does not exist in the config', function () {
         Config::set('laraca.struct.model.parent', 'nonexistent_key');
 
-        $this->artisan('init:structure');
+        artisan('init:structure');
 
     })->throws(InvalidConfigKeyException::class);
 
     it('throws a MissingRootPathException when a tree does not lead to a base or app parent', function () {
         Config::set('laraca.struct.model.parent', '');
 
-        $this->artisan('init:structure');
+        artisan('init:structure');
 
     })->throws(MissingRootPathException::class);
 });

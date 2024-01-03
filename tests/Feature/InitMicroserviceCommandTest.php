@@ -11,9 +11,8 @@ use function Pest\Laravel\artisan;
 describe('init:micro', function () {
     it('should implement microservice with selected elements', function (string $class) {
         Config::set('laraca.struct.microservice.path', 'Test/Microservices');
-        expect($this->artisan('init:micro', [
-            'name' => $class,
-        ]))->toBe(0);
+
+        artisan('init:micro', ['name' => $class]);
 
         $output = Artisan::output();
 
@@ -35,95 +34,107 @@ describe('init:micro', function () {
                 ->toBe(true, "Directory not created:\n".$dirPath."\n");
         }
 
-        $root = "Test/Microservices/$class";
-        $servicePath = app_path($root.'/'.$class.'ServiceProvider.php');
-        $routeServicePath = app_path("$root/Providers/RouteServiceProvider.php");
-        $broadcastServicePath = app_path("$root/Providers/BroadcastServiceProvider.php");
-        $welcomePath = app_path("$root/resources/views/welcome.blade.php");
-        $routesPath = app_path("$root/routes/");
+        $root = app_path("Test/Microservices/$class/");
 
-        $serviceNamespace = fullNamespaceStr("App\\Test\\Microservices\\$class");
-        $providerNamespace = fullNamespaceStr("App\\Test\\Microservices\\$class\\Providers");
+        $serviceProviderPath = "$root{$class}ServiceProvider.php";
+        expect($serviceProviderPath)
+            ->toBeFile("File not created at expected path:\n$serviceProviderPath\n\nOutput results:\n$output\n=====\n");
 
-        expect(File::exists($servicePath))
-            ->toBe(true, "File not created at expected path:\n".$servicePath."\nCommand result:\n".$output."\n\n");
-        expect(File::get($servicePath))
-            ->toContain($serviceNamespace);
+        expect(File::get($serviceProviderPath))->toContain(
+            "namespace App\Test\Microservices\\$class;",
+            "class $class",
+        );
 
-        expect(File::exists(app_path("Test/Microservices/$class/Providers/RouteServiceProvider.php")))
-            ->toBe(true, "File not created at expected path:\n".$routeServicePath."\nCommand result:\n".$output."\n\n");
+        $routeServiceProviderPath = "{$root}Providers/RouteServiceProvider.php";
+        expect($routeServiceProviderPath)
+            ->toBeFile("File not created at expected path:\n$routeServiceProviderPath\n\nOutput results:\n$output\n=====\n");
 
-        expect(File::exists($routeServicePath))
-            ->toBe(true, "File not created at expected path:\n".$routeServicePath."\nCommand result:\n".$output."\n\n");
-        expect(File::get($routeServicePath))
-            ->toContain($providerNamespace)
-            ->toContain('require __DIR__.\'/../routes/web.php\';');
+        expect(File::get($routeServiceProviderPath))->toContain(
+            "namespace App\Test\Microservices\\$class\Providers;",
+            'class RouteServiceProvider',
+            'require __DIR__.\'/../routes/web.php\';',
+        );
 
-        expect(File::exists($broadcastServicePath))
-            ->toBe(true, "File not created at expected path:\n".$broadcastServicePath."\nCommand result:\n".$output."\n\n");
-        expect(File::get($broadcastServicePath))
-            ->toContain($providerNamespace)
-            ->toContain('require __DIR__.\'/../routes/channels.php\';');
+        $broadcastServiceProviderPath = "{$root}Providers/BroadcastServiceProvider.php";
+        expect($broadcastServiceProviderPath)
+            ->toBeFile("File not created at expected path:\n$broadcastServiceProviderPath\n\nOutput results:\n$output\n=====\n");
 
-        expect(File::exists($routesPath.'web.php'))
-            ->toBe(true, "File not created at expected path:\n".$routesPath.'web.php'."\nCommand result:\n".$output."\n\n");
-        expect(File::get($routesPath.'web.php'))
-            ->toContain($slug)
-            ->toContain("prefix: /$slug");
+        expect(File::get($broadcastServiceProviderPath))->toContain(
+            "namespace App\Test\Microservices\\$class\Providers;",
+            'class BroadcastServiceProvider',
+            'require __DIR__.\'/../routes/channels.php\';',
+        );
 
-        expect(File::exists($routesPath.'api.php'))
-            ->toBe(true, "File not created at expected path:\n".$routesPath.'api.php'."\nCommand result:\n".$output."\n\n");
-        expect(File::get($routesPath.'api.php'))
-            ->toContain($slug)
-            ->toContain("/api/$slug");
+        $routesPath = "{$root}routes/";
+        $webPath = "{$routesPath}web.php";
+        expect($webPath)
+            ->toBeFile("File not created at expected path:\n$webPath\n\nOutput results:\n$output\n=====\n");
 
-        expect(File::exists($routesPath.'channels.php'))
-            ->toBe(true, "File not created at expected path:\n".$routesPath.'api.php'."\nCommand result:\n".$output."\n\n");
-        expect(File::get($routesPath.'channels.php'))
-            ->toContain($class)
-            ->toContain('Broadcast::channel(\''.$class.'.User.{id}\', function ($user, $id) {');
+        expect(File::get($webPath))->toContain(
+            "prefix: /$slug"
+        );
 
-        expect(File::exists($welcomePath))
-            ->toBe(true, "File not created at expected path:\n".$welcomePath."\nCommand result:\n".$output."\n\n");
+        $apiPath = "{$routesPath}api.php";
+        expect($apiPath)
+            ->toBeFile("File not created at expected path:\n$apiPath\n\nOutput results:\n$output\n=====\n");
+
+        expect(File::get($apiPath))->toContain(
+            "/api/$slug"
+        );
+
+        $channelsPath = "{$routesPath}channels.php";
+        expect($channelsPath)
+            ->toBeFile("File not created at expected path:\n$channelsPath\n\nOutput results:\n$output\n=====\n");
+
+        expect(File::get($channelsPath))->toContain(
+            "Broadcast::channel('$class.User.{id}', function (\$user, \$id) {"
+        );
+
+        $welcomePath = "{$root}resources/views/welcome.blade.php";
+        expect($welcomePath)
+            ->toBeFile("File not created at expected path:\n$welcomePath\n\nOutput results:\n$output\n=====\n");
+
+        expect(File::get($welcomePath))->toContain(
+            'Enjoy your new Laraca generated service'
+        );
     })->with('classes');
 
     it('should not allow the same microservice to be created twice', function (string $class) {
-        config(['laraca.struct.microservice.path' => 'Test/Microservices']);
-        $this->artisan(
-            'init:micro',
-            ['name' => $class]
-        );
+        Config::set('laraca.struct.microservice.path', 'Test/Microservices');
 
-        $this->artisan(
-            'init:micro',
-            ['name' => $class]
-        );
+        artisan('init:micro', ['name' => $class]);
 
+        artisan('init:micro', ['name' => $class]);
         $output = Artisan::output();
+
         expect($output)->toContain('already exists');
     })->with('classes');
 
-    it('should create microservice in domain', function () {
-        config(['laraca.struct.domain.enabled' => true]);
-        config(['laraca.struct.domain.path' => 'Test/Domains']);
+    it('should create microservice in domain', function (string $class, string $domain) {
+        Config::set('laraca.struct.domain.enabled', true);
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
-        artisan('init:micro', ['name' => 'FooCreated', '--domain' => 'Foo']);
+        artisan('init:micro', ['name' => $class, '--domain' => $domain]);
+        $output = Artisan::output();
 
-        $serviceProviderPath = app_path('Test/Domains/Foo/Microservices/FooCreated/FooCreatedServiceProvider.php');
+        $class = ucfirst($class);
+        $domain = ucfirst($domain);
 
-        expect($serviceProviderPath)->toBeFile();
+        $serviceProviderPath = app_path("Test/Domains/$domain/Microservices/$class/{$class}ServiceProvider.php");
+        expect($serviceProviderPath)
+            ->toBeFile("File not created at expected path:\n$serviceProviderPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($serviceProviderPath))->toContain(
-            'namespace App\Test\Domains\Foo\Microservices\FooCreated;',
-            'class FooCreated',
+            "namespace App\Test\Domains\\$domain\Microservices\\$class;",
+            "class $class",
         );
-    });
+    })->with('classes', 'domains');
 
     it('should not create a service with service flag', function () {
-        config(['laraca.struct.domain.enabled' => true]);
-        config(['laraca.struct.domain.path' => 'Test/Domains']);
+        Config::set('laraca.struct.domain.enabled', true);
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
-        artisan('init:micro', ['name' => 'FooCreated', '--service' => 'Foo']);
+        artisan('init:micro', ['name' => 'FooCreated', '--service' => 'Bar']);
 
     })->throws(InvalidOptionException::class);
 });

@@ -4,45 +4,44 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
+use function Pest\Laravel\artisan;
+
 describe('make:test', function () {
     it('should create Test class with namespace and path created from configured vals', function (string $class) {
         Config::set('laraca.struct.test.path', 'test/tests');
-        $this->artisan('make:test',
-            ['name' => $class]);
 
-        $configPath = assembleFullPath('test');
-        $filePath = "$configPath/Feature/$class.php";
-
+        artisan('make:test', ['name' => $class]);
         $output = Artisan::output();
 
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
+        $class = ucfirst($class);
 
-        $configNamespace = fullNamespaceStr('Tests\Feature');
+        $testPath = base_path("test/tests/Feature/$class.php");
 
-        expect(File::get($filePath))
-            ->toContain($configNamespace);
+        expect($testPath)
+            ->toBeFile("File not created at expected path:\n$testPath\n\nOutput results:\n$output\n=====\n");
 
+        expect(File::get($testPath))->toContain(
+            'namespace Tests\Feature;',
+            "class $class",
+        );
     })->with('classes');
 
     it('should create Test class with namespace and path created from configured vals with unit option', function (string $class) {
-        $this->artisan('make:test',
-            ['name' => $class,
-                '--unit' => true],
-        );
+        Config::set('laraca.struct.test.path', 'test/tests');
 
-        $configPath = assembleFullPath('test');
-        $filePath = "$configPath/Unit/$class.php";
-
+        artisan('make:test', ['name' => $class, '--unit' => true]);
         $output = Artisan::output();
 
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
+        $class = ucfirst($class);
 
-        $configNamespace = fullNamespaceStr('Tests\Unit');
+        $testPath = base_path("test/tests/Unit/$class.php");
 
-        expect(File::get($filePath))
-            ->toContain($configNamespace);
+        expect($testPath)
+            ->toBeFile("File not created at expected path:\n$testPath\n\nOutput results:\n$output\n=====\n");
 
+        expect(File::get($testPath))->toContain(
+            'namespace Tests\Unit;',
+            "class $class",
+        );
     })->with('classes');
 });

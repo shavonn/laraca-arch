@@ -4,24 +4,25 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
+use function Pest\Laravel\artisan;
+
 describe('make:middleware', function () {
     it('should create Middleware class with namespace and path created from configured vals', function (string $class) {
         Config::set('laraca.struct.middleware.path', 'Test/Http/Middleware');
-        $this->artisan('make:middleware',
-            ['name' => $class]);
 
-        $configPath = assembleFullPath('middleware');
-        $filePath = "$configPath/$class.php";
-
+        artisan('make:middleware', ['name' => $class]);
         $output = Artisan::output();
 
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
+        $class = ucfirst($class);
 
-        $configNamespace = fullNamespaceStr('App\Test\Http\Middleware');
+        $middlewarePath = app_path("Test/Http/Middleware/$class.php");
 
-        expect(File::get($filePath))
-            ->toContain($configNamespace);
+        expect($middlewarePath)
+            ->toBeFile("File not created at expected path:\n$middlewarePath\n\nOutput results:\n$output\n=====\n");
 
+        expect(File::get($middlewarePath))->toContain(
+            'namespace App\Test\Http\Middleware;',
+            "class $class",
+        );
     })->with('classes');
 });

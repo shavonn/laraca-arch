@@ -4,24 +4,25 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
+use function Pest\Laravel\artisan;
+
 describe('make:request', function () {
     it('should create Request class with namespace and path created from configured vals', function (string $class) {
         Config::set('laraca.struct.request.path', 'Test/Http/Requests');
-        $this->artisan('make:request',
-            ['name' => $class]);
 
-        $configPath = assembleFullPath('request');
-        $filePath = "$configPath/$class.php";
-
+        artisan('make:request', ['name' => $class]);
         $output = Artisan::output();
 
-        expect(File::exists($filePath))
-            ->toBe(true, "File not created at expected path:\n".$filePath."\nCommand result:\n".$output."\n\n");
+        $class = ucfirst($class);
 
-        $configNamespace = fullNamespaceStr('App\Test\Http\Requests');
+        $requestPath = app_path("Test/Http/Requests/$class.php");
 
-        expect(File::get($filePath))
-            ->toContain($configNamespace);
+        expect($requestPath)
+            ->toBeFile("File not created at expected path:\n$requestPath\n\nOutput results:\n$output\n=====\n");
 
+        expect(File::get($requestPath))->toContain(
+            'namespace App\Test\Http\Requests;',
+            "class $class",
+        );
     })->with('classes');
 });
