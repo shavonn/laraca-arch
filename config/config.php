@@ -289,12 +289,12 @@ return [
 
         /*
         |--------------------------------------------------------------------------
-        | Service Path
+        | Strategy Path
         |--------------------------------------------------------------------------
-        | make:service
+        | make:strategy
         */
-        'service' => [
-            'path' => 'Services',
+        'strategy' => [
+            'path' => 'Strategy',
             'parent' => 'app',
         ],
 

@@ -29,7 +29,7 @@ use HandsomeBrown\Laraca\Commands\MakeResourceCommand;
 use HandsomeBrown\Laraca\Commands\MakeRuleCommand;
 use HandsomeBrown\Laraca\Commands\MakeScopeCommand;
 use HandsomeBrown\Laraca\Commands\MakeSeederCommand;
-use HandsomeBrown\Laraca\Commands\MakeServiceCommand;
+use HandsomeBrown\Laraca\Commands\MakeStrategyCommand;
 use HandsomeBrown\Laraca\Commands\MakeTestCommand;
 use HandsomeBrown\Laraca\Commands\MakeValueCommand;
 use HandsomeBrown\Laraca\Commands\MakeViewCommand;
@@ -80,7 +80,7 @@ class LaracaServiceProvider extends ServiceProvider
         'MakeResource' => MakeResourceCommand::class,
         'MakeRule' => MakeRuleCommand::class,
         'MakeScope' => MakeScopeCommand::class,
-        'MakeService' => MakeServiceCommand::class,
+        'MakeStrategy' => MakeStrategyCommand::class,
         'MakeSeeder' => MakeSeederCommand::class,
         'MakeTest' => MakeTestCommand::class,
         'MakeValue' => MakeValueCommand::class,
