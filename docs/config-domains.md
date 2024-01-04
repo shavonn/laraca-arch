@@ -1,6 +1,6 @@
 # Laraca Config: Domains
 
-If you're interested in domain-driven design or even separating your application into microservices in a monolith, enabling domains can do that with you.
+An option for domain-driven design.
 
 ```php
     'domains' => [
@@ -17,14 +17,20 @@ If you're interested in domain-driven design or even separating your application
 Examples:
 
 -   `'path' => 'Domains'` => `(app/Domains/Foo)`
--   `'path' => 'Service'` => `(app/Service/Foo)`
 -   `'path' => null` => `(app/Foo)`
 
 ## Use with make commands
 
-When enabled, it adds an optional `domain` argument to all of Laraca's make commands except (Factories,Migrations, Providers, and Seeders) so **if** you want the file to generate in a particular domain, just pass it as the second arg.
+When enabled, it adds an optional `--domain` flag to all of Laraca's arti and make commands to route it to a particular domain. It will use the directory path defined up until the `base` or `app` end.
 
-`artisan make:controller FavoritesContoller` **`Favorites`**
+**For example:**
+Domain path = `Domains`
+Job path = `Operations/Jobs`
+
+`artisan make:job GenerateInvoice` **`--domain=Billing`**
+
+The job would generate at:
+`app/Domains/Billing/Operations/Jobs/GenerateInvoice.php`
 
 ## Associated commands
 

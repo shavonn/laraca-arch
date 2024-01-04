@@ -2,12 +2,13 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
+use HandsomeBrown\Laraca\Commands\Traits\Directable;
 use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Foundation\Console\ProviderMakeCommand;
 
 class MakeProviderCommand extends ProviderMakeCommand
 {
-    use LaracaCommand;
+    use Directable, LaracaCommand;
 
     /**
      * name

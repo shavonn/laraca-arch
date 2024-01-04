@@ -2,13 +2,14 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
+use HandsomeBrown\Laraca\Commands\Traits\Directable;
 use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Database\Console\Seeds\SeederMakeCommand;
 use Illuminate\Support\Str;
 
 class MakeSeederCommand extends SeederMakeCommand
 {
-    use LaracaCommand;
+    use Directable, LaracaCommand;
 
     /**
      * name

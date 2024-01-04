@@ -6,12 +6,6 @@
 
 The goal of this package is a _configurable_ Laravel application structure with a few niceties thrown in. And I swear only tiny bits of my personal opinion made it into the default configuration. ;)
 
-### Testing
-
-```bash
-composer test
-```
-
 ### Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
