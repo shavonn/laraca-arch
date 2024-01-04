@@ -99,7 +99,7 @@ describe('init:micro', function () {
         );
     })->with('classes');
 
-    it('should not allow the same microservice to be created twice', function (string $class) {
+    it('should not allow an existing microservice to be created', function (string $class) {
         Config::set('laraca.struct.microservice.path', 'Test/Microservices');
 
         artisan('init:micro', ['name' => $class]);

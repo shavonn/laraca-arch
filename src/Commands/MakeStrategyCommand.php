@@ -9,8 +9,8 @@ use Illuminate\Support\Str;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
-#[AsCommand(name: 'make:service')]
-class MakeServiceCommand extends LaracaGeneratorCommand
+#[AsCommand(name: 'make:strategy')]
+class MakeStrategyCommand extends LaracaGeneratorCommand
 {
     use Directable, LaracaCommand;
 
@@ -19,21 +19,21 @@ class MakeServiceCommand extends LaracaGeneratorCommand
      *
      * @var string
      */
-    protected $name = 'make:service';
+    protected $name = 'make:strategy';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new service class and interface';
+    protected $description = 'Create a new strategy class and interface';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Service';
+    protected $type = 'Strategy';
 
     /**
      * Execute the console command.
@@ -50,24 +50,24 @@ class MakeServiceCommand extends LaracaGeneratorCommand
             return false;
         }
 
-        $interface = Str::of($name)->finish('Interface');
+        $concreteName = Str::of($name)->start('Type');
 
-        $interfacePath = $this->makeFile($interface, __DIR__.'/stubs/interface.stub');
-        $servicePath = $this->makeFile($name, __DIR__.'/stubs/service.stub');
+        $interfacePath = $this->makeFile($name, __DIR__.'/stubs/interface.stub');
+        $strategyPath = $this->makeFile($concreteName, __DIR__.'/stubs/implements-interface.stub');
 
         $info = $this->type;
 
         if (in_array(CreatesMatchingTest::class, class_uses_recursive($this))) {
-            if ($this->handleTestCreation($servicePath)) {
+            if ($this->handleTestCreation($strategyPath)) {
                 $info .= ' and test';
             }
         }
 
         if (windows_os()) {
-            $servicePath = str_replace('/', '\\', $servicePath);
+            $strategyPath = str_replace('/', '\\', $strategyPath);
         }
 
-        $this->components->info(sprintf('%s [%s] and interface [%s] created successfully.', $info, $servicePath, $interfacePath));
+        $this->components->info(sprintf('%s [%s] and interface [%s] created successfully.', $info, $strategyPath, $interfacePath));
     }
 
     /**
@@ -77,7 +77,7 @@ class MakeServiceCommand extends LaracaGeneratorCommand
     {
         $name = parent::getClassName($name);
 
-        return Str::of($name)->endsWith('Service') ? $name : Str::of($name)->finish('Service');
+        return Str::of($name)->endsWith('Strategy') ? $name : Str::of($name)->finish('Strategy');
     }
 
     /**
@@ -89,14 +89,28 @@ class MakeServiceCommand extends LaracaGeneratorCommand
      */
     protected function replaceNamespace(&$stub, $name)
     {
-        $interface = Str::of($name)->finish('Interface');
+        $concreteStrategy = Str::of($name)->start('Type');
 
         $search = ['{{ namespace }}', '{{ class }}', '{{ interface }}'];
-        $replace = [$this->assembleNamespace('service'), $name, $interface];
+        $replace = [$this->assembleNamespace('strategy'), $concreteStrategy, $name];
 
         $stub = str_replace($search, $replace, $stub);
 
         return $stub;
+    }
+
+    /**
+     * Determine if the class already exists.
+     *
+     * @param  string  $rawName
+     * @return bool
+     */
+    protected function alreadyExists($rawName)
+    {
+        $name = $this->getClassName($rawName);
+        $strategyName = Str::of($name)->endsWith('Strategy') ? $name : Str::of($name)->finish('Strategy');
+
+        return $this->files->exists($this->getPath($strategyName));
     }
 
     /**
