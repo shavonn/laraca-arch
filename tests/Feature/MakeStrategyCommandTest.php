@@ -41,8 +41,8 @@ describe('make:strategy', function () {
         artisan('make:strategy', ['name' => $class]);
 
         artisan('make:strategy', ['name' => $class]);
-
         $output = Artisan::output();
+
         expect($output)->toContain('already exists');
     })->with('classes');
 });
