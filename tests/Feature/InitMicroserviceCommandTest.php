@@ -10,7 +10,7 @@ use function Pest\Laravel\artisan;
 
 describe('init:micro', function () {
     it('should implement microservice with selected elements', function (string $class) {
-        Config::set('laraca.struct.microservice.path', 'Test/Microservices');
+        Config::set('laraca.struct.microservice.path', 'Test/Services');
 
         artisan('init:micro', ['name' => $class]);
 
@@ -20,12 +20,12 @@ describe('init:micro', function () {
         $slug = Str::slug($class);
 
         $paths = [
-            "app/Test/Microservices/$class/Broadcasting",
-            "app/Test/Microservices/$class/Http/Controllers",
-            "app/Test/Microservices/$class/Providers",
-            "app/Test/Microservices/$class/resources/views",
-            "app/Test/Microservices/$class/routes",
-            "app/Test/Microservices/$class/tests",
+            "app/Test/Services/$class/Broadcasting",
+            "app/Test/Services/$class/Http/Controllers",
+            "app/Test/Services/$class/Providers",
+            "app/Test/Services/$class/resources/views",
+            "app/Test/Services/$class/routes",
+            "app/Test/Services/$class/tests",
         ];
 
         foreach ($paths as $p) {
@@ -34,14 +34,14 @@ describe('init:micro', function () {
                 ->toBe(true, "Directory not created:\n".$dirPath."\n");
         }
 
-        $root = app_path("Test/Microservices/$class/");
+        $root = app_path("Test/Services/$class/");
 
         $serviceProviderPath = "$root{$class}ServiceProvider.php";
         expect($serviceProviderPath)
             ->toBeFile("File not created at expected path:\n$serviceProviderPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($serviceProviderPath))->toContain(
-            "namespace App\Test\Microservices\\$class;",
+            "namespace App\Test\Services\\$class;",
             "class $class",
         );
 
@@ -50,7 +50,7 @@ describe('init:micro', function () {
             ->toBeFile("File not created at expected path:\n$routeServiceProviderPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($routeServiceProviderPath))->toContain(
-            "namespace App\Test\Microservices\\$class\Providers;",
+            "namespace App\Test\Services\\$class\Providers;",
             'class RouteServiceProvider',
             'require __DIR__.\'/../routes/web.php\';',
         );
@@ -60,7 +60,7 @@ describe('init:micro', function () {
             ->toBeFile("File not created at expected path:\n$broadcastServiceProviderPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($broadcastServiceProviderPath))->toContain(
-            "namespace App\Test\Microservices\\$class\Providers;",
+            "namespace App\Test\Services\\$class\Providers;",
             'class BroadcastServiceProvider',
             'require __DIR__.\'/../routes/channels.php\';',
         );
@@ -100,7 +100,7 @@ describe('init:micro', function () {
     })->with('classes');
 
     it('should not allow an existing microservice to be created', function (string $class) {
-        Config::set('laraca.struct.microservice.path', 'Test/Microservices');
+        Config::set('laraca.struct.microservice.path', 'Test/Services');
 
         artisan('init:micro', ['name' => $class]);
 
@@ -120,12 +120,12 @@ describe('init:micro', function () {
         $class = ucfirst($class);
         $domain = ucfirst($domain);
 
-        $serviceProviderPath = app_path("Test/Domains/$domain/Microservices/$class/{$class}ServiceProvider.php");
+        $serviceProviderPath = app_path("Test/Domains/$domain/Services/$class/{$class}ServiceProvider.php");
         expect($serviceProviderPath)
             ->toBeFile("File not created at expected path:\n$serviceProviderPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($serviceProviderPath))->toContain(
-            "namespace App\Test\Domains\\$domain\Microservices\\$class;",
+            "namespace App\Test\Domains\\$domain\Services\\$class;",
             "class $class",
         );
     })->with('classes', 'domains');

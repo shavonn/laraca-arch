@@ -2,13 +2,14 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
+use HandsomeBrown\Laraca\Commands\Traits\Directable;
 use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Database\Console\Factories\FactoryMakeCommand;
 use Illuminate\Support\Str;
 
 class MakeFactoryCommand extends FactoryMakeCommand
 {
-    use LaracaCommand;
+    use Directable, LaracaCommand;
 
     /**
      * name

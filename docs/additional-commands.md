@@ -16,6 +16,14 @@ artisan domain:list
 
 Generates full list of domain names.
 
+## init:micro
+
+```bash
+artisan init:micro [name]
+```
+
+Generates [microservice](/config-microservices#init-micro).
+
 ## init:structure
 
 ```bash
@@ -31,6 +39,14 @@ artisan make:enum [name]
 ```
 
 Default dir in config: `app/Enums`
+
+## make:strategy
+
+```bash
+artisan make:strategy [name]
+```
+
+Default dir in config: `app/Strategy`
 
 ## make:value
 

@@ -173,7 +173,7 @@ return [
         */
         'microservice' => [
             'enabled' => true,
-            'path' => 'Microservices',
+            'path' => 'Services',
             'parent' => 'app',
         ],
 

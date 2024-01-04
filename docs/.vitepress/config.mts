@@ -25,6 +25,10 @@ export default defineConfig({
                         text: "Domains",
                         link: "/config-domains",
                     },
+                    {
+                        text: "Microservices",
+                        link: "/config-microservices",
+                    },
                 ],
             },
             {

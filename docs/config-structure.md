@@ -22,7 +22,7 @@ When you want a directory that is just a parent to others, there are two ways to
 
 ### Via Path (recommended)
 
-Or avoid bloat in your config and just put it in its path.
+Avoid bloat in your config and just put it in its path.
 
 ```php
 'model' => [
@@ -33,12 +33,12 @@ Or avoid bloat in your config and just put it in its path.
 
 Results: `app/Data/Models`
 
-### Via Parent
+### Via Addition to Structure
 
 Additional keys can be added to the `struct` to serve as parent directories.
 
 ```php
-'data' => [
+'data' => [ // only here as a parent
     'path' => 'Data',
     'parent' => 'app',
 ],
@@ -64,6 +64,7 @@ Laravel root
 │   │       └── Scopes
 │   │   ├── Observers
 │   │   └── Values
+│   ├── Domains
 │   ├── Enums
 │   ├── Events
 │   ├── Exceptions
@@ -79,6 +80,8 @@ Laravel root
 │   ├── Policies
 │   ├── Providers
 │   ├── Rules
+│   ├── Services
+│   ├── Strategy
 │   └── View
 │       └── Components
 ├── database
