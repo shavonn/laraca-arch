@@ -107,7 +107,8 @@ class MakeStrategyCommand extends LaracaGeneratorCommand
      */
     protected function alreadyExists($rawName)
     {
-        $strategyName = Str::of($rawName)->endsWith('Strategy') ? $rawName : Str::of($rawName)->finish('Strategy');
+        $name = $this->getClassName($rawName);
+        $strategyName = Str::of($name)->endsWith('Strategy') ? $name : Str::of($name)->finish('Strategy');
 
         return $this->files->exists($this->getPath($strategyName));
     }
