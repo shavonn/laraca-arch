@@ -112,6 +112,7 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
         $elements = [
             'channel',
             'controller',
+            'migration',
             'provider',
             'route',
             'test',
