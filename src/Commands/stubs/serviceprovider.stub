@@ -17,7 +17,7 @@ class {{ service }}ServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(BroadcastServiceProvider::class);
 
-        View::addNamespace('{{ service }}', realpath(__DIR__.'/../resources/views'));
+        View::addNamespace('{{ service }}', realpath(__DIR__.'/resources/views'));
     }
 
     /**
@@ -25,6 +25,6 @@ class {{ service }}ServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
     }
 }

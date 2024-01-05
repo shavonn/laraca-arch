@@ -2,14 +2,17 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
+use HandsomeBrown\Laraca\Commands\Traits\Directable;
 use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
 use Illuminate\Database\Console\Migrations\MigrateMakeCommand;
+use Illuminate\Database\Migrations\MigrationCreator;
+use Illuminate\Support\Composer;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(name: 'arti:migration')]
 class ArtiMigrationCommand extends MigrateMakeCommand
 {
-    use LaracaCommand;
+    use Directable, LaracaCommand;
 
     /**
      * signature
@@ -25,17 +28,37 @@ class ArtiMigrationCommand extends MigrateMakeCommand
         {--fullpath : Output the full path of the migration (Deprecated)}';
 
     /**
+     * Create a new migration install command instance.
+     *
+     * @return void
+     */
+    public function __construct(MigrationCreator $creator, Composer $composer)
+    {
+        if (self::domainsEnabled()) {
+            $this->signature = $this->signature.' {--domain= : The name of the domain}';
+        }
+
+        if (self::microservicesEnabled()) {
+            $this->signature = $this->signature.' {--service= : The name of the service}';
+        }
+
+        parent::__construct($creator, $composer);
+    }
+
+    /**
      * getMigrationPath
      * Get migration path (either specified by '--path' option or default location).
      */
     protected function getMigrationPath(): string
     {
+        [$domain, $service] = $this->gatherPathAssets();
+
         if (! is_null($targetPath = $this->input->getOption('path'))) {
             return ! $this->usingRealPath()
                             ? $this->laravel->basePath().'/'.$targetPath
                             : $targetPath;
         }
 
-        return self::assembleFullPath('migration');
+        return self::assembleFullPath('migration', $domain, $service);
     }
 }
