@@ -3,7 +3,7 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
+use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
 use Illuminate\Console\Concerns\CreatesMatchingTest;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -12,7 +12,7 @@ use Symfony\Component\Console\Input\InputArgument;
 #[AsCommand(name: 'make:strategy')]
 class MakeStrategyCommand extends LaracaGeneratorCommand
 {
-    use Directable, LaracaCommand;
+    use CreatesMatchingTest, Directable, SharedMethods;
 
     /**
      * The console command name.
@@ -44,7 +44,7 @@ class MakeStrategyCommand extends LaracaGeneratorCommand
      */
     public function handle()
     {
-        $name = $this->getClassName($this->input->getArgument('name'));
+        $name = $this->formatName($this->input->getArgument('name'));
 
         if (! parent::handle()) {
             return false;
@@ -73,9 +73,9 @@ class MakeStrategyCommand extends LaracaGeneratorCommand
     /**
      * Get the class name
      */
-    protected function getClassName(string $name): string
+    protected function formatName(string $name): string
     {
-        $name = parent::getClassName($name);
+        $name = parent::formatName($name);
 
         return Str::of($name)->endsWith('Strategy') ? $name : Str::of($name)->finish('Strategy');
     }
@@ -85,12 +85,10 @@ class MakeStrategyCommand extends LaracaGeneratorCommand
      */
     protected function replaceTags(string &$stub, string $name): string
     {
-        [$domain, $service] = $this->gatherPathAssets();
-
         $concreteStrategy = Str::of($name)->start('Type');
 
         $search = ['{{ namespace }}', '{{ class }}', '{{ interface }}'];
-        $replace = [$this->assembleNamespace('strategy'), $concreteStrategy, $name];
+        $replace = [$this->getFullNamespace('strategy'), $concreteStrategy, $name];
 
         $stub = str_replace($search, $replace, $stub);
 
@@ -105,7 +103,7 @@ class MakeStrategyCommand extends LaracaGeneratorCommand
      */
     protected function alreadyExists($rawName)
     {
-        $name = $this->getClassName($rawName);
+        $name = $this->formatName($rawName);
         $strategyName = Str::of($name)->endsWith('Strategy') ? $name : Str::of($name)->finish('Strategy');
 
         return $this->files->exists($this->getPath($strategyName));

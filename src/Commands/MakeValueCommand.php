@@ -3,7 +3,9 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
+use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
+use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
+use Illuminate\Console\Concerns\CreatesMatchingTest;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -11,7 +13,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 #[AsCommand(name: 'make:value')]
 class MakeValueCommand extends GeneratorCommand
 {
-    use Directable, LaracaCommand;
+    use CreatesMatchingTest, Directable, SharedMethods, UsesLaravelGenerator;
 
     /**
      * The console command name.
@@ -68,5 +70,16 @@ class MakeValueCommand extends GeneratorCommand
         $classVar = Str::camel($this->getNameInput());
 
         return str_replace(['{{ class }}', '{{ class_var }}'], [$class, $classVar], $stub);
+    }
+
+    /**
+     * Create the matching test case if requested.
+     *
+     * @param  string  $path
+     * @return bool
+     */
+    protected function handleTestCreation($path)
+    {
+        return $this->makeTest($path);
     }
 }

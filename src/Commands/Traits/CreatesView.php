@@ -16,7 +16,7 @@ trait CreatesView
         $views = parent::viewPath($path);
 
         try {
-            $laracaViewsPath = $this->assembleFullPath('view');
+            $laracaViewsPath = $this->getFullPath('view');
             $views = $laracaViewsPath.'/'.$path;
         } catch (\Throwable $th) {
             $this->components->info('Using config.view config path.');

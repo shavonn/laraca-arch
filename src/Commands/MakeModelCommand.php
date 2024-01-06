@@ -3,13 +3,14 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
+use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
+use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
 use Illuminate\Foundation\Console\ModelMakeCommand;
 use Symfony\Component\Console\Input\InputOption;
 
 class MakeModelCommand extends ModelMakeCommand
 {
-    use Directable, LaracaCommand;
+    use Directable, SharedMethods, UsesLaravelGenerator;
 
     /**
      * The console command name.
@@ -70,5 +71,16 @@ class MakeModelCommand extends ModelMakeCommand
         return array_merge(parent::getOptions(), [
             ['uuid', null, InputOption::VALUE_NONE, 'Create an Eloquent model with a uuid as the primary key.'],
         ]);
+    }
+
+    /**
+     * Create the matching test case if requested.
+     *
+     * @param  string  $path
+     * @return bool
+     */
+    protected function handleTestCreation($path)
+    {
+        return $this->makeTest($path);
     }
 }

@@ -3,12 +3,13 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
+use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
+use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
 use Illuminate\Foundation\Console\ObserverMakeCommand;
 
 class MakeObserverCommand extends ObserverMakeCommand
 {
-    use Directable, LaracaCommand;
+    use Directable, SharedMethods, UsesLaravelGenerator;
 
     /**
      * The console command name.

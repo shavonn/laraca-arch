@@ -42,7 +42,7 @@ class InitStructureCommand extends LaracaGeneratorCommand
                 continue;
             }
 
-            $fullPath = self::assembleFullPath($key);
+            $fullPath = self::getFullPath($key);
 
             $this->makeEmptyDirectory($fullPath);
         }

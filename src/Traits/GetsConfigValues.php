@@ -12,7 +12,7 @@ trait GetsConfigValues
     /**
      * If domains are enabled
      */
-    public static function domainsEnabled(): bool
+    protected static function domainsEnabled(): bool
     {
         $domainsEnabled = Config::get('laraca.struct.domain.enabled');
 
@@ -22,7 +22,7 @@ trait GetsConfigValues
     /**
      * Domain parent dir
      */
-    public static function domainParentDir(): ?string
+    protected static function domainParentDir(): ?string
     {
         $parentDir = Config::get('laraca.struct.domain.path');
 
@@ -32,7 +32,7 @@ trait GetsConfigValues
     /**
      * If microservices are enabled
      */
-    public static function microservicesEnabled(): bool
+    protected static function microservicesEnabled(): bool
     {
         $microservicesEnabled = Config::get('laraca.struct.microservice.enabled');
 
@@ -42,7 +42,7 @@ trait GetsConfigValues
     /**
      * Microservice parent dir
      */
-    public static function microserviceParentDir(): ?string
+    protected static function microserviceParentDir(): ?string
     {
         $parentDir = Config::get('laraca.struct.microservice.path');
 
@@ -50,37 +50,11 @@ trait GetsConfigValues
     }
 
     /**
-     * Return full path string
+     * Get the namespace with the possibility of domain or service flags
      */
-    public static function assembleFullPath(string $key, ?string $domain = null, ?string $service = null, bool $withRoot = true): string
+    protected function getFullNamespaceWithArgs(string $key, ?string $domain, ?string $service): string
     {
-        $path = self::assemblePathArray($key, $domain, $service);
-        $pathArray = $path->getArray();
-
-        $pathStr = implode('/', $pathArray);
-
-        if ($withRoot) {
-            if ($path->getRoot() == 'app') {
-                $pathStr = app_path($pathStr);
-            } elseif ($path->getRoot() == 'base') {
-                $pathStr = base_path($pathStr);
-            }
-        }
-
-        return $pathStr;
-    }
-
-    /**
-     * Return base path string
-     */
-    public static function assembleBasePath(string $key): string
-    {
-        $path = self::assembleBasePathArray($key);
-        $pathArray = $path->getArray();
-
-        $pathStr = implode('/', $pathArray);
-
-        return $pathStr;
+        return self::assembleNamespace($key, $domain, $service);
     }
 
     /**
@@ -102,6 +76,41 @@ trait GetsConfigValues
         }
 
         return $namespace;
+    }
+
+    /**
+     * Get the path with the possibility of domain or service flags
+     */
+    protected function getFullPath(string $key, bool $withRoot = true): string
+    {
+        if (method_exists($this, 'getPathAssets')) {
+            [$domain, $service] = $this->getPathAssets();
+
+            return self::assembleFullPath($key, $domain, $service, $withRoot);
+        }
+
+        return self::assembleFullPath($key, null, null, $withRoot);
+    }
+
+    /**
+     * Return full path string
+     */
+    public static function assembleFullPath(string $key, ?string $domain = null, ?string $service = null, bool $withRoot = true): string
+    {
+        $path = self::assemblePathArray($key, $domain, $service);
+        $pathArray = $path->getArray();
+
+        $pathStr = implode('/', $pathArray);
+
+        if ($withRoot) {
+            if ($path->getRoot() == 'app') {
+                $pathStr = app_path($pathStr);
+            } elseif ($path->getRoot() == 'base') {
+                $pathStr = base_path($pathStr);
+            }
+        }
+
+        return $pathStr;
     }
 
     /**
@@ -142,6 +151,19 @@ trait GetsConfigValues
         }
 
         return new Path($pathArray, $path->getRoot());
+    }
+
+    /**
+     * Return base path string
+     */
+    public static function assembleBasePath(string $key): string
+    {
+        $path = self::assembleBasePathArray($key);
+        $pathArray = $path->getArray();
+
+        $pathStr = implode('/', $pathArray);
+
+        return $pathStr;
     }
 
     /**

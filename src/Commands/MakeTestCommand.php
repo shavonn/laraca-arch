@@ -3,13 +3,14 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
+use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
+use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
 use Illuminate\Foundation\Console\TestMakeCommand;
 use Illuminate\Support\Str;
 
 class MakeTestCommand extends TestMakeCommand
 {
-    use Directable, LaracaCommand;
+    use Directable, SharedMethods, UsesLaravelGenerator;
 
     /**
      * The console command name.
@@ -27,6 +28,6 @@ class MakeTestCommand extends TestMakeCommand
     {
         $name = Str::of($name)->replaceFirst($this->rootNamespace(), '')->replace('\\', '/');
 
-        return self::assembleFullPath('test')."/$name.php";
+        return self::getFullPath('test')."/$name.php";
     }
 }

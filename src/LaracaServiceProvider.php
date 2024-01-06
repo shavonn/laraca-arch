@@ -88,7 +88,6 @@ class LaracaServiceProvider extends ServiceProvider
     ];
 
     /**
-     * boot
      * Bootstrap the application services.
      */
     public function boot(): void
@@ -98,7 +97,7 @@ class LaracaServiceProvider extends ServiceProvider
                 __DIR__.'/../config/config.php' => config_path('laraca.php'),
             ], 'laraca-config');
 
-            $this->app->useDatabasePath($this->assembleFullPath('database'));
+            $this->app->useDatabasePath($this->getFullPath('database'));
 
             if ($this->domainsEnabled() && $this->domainParentDir()) {
                 $this->commands['DomainList'] = DomainListCommand::class;
@@ -108,13 +107,12 @@ class LaracaServiceProvider extends ServiceProvider
             $this->registerCommands();
         }
 
-        $this->loadViewsFrom($this->assembleFullPath('view'), 'laraca');
+        $this->loadViewsFrom($this->getFullPath('view'), 'laraca');
 
-        $this->loadMigrationsFrom($this->assembleFullPath('migration'));
+        $this->loadMigrationsFrom($this->getFullPath('migration'));
     }
 
     /**
-     * register
      * Register the application services.
      */
     public function register(): void
@@ -124,7 +122,6 @@ class LaracaServiceProvider extends ServiceProvider
     }
 
     /**
-     * registerCommands
      * Register the given commands.
      */
     public function registerCommands(): void

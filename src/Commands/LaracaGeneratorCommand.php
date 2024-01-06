@@ -2,15 +2,16 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
+use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
 use Illuminate\Console\Command;
+use Illuminate\Console\Concerns\CreatesMatchingTest;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
 class LaracaGeneratorCommand extends Command
 {
-    use LaracaCommand;
+    use SharedMethods;
 
     /**
      * The filesystem instance.
@@ -49,6 +50,10 @@ class LaracaGeneratorCommand extends Command
     {
         parent::__construct();
 
+        if (in_array(CreatesMatchingTest::class, class_uses_recursive($this))) {
+            $this->addTestOptions();
+        }
+
         $this->configKey = strtolower($this->type);
         $this->files = $files;
     }
@@ -72,18 +77,6 @@ class LaracaGeneratorCommand extends Command
         }
 
         return true;
-    }
-
-    /**
-     * Get the class name
-     */
-    protected function getClassName(string $name): string
-    {
-        $name = ltrim($name, '\\/');
-
-        $name = str_replace('/', '\\', $name);
-
-        return ucfirst($name);
     }
 
     /**
@@ -128,7 +121,7 @@ class LaracaGeneratorCommand extends Command
     {
         $stub = $this->files->get($stub);
 
-        return $this->replaceNamespace($stub, $name)->replaceTags($stub, $name);
+        return $this->replaceTags($stub, $name);
     }
 
     /**
@@ -160,10 +153,8 @@ class LaracaGeneratorCommand extends Command
      */
     protected function replaceTags(string &$stub, string $name): string
     {
-        [$domain, $service] = $this->gatherPathAssets();
-
         $search = ['{{ namespace }}', '{{ class }}'];
-        $replace = [$this->assembleNamespace($this->configKey, $domain, $service), $name];
+        $replace = [$this->getFullNamespace($this->configKey), $name];
 
         $stub = str_replace($search, $replace, $stub);
 
@@ -177,7 +168,7 @@ class LaracaGeneratorCommand extends Command
     {
         $name = Str::of($name)->replaceFirst($this->rootNamespace(), '')->replace('\\', '/');
 
-        return self::assembleFullPath($this->configKey)."/$name.php";
+        return self::getFullPath($this->configKey)."/$name.php";
     }
 
     /**
@@ -188,7 +179,7 @@ class LaracaGeneratorCommand extends Command
      */
     protected function alreadyExists($rawName)
     {
-        return $this->files->exists($this->getPath($this->getClassName($rawName)));
+        return $this->files->exists($this->getPath($this->formatName($rawName)));
     }
 
     /**
@@ -198,7 +189,7 @@ class LaracaGeneratorCommand extends Command
      */
     protected function rootNamespace()
     {
-        return $this->laravel->getNamespace();
+        return app()->getNamespace();
     }
 
     /**

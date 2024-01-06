@@ -9,7 +9,7 @@ use function Pest\Laravel\artisan;
 describe('domain:list', function () {
     it('should list direct children of the configured domain folder', function (string $class, string $domain) {
         Config::set('laraca.struct.domain.enabled', true);
-        Config::set('laraca.struct.domain.path', 'TestDomains');
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('make:controller', ['name' => $class, '--domain' => $domain]);
 
@@ -22,12 +22,12 @@ describe('domain:list', function () {
         $domain = ucfirst($domain);
 
         expect($output)
-            ->toContain('TestDomains', $domain);
+            ->toContain('Test/Domains', $domain);
     })->with('classes', 'domains');
 
     it('should not be available when domains are disabled', function (string $class, string $domain) {
         Config::set('laraca.struct.domain.enabled', false);
-        Config::set('laraca.struct.domain.path', 'TestDomains');
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('make:controller', ['name' => $class, '--domain' => $domain]);
         $output = Artisan::output();

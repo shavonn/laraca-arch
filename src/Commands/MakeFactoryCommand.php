@@ -3,13 +3,14 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
+use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
+use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
 use Illuminate\Database\Console\Factories\FactoryMakeCommand;
 use Illuminate\Support\Str;
 
 class MakeFactoryCommand extends FactoryMakeCommand
 {
-    use Directable, LaracaCommand;
+    use Directable, SharedMethods, UsesLaravelGenerator;
 
     /**
      * The console command name.
@@ -27,7 +28,7 @@ class MakeFactoryCommand extends FactoryMakeCommand
     {
         $name = Str::of($name)->replaceFirst($this->rootNamespace(), '')->finish('Factory');
 
-        return self::assembleFullPath('factory')."/$name.php";
+        return self::getFullPath('factory')."/$name.php";
     }
 
     /**

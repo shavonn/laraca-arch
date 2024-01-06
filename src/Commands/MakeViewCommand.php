@@ -4,13 +4,13 @@ namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\CreatesView;
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
+use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
 use Illuminate\Foundation\Console\ViewMakeCommand;
+use Illuminate\Support\Str;
 
 class MakeViewCommand extends ViewMakeCommand
 {
-    use CreatesView;
-    use Directable, LaracaCommand;
+    use CreatesView, Directable, SharedMethods;
 
     /**
      * The console command name.
@@ -27,5 +27,30 @@ class MakeViewCommand extends ViewMakeCommand
     protected function handleTestCreation($path): bool
     {
         return parent::handleTestCreation($path);
+    }
+
+    /**
+     * Get the class fully qualified name for the test.
+     *
+     * @return string
+     */
+    protected function testClassFullyQualifiedName()
+    {
+        $extension = is_string($this->option('extension')) ? $this->option('extension') : '';
+        $name = Str::of(Str::lower($this->getNameInput()))->replace('.'.$extension, '');
+
+        $namespacedName = Str::of(
+            Str::of($name)
+                ->replace('/', ' ')
+                ->explode(' ')
+                ->map(fn ($part) => Str::of($part)->ucfirst())
+                ->implode('\\')
+        )
+            ->replace(['-', '_'], ' ')
+            ->explode(' ')
+            ->map(fn ($part) => Str::of($part)->ucfirst())
+            ->implode('');
+
+        return $this->getFullNamespace('test').'\\Feature\\View\\'.$namespacedName;
     }
 }

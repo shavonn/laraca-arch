@@ -5,28 +5,14 @@ namespace HandsomeBrown\Laraca\Commands\Traits;
 use HandsomeBrown\Laraca\Traits\GetsConfigValues;
 use Illuminate\Support\Str;
 
-trait LaracaCommand
+trait SharedMethods
 {
     use GetsConfigValues;
 
     /**
-     * Parse the class name and format according to the root namespace.
-     * Laravel func
-     *
-     * @param  string  $name
-     * @return string
-     */
-    protected function qualifyClass($name)
-    {
-        $name = ucfirst($name);
-
-        return parent::qualifyClass($name);
-    }
-
-    /**
      * Get the class name
      */
-    protected function getClassName(string $name): string
+    protected function formatName(string $name): string
     {
         $name = ltrim($name, '\\/');
 
@@ -40,14 +26,14 @@ trait LaracaCommand
      *
      * @return array<int,string|null>
      */
-    protected function gatherPathAssets(): array
+    protected function getPathAssets(): array
     {
         $domain = null;
         $service = null;
 
         if ($this->input->hasOption('domain')) {
             $domain = $this->input->getOption('domain');
-            $domainName = $domain ? $this->getClassName($this->input->getOption('domain')) : null;
+            $domainName = $domain ? $this->formatName($this->input->getOption('domain')) : null;
             if (self::domainsEnabled() && $domainName) {
                 $domain = $domainName;
             }
@@ -55,7 +41,7 @@ trait LaracaCommand
 
         if ($this->input->hasOption('service')) {
             $service = $this->input->getOption('service');
-            $serviceName = $service ? $this->getClassName($this->input->getOption('service')) : null;
+            $serviceName = $service ? $this->formatName($this->input->getOption('service')) : null;
             if (self::microservicesEnabled() && $serviceName) {
                 $service = $serviceName;
             }
@@ -69,37 +55,18 @@ trait LaracaCommand
      */
     protected function getFullNamespace(string $key): string
     {
-        [$domain, $service] = $this->gatherPathAssets();
+        [$domain, $service] = $this->getPathAssets();
 
         return self::assembleNamespace($key, $domain, $service);
     }
 
     /**
-     * Get the path with the possibility of domain or service flags
-     */
-    protected function getBasePath(string $key): string
-    {
-        return self::assembleBasePath($key);
-    }
-
-    /**
-     * Get the path with the possibility of domain or service flags
-     */
-    public function getFullPath(string $key, bool $withRoot = true): string
-    {
-        [$domain, $service] = $this->gatherPathAssets();
-
-        return self::assembleFullPath($key, $domain, $service, $withRoot);
-    }
-
-    /**
      * Create the matching test case if requested.
-     * Laravel func
      *
      * @param  string  $path
      * @return bool
      */
-    protected function handleTestCreation($path)
+    protected function makeTest($path)
     {
         if (! $this->option('test') && ! $this->option('pest')) {
             return false;
@@ -112,7 +79,7 @@ trait LaracaCommand
             '--pest' => $this->option('pest'),
         ];
 
-        [$domain, $service] = $this->gatherPathAssets();
+        [$domain, $service] = $this->getPathAssets();
 
         if ($domain) {
             $args['--domain'] = $domain;
