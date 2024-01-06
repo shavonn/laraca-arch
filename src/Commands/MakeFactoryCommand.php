@@ -12,7 +12,6 @@ class MakeFactoryCommand extends FactoryMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -32,7 +31,6 @@ class MakeFactoryCommand extends FactoryMakeCommand
     }
 
     /**
-     * getNamespace
      * Get the full namespace for a given class, without the class name.
      *
      * @param  string  $name

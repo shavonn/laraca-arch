@@ -13,10 +13,19 @@ class MakeViewCommand extends ViewMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
      */
     protected $name = 'make:view';
+
+    /**
+     * Create the matching test case if requested.
+     *
+     * @param  string  $path
+     */
+    protected function handleTestCreation($path): bool
+    {
+        return parent::handleTestCreation($path);
+    }
 }

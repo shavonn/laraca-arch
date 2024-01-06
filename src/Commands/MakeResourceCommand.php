@@ -11,7 +11,6 @@ class MakeResourceCommand extends ResourceMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -19,7 +18,6 @@ class MakeResourceCommand extends ResourceMakeCommand
     protected $name = 'make:resource';
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace

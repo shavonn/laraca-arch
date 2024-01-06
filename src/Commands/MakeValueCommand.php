@@ -56,20 +56,17 @@ class MakeValueCommand extends GeneratorCommand
     }
 
     /**
-     * Build the class with the given name.
+     * Replace the class name for the given stub.
      *
+     * @param  string  $stub
      * @param  string  $name
      * @return string
-     *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    protected function buildClass($name)
+    protected function replaceClass($stub, $name)
     {
-        $class = parent::buildClass($name);
+        $class = str_replace($this->getNamespace($name).'\\', '', $name);
         $classVar = Str::camel($this->getNameInput());
 
-        $class = Str::replace('{{ class_var }}', $classVar, $class);
-
-        return $class;
+        return str_replace(['{{ class }}', '{{ class_var }}'], [$class, $classVar], $stub);
     }
 }

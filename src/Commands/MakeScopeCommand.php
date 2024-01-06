@@ -11,7 +11,6 @@ class MakeScopeCommand extends ScopeMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -19,7 +18,6 @@ class MakeScopeCommand extends ScopeMakeCommand
     protected $name = 'make:scope';
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace

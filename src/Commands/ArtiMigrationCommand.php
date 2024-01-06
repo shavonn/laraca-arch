@@ -15,7 +15,6 @@ class ArtiMigrationCommand extends MigrateMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * signature
      * The console command signature.
      *
      * @var string
@@ -26,6 +25,13 @@ class ArtiMigrationCommand extends MigrateMakeCommand
         {--path= : The location where the migration file should be created}
         {--realpath : Indicate any provided migration file paths are pre-resolved absolute paths}
         {--fullpath : Output the full path of the migration (Deprecated)}';
+
+    /**
+     * The type of class being generated.
+     *
+     * @var string
+     */
+    protected $type = 'Migration';
 
     /**
      * Create a new migration install command instance.
@@ -46,7 +52,6 @@ class ArtiMigrationCommand extends MigrateMakeCommand
     }
 
     /**
-     * getMigrationPath
      * Get migration path (either specified by '--path' option or default location).
      */
     protected function getMigrationPath(): string

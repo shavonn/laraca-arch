@@ -11,7 +11,6 @@ class MakeJobCommand extends JobMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -19,7 +18,6 @@ class MakeJobCommand extends JobMakeCommand
     protected $name = 'make:job';
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace

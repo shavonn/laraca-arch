@@ -11,7 +11,6 @@ class MakeMailCommand extends MailMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -19,7 +18,6 @@ class MakeMailCommand extends MailMakeCommand
     protected $name = 'make:mail';
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace

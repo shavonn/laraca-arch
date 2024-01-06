@@ -11,7 +11,6 @@ class MakeChannelCommand extends ChannelMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -19,7 +18,6 @@ class MakeChannelCommand extends ChannelMakeCommand
     protected $name = 'make:channel';
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace

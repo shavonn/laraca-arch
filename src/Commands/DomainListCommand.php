@@ -51,7 +51,7 @@ class DomainListCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool|null
+     * @return bool|void
      */
     public function handle()
     {
@@ -77,7 +77,5 @@ class DomainListCommand extends Command
         $this->table(['Domain', 'Slug', 'Path'], array_map(function ($domain) {
             return [$domain['name'], $domain['slug'], $domain['path']];
         }, $domains));
-
-        return Command::SUCCESS;
     }
 }

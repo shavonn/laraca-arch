@@ -51,7 +51,7 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
     /**
      * Execute the console command.
      *
-     * @return bool|null
+     * @return bool|void
      */
     public function handle()
     {
@@ -74,8 +74,6 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
         $this->components->bulletList($this->generated);
         $this->components->info('Microservice created successfully.');
         $this->components->info('Don\'t forget to <info>'.$this->serviceName.'ServiceProvider.php</info> to providers in <info>app.php</info>');
-
-        return Command::SUCCESS;
     }
 
     /**
@@ -139,7 +137,7 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
     /**
      * Get the console command arguments.
      */
-    protected function makeProviders()
+    protected function makeProviders(): void
     {
         // RouteServiceProvider
         $this->makeFile('RouteServiceProvider', __DIR__.'/stubs/serviceprovider-route.stub');
@@ -204,7 +202,7 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
     /**
      * Get the console command arguments.
      *
-     * @return array
+     * @return array<int,array<int,int|string>>
      */
     protected function getArguments()
     {

@@ -11,7 +11,6 @@ class MakeProviderCommand extends ProviderMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -19,7 +18,6 @@ class MakeProviderCommand extends ProviderMakeCommand
     protected $name = 'make:provider';
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace

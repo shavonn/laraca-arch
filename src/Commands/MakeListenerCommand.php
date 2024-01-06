@@ -11,7 +11,6 @@ class MakeListenerCommand extends ListenerMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -19,7 +18,6 @@ class MakeListenerCommand extends ListenerMakeCommand
     protected $name = 'make:listener';
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace

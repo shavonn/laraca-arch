@@ -38,7 +38,7 @@ class MakeStrategyCommand extends LaracaGeneratorCommand
     /**
      * Execute the console command.
      *
-     * @return bool|null
+     * @return bool|void
      *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
@@ -73,7 +73,7 @@ class MakeStrategyCommand extends LaracaGeneratorCommand
     /**
      * Get the class name
      */
-    protected function getClassName($name): string
+    protected function getClassName(string $name): string
     {
         $name = parent::getClassName($name);
 
@@ -81,14 +81,12 @@ class MakeStrategyCommand extends LaracaGeneratorCommand
     }
 
     /**
-     * Replace the namespace for the given stub.
-     *
-     * @param  string  $stub
-     * @param  string  $name
-     * @return $this
+     * Replace the tags for the given stub.
      */
-    protected function replaceNamespace(&$stub, $name)
+    protected function replaceTags(string &$stub, string $name): string
     {
+        [$domain, $service] = $this->gatherPathAssets();
+
         $concreteStrategy = Str::of($name)->start('Type');
 
         $search = ['{{ namespace }}', '{{ class }}', '{{ interface }}'];
@@ -116,7 +114,7 @@ class MakeStrategyCommand extends LaracaGeneratorCommand
     /**
      * Get the console command arguments.
      *
-     * @return array
+     * @return array<int,array<int,int|string>>
      */
     protected function getArguments()
     {

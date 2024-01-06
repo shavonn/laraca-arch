@@ -12,7 +12,6 @@ class MakeTestCommand extends TestMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string

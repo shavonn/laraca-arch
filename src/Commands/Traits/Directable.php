@@ -9,7 +9,7 @@ trait Directable
     /**
      * Get the console command options.
      *
-     * @return array
+     * @return array<int,array<int,int|string>>
      */
     protected function getOptions()
     {

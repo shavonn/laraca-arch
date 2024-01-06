@@ -11,7 +11,6 @@ class MakeRequestCommand extends RequestMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -19,7 +18,6 @@ class MakeRequestCommand extends RequestMakeCommand
     protected $name = 'make:request';
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace

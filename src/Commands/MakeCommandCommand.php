@@ -11,7 +11,6 @@ class MakeCommandCommand extends ConsoleMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -19,7 +18,6 @@ class MakeCommandCommand extends ConsoleMakeCommand
     protected $name = 'make:command';
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace

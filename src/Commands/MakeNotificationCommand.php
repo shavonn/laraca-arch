@@ -11,7 +11,6 @@ class MakeNotificationCommand extends NotificationMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -19,7 +18,6 @@ class MakeNotificationCommand extends NotificationMakeCommand
     protected $name = 'make:notification';
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace

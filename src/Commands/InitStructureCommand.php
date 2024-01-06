@@ -26,7 +26,7 @@ class InitStructureCommand extends LaracaGeneratorCommand
     /**
      * Execute the console command.
      *
-     * @return bool|null
+     * @return bool|void
      */
     public function handle()
     {
@@ -34,6 +34,7 @@ class InitStructureCommand extends LaracaGeneratorCommand
 
         $this->components->info('Creating directory structure from Laraca config.');
 
+        /** @var string $key */
         foreach (array_keys($config) as $key) {
             if ($key == 'domain' && ! $config['domain']['enabled']) {
                 continue;
@@ -47,7 +48,5 @@ class InitStructureCommand extends LaracaGeneratorCommand
         }
 
         $this->components->info('Configured structure generated successfully.');
-
-        return Command::SUCCESS;
     }
 }

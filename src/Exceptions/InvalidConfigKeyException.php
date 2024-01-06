@@ -6,7 +6,7 @@ use Exception;
 
 class InvalidConfigKeyException extends Exception
 {
-    public function __construct($key)
+    public function __construct(string $key)
     {
         $this->message = 'Invalid configuration key: '.$key;
     }

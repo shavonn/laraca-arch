@@ -11,7 +11,6 @@ class MakeRuleCommand extends RuleMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -19,7 +18,6 @@ class MakeRuleCommand extends RuleMakeCommand
     protected $name = 'make:rule';
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace

@@ -12,7 +12,6 @@ class MakeSeederCommand extends SeederMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -32,7 +31,6 @@ class MakeSeederCommand extends SeederMakeCommand
     }
 
     /**
-     * rootNamespace
      * Get the root namespace for the class.
      */
     protected function rootNamespace(): string

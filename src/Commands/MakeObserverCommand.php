@@ -11,7 +11,6 @@ class MakeObserverCommand extends ObserverMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -19,7 +18,6 @@ class MakeObserverCommand extends ObserverMakeCommand
     protected $name = 'make:observer';
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace

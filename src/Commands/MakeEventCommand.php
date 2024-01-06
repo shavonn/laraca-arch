@@ -11,7 +11,6 @@ class MakeEventCommand extends EventMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -19,7 +18,6 @@ class MakeEventCommand extends EventMakeCommand
     protected $name = 'make:event';
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace

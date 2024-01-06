@@ -12,7 +12,6 @@ class MakeModelCommand extends ModelMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -20,7 +19,6 @@ class MakeModelCommand extends ModelMakeCommand
     protected $name = 'make:model';
 
     /**
-     * getStub
      * Get the stub file for the generator.
      */
     protected function getStub(): string
@@ -53,7 +51,6 @@ class MakeModelCommand extends ModelMakeCommand
     }
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
@@ -64,7 +61,6 @@ class MakeModelCommand extends ModelMakeCommand
     }
 
     /**
-     * getOptions
      * Get the console command options.
      *
      * @return array<array<string>>

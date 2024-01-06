@@ -11,7 +11,6 @@ class MakeExceptionCommand extends ExceptionMakeCommand
     use Directable, LaracaCommand;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -19,7 +18,6 @@ class MakeExceptionCommand extends ExceptionMakeCommand
     protected $name = 'make:exception';
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
