@@ -3,13 +3,13 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
 use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
 use Illuminate\Routing\Console\ControllerMakeCommand;
 
 class MakeControllerCommand extends ControllerMakeCommand
 {
-    use Directable, SharedMethods, UsesLaravelGenerator;
+    use Directable, Shared, UsesLaravelGenerator;
 
     /**
      * The console command name.
@@ -25,7 +25,7 @@ class MakeControllerCommand extends ControllerMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getFullNamespace('controller');
+        return $this->getConfigNamespaceWithOptions('controller');
     }
 
     /**

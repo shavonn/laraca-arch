@@ -3,13 +3,13 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
 use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
 use Illuminate\Routing\Console\MiddlewareMakeCommand;
 
 class MakeMiddlewareCommand extends MiddlewareMakeCommand
 {
-    use Directable, SharedMethods, UsesLaravelGenerator;
+    use Directable, Shared, UsesLaravelGenerator;
 
     /**
      * The console command name.
@@ -25,7 +25,7 @@ class MakeMiddlewareCommand extends MiddlewareMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getFullNamespace('middleware');
+        return $this->getConfigNamespaceWithOptions('middleware');
     }
 
     /**

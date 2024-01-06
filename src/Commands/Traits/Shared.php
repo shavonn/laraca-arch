@@ -5,7 +5,7 @@ namespace HandsomeBrown\Laraca\Commands\Traits;
 use HandsomeBrown\Laraca\Traits\GetsConfigValues;
 use Illuminate\Support\Str;
 
-trait SharedMethods
+trait Shared
 {
     use GetsConfigValues;
 
@@ -53,11 +53,11 @@ trait SharedMethods
     /**
      * Get the namespace with the possibility of domain or service flags
      */
-    protected function getFullNamespace(string $key): string
+    protected function getConfigNamespaceWithOptions(string $key): string
     {
         [$domain, $service] = $this->getPathAssets();
 
-        return self::assembleNamespace($key, $domain, $service);
+        return self::getConfigNamespace($key, $domain, $service);
     }
 
     /**
@@ -90,5 +90,15 @@ trait SharedMethods
         }
 
         return $this->callSilent('make:test', $args) == 0;
+    }
+
+    /**
+     * Get the path with the possibility of domain or service flags
+     */
+    protected function getConfigPathWithOptions(string $key, bool $withRoot = true): string
+    {
+        [$domain, $service] = $this->getPathAssets();
+
+        return self::getConfigPath($key, $domain, $service, $withRoot);
     }
 }

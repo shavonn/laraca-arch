@@ -21,7 +21,7 @@ describe('make:test', function () {
             ->toBeFile("File not created at expected path:\n$testPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($testPath))->toContain(
-            'namespace Tests\Feature;',
+            'namespace Test\Tests\Feature;',
             "class $class",
         );
     })->with('classes');
@@ -40,7 +40,7 @@ describe('make:test', function () {
             ->toBeFile("File not created at expected path:\n$testPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($testPath))->toContain(
-            'namespace Tests\Unit;',
+            'namespace Test\Tests\Unit;',
             "class $class",
         );
     })->with('classes');

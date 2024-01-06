@@ -3,13 +3,13 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
 use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
 use Illuminate\Foundation\Console\ResourceMakeCommand;
 
 class MakeResourceCommand extends ResourceMakeCommand
 {
-    use Directable, SharedMethods, UsesLaravelGenerator;
+    use Directable, Shared, UsesLaravelGenerator;
 
     /**
      * The console command name.
@@ -25,6 +25,6 @@ class MakeResourceCommand extends ResourceMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getFullNamespace('resource');
+        return $this->getConfigNamespaceWithOptions('resource');
     }
 }

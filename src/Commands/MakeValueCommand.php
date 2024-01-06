@@ -3,7 +3,7 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
 use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
 use Illuminate\Console\Concerns\CreatesMatchingTest;
 use Illuminate\Console\GeneratorCommand;
@@ -13,7 +13,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 #[AsCommand(name: 'make:value')]
 class MakeValueCommand extends GeneratorCommand
 {
-    use CreatesMatchingTest, Directable, SharedMethods, UsesLaravelGenerator;
+    use CreatesMatchingTest, Directable, Shared, UsesLaravelGenerator;
 
     /**
      * The console command name.
@@ -54,7 +54,7 @@ class MakeValueCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $this->getFullNamespace('value');
+        return $this->getConfigNamespaceWithOptions('value');
     }
 
     /**

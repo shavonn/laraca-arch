@@ -3,7 +3,7 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
 use Illuminate\Console\Concerns\CreatesMatchingTest;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -12,7 +12,7 @@ use Symfony\Component\Console\Input\InputArgument;
 #[AsCommand(name: 'make:strategy')]
 class MakeStrategyCommand extends LaracaGeneratorCommand
 {
-    use CreatesMatchingTest, Directable, SharedMethods;
+    use CreatesMatchingTest, Directable, Shared;
 
     /**
      * The console command name.
@@ -88,7 +88,7 @@ class MakeStrategyCommand extends LaracaGeneratorCommand
         $concreteStrategy = Str::of($name)->start('Type');
 
         $search = ['{{ namespace }}', '{{ class }}', '{{ interface }}'];
-        $replace = [$this->getFullNamespace('strategy'), $concreteStrategy, $name];
+        $replace = [$this->getConfigNamespaceWithOptions('strategy'), $concreteStrategy, $name];
 
         $stub = str_replace($search, $replace, $stub);
 

@@ -3,13 +3,13 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
 use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
 use Illuminate\Foundation\Console\JobMakeCommand;
 
 class MakeJobCommand extends JobMakeCommand
 {
-    use Directable, SharedMethods, UsesLaravelGenerator;
+    use Directable, Shared, UsesLaravelGenerator;
 
     /**
      * The console command name.
@@ -25,7 +25,7 @@ class MakeJobCommand extends JobMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getFullNamespace('job');
+        return $this->getConfigNamespaceWithOptions('job');
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
 use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 #[AsCommand(name: 'make:enum')]
 class MakeEnumCommand extends GeneratorCommand
 {
-    use Directable, SharedMethods, UsesLaravelGenerator;
+    use Directable, Shared, UsesLaravelGenerator;
 
     /**
      * The console command name.
@@ -52,6 +52,6 @@ class MakeEnumCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $this->getFullNamespace('enum');
+        return $this->getConfigNamespaceWithOptions('enum');
     }
 }

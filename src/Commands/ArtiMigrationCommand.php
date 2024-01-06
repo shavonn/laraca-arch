@@ -3,7 +3,7 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
 use Illuminate\Database\Console\Migrations\MigrateMakeCommand;
 use Illuminate\Database\Migrations\MigrationCreator;
 use Illuminate\Support\Composer;
@@ -12,7 +12,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 #[AsCommand(name: 'arti:migration')]
 class ArtiMigrationCommand extends MigrateMakeCommand
 {
-    use Directable, SharedMethods;
+    use Directable, Shared;
 
     /**
      * The console command signature.
@@ -56,13 +56,12 @@ class ArtiMigrationCommand extends MigrateMakeCommand
      */
     protected function getMigrationPath(): string
     {
-
         if (! is_null($targetPath = $this->input->getOption('path'))) {
             return ! $this->usingRealPath()
                             ? $this->laravel->basePath().'/'.$targetPath
                             : $targetPath;
         }
 
-        return self::getFullPath('migration');
+        return self::getConfigPathWithOptions('migration');
     }
 }

@@ -41,13 +41,6 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
     protected $serviceName = '';
 
     /**
-     * The microservice path.
-     *
-     * @var string
-     */
-    protected $servicePath = '';
-
-    /**
      * Execute the console command.
      *
      * @return bool|void
@@ -55,8 +48,6 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
     public function handle()
     {
         $this->serviceName = $this->formatName($this->input->getArgument('name'));
-        $servicePath = $this->getFullPath('microservice');
-        $this->servicePath = "$servicePath/$this->serviceName";
 
         if (! parent::handle()) {
             return false;
@@ -80,7 +71,7 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
      */
     protected function replaceTags(string &$stub, string $name): string
     {
-        $controllerNamespace = $this->getFullNamespaceWithArgs('controller', null, $this->serviceName);
+        $controllerNamespace = $this->getConfigNamespaceWithOptions('controller', null, $this->serviceName);
 
         $search = ['{{ namespace }}', '{{ slug }}', '{{ service }}', '{{ controller_namespace }}'];
         $replace = [$this->getServiceNamespace(), Str::slug($this->serviceName), $this->serviceName, $controllerNamespace];
@@ -115,7 +106,7 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
             'view',
         ];
 
-        $path = $this->servicePath.'/';
+        $path = $this->getServicePath().'/';
 
         foreach ($elements as $element) {
             $dir = '';
@@ -125,7 +116,7 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
                     break;
 
                 default:
-                    $dir = $path.$this->assembleBasePath($element);
+                    $dir = $path.$this->getBasePath($element);
                     break;
             }
             $this->makeDirectory($dir);
@@ -155,12 +146,12 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
     {
         $name = Str::of($name)->replaceFirst($this->getServiceNamespace(), '')->replace('\\', '/');
 
-        $path = $this->servicePath.'/';
+        $path = $this->getServicePath().'/';
 
         switch ($name) {
             case 'BroadcastServiceProvider':
             case 'RouteServiceProvider':
-                $path = $path.$this->assembleBasePath('provider')."/$name.php";
+                $path = $path.$this->getBasePath('provider')."/$name.php";
                 break;
             case 'api':
             case 'channels':
@@ -168,7 +159,7 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
                 $path = $path."routes/$name.php";
                 break;
             case 'welcome':
-                $path = $path.$this->assembleBasePath('view')."/$name.blade.php";
+                $path = $path.$this->getBasePath('view')."/$name.blade.php";
                 break;
             default:
                 $path = $path."$name.php";
@@ -179,9 +170,16 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
 
     protected function getServiceNamespace(): string
     {
-        $namespace = $this->getFullNamespace('microservice');
+        $namespace = $this->getConfigNamespaceWithOptions($this->configKey);
 
         return "$namespace\\$this->serviceName";
+    }
+
+    protected function getServicePath(): string
+    {
+        $path = $this->getConfigPathWithOptions($this->configKey);
+
+        return "$path/$this->serviceName";
     }
 
     /**

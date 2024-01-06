@@ -2,7 +2,7 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Config;
@@ -13,7 +13,7 @@ use Symfony\Component\Finder\Finder as SymfonyFinder;
 #[AsCommand(name: 'domain:list')]
 class DomainListCommand extends Command
 {
-    use SharedMethods;
+    use Shared;
 
     /**
      * The console command name.

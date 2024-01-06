@@ -3,14 +3,14 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
 use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
 use Illuminate\Database\Console\Seeds\SeederMakeCommand;
 use Illuminate\Support\Str;
 
 class MakeSeederCommand extends SeederMakeCommand
 {
-    use Directable, SharedMethods, UsesLaravelGenerator;
+    use Directable, Shared, UsesLaravelGenerator;
 
     /**
      * The console command name.
@@ -28,7 +28,7 @@ class MakeSeederCommand extends SeederMakeCommand
     {
         $name = Str::of($name)->replaceFirst($this->rootNamespace(), '')->replace('\\', '/');
 
-        return self::getFullPath('seeder')."/$name.php";
+        return self::getConfigPathWithOptions('seeder')."/$name.php";
     }
 
     /**
@@ -36,6 +36,6 @@ class MakeSeederCommand extends SeederMakeCommand
      */
     protected function rootNamespace(): string
     {
-        return $this->getFullNamespace('seeder');
+        return $this->getConfigNamespaceWithOptions('seeder');
     }
 }

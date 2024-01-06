@@ -2,7 +2,7 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
 use Illuminate\Console\Command;
 use Illuminate\Console\Concerns\CreatesMatchingTest;
 use Illuminate\Filesystem\Filesystem;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputOption;
 
 class LaracaGeneratorCommand extends Command
 {
-    use SharedMethods;
+    use Shared;
 
     /**
      * The filesystem instance.
@@ -154,7 +154,7 @@ class LaracaGeneratorCommand extends Command
     protected function replaceTags(string &$stub, string $name): string
     {
         $search = ['{{ namespace }}', '{{ class }}'];
-        $replace = [$this->getFullNamespace($this->configKey), $name];
+        $replace = [$this->getConfigNamespaceWithOptions($this->configKey), $name];
 
         $stub = str_replace($search, $replace, $stub);
 
@@ -168,7 +168,7 @@ class LaracaGeneratorCommand extends Command
     {
         $name = Str::of($name)->replaceFirst($this->rootNamespace(), '')->replace('\\', '/');
 
-        return self::getFullPath($this->configKey)."/$name.php";
+        return self::getConfigPathWithOptions($this->configKey)."/$name.php";
     }
 
     /**

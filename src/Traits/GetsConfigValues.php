@@ -50,17 +50,9 @@ trait GetsConfigValues
     }
 
     /**
-     * Get the namespace with the possibility of domain or service flags
-     */
-    protected function getFullNamespaceWithArgs(string $key, ?string $domain, ?string $service): string
-    {
-        return self::assembleNamespace($key, $domain, $service);
-    }
-
-    /**
      * Return namespace string
      */
-    public static function assembleNamespace(string $key, ?string $domain = null, ?string $service = null, bool $withRoot = true): string
+    public static function getConfigNamespace(string $key, ?string $domain = null, ?string $service = null, bool $withRoot = true): string
     {
         $path = self::assemblePathArray($key, $domain, $service);
         $pathArray = $path->getArray();
@@ -79,23 +71,9 @@ trait GetsConfigValues
     }
 
     /**
-     * Get the path with the possibility of domain or service flags
-     */
-    protected function getFullPath(string $key, bool $withRoot = true): string
-    {
-        if (method_exists($this, 'getPathAssets')) {
-            [$domain, $service] = $this->getPathAssets();
-
-            return self::assembleFullPath($key, $domain, $service, $withRoot);
-        }
-
-        return self::assembleFullPath($key, null, null, $withRoot);
-    }
-
-    /**
      * Return full path string
      */
-    public static function assembleFullPath(string $key, ?string $domain = null, ?string $service = null, bool $withRoot = true): string
+    public static function getConfigPath(string $key, ?string $domain = null, ?string $service = null, bool $withRoot = true): string
     {
         $path = self::assemblePathArray($key, $domain, $service);
         $pathArray = $path->getArray();
@@ -122,7 +100,7 @@ trait GetsConfigValues
             throw new InvalidConfigKeyException($key);
         }
 
-        $path = self::assembleBasePathArray($key);
+        $path = self::getBasePathArray($key);
         $pathArray = $path->getArray();
 
         if (self::microservicesEnabled() || self::domainsEnabled()) {
@@ -156,9 +134,9 @@ trait GetsConfigValues
     /**
      * Return base path string
      */
-    public static function assembleBasePath(string $key): string
+    public static function getBasePath(string $key): string
     {
-        $path = self::assembleBasePathArray($key);
+        $path = self::getBasePathArray($key);
         $pathArray = $path->getArray();
 
         $pathStr = implode('/', $pathArray);
@@ -169,7 +147,7 @@ trait GetsConfigValues
     /**
      * Return path as array without root
      */
-    protected static function assembleBasePathArray(string $key): Path
+    protected static function getBasePathArray(string $key): Path
     {
         if (! Config::has('laraca.struct.'.$key)) {
             throw new InvalidConfigKeyException($key);

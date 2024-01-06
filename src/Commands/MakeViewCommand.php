@@ -4,13 +4,13 @@ namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\CreatesView;
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\SharedMethods;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
 use Illuminate\Foundation\Console\ViewMakeCommand;
 use Illuminate\Support\Str;
 
 class MakeViewCommand extends ViewMakeCommand
 {
-    use CreatesView, Directable, SharedMethods;
+    use CreatesView, Directable, Shared;
 
     /**
      * The console command name.
@@ -51,6 +51,6 @@ class MakeViewCommand extends ViewMakeCommand
             ->map(fn ($part) => Str::of($part)->ucfirst())
             ->implode('');
 
-        return $this->getFullNamespace('test').'\\Feature\\View\\'.$namespacedName;
+        return $this->getConfigNamespaceWithOptions('test').'\\Feature\\View\\'.$namespacedName;
     }
 }
