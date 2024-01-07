@@ -3,15 +3,15 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
+use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
 use Illuminate\Foundation\Console\MailMakeCommand;
 
 class MakeMailCommand extends MailMakeCommand
 {
-    use Directable, LaracaCommand;
+    use Directable, Shared, UsesLaravelGenerator;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -19,13 +19,23 @@ class MakeMailCommand extends MailMakeCommand
     protected $name = 'make:mail';
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getFullNamespace('mail');
+        return $this->getConfigNamespaceWithOptions('mail');
+    }
+
+    /**
+     * Create the matching test case if requested.
+     *
+     * @param  string  $path
+     * @return bool
+     */
+    protected function handleTestCreation($path)
+    {
+        return $this->makeTest($path);
     }
 }

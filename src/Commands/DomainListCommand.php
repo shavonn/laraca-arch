@@ -2,7 +2,7 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Config;
@@ -13,7 +13,7 @@ use Symfony\Component\Finder\Finder as SymfonyFinder;
 #[AsCommand(name: 'domain:list')]
 class DomainListCommand extends Command
 {
-    use LaracaCommand;
+    use Shared;
 
     /**
      * The console command name.
@@ -51,7 +51,7 @@ class DomainListCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return bool|null
+     * @return bool|void
      */
     public function handle()
     {
@@ -77,7 +77,5 @@ class DomainListCommand extends Command
         $this->table(['Domain', 'Slug', 'Path'], array_map(function ($domain) {
             return [$domain['name'], $domain['slug'], $domain['path']];
         }, $domains));
-
-        return Command::SUCCESS;
     }
 }

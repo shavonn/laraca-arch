@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Config;
 trait GetsConfigValues
 {
     /**
-     * Using domains
+     * If domains are enabled
      */
-    public static function domainsEnabled(): bool
+    protected static function domainsEnabled(): bool
     {
         $domainsEnabled = Config::get('laraca.struct.domain.enabled');
 
@@ -22,7 +22,7 @@ trait GetsConfigValues
     /**
      * Domain parent dir
      */
-    public static function domainParentDir(): ?string
+    protected static function domainParentDir(): ?string
     {
         $parentDir = Config::get('laraca.struct.domain.path');
 
@@ -30,9 +30,9 @@ trait GetsConfigValues
     }
 
     /**
-     * Using domains
+     * If microservices are enabled
      */
-    public static function microservicesEnabled(): bool
+    protected static function microservicesEnabled(): bool
     {
         $microservicesEnabled = Config::get('laraca.struct.microservice.enabled');
 
@@ -40,9 +40,9 @@ trait GetsConfigValues
     }
 
     /**
-     * Domain parent dir
+     * Microservice parent dir
      */
-    public static function microserviceParentDir(): ?string
+    protected static function microserviceParentDir(): ?string
     {
         $parentDir = Config::get('laraca.struct.microservice.path');
 
@@ -50,43 +50,12 @@ trait GetsConfigValues
     }
 
     /**
-     * assembleFullPath
+     * Return namespace string
      */
-    public static function assembleFullPath(string $key, ?string $domain = null, ?string $service = null, bool $withRoot = true): string
+    public static function getConfigNamespace(string $key, ?string $domain = null, ?string $service = null, bool $withRoot = true): string
     {
-        [$pathArray, $root] = self::assemblePathArray($key, $domain, $service);
-
-        $path = implode('/', $pathArray);
-
-        if ($withRoot) {
-            if ($root == 'app') {
-                $path = app_path($path);
-            } elseif ($root == 'base') {
-                $path = base_path($path);
-            }
-        }
-
-        return $path;
-    }
-
-    /**
-     * assembleBasePath
-     */
-    public static function assembleBasePath(string $key): string
-    {
-        [$pathArray, $root] = self::assembleBasePathArray($key);
-
-        $path = implode('/', $pathArray);
-
-        return $path;
-    }
-
-    /**
-     * assembleNamespace
-     */
-    public static function assembleNamespace(string $key, ?string $domain = null, ?string $service = null, bool $withRoot = true): string
-    {
-        [$pathArray, $root] = self::assemblePathArray($key, $domain, $service);
+        $path = self::assemblePathArray($key, $domain, $service);
+        $pathArray = $path->getArray();
 
         $pathArray = array_map(function ($dir) {
             return str_replace('/', '\\', ucfirst($dir));
@@ -94,7 +63,7 @@ trait GetsConfigValues
 
         $namespace = implode('\\', $pathArray);
 
-        if ($root == 'app' && $withRoot) {
+        if ($path->getRoot() == 'app' && $withRoot) {
             $namespace = app()->getNamespace().$namespace;
         }
 
@@ -102,15 +71,37 @@ trait GetsConfigValues
     }
 
     /**
-     * assemblePathArray
+     * Return full path string
      */
-    protected static function assemblePathArray(string $key, ?string $domain = null, ?string $service = null): array
+    public static function getConfigPath(string $key, ?string $domain = null, ?string $service = null, bool $withRoot = true): string
+    {
+        $path = self::assemblePathArray($key, $domain, $service);
+        $pathArray = $path->getArray();
+
+        $pathStr = implode('/', $pathArray);
+
+        if ($withRoot) {
+            if ($path->getRoot() == 'app') {
+                $pathStr = app_path($pathStr);
+            } elseif ($path->getRoot() == 'base') {
+                $pathStr = base_path($pathStr);
+            }
+        }
+
+        return $pathStr;
+    }
+
+    /**
+     * Return full path as array
+     */
+    protected static function assemblePathArray(string $key, ?string $domain = null, ?string $service = null): Path
     {
         if (! Config::has('laraca.struct.'.$key)) {
             throw new InvalidConfigKeyException($key);
         }
 
-        [$pathArray, $root] = self::assembleBasePathArray($key);
+        $path = self::getBasePathArray($key);
+        $pathArray = $path->getArray();
 
         if (self::microservicesEnabled() || self::domainsEnabled()) {
             if ($service || $domain) {
@@ -118,7 +109,8 @@ trait GetsConfigValues
                     array_unshift($pathArray, ucfirst($service));
 
                     if (self::microserviceParentDir()) {
-                        array_unshift($pathArray, self::microserviceParentDir());
+                        $parentDir = self::microserviceParentDir();
+                        array_unshift($pathArray, ...explode('/', $parentDir));
                     }
                 }
 
@@ -126,24 +118,38 @@ trait GetsConfigValues
                     array_unshift($pathArray, ucfirst($domain));
 
                     if (self::domainParentDir()) {
-                        array_unshift($pathArray, self::domainParentDir());
+                        $parentDir = self::domainParentDir();
+                        array_unshift($pathArray, ...explode('/', $parentDir));
                     }
 
                 }
 
-                if ($root == 'base') {
-                    $root = 'app';
+                if ($path->getRoot() == 'base') {
+                    $path->setRoot('app');
                 }
             }
         }
 
-        return [$pathArray, $root];
+        return new Path($pathArray, $path->getRoot());
     }
 
     /**
-     * assemblePathArray
+     * Return base path string
      */
-    protected static function assembleBasePathArray(string $key): array
+    public static function getBasePath(string $key): string
+    {
+        $path = self::getBasePathArray($key);
+        $pathArray = $path->getArray();
+
+        $pathStr = implode('/', $pathArray);
+
+        return $pathStr;
+    }
+
+    /**
+     * Return path as array without root
+     */
+    protected static function getBasePathArray(string $key): Path
     {
         if (! Config::has('laraca.struct.'.$key)) {
             throw new InvalidConfigKeyException($key);
@@ -180,6 +186,6 @@ trait GetsConfigValues
 
         } while ($done !== true);
 
-        return [$pathArray, $root];
+        return new Path($pathArray, $root);
     }
 }

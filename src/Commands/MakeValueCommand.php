@@ -3,7 +3,9 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
+use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
+use Illuminate\Console\Concerns\CreatesMatchingTest;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -11,7 +13,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 #[AsCommand(name: 'make:value')]
 class MakeValueCommand extends GeneratorCommand
 {
-    use Directable, LaracaCommand;
+    use CreatesMatchingTest, Directable, Shared, UsesLaravelGenerator;
 
     /**
      * The console command name.
@@ -52,24 +54,32 @@ class MakeValueCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $this->getFullNamespace('value');
+        return $this->getConfigNamespaceWithOptions('value');
     }
 
     /**
-     * Build the class with the given name.
+     * Replace the class name for the given stub.
      *
+     * @param  string  $stub
      * @param  string  $name
      * @return string
-     *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    protected function buildClass($name)
+    protected function replaceClass($stub, $name)
     {
-        $class = parent::buildClass($name);
+        $class = str_replace($this->getNamespace($name).'\\', '', $name);
         $classVar = Str::camel($this->getNameInput());
 
-        $class = Str::replace('{{ class_var }}', $classVar, $class);
+        return str_replace(['{{ class }}', '{{ class_var }}'], [$class, $classVar], $stub);
+    }
 
-        return $class;
+    /**
+     * Create the matching test case if requested.
+     *
+     * @param  string  $path
+     * @return bool
+     */
+    protected function handleTestCreation($path)
+    {
+        return $this->makeTest($path);
     }
 }

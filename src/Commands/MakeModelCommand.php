@@ -3,16 +3,16 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
+use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
 use Illuminate\Foundation\Console\ModelMakeCommand;
 use Symfony\Component\Console\Input\InputOption;
 
 class MakeModelCommand extends ModelMakeCommand
 {
-    use Directable, LaracaCommand;
+    use Directable, Shared, UsesLaravelGenerator;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -20,7 +20,6 @@ class MakeModelCommand extends ModelMakeCommand
     protected $name = 'make:model';
 
     /**
-     * getStub
      * Get the stub file for the generator.
      */
     protected function getStub(): string
@@ -53,18 +52,16 @@ class MakeModelCommand extends ModelMakeCommand
     }
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getFullNamespace('model');
+        return $this->getConfigNamespaceWithOptions('model');
     }
 
     /**
-     * getOptions
      * Get the console command options.
      *
      * @return array<array<string>>
@@ -74,5 +71,16 @@ class MakeModelCommand extends ModelMakeCommand
         return array_merge(parent::getOptions(), [
             ['uuid', null, InputOption::VALUE_NONE, 'Create an Eloquent model with a uuid as the primary key.'],
         ]);
+    }
+
+    /**
+     * Create the matching test case if requested.
+     *
+     * @param  string  $path
+     * @return bool
+     */
+    protected function handleTestCreation($path)
+    {
+        return $this->makeTest($path);
     }
 }

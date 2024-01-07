@@ -4,16 +4,16 @@ namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\CreatesView;
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
+use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
 use Illuminate\Foundation\Console\ComponentMakeCommand;
 
 class MakeComponentCommand extends ComponentMakeCommand
 {
     use CreatesView;
-    use Directable, LaracaCommand;
+    use Directable, Shared, UsesLaravelGenerator;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -21,13 +21,23 @@ class MakeComponentCommand extends ComponentMakeCommand
     protected $name = 'make:component';
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getFullNamespace('component');
+        return $this->getConfigNamespaceWithOptions('component');
+    }
+
+    /**
+     * Create the matching test case if requested.
+     *
+     * @param  string  $path
+     * @return bool
+     */
+    protected function handleTestCreation($path)
+    {
+        return $this->makeTest($path);
     }
 }

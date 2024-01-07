@@ -9,14 +9,13 @@ use Symfony\Component\Console\Exception\InvalidOptionException;
 use function Pest\Laravel\artisan;
 
 describe('init:micro', function () {
-    it('should implement microservice with selected elements', function (string $class) {
+    it('should init microservice dirs and files', function (string $class) {
         Config::set('laraca.struct.microservice.path', 'Test/Services');
 
         artisan('init:micro', ['name' => $class]);
-
         $output = Artisan::output();
 
-        $class = ucfirst($class);
+        $class = getName($class);
         $slug = Str::slug($class);
 
         $paths = [
@@ -103,24 +102,24 @@ describe('init:micro', function () {
         Config::set('laraca.struct.microservice.path', 'Test/Services');
 
         artisan('init:micro', ['name' => $class]);
-
         artisan('init:micro', ['name' => $class]);
         $output = Artisan::output();
 
         expect($output)->toContain('already exists');
     })->with('classes');
 
-    it('should create microservice in domain', function (string $class, string $domain) {
+    it('should init microservice dirs and files in domain', function (string $class, string $domain) {
         Config::set('laraca.struct.domain.enabled', true);
         Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('init:micro', ['name' => $class, '--domain' => $domain]);
         $output = Artisan::output();
 
-        $class = ucfirst($class);
-        $domain = ucfirst($domain);
+        $class = getName($class);
+        $domain = getName($domain);
 
         $serviceProviderPath = app_path("Test/Domains/$domain/Services/$class/{$class}ServiceProvider.php");
+
         expect($serviceProviderPath)
             ->toBeFile("File not created at expected path:\n$serviceProviderPath\n\nOutput results:\n$output\n=====\n");
 
@@ -130,9 +129,9 @@ describe('init:micro', function () {
         );
     })->with('classes', 'domains');
 
-    it('should not create a service with service flag', function () {
-        Config::set('laraca.struct.domain.enabled', true);
-        Config::set('laraca.struct.domain.path', 'Test/Domains');
+    it('should not create a microservice with service flag', function () {
+        Config::set('laraca.struct.microservice.enabled', true);
+        Config::set('laraca.struct.microservice.path', 'Test/Services');
 
         artisan('init:micro', ['name' => 'FooCreated', '--service' => 'Bar']);
 

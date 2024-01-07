@@ -8,8 +8,8 @@ use HandsomeBrown\Laraca\Commands\InitMicroserviceCommand;
 use HandsomeBrown\Laraca\Commands\InitStructureCommand;
 use HandsomeBrown\Laraca\Commands\MakeCastCommand;
 use HandsomeBrown\Laraca\Commands\MakeChannelCommand;
-use HandsomeBrown\Laraca\Commands\MakeCommandCommand;
 use HandsomeBrown\Laraca\Commands\MakeComponentCommand;
+use HandsomeBrown\Laraca\Commands\MakeConsoleCommand;
 use HandsomeBrown\Laraca\Commands\MakeControllerCommand;
 use HandsomeBrown\Laraca\Commands\MakeEnumCommand;
 use HandsomeBrown\Laraca\Commands\MakeEventCommand;
@@ -60,7 +60,7 @@ class LaracaServiceProvider extends ServiceProvider
         'InitStructure' => InitStructureCommand::class,
         'MakeCast' => MakeCastCommand::class,
         'MakeChannel' => MakeChannelCommand::class,
-        'MakeCommand' => MakeCommandCommand::class,
+        'MakeCommand' => MakeConsoleCommand::class,
         'MakeComponent' => MakeComponentCommand::class,
         'MakeController' => MakeControllerCommand::class,
         'MakeEvent' => MakeEventCommand::class,
@@ -88,7 +88,6 @@ class LaracaServiceProvider extends ServiceProvider
     ];
 
     /**
-     * boot
      * Bootstrap the application services.
      */
     public function boot(): void
@@ -98,7 +97,7 @@ class LaracaServiceProvider extends ServiceProvider
                 __DIR__.'/../config/config.php' => config_path('laraca.php'),
             ], 'laraca-config');
 
-            $this->app->useDatabasePath($this->assembleFullPath('database'));
+            $this->app->useDatabasePath($this->getConfigPath('database'));
 
             if ($this->domainsEnabled() && $this->domainParentDir()) {
                 $this->commands['DomainList'] = DomainListCommand::class;
@@ -108,13 +107,12 @@ class LaracaServiceProvider extends ServiceProvider
             $this->registerCommands();
         }
 
-        $this->loadViewsFrom($this->assembleFullPath('view'), 'laraca');
+        $this->loadViewsFrom($this->getConfigPath('view'), 'laraca');
 
-        $this->loadMigrationsFrom($this->assembleFullPath('migration'));
+        $this->loadMigrationsFrom($this->getConfigPath('migration'));
     }
 
     /**
-     * register
      * Register the application services.
      */
     public function register(): void
@@ -124,7 +122,6 @@ class LaracaServiceProvider extends ServiceProvider
     }
 
     /**
-     * registerCommands
      * Register the given commands.
      */
     public function registerCommands(): void

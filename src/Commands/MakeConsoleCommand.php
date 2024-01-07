@@ -5,9 +5,9 @@ namespace HandsomeBrown\Laraca\Commands;
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
 use HandsomeBrown\Laraca\Commands\Traits\Shared;
 use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
-use Illuminate\Foundation\Console\ProviderMakeCommand;
+use Illuminate\Foundation\Console\ConsoleMakeCommand;
 
-class MakeProviderCommand extends ProviderMakeCommand
+class MakeConsoleCommand extends ConsoleMakeCommand
 {
     use Directable, Shared, UsesLaravelGenerator;
 
@@ -16,7 +16,7 @@ class MakeProviderCommand extends ProviderMakeCommand
      *
      * @var string
      */
-    protected $name = 'make:provider';
+    protected $name = 'make:command';
 
     /**
      * Get the default namespace for the class.
@@ -25,6 +25,17 @@ class MakeProviderCommand extends ProviderMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getConfigNamespaceWithOptions('provider');
+        return $this->getConfigNamespaceWithOptions('command');
+    }
+
+    /**
+     * Create the matching test case if requested.
+     *
+     * @param  string  $path
+     * @return bool
+     */
+    protected function handleTestCreation($path)
+    {
+        return $this->makeTest($path);
     }
 }

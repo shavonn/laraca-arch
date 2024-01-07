@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Str;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -14,29 +16,27 @@
 uses(HandsomeBrown\Laraca\Tests\LaracaTestCase::class)->in(__DIR__);
 
 /**
- * assemblePath
- *
- * @param  string  $key
+ * getConfigPath
  */
-function assembleFullPath($key, $domain = null, $service = null): string
+function getConfigPath(string $key, ?string $domain = null, ?string $service = null): string
 {
-    return HandsomeBrown\Laraca\Traits\GetsConfigValues::assembleFullPath($key, $domain, $service);
+    return HandsomeBrown\Laraca\Traits\GetsConfigValues::getConfigPath($key, $domain, $service);
 }
 
 /**
- * assembleNamespace
- *
- * @param  string  $key
+ * getConfigNamespace
  */
-function assembleNamespace($key): string
+function getConfigNamespace(string $key): string
 {
-    return HandsomeBrown\Laraca\Traits\GetsConfigValues::assembleNamespace($key);
+    return HandsomeBrown\Laraca\Traits\GetsConfigValues::getConfigNamespace($key);
 }
 
 /**
- * fullNamespaceStr
+ * getName
+ *
+ * @return \Illuminate\Support\Stringable
  */
-function fullNamespaceStr(string $namespace): string
+function getName(string $name)
 {
-    return 'namespace '.$namespace.';';
+    return Str::of($name)->ucfirst();
 }

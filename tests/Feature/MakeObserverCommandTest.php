@@ -7,14 +7,13 @@ use Illuminate\Support\Facades\File;
 use function Pest\Laravel\artisan;
 
 describe('make:observer', function () {
-    it('should create Observer class with namespace and path created from configured vals', function (string $class) {
+    it('should create Observer and test in config path', function (string $class) {
         Config::set('laraca.struct.observer.path', 'Test/Data/Observers');
 
         artisan('make:observer', ['name' => $class]);
         $output = Artisan::output();
 
-        $class = ucfirst($class);
-
+        $class = getName($class);
         $observerPath = app_path("Test/Data/Observers/$class.php");
 
         expect($observerPath)
@@ -25,4 +24,63 @@ describe('make:observer', function () {
             "class $class",
         );
     })->with('classes');
+
+    it('should create Observer and test in config path with domain', function (string $class, string $domain) {
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
+
+        artisan('make:observer', ['name' => $class, '--domain' => $domain]);
+        $output = Artisan::output();
+
+        $class = getName($class);
+        $domain = getName($domain);
+        $observerPath = app_path("Test/Domains/$domain/Data/Observers/$class.php");
+
+        expect($observerPath)
+            ->toBeFile("File not created at expected path:\n$observerPath\n\nOutput results:\n$output\n=====\n");
+
+        expect(File::get($observerPath))->toContain(
+            "namespace App\Test\Domains\\$domain\Data\Observers;",
+            "class $class",
+        );
+    })->with('classes', 'domains');
+
+    it('should create Observer and test in config path with service', function (string $class, string $service) {
+        Config::set('laraca.struct.microservice.path', 'Test/Services');
+
+        artisan('make:observer', ['name' => $class, '--service' => $service]);
+        $output = Artisan::output();
+
+        $class = getName($class);
+        $service = getName($service);
+        $observerPath = app_path("Test/Services/$service/Data/Observers/$class.php");
+
+        expect($observerPath)
+            ->toBeFile("File not created at expected path:\n$observerPath\n\nOutput results:\n$output\n=====\n");
+
+        expect(File::get($observerPath))->toContain(
+            "namespace App\Test\Services\\$service\Data\Observers;",
+            "class $class",
+        );
+    })->with('classes', 'domains');
+
+    it('should create Observer and test in config path with domain service', function (string $class, string $domain, string $service) {
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
+
+        artisan('make:observer', ['name' => $class, '--domain' => $domain, '--service' => $service]);
+        $output = Artisan::output();
+
+        $class = getName($class);
+        $service = getName($service);
+        $domain = getName($domain);
+
+        $observerPath = app_path("Test/Domains/$domain/Services/$service/Data/Observers/$class.php");
+
+        expect($observerPath)
+            ->toBeFile("File not created at expected path:\n$observerPath\n\nOutput results:\n$output\n=====\n");
+
+        expect(File::get($observerPath))->toContain(
+            "namespace App\Test\Domains\\$domain\Services\\$service\Data\Observers;",
+            "class $class",
+        );
+    })->with('classes', 'domains', 'domains');
 });

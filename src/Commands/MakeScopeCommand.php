@@ -3,15 +3,15 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
+use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
 use Illuminate\Foundation\Console\ScopeMakeCommand;
 
 class MakeScopeCommand extends ScopeMakeCommand
 {
-    use Directable, LaracaCommand;
+    use Directable, Shared, UsesLaravelGenerator;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -19,13 +19,12 @@ class MakeScopeCommand extends ScopeMakeCommand
     protected $name = 'make:scope';
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getFullNamespace('scope');
+        return $this->getConfigNamespaceWithOptions('scope');
     }
 }

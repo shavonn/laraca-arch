@@ -3,15 +3,15 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
+use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
 use Illuminate\Foundation\Console\EventMakeCommand;
 
 class MakeEventCommand extends EventMakeCommand
 {
-    use Directable, LaracaCommand;
+    use Directable, Shared, UsesLaravelGenerator;
 
     /**
-     * name
      * The console command name.
      *
      * @var string
@@ -19,13 +19,12 @@ class MakeEventCommand extends EventMakeCommand
     protected $name = 'make:event';
 
     /**
-     * getDefaultNamespace
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $this->getFullNamespace('event');
+        return $this->getConfigNamespaceWithOptions('event');
     }
 }

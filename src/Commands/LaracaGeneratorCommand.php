@@ -2,7 +2,7 @@
 
 namespace HandsomeBrown\Laraca\Commands;
 
-use HandsomeBrown\Laraca\Commands\Traits\LaracaCommand;
+use HandsomeBrown\Laraca\Commands\Traits\Shared;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
@@ -10,7 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
 
 class LaracaGeneratorCommand extends Command
 {
-    use LaracaCommand;
+    use Shared;
 
     /**
      * The filesystem instance.
@@ -27,36 +27,16 @@ class LaracaGeneratorCommand extends Command
     protected $type;
 
     /**
-     * Config key.
-     *
-     * @var string
-     */
-    protected $key;
-
-    /**
      * Generated files.
      *
-     * @var array
+     * @var array<string>
      */
     protected $generated = [];
 
     /**
-     * Create a new controller creator command instance.
-     *
-     * @return void
-     */
-    public function __construct(Filesystem $files)
-    {
-        parent::__construct();
-
-        $this->key = strtolower($this->type);
-        $this->files = $files;
-    }
-
-    /**
      * Execute the console command.
      *
-     * @return bool|null
+     * @return bool|void
      *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
@@ -91,11 +71,8 @@ class LaracaGeneratorCommand extends Command
 
     /**
      * Build the directory for the class if necessary.
-     *
-     * @param  string  $path
-     * @return string
      */
-    protected function makeEmptyDirectory($path)
+    protected function makeEmptyDirectory(string $path): string
     {
         $this->makeDirectory($path);
 
@@ -115,11 +92,11 @@ class LaracaGeneratorCommand extends Command
      *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    protected function build($name, $stub)
+    protected function buildClass($name, $stub)
     {
         $stub = $this->files->get($stub);
 
-        return $this->replaceNamespace($stub, $name);
+        return $this->replaceTags($stub, $name);
     }
 
     /**
@@ -152,7 +129,7 @@ class LaracaGeneratorCommand extends Command
     protected function replaceTags(string &$stub, string $name): string
     {
         $search = ['{{ namespace }}', '{{ class }}'];
-        $replace = [$this->assembleNamespace($this->key), $name];
+        $replace = [$this->getConfigNamespaceWithOptions($this->configKey), $name];
 
         $stub = str_replace($search, $replace, $stub);
 
@@ -166,18 +143,7 @@ class LaracaGeneratorCommand extends Command
     {
         $name = Str::of($name)->replaceFirst($this->rootNamespace(), '')->replace('\\', '/');
 
-        return self::assembleFullPath($this->key)."/$name.php";
-    }
-
-    /**
-     * Get the default namespace for the class.
-     *
-     * @param  string  $rootNamespace
-     * @return string
-     */
-    protected function getDefaultNamespace($rootNamespace)
-    {
-        return $this->getFullNamespace($this->key);
+        return $this->getConfigPathWithOptions($this->configKey)."/$name.php";
     }
 
     /**
@@ -188,7 +154,7 @@ class LaracaGeneratorCommand extends Command
      */
     protected function alreadyExists($rawName)
     {
-        return $this->files->exists($this->getPath($this->getClassName($rawName)));
+        return $this->files->exists($this->getPath($this->formatName($rawName)));
     }
 
     /**
@@ -198,13 +164,13 @@ class LaracaGeneratorCommand extends Command
      */
     protected function rootNamespace()
     {
-        return $this->laravel->getNamespace();
+        return app()->getNamespace();
     }
 
     /**
      * Get the console command options.
      *
-     * @return array
+     * @return array<int,array<int,int|string>>
      */
     protected function getOptions()
     {

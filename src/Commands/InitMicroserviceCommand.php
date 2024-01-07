@@ -3,7 +3,6 @@
 namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Directable;
-use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -42,22 +41,13 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
     protected $serviceName = '';
 
     /**
-     * The microservice path.
-     *
-     * @var string
-     */
-    protected $servicePath = '';
-
-    /**
      * Execute the console command.
      *
-     * @return bool|null
+     * @return bool|void
      */
     public function handle()
     {
-        $this->serviceName = $this->getClassName($this->input->getArgument('name'));
-        $servicePath = $this->getFullPath('microservice');
-        $this->servicePath = "$servicePath/$this->serviceName";
+        $this->serviceName = $this->formatName($this->input->getArgument('name'));
 
         if (! parent::handle()) {
             return false;
@@ -74,8 +64,6 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
         $this->components->bulletList($this->generated);
         $this->components->info('Microservice created successfully.');
         $this->components->info('Don\'t forget to <info>'.$this->serviceName.'ServiceProvider.php</info> to providers in <info>app.php</info>');
-
-        return Command::SUCCESS;
     }
 
     /**
@@ -83,11 +71,10 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
      */
     protected function replaceTags(string &$stub, string $name): string
     {
-        $namespace = $this->getDefaultNamespace($this->rootNamespace());
-        $controllerNamespace = $this->assembleNamespace('controller', null, $this->serviceName);
+        $controllerNamespace = $this->getConfigNamespace('controller', null, $this->serviceName);
 
         $search = ['{{ namespace }}', '{{ slug }}', '{{ service }}', '{{ controller_namespace }}'];
-        $replace = [$namespace, Str::slug($this->serviceName), $this->serviceName, $controllerNamespace];
+        $replace = [$this->getServiceNamespace(), Str::slug($this->serviceName), $this->serviceName, $controllerNamespace];
 
         $stub = str_replace($search, $replace, $stub);
 
@@ -119,7 +106,7 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
             'view',
         ];
 
-        $path = $this->servicePath.'/';
+        $path = $this->getServicePath().'/';
 
         foreach ($elements as $element) {
             $dir = '';
@@ -139,7 +126,7 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
     /**
      * Get the console command arguments.
      */
-    protected function makeProviders()
+    protected function makeProviders(): void
     {
         // RouteServiceProvider
         $this->makeFile('RouteServiceProvider', __DIR__.'/stubs/serviceprovider-route.stub');
@@ -157,9 +144,9 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
      */
     protected function getPath(string $name): string
     {
-        $name = Str::of($name)->replaceFirst($this->getDefaultNamespace($this->rootNamespace()), '')->replace('\\', '/');
+        $name = Str::of($name)->replaceFirst($this->getServiceNamespace(), '')->replace('\\', '/');
 
-        $path = $this->servicePath.'/';
+        $path = $this->getServicePath().'/';
 
         switch ($name) {
             case 'BroadcastServiceProvider':
@@ -181,11 +168,18 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
         return $path;
     }
 
-    protected function getDefaultNamespace($rootNamespace): string
+    protected function getServiceNamespace(): string
     {
-        $namespace = $this->getFullNamespace('microservice');
+        $namespace = $this->getConfigNamespaceWithOptions($this->configKey);
 
         return "$namespace\\$this->serviceName";
+    }
+
+    protected function getServicePath(): string
+    {
+        $path = $this->getConfigPathWithOptions($this->configKey);
+
+        return "$path/$this->serviceName";
     }
 
     /**
@@ -204,7 +198,7 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
     /**
      * Get the console command arguments.
      *
-     * @return array
+     * @return array<int,array<int,int|string>>
      */
     protected function getArguments()
     {

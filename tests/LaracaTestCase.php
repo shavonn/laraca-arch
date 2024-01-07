@@ -20,18 +20,6 @@ class LaracaTestCase extends TestCase
 
         $this->withoutMockingConsoleOutput();
 
-        $this->afterApplicationCreated(function () {
-            if (! File::exists(app_path('Test'))) {
-                File::makeDirectory(app_path('Test'));
-            }
-            if (! File::exists(base_path('test'))) {
-                File::makeDirectory(base_path('test'));
-            }
-            if (! File::exists(base_path('resources/views'))) {
-                File::makeDirectory(base_path('resources/views'));
-            }
-        });
-
         $this->beforeApplicationDestroyed(function () {
             if (File::exists(app_path('Test'))) {
                 File::deleteDirectories(app_path('Test'));
@@ -45,8 +33,11 @@ class LaracaTestCase extends TestCase
             if (File::exists(base_path('test'))) {
                 File::deleteDirectories(base_path('test'));
             }
-            if (File::exists(base_path('resources/views'))) {
-                File::deleteDirectories(base_path('resources/views'));
+            if (File::exists(base_path('tests'))) {
+                File::deleteDirectories(base_path('tests'));
+            }
+            if (File::exists(base_path('resources'))) {
+                File::deleteDirectories(base_path('resources'));
             }
         });
     }
