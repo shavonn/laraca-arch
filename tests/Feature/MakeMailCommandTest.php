@@ -37,69 +37,69 @@ describe('make:mail', function () {
     })->with('classes');
 
     it('should create Mail and test in config path with domain', function (string $class, string $domain) {
-        Config::set('laraca.struct.mail.path', 'Test/Mail');
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('make:mail', ['name' => $class, '--domain' => $domain, '--test' => true]);
         $output = Artisan::output();
 
         $class = getName($class);
         $domain = getName($domain);
-        $mailPath = app_path("Domains/$domain/Test/Mail/$class.php");
+        $mailPath = app_path("Test/Domains/$domain/Mail/$class.php");
 
         expect($mailPath)
             ->toBeFile("File not created at expected path:\n$mailPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($mailPath))->toContain(
-            "namespace App\Domains\\$domain\Test\Mail;",
+            "namespace App\Test\Domains\\$domain\Mail;",
             "class $class",
         );
 
         $classTest = getName($class)->finish('Test');
 
-        $mailTestPath = app_path("Domains/$domain/tests/Feature/$classTest.php");
+        $mailTestPath = app_path("Test/Domains/$domain/tests/Feature/$classTest.php");
 
         expect($mailTestPath)
             ->toBeFile("File not created at expected path:\n$mailTestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($mailTestPath))->toContain(
-            "namespace App\Domains\\$domain\Tests\Feature;",
+            "namespace App\Test\Domains\\$domain\Tests\Feature;",
             "class $classTest",
         );
     })->with('classes', 'domains');
 
     it('should create Mail and test in config path with service', function (string $class, string $service) {
-        Config::set('laraca.struct.mail.path', 'Test/Mail');
+        Config::set('laraca.struct.microservice.path', 'Test/Services');
 
         artisan('make:mail', ['name' => $class, '--service' => $service, '--test' => true]);
         $output = Artisan::output();
 
         $class = getName($class);
         $service = getName($service);
-        $mailPath = app_path("Services/$service/Test/Mail/$class.php");
+        $mailPath = app_path("Test/Services/$service/Mail/$class.php");
 
         expect($mailPath)
             ->toBeFile("File not created at expected path:\n$mailPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($mailPath))->toContain(
-            "namespace App\Services\\$service\Test\Mail;",
+            "namespace App\Test\Services\\$service\Mail;",
             "class $class",
         );
 
         $classTest = getName($class)->finish('Test');
 
-        $mailTestPath = app_path("Services/$service/tests/Feature/$classTest.php");
+        $mailTestPath = app_path("Test/Services/$service/tests/Feature/$classTest.php");
 
         expect($mailTestPath)
             ->toBeFile("File not created at expected path:\n$mailTestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($mailTestPath))->toContain(
-            "namespace App\Services\\$service\Tests\Feature;",
+            "namespace App\Test\Services\\$service\Tests\Feature;",
             "class $classTest",
         );
     })->with('classes', 'domains');
 
     it('should create Mail and test in config path with domain service', function (string $class, string $domain, string $service) {
-        Config::set('laraca.struct.mail.path', 'Test/Mail');
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('make:mail', ['name' => $class, '--domain' => $domain, '--service' => $service, '--test' => true]);
         $output = Artisan::output();
@@ -108,23 +108,23 @@ describe('make:mail', function () {
         $service = getName($service);
         $domain = getName($domain);
 
-        $mailPath = app_path("Domains/$domain/Services/$service/Test/Mail/$class.php");
+        $mailPath = app_path("Test/Domains/$domain/Services/$service/Mail/$class.php");
 
         expect($mailPath)
             ->toBeFile("File not created at expected path:\n$mailPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($mailPath))->toContain(
-            "namespace App\Domains\\$domain\Services\\$service\Test\Mail;",
+            "namespace App\Test\Domains\\$domain\Services\\$service\Mail;",
             "class $class",
         );
         $classTest = getName($class)->finish('Test');
-        $mailTestPath = app_path("Domains/$domain/Services/$service/tests/Feature/$classTest.php");
+        $mailTestPath = app_path("Test/Domains/$domain/Services/$service/tests/Feature/$classTest.php");
 
         expect($mailTestPath)
             ->toBeFile("File not created at expected path:\n$mailTestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($mailTestPath))->toContain(
-            "namespace App\Domains\\$domain\Services\\$service\Tests\Feature;",
+            "namespace App\Test\Domains\\$domain\Services\\$service\Tests\Feature;",
             "class $classTest",
         );
     })->with('classes', 'domains', 'domains');

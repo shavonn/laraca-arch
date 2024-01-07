@@ -46,69 +46,69 @@ describe('make:component', function () {
     })->with('classes');
 
     it('should create Component and test in config path with domain', function (string $class, string $domain) {
-        Config::set('laraca.struct.component.path', 'Test/View/Components');
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('make:component', ['name' => $class, '--domain' => $domain, '--test' => true]);
         $output = Artisan::output();
 
         $class = getName($class);
         $domain = getName($domain);
-        $componentPath = app_path("Domains/$domain/Test/View/Components/$class.php");
+        $componentPath = app_path("Test/Domains/$domain/View/Components/$class.php");
 
         expect($componentPath)
             ->toBeFile("File not created at expected path:\n$componentPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($componentPath))->toContain(
-            "namespace App\Domains\\$domain\Test\View\Components;",
+            "namespace App\Test\Domains\\$domain\View\Components;",
             "class $class",
         );
 
         $classTest = getName($class)->finish('Test');
 
-        $componentTestPath = app_path("Domains/$domain/tests/Feature/$classTest.php");
+        $componentTestPath = app_path("Test/Domains/$domain/tests/Feature/$classTest.php");
 
         expect($componentTestPath)
             ->toBeFile("File not created at expected path:\n$componentTestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($componentTestPath))->toContain(
-            "namespace App\Domains\\$domain\Tests\Feature;",
+            "namespace App\Test\Domains\\$domain\Tests\Feature;",
             "class $classTest",
         );
     })->with('classes', 'domains');
 
     it('should create Component and test in config path with service', function (string $class, string $service) {
-        Config::set('laraca.struct.component.path', 'Test/View/Components');
+        Config::set('laraca.struct.microservice.path', 'Test/Services');
 
         artisan('make:component', ['name' => $class, '--service' => $service, '--test' => true]);
         $output = Artisan::output();
 
         $class = getName($class);
         $service = getName($service);
-        $componentPath = app_path("Services/$service/Test/View/Components/$class.php");
+        $componentPath = app_path("Test/Services/$service/View/Components/$class.php");
 
         expect($componentPath)
             ->toBeFile("File not created at expected path:\n$componentPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($componentPath))->toContain(
-            "namespace App\Services\\$service\Test\View\Components;",
+            "namespace App\Test\Services\\$service\View\Components;",
             "class $class",
         );
 
         $classTest = getName($class)->finish('Test');
 
-        $componentTestPath = app_path("Services/$service/tests/Feature/$classTest.php");
+        $componentTestPath = app_path("Test/Services/$service/tests/Feature/$classTest.php");
 
         expect($componentTestPath)
             ->toBeFile("File not created at expected path:\n$componentTestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($componentTestPath))->toContain(
-            "namespace App\Services\\$service\Tests\Feature;",
+            "namespace App\Test\Services\\$service\Tests\Feature;",
             "class $classTest",
         );
     })->with('classes', 'domains');
 
     it('should create Component and test in config path with domain service', function (string $class, string $domain, string $service) {
-        Config::set('laraca.struct.component.path', 'Test/View/Components');
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('make:component', ['name' => $class, '--domain' => $domain, '--service' => $service, '--test' => true]);
         $output = Artisan::output();
@@ -117,24 +117,24 @@ describe('make:component', function () {
         $service = getName($service);
         $domain = getName($domain);
 
-        $componentPath = app_path("Domains/$domain/Services/$service/Test/View/Components/$class.php");
+        $componentPath = app_path("Test/Domains/$domain/Services/$service/View/Components/$class.php");
 
         expect($componentPath)
             ->toBeFile("File not created at expected path:\n$componentPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($componentPath))->toContain(
-            "namespace App\Domains\\$domain\Services\\$service\Test\View\Components;",
+            "namespace App\Test\Domains\\$domain\Services\\$service\View\Components;",
             "class $class",
         );
 
         $classTest = getName($class)->finish('Test');
-        $componentTestPath = app_path("Domains/$domain/Services/$service/tests/Feature/$classTest.php");
+        $componentTestPath = app_path("Test/Domains/$domain/Services/$service/tests/Feature/$classTest.php");
 
         expect($componentTestPath)
             ->toBeFile("File not created at expected path:\n$componentTestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($componentTestPath))->toContain(
-            "namespace App\Domains\\$domain\Services\\$service\Tests\Feature;",
+            "namespace App\Test\Domains\\$domain\Services\\$service\Tests\Feature;",
             "class $classTest",
         );
     })->with('classes', 'domains', 'domains');

@@ -33,7 +33,7 @@ describe('make:view', function () {
     it('should create View and test in Laravel config path when view not set in laraca config', function (string $class) {
         Config::offsetUnset('view');
 
-        artisan('make:view', ['name' => $class]);
+        artisan('make:view', ['name' => $class, '--test' => true]);
         $output = Artisan::output();
 
         $viewPath = base_path("resources/views/{$class}.blade.php");
@@ -53,13 +53,13 @@ describe('make:view', function () {
     })->with('classes');
 
     it('should create View and test in config path with domain', function (string $class, string $domain) {
-        Config::set('laraca.struct.view.path', 'resources/views');
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('make:view', ['name' => $class, '--domain' => $domain, '--test' => true]);
         $output = Artisan::output();
 
         $domain = getName($domain);
-        $viewPath = app_path("Domains/$domain/resources/views/{$class}.blade.php");
+        $viewPath = app_path("Test/Domains/$domain/resources/views/{$class}.blade.php");
 
         expect($viewPath)
             ->toBeFile("File not created at expected path:\n$viewPath\n\nOutput results:\n$output\n=====\n");
@@ -68,25 +68,25 @@ describe('make:view', function () {
 
         $class = strtolower($class);
         $classTest = getName($class)->finish('Test');
-        $viewTestPath = app_path("Domains/$domain/tests/Feature/View/$classTest.php");
+        $viewTestPath = app_path("Test/Domains/$domain/tests/Feature/View/$classTest.php");
 
         expect($viewTestPath)
             ->toBeFile("File not created at expected path:\n$viewTestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($viewTestPath))->toContain(
-            "namespace App\Domains\\$domain\Tests\Feature\View;",
+            "namespace App\Test\Domains\\$domain\Tests\Feature\View;",
             "class $classTest",
         );
     })->with('classes', 'domains');
 
     it('should create View and test in config path with service', function (string $class, string $service) {
-        Config::set('laraca.struct.view.path', 'resources/views');
+        Config::set('laraca.struct.microservice.path', 'Test/Services');
 
         artisan('make:view', ['name' => $class, '--service' => $service, '--test' => true]);
         $output = Artisan::output();
 
         $service = getName($service);
-        $viewPath = app_path("Services/$service/resources/views/{$class}.blade.php");
+        $viewPath = app_path("Test/Services/$service/resources/views/{$class}.blade.php");
 
         expect($viewPath)
             ->toBeFile("File not created at expected path:\n$viewPath\n\nOutput results:\n$output\n=====\n");
@@ -95,20 +95,19 @@ describe('make:view', function () {
 
         $class = strtolower($class);
         $classTest = getName($class)->finish('Test');
-        $viewTestPath = app_path("Services/$service/tests/Feature/View/$classTest.php");
+        $viewTestPath = app_path("Test/Services/$service/tests/Feature/View/$classTest.php");
 
         expect($viewTestPath)
             ->toBeFile("File not created at expected path:\n$viewTestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($viewTestPath))->toContain(
-            "namespace App\Services\\$service\Tests\Feature\View;",
+            "namespace App\Test\Services\\$service\Tests\Feature\View;",
             "class $classTest",
         );
     })->with('classes', 'domains');
 
     it('should create View and test in config path with domain service', function (string $class, string $domain, string $service) {
-        Config::set('laraca.struct.view.path', 'resources/views');
-        Config::set('laraca.struct.component.path', 'Test/View');
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('make:view', ['name' => $class, '--domain' => $domain, '--service' => $service, '--test' => true]);
         $output = Artisan::output();
@@ -116,7 +115,7 @@ describe('make:view', function () {
         $service = getName($service);
         $domain = getName($domain);
 
-        $viewPath = app_path("Domains/$domain/Services/$service/resources/views/{$class}.blade.php");
+        $viewPath = app_path("Test/Domains/$domain/Services/$service/resources/views/{$class}.blade.php");
 
         expect($viewPath)
             ->toBeFile("File not created at expected path:\n$viewPath\n\nOutput results:\n$output\n=====\n");
@@ -125,13 +124,13 @@ describe('make:view', function () {
 
         $class = strtolower($class);
         $classTest = getName($class)->finish('Test');
-        $viewTestPath = app_path("Domains/$domain/Services/$service/tests/Feature/View/$classTest.php");
+        $viewTestPath = app_path("Test/Domains/$domain/Services/$service/tests/Feature/View/$classTest.php");
 
         expect($viewTestPath)
             ->toBeFile("File not created at expected path:\n$viewTestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($viewTestPath))->toContain(
-            "namespace App\Domains\\$domain\Services\\$service\Tests\Feature\View;",
+            "namespace App\Test\Domains\\$domain\Services\\$service\Tests\Feature\View;",
             "class $classTest",
         );
     })->with('classes', 'domains', 'domains');

@@ -130,8 +130,8 @@ describe('init:micro', function () {
     })->with('classes', 'domains');
 
     it('should not create a microservice with service flag', function () {
-        Config::set('laraca.struct.domain.enabled', true);
-        Config::set('laraca.struct.domain.path', 'Test/Domains');
+        Config::set('laraca.struct.microservice.enabled', true);
+        Config::set('laraca.struct.microservice.path', 'Test/Services');
 
         artisan('init:micro', ['name' => 'FooCreated', '--service' => 'Bar']);
 

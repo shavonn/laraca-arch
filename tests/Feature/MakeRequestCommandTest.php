@@ -26,45 +26,45 @@ describe('make:request', function () {
     })->with('classes');
 
     it('should create Request and test in config path with domain', function (string $class, string $domain) {
-        Config::set('laraca.struct.request.path', 'Test/Http/Requests');
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('make:request', ['name' => $class, '--domain' => $domain]);
         $output = Artisan::output();
 
         $class = getName($class);
         $domain = getName($domain);
-        $requestPath = app_path("Domains/$domain/Test/Http/Requests/$class.php");
+        $requestPath = app_path("Test/Domains/$domain/Http/Requests/$class.php");
 
         expect($requestPath)
             ->toBeFile("File not created at expected path:\n$requestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($requestPath))->toContain(
-            "namespace App\Domains\\$domain\Test\Http\Requests;",
+            "namespace App\Test\Domains\\$domain\Http\Requests;",
             "class $class",
         );
     })->with('classes', 'domains');
 
     it('should create Request and test in config path with service', function (string $class, string $service) {
-        Config::set('laraca.struct.request.path', 'Test/Http/Requests');
+        Config::set('laraca.struct.microservice.path', 'Test/Services');
 
         artisan('make:request', ['name' => $class, '--service' => $service]);
         $output = Artisan::output();
 
         $class = getName($class);
         $service = getName($service);
-        $requestPath = app_path("Services/$service/Test/Http/Requests/$class.php");
+        $requestPath = app_path("Test/Services/$service/Http/Requests/$class.php");
 
         expect($requestPath)
             ->toBeFile("File not created at expected path:\n$requestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($requestPath))->toContain(
-            "namespace App\Services\\$service\Test\Http\Requests;",
+            "namespace App\Test\Services\\$service\Http\Requests;",
             "class $class",
         );
     })->with('classes', 'domains');
 
     it('should create Request and test in config path with domain service', function (string $class, string $domain, string $service) {
-        Config::set('laraca.struct.request.path', 'Test/Http/Requests');
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('make:request', ['name' => $class, '--domain' => $domain, '--service' => $service]);
         $output = Artisan::output();
@@ -73,13 +73,13 @@ describe('make:request', function () {
         $service = getName($service);
         $domain = getName($domain);
 
-        $requestPath = app_path("Domains/$domain/Services/$service/Test/Http/Requests/$class.php");
+        $requestPath = app_path("Test/Domains/$domain/Services/$service/Http/Requests/$class.php");
 
         expect($requestPath)
             ->toBeFile("File not created at expected path:\n$requestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($requestPath))->toContain(
-            "namespace App\Domains\\$domain\Services\\$service\Test\Http\Requests;",
+            "namespace App\Test\Domains\\$domain\Services\\$service\Http\Requests;",
             "class $class",
         );
     })->with('classes', 'domains', 'domains');

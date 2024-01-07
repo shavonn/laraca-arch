@@ -109,7 +109,8 @@ trait GetsConfigValues
                     array_unshift($pathArray, ucfirst($service));
 
                     if (self::microserviceParentDir()) {
-                        array_unshift($pathArray, self::microserviceParentDir());
+                        $parentDir = self::microserviceParentDir();
+                        array_unshift($pathArray, ...explode('/', $parentDir));
                     }
                 }
 
@@ -117,7 +118,8 @@ trait GetsConfigValues
                     array_unshift($pathArray, ucfirst($domain));
 
                     if (self::domainParentDir()) {
-                        array_unshift($pathArray, self::domainParentDir());
+                        $parentDir = self::domainParentDir();
+                        array_unshift($pathArray, ...explode('/', $parentDir));
                     }
 
                 }

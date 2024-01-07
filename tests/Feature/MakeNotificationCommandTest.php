@@ -37,69 +37,69 @@ describe('make:notification', function () {
     })->with('classes');
 
     it('should create Notification and test in config path with domain', function (string $class, string $domain) {
-        Config::set('laraca.struct.notification.path', 'Test/Notifications');
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('make:notification', ['name' => $class, '--domain' => $domain, '--test' => true]);
         $output = Artisan::output();
 
         $class = getName($class);
         $domain = getName($domain);
-        $notificationPath = app_path("Domains/$domain/Test/Notifications/$class.php");
+        $notificationPath = app_path("Test/Domains/$domain/Notifications/$class.php");
 
         expect($notificationPath)
             ->toBeFile("File not created at expected path:\n$notificationPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($notificationPath))->toContain(
-            "namespace App\Domains\\$domain\Test\Notifications;",
+            "namespace App\Test\Domains\\$domain\Notifications;",
             "class $class",
         );
 
         $classTest = getName($class)->finish('Test');
 
-        $notificationTestPath = app_path("Domains/$domain/tests/Feature/$classTest.php");
+        $notificationTestPath = app_path("Test/Domains/$domain/tests/Feature/$classTest.php");
 
         expect($notificationTestPath)
             ->toBeFile("File not created at expected path:\n$notificationTestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($notificationTestPath))->toContain(
-            "namespace App\Domains\\$domain\Tests\Feature;",
+            "namespace App\Test\Domains\\$domain\Tests\Feature;",
             "class $classTest",
         );
     })->with('classes', 'domains');
 
     it('should create Notification and test in config path with service', function (string $class, string $service) {
-        Config::set('laraca.struct.notification.path', 'Test/Notifications');
+        Config::set('laraca.struct.microservice.path', 'Test/Services');
 
         artisan('make:notification', ['name' => $class, '--service' => $service, '--test' => true]);
         $output = Artisan::output();
 
         $class = getName($class);
         $service = getName($service);
-        $notificationPath = app_path("Services/$service/Test/Notifications/$class.php");
+        $notificationPath = app_path("Test/Services/$service/Notifications/$class.php");
 
         expect($notificationPath)
             ->toBeFile("File not created at expected path:\n$notificationPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($notificationPath))->toContain(
-            "namespace App\Services\\$service\Test\Notifications;",
+            "namespace App\Test\Services\\$service\Notifications;",
             "class $class",
         );
 
         $classTest = getName($class)->finish('Test');
 
-        $notificationTestPath = app_path("Services/$service/tests/Feature/$classTest.php");
+        $notificationTestPath = app_path("Test/Services/$service/tests/Feature/$classTest.php");
 
         expect($notificationTestPath)
             ->toBeFile("File not created at expected path:\n$notificationTestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($notificationTestPath))->toContain(
-            "namespace App\Services\\$service\Tests\Feature;",
+            "namespace App\Test\Services\\$service\Tests\Feature;",
             "class $classTest",
         );
     })->with('classes', 'domains');
 
     it('should create Notification and test in config path with domain service', function (string $class, string $domain, string $service) {
-        Config::set('laraca.struct.notification.path', 'Test/Notifications');
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('make:notification', ['name' => $class, '--domain' => $domain, '--service' => $service, '--test' => true]);
         $output = Artisan::output();
@@ -108,24 +108,24 @@ describe('make:notification', function () {
         $service = getName($service);
         $domain = getName($domain);
 
-        $notificationPath = app_path("Domains/$domain/Services/$service/Test/Notifications/$class.php");
+        $notificationPath = app_path("Test/Domains/$domain/Services/$service/Notifications/$class.php");
 
         expect($notificationPath)
             ->toBeFile("File not created at expected path:\n$notificationPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($notificationPath))->toContain(
-            "namespace App\Domains\\$domain\Services\\$service\Test\Notifications;",
+            "namespace App\Test\Domains\\$domain\Services\\$service\Notifications;",
             "class $class",
         );
 
         $classTest = getName($class)->finish('Test');
-        $notificationTestPath = app_path("Domains/$domain/Services/$service/tests/Feature/$classTest.php");
+        $notificationTestPath = app_path("Test/Domains/$domain/Services/$service/tests/Feature/$classTest.php");
 
         expect($notificationTestPath)
             ->toBeFile("File not created at expected path:\n$notificationTestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($notificationTestPath))->toContain(
-            "namespace App\Domains\\$domain\Services\\$service\Tests\Feature;",
+            "namespace App\Test\Domains\\$domain\Services\\$service\Tests\Feature;",
             "class $classTest",
         );
     })->with('classes', 'domains', 'domains');

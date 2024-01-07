@@ -54,7 +54,7 @@ describe('arti:migration', function () {
     })->with('classes');
 
     it('should create Migration and test in config path with domain', function (string $class, string $domain) {
-        Config::set('laraca.struct.database.path', 'test/database');
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('arti:migration', ['name' => $class, '--domain' => $domain]);
         $output = Artisan::output();
@@ -65,7 +65,7 @@ describe('arti:migration', function () {
 
         $snake_class = Str::snake($class);
 
-        $migrationsPath = app_path("Domains/$domain/test/database/migrations");
+        $migrationsPath = app_path("Test/Domains/$domain/database/migrations");
 
         // account for second change variation that may occur in file name
         $migrationPath1 = "$migrationsPath/{$subSecond}_{$snake_class}.php";
@@ -76,7 +76,7 @@ describe('arti:migration', function () {
     })->with('classes', 'domains');
 
     it('should create Migration and test in config path with service', function (string $class, string $service) {
-        Config::set('laraca.struct.database.path', 'test/database');
+        Config::set('laraca.struct.microservice.path', 'Test/Services');
 
         artisan('arti:migration', ['name' => $class, '--service' => $service]);
         $output = Artisan::output();
@@ -87,7 +87,7 @@ describe('arti:migration', function () {
 
         $snake_class = Str::snake($class);
 
-        $migrationsPath = app_path("Services/$service/test/database/migrations");
+        $migrationsPath = app_path("Test/Services/$service/database/migrations");
 
         // account for second change variation that may occur in file name
         $migrationPath1 = "$migrationsPath/{$subSecond}_{$snake_class}.php";
@@ -98,7 +98,7 @@ describe('arti:migration', function () {
     })->with('classes', 'domains');
 
     it('should create Migration and test in config path with domain service', function (string $class, string $domain, string $service) {
-        Config::set('laraca.struct.database.path', 'test/database');
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('arti:migration', ['name' => $class, '--domain' => $domain, '--service' => $service]);
         $output = Artisan::output();
@@ -109,7 +109,7 @@ describe('arti:migration', function () {
 
         $snake_class = Str::snake($class);
 
-        $migrationsPath = app_path("Domains/$domain/Services/$service/test/database/migrations");
+        $migrationsPath = app_path("Test/Domains/$domain/Services/$service/database/migrations");
 
         // account for second change variation that may occur in file name
         $migrationPath1 = "$migrationsPath/{$subSecond}_{$snake_class}.php";

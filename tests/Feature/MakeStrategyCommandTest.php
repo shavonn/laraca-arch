@@ -47,7 +47,7 @@ describe('make:strategy', function () {
     })->with('classes');
 
     it('should create Strategy and test in config path with domain', function (string $class, string $domain) {
-        Config::set('laraca.struct.strategy.path', 'Test/Strategy');
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('make:strategy', ['name' => $class, '--domain' => $domain, '--test' => true]);
         $output = Artisan::output();
@@ -55,14 +55,14 @@ describe('make:strategy', function () {
         $class = getName($class);
         $domain = getName($domain);
 
-        $strategyPath = app_path("Domains/$domain/Test/Strategy/Type{$class}Strategy.php");
-        $interfacePath = app_path("Domains/$domain/Test/Strategy/{$class}Strategy.php");
+        $strategyPath = app_path("Test/Domains/$domain/Strategy/Type{$class}Strategy.php");
+        $interfacePath = app_path("Test/Domains/$domain/Strategy/{$class}Strategy.php");
 
         expect($strategyPath)
             ->toBeFile("File not created at expected path:\n$strategyPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($strategyPath))->toContain(
-            "namespace App\Domains\\$domain\Test\Strategy;",
+            "namespace App\Test\Domains\\$domain\Strategy;",
             "class Type{$class}Strategy",
         );
 
@@ -70,24 +70,24 @@ describe('make:strategy', function () {
             ->toBeFile("File not created at expected path:\n$interfacePath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($interfacePath))->toContain(
-            "namespace App\Domains\\$domain\Test\Strategy;",
+            "namespace App\Test\Domains\\$domain\Strategy;",
             "interface {$class}Strategy",
         );
 
         $classTest = getName($class)->start('Type')->finish('StrategyTest');
-        $strategyTestPath = app_path("Domains/$domain/tests/Feature/$classTest.php");
+        $strategyTestPath = app_path("Test/Domains/$domain/tests/Feature/$classTest.php");
 
         expect($strategyTestPath)
             ->toBeFile("File not created at expected path:\n$strategyTestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($strategyTestPath))->toContain(
-            "namespace App\Domains\\$domain\Tests\Feature;",
+            "namespace App\Test\Domains\\$domain\Tests\Feature;",
             "class $classTest",
         );
     })->with('classes', 'domains');
 
     it('should create Strategy and test in config path with service', function (string $class, string $service) {
-        Config::set('laraca.struct.strategy.path', 'Test/Strategy');
+        Config::set('laraca.struct.microservice.path', 'Test/Services');
 
         artisan('make:strategy', ['name' => $class, '--service' => $service, '--test' => true]);
         $output = Artisan::output();
@@ -95,14 +95,14 @@ describe('make:strategy', function () {
         $class = getName($class);
         $service = getName($service);
 
-        $strategyPath = app_path("Services/$service/Test/Strategy/Type{$class}Strategy.php");
-        $interfacePath = app_path("Services/$service/Test/Strategy/{$class}Strategy.php");
+        $strategyPath = app_path("Test/Services/$service/Strategy/Type{$class}Strategy.php");
+        $interfacePath = app_path("Test/Services/$service/Strategy/{$class}Strategy.php");
 
         expect($strategyPath)
             ->toBeFile("File not created at expected path:\n$strategyPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($strategyPath))->toContain(
-            "namespace App\Services\\$service\Test\Strategy;",
+            "namespace App\Test\Services\\$service\Strategy;",
             "class Type{$class}Strategy",
         );
 
@@ -110,24 +110,24 @@ describe('make:strategy', function () {
             ->toBeFile("File not created at expected path:\n$interfacePath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($interfacePath))->toContain(
-            "namespace App\Services\\$service\Test\Strategy;",
+            "namespace App\Test\Services\\$service\Strategy;",
             "interface {$class}Strategy",
         );
 
         $classTest = getName($class)->start('Type')->finish('StrategyTest');
-        $strategyTestPath = app_path("Services/$service/tests/Feature/$classTest.php");
+        $strategyTestPath = app_path("Test/Services/$service/tests/Feature/$classTest.php");
 
         expect($strategyTestPath)
             ->toBeFile("File not created at expected path:\n$strategyTestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($strategyTestPath))->toContain(
-            "namespace App\Services\\$service\Tests\Feature;",
+            "namespace App\Test\Services\\$service\Tests\Feature;",
             "class $classTest",
         );
     })->with('classes', 'domains');
 
     it('should create Strategy and test in config path with domain service', function (string $class, string $domain, string $service) {
-        Config::set('laraca.struct.strategy.path', 'Test/Strategy');
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('make:strategy', ['name' => $class, '--domain' => $domain, '--service' => $service, '--test' => true]);
         $output = Artisan::output();
@@ -136,14 +136,14 @@ describe('make:strategy', function () {
         $service = getName($service);
         $domain = getName($domain);
 
-        $strategyPath = app_path("Domains/$domain/Services/$service/Test/Strategy/Type{$class}Strategy.php");
-        $interfacePath = app_path("Domains/$domain/Services/$service/Test/Strategy/{$class}Strategy.php");
+        $strategyPath = app_path("Test/Domains/$domain/Services/$service/Strategy/Type{$class}Strategy.php");
+        $interfacePath = app_path("Test/Domains/$domain/Services/$service/Strategy/{$class}Strategy.php");
 
         expect($strategyPath)
             ->toBeFile("File not created at expected path:\n$strategyPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($strategyPath))->toContain(
-            "namespace App\Domains\\$domain\Services\\$service\Test\Strategy;",
+            "namespace App\Test\Domains\\$domain\Services\\$service\Strategy;",
             "class Type{$class}Strategy",
         );
 
@@ -151,18 +151,18 @@ describe('make:strategy', function () {
             ->toBeFile("File not created at expected path:\n$interfacePath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($interfacePath))->toContain(
-            "namespace App\Domains\\$domain\Services\\$service\Test\Strategy;",
+            "namespace App\Test\Domains\\$domain\Services\\$service\Strategy;",
             "interface {$class}Strategy",
         );
 
         $classTest = getName($class)->start('Type')->finish('StrategyTest');
-        $strategyTestPath = app_path("Domains/$domain/Services/$service/tests/Feature/$classTest.php");
+        $strategyTestPath = app_path("Test/Domains/$domain/Services/$service/tests/Feature/$classTest.php");
 
         expect($strategyTestPath)
             ->toBeFile("File not created at expected path:\n$strategyTestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($strategyTestPath))->toContain(
-            "namespace App\Domains\\$domain\Services\\$service\Tests\Feature;",
+            "namespace App\Test\Domains\\$domain\Services\\$service\Tests\Feature;",
             "class $classTest",
         );
     })->with('classes', 'domains', 'domains');

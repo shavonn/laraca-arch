@@ -26,45 +26,45 @@ describe('make:cast', function () {
     })->with('classes');
 
     it('should create Cast in config path with domain', function (string $class, string $domain) {
-        Config::set('laraca.struct.cast.path', 'Test/Data/Casts');
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('make:cast', ['name' => $class, '--domain' => $domain]);
         $output = Artisan::output();
 
         $class = getName($class);
         $domain = getName($domain);
-        $castPath = app_path("Domains/$domain/Test/Data/Casts/$class.php");
+        $castPath = app_path("Test/Domains/$domain/Data/Casts/$class.php");
 
         expect($castPath)
             ->toBeFile("File not created at expected path:\n$castPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($castPath))->toContain(
-            "namespace App\Domains\\$domain\Test\Data\Casts;",
+            "namespace App\Test\Domains\\$domain\Data\Casts;",
             "class $class",
         );
     })->with('classes', 'domains');
 
     it('should create Cast in config path with service', function (string $class, string $service) {
-        Config::set('laraca.struct.cast.path', 'Test/Data/Casts');
+        Config::set('laraca.struct.microservice.path', 'Test/Services');
 
         artisan('make:cast', ['name' => $class, '--service' => $service]);
         $output = Artisan::output();
 
         $class = getName($class);
         $service = getName($service);
-        $castPath = app_path("Services/$service/Test/Data/Casts/$class.php");
+        $castPath = app_path("Test/Services/$service/Data/Casts/$class.php");
 
         expect($castPath)
             ->toBeFile("File not created at expected path:\n$castPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($castPath))->toContain(
-            "namespace App\Services\\$service\Test\Data\Casts;",
+            "namespace App\Test\Services\\$service\Data\Casts;",
             "class $class",
         );
     })->with('classes', 'domains');
 
     it('should create Cast in config path with domain service', function (string $class, string $domain, string $service) {
-        Config::set('laraca.struct.cast.path', 'Test/Data/Casts');
+        Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('make:cast', ['name' => $class, '--domain' => $domain, '--service' => $service]);
         $output = Artisan::output();
@@ -73,13 +73,13 @@ describe('make:cast', function () {
         $service = getName($service);
         $domain = getName($domain);
 
-        $castPath = app_path("Domains/$domain/Services/$service/Test/Data/Casts/$class.php");
+        $castPath = app_path("Test/Domains/$domain/Services/$service/Data/Casts/$class.php");
 
         expect($castPath)
             ->toBeFile("File not created at expected path:\n$castPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($castPath))->toContain(
-            "namespace App\Domains\\$domain\Services\\$service\Test\Data\Casts;",
+            "namespace App\Test\Domains\\$domain\Services\\$service\Data\Casts;",
             "class $class",
         );
     })->with('classes', 'domains', 'domains');
