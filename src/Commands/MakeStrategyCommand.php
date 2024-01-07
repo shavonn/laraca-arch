@@ -45,6 +45,7 @@ class MakeStrategyCommand extends LaracaGeneratorCommand
     public function handle()
     {
         $name = $this->formatName($this->input->getArgument('name'));
+        $name = Str::of($name)->endsWith('Strategy') ? $name : Str::of($name)->finish('Strategy');
 
         if (! parent::handle()) {
             return false;
@@ -68,16 +69,6 @@ class MakeStrategyCommand extends LaracaGeneratorCommand
         }
 
         $this->components->info(sprintf('%s [%s] and interface [%s] created successfully.', $info, $strategyPath, $interfacePath));
-    }
-
-    /**
-     * Get the class name
-     */
-    protected function formatName(string $name): string
-    {
-        $name = parent::formatName($name);
-
-        return Str::of($name)->endsWith('Strategy') ? $name : Str::of($name)->finish('Strategy');
     }
 
     /**
@@ -119,5 +110,16 @@ class MakeStrategyCommand extends LaracaGeneratorCommand
         return [
             ['name', InputArgument::REQUIRED, 'The name of the '.strtolower($this->type)],
         ];
+    }
+
+    /**
+     * Create the matching test case if requested.
+     *
+     * @param  string  $path
+     * @return bool
+     */
+    protected function handleTestCreation($path)
+    {
+        return $this->makeTest($path);
     }
 }

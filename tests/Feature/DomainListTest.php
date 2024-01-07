@@ -12,14 +12,12 @@ describe('domain:list', function () {
         Config::set('laraca.struct.domain.path', 'Test/Domains');
 
         artisan('make:controller', ['name' => $class, '--domain' => $domain]);
-
         artisan('make:job', ['name' => $class, '--domain' => $domain]);
-
         artisan('domain:list');
         $output = Artisan::output();
 
-        $class = ucfirst($class);
-        $domain = ucfirst($domain);
+        $class = getName($class);
+        $domain = getName($domain);
 
         expect($output)
             ->toContain('Test/Domains', $domain);

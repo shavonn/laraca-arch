@@ -10,7 +10,7 @@ describe('make:enum', function () {
     it('should create Enum class with namespace and path created from configured vals', function (string $class) {
         Config::set('laraca.struct.enum.path', 'Test/Enums');
 
-        $class = ucfirst($class);
+        $class = getName($class);
 
         artisan('make:enum', ['name' => $class]);
         $output = Artisan::output();

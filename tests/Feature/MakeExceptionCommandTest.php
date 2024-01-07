@@ -10,7 +10,7 @@ describe('make:exception', function () {
     it('should create Exception class with namespace and path created from configured vals', function (string $class) {
         Config::set('laraca.struct.exception.path', 'Test/Exceptions');
 
-        $class = ucfirst($class);
+        $class = getName($class);
 
         artisan('make:exception', ['name' => $class]);
         $output = Artisan::output();

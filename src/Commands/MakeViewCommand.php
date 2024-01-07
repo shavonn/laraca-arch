@@ -20,15 +20,38 @@ class MakeViewCommand extends ViewMakeCommand
     protected $name = 'make:view';
 
     /**
+     * Get the destination test case path.
+     *
+     * @return string
+     */
+    protected function getTestPath()
+    {
+        $testBasePath = Str::of($this->testClassFullyQualifiedName())
+            ->replace('\\', '/')
+            ->replaceFirst('Tests/Feature', 'tests/Feature')
+            ->replaceFirst('App/', 'app/')
+            ->append('Test.php')
+            ->value();
+        // echo base_path($testBasePath)."\n\n";
+        // echo $this->getConfigPathWithOptions('test')."\n\n";
+        // echo $this->getConfigPathWithOptions('test')."/$testBasePath"."\n\n";
+
+        return base_path($testBasePath);
+    }
+
+    /**
      * Create the matching test case if requested.
      *
      * @param  string  $path
      */
-    protected function handleTestCreation($path): bool
-    {
-        return parent::handleTestCreation($path);
-    }
+    // protected function handleTestCreation($path): bool
+    // {
+    //     $path = $this->formatName($this->getNameInput());
 
+    //     echo "$path\n\n";
+
+    //     return $this->makeTest($path);
+    // }
     /**
      * Get the class fully qualified name for the test.
      *
@@ -36,8 +59,7 @@ class MakeViewCommand extends ViewMakeCommand
      */
     protected function testClassFullyQualifiedName()
     {
-        $extension = is_string($this->option('extension')) ? $this->option('extension') : '';
-        $name = Str::of(Str::lower($this->getNameInput()))->replace('.'.$extension, '');
+        $name = Str::of(Str::lower($this->getNameInput()))->replace('.'.$this->option('extension'), '');
 
         $namespacedName = Str::of(
             Str::of($name)
@@ -51,6 +73,6 @@ class MakeViewCommand extends ViewMakeCommand
             ->map(fn ($part) => Str::of($part)->ucfirst())
             ->implode('');
 
-        return $this->getConfigNamespaceWithOptions('test').'\\Feature\\View\\'.$namespacedName;
+        return $this->getConfigNamespaceWithOptions('test', true).'\\Feature\\View\\'.$namespacedName;
     }
 }

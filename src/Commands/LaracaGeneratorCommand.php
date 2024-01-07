@@ -168,7 +168,7 @@ class LaracaGeneratorCommand extends Command
     {
         $name = Str::of($name)->replaceFirst($this->rootNamespace(), '')->replace('\\', '/');
 
-        return self::getConfigPathWithOptions($this->configKey)."/$name.php";
+        return $this->getConfigPathWithOptions($this->configKey)."/$name.php";
     }
 
     /**

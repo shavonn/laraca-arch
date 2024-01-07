@@ -7,14 +7,13 @@ use Illuminate\Support\Facades\File;
 use function Pest\Laravel\artisan;
 
 describe('make:model', function () {
-    it('should create Model class with namespace and path created from configured vals', function (string $class) {
+    it('should create Model and test in config path', function (string $class) {
         Config::set('laraca.struct.model.path', 'Test/Data/Models');
 
-        $class = ucfirst($class);
-
-        artisan('make:model', ['name' => $class]);
+        artisan('make:model', ['name' => $class, '--test' => true]);
         $output = Artisan::output();
 
+        $class = getName($class);
         $modelPath = app_path("Test/Data/Models/$class.php");
 
         expect($modelPath)
@@ -24,12 +23,23 @@ describe('make:model', function () {
             'namespace App\Test\Data\Models;',
             "class $class",
         );
+
+        $classTest = getName($class)->finish('Test');
+        $modelTestPath = base_path("tests/Feature/$classTest.php");
+
+        expect($modelTestPath)
+            ->toBeFile("File not created at expected path:\n$modelTestPath\n\nOutput results:\n$output\n=====\n");
+
+        expect(File::get($modelTestPath))->toContain(
+            'namespace Tests\Feature;',
+            "class $classTest",
+        );
     })->with('classes');
 
-    it('should create a Model class with HasUuids trait', function (string $class) {
+    it('should create Model and test in config path with HasUuids trait', function (string $class) {
         Config::set('laraca.struct.model.path', 'Test/Data/Models');
 
-        $class = ucfirst($class);
+        $class = getName($class);
 
         artisan('make:model', ['name' => $class, '--uuid' => true]);
         $output = Artisan::output();

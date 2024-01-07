@@ -28,7 +28,7 @@ class MakeFactoryCommand extends FactoryMakeCommand
     {
         $name = Str::of($name)->replaceFirst($this->rootNamespace(), '')->finish('Factory');
 
-        return self::getConfigPathWithOptions('factory')."/$name.php";
+        return $this->getConfigPathWithOptions('factory')."/$name.php";
     }
 
     /**

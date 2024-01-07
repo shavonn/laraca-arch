@@ -36,6 +36,12 @@ class LaracaTestCase extends TestCase
             if (File::exists(app_path('Test'))) {
                 File::deleteDirectories(app_path('Test'));
             }
+            if (File::exists(app_path('Domains'))) {
+                File::deleteDirectories(app_path('Domains'));
+            }
+            if (File::exists(app_path('Services'))) {
+                File::deleteDirectories(app_path('Services'));
+            }
             if (File::exists(app_path('AreaB'))) {
                 File::deleteDirectories(app_path('AreaB'));
             }

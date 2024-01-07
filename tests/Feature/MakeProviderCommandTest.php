@@ -13,7 +13,7 @@ describe('make:provider', function () {
         artisan('make:provider', ['name' => $class]);
         $output = Artisan::output();
 
-        $class = ucfirst($class);
+        $class = getName($class);
 
         $providerPath = app_path("Test/Providers/$class.php");
 

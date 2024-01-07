@@ -28,7 +28,7 @@ class MakeSeederCommand extends SeederMakeCommand
     {
         $name = Str::of($name)->replaceFirst($this->rootNamespace(), '')->replace('\\', '/');
 
-        return self::getConfigPathWithOptions('seeder')."/$name.php";
+        return $this->getConfigPathWithOptions('seeder')."/$name.php";
     }
 
     /**

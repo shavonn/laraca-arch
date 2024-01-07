@@ -71,7 +71,7 @@ class InitMicroserviceCommand extends LaracaGeneratorCommand
      */
     protected function replaceTags(string &$stub, string $name): string
     {
-        $controllerNamespace = $this->getConfigNamespaceWithOptions('controller', null, $this->serviceName);
+        $controllerNamespace = $this->getConfigNamespace('controller', null, $this->serviceName);
 
         $search = ['{{ namespace }}', '{{ slug }}', '{{ service }}', '{{ controller_namespace }}'];
         $replace = [$this->getServiceNamespace(), Str::slug($this->serviceName), $this->serviceName, $controllerNamespace];

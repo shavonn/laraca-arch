@@ -13,7 +13,7 @@ describe('make:rule', function () {
         artisan('make:rule', ['name' => $class]);
         $output = Artisan::output();
 
-        $class = ucfirst($class);
+        $class = getName($class);
 
         $rulePath = app_path("Test/Rules/$class.php");
 

@@ -9,6 +9,7 @@ use function Pest\Laravel\artisan;
 describe('make:component', function () {
     it('should create Component and test in config path', function (string $class) {
         Config::set('laraca.struct.component.path', 'Test/View/Components');
+        Config::set('laraca.struct.view.path', 'test/resources/views');
 
         artisan('make:component', ['name' => $class, '--test' => true]);
         $output = Artisan::output();
@@ -34,6 +35,14 @@ describe('make:component', function () {
             'namespace Tests\Feature;',
             "class $classTest",
         );
+
+        $viewName = $class->kebab();
+        $viewPath = base_path("test/resources/views/components/{$viewName}.blade.php");
+
+        expect($viewPath)
+            ->toBeFile("File not created at expected path:\n$viewPath\n\nOutput results:\n$output\n=====\n");
+
+        expect(File::get($viewPath))->toContain('<div>');
     })->with('classes');
 
     it('should create Component and test in config path with domain', function (string $class, string $domain) {

@@ -53,11 +53,11 @@ trait Shared
     /**
      * Get the namespace with the possibility of domain or service flags
      */
-    protected function getConfigNamespaceWithOptions(string $key): string
+    protected function getConfigNamespaceWithOptions(string $key, bool $withRoot = true): string
     {
         [$domain, $service] = $this->getPathAssets();
 
-        return self::getConfigNamespace($key, $domain, $service);
+        return $this->getConfigNamespace($key, $domain, $service, $withRoot);
     }
 
     /**

@@ -13,7 +13,7 @@ describe('make:resource', function () {
         artisan('make:resource', ['name' => $class]);
         $output = Artisan::output();
 
-        $class = ucfirst($class);
+        $class = getName($class);
 
         $resourcePath = app_path("Test/Http/Resources/$class.php");
 

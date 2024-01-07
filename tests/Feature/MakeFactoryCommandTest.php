@@ -10,7 +10,7 @@ describe('make:factory', function () {
     it('should create Factory class with namespace and path created from configured vals', function (string $class) {
         Config::set('laraca.struct.database.path', 'test/database');
 
-        $class = ucfirst($class);
+        $class = getName($class);
 
         artisan('make:factory', ['name' => $class]);
         $output = Artisan::output();

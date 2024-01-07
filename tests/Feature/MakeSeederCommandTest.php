@@ -13,7 +13,7 @@ describe('make:seeder', function () {
         artisan('make:seeder', ['name' => $class]);
         $output = Artisan::output();
 
-        $class = ucfirst($class);
+        $class = getName($class);
 
         $seederPath = base_path("test/database/seeders/$class.php");
 

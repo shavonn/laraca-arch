@@ -13,7 +13,7 @@ describe('make:request', function () {
         artisan('make:request', ['name' => $class]);
         $output = Artisan::output();
 
-        $class = ucfirst($class);
+        $class = getName($class);
 
         $requestPath = app_path("Test/Http/Requests/$class.php");
 

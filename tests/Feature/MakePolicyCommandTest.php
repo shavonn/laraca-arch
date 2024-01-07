@@ -13,7 +13,7 @@ describe('make:policy', function () {
         artisan('make:policy', ['name' => $class]);
         $output = Artisan::output();
 
-        $class = ucfirst($class);
+        $class = getName($class);
 
         $policyPath = app_path("Test/Policies/$class.php");
 

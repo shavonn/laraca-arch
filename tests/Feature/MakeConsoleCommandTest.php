@@ -101,20 +101,20 @@ describe('make:command', function () {
     it('should create Command and test in config path with domain service', function (string $class, string $domain, string $service) {
         Config::set('laraca.struct.command.path', 'Test/Console/Commands');
 
-        artisan('make:command', ['name' => $class, '--domain' => $domain, '--service' => $service]);
+        artisan('make:command', ['name' => $class, '--domain' => $domain, '--service' => $service, '--test' => true]);
         $output = Artisan::output();
 
         $class = getName($class);
         $service = getName($service);
         $domain = getName($domain);
 
-        $commandPath = app_path("Domains/$domain/Services/$service/Console/Commands/$class.php");
+        $commandPath = app_path("Domains/$domain/Services/$service/Test/Console/Commands/$class.php");
 
         expect($commandPath)
             ->toBeFile("File not created at expected path:\n$commandPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($commandPath))->toContain(
-            "namespace App\Domains\\$domain\Services\\$service\Console\Commands;",
+            "namespace App\Domains\\$domain\Services\\$service\Test\Console\Commands;",
             "class $class",
         );
 

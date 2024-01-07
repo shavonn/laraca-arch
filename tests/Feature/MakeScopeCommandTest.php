@@ -13,7 +13,7 @@ describe('make:scope', function () {
         artisan('make:scope', ['name' => $class]);
         $output = Artisan::output();
 
-        $class = ucfirst($class);
+        $class = getName($class);
 
         $scopePath = app_path("Test/Data/Models/Scopes/$class.php");
 

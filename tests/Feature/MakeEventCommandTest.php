@@ -10,7 +10,7 @@ describe('make:event', function () {
     it('should create Event class with namespace and path created from configured vals', function (string $class) {
         Config::set('laraca.struct.event.path', 'Test/Events');
 
-        $class = ucfirst($class);
+        $class = getName($class);
 
         artisan('make:event', ['name' => $class]);
         $output = Artisan::output();

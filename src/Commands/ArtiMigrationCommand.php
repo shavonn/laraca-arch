@@ -62,6 +62,6 @@ class ArtiMigrationCommand extends MigrateMakeCommand
                             : $targetPath;
         }
 
-        return self::getConfigPathWithOptions('migration');
+        return $this->getConfigPathWithOptions('migration');
     }
 }

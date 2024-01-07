@@ -14,8 +14,8 @@ describe('use domains', function () {
         artisan('make:controller', ['name' => $class, '--domain' => $domain]);
         $output = Artisan::output();
 
-        $class = ucfirst($class);
-        $domain = ucfirst($domain);
+        $class = getName($class);
+        $domain = getName($domain);
 
         $contollerPath = app_path("Test/Domains/$domain/Http/Controllers/$class.php");
 
@@ -35,8 +35,8 @@ describe('use domains', function () {
         artisan('make:enum', ['name' => $class, '--domain' => $domain]);
         $output = Artisan::output();
 
-        $class = ucfirst($class);
-        $domain = ucfirst($domain);
+        $class = getName($class);
+        $domain = getName($domain);
 
         $enumPath = app_path("$domain/Enums/$class.php");
 
@@ -58,8 +58,7 @@ describe('use domains', function () {
         artisan('make:controller', ['name' => $class]);
         $output = Artisan::output();
 
-        $class = ucfirst($class);
-
+        $class = getName($class);
         $contollerPath = app_path("Test/Http/Controllers/$class.php");
 
         expect($contollerPath)

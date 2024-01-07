@@ -13,7 +13,7 @@ describe('make:observer', function () {
         artisan('make:observer', ['name' => $class]);
         $output = Artisan::output();
 
-        $class = ucfirst($class);
+        $class = getName($class);
 
         $observerPath = app_path("Test/Data/Observers/$class.php");
 

@@ -7,7 +7,7 @@ use HandsomeBrown\Laraca\Commands\Traits\Shared;
 use HandsomeBrown\Laraca\Commands\Traits\UsesLaravelGenerator;
 use Illuminate\Foundation\Console\ConsoleMakeCommand;
 
-class MakeCommandCommand extends ConsoleMakeCommand
+class MakeConsoleCommand extends ConsoleMakeCommand
 {
     use Directable, Shared, UsesLaravelGenerator;
 

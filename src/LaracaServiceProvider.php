@@ -8,8 +8,8 @@ use HandsomeBrown\Laraca\Commands\InitMicroserviceCommand;
 use HandsomeBrown\Laraca\Commands\InitStructureCommand;
 use HandsomeBrown\Laraca\Commands\MakeCastCommand;
 use HandsomeBrown\Laraca\Commands\MakeChannelCommand;
-use HandsomeBrown\Laraca\Commands\MakeCommandCommand;
 use HandsomeBrown\Laraca\Commands\MakeComponentCommand;
+use HandsomeBrown\Laraca\Commands\MakeConsoleCommand;
 use HandsomeBrown\Laraca\Commands\MakeControllerCommand;
 use HandsomeBrown\Laraca\Commands\MakeEnumCommand;
 use HandsomeBrown\Laraca\Commands\MakeEventCommand;
@@ -60,7 +60,7 @@ class LaracaServiceProvider extends ServiceProvider
         'InitStructure' => InitStructureCommand::class,
         'MakeCast' => MakeCastCommand::class,
         'MakeChannel' => MakeChannelCommand::class,
-        'MakeCommand' => MakeCommandCommand::class,
+        'MakeCommand' => MakeConsoleCommand::class,
         'MakeComponent' => MakeComponentCommand::class,
         'MakeController' => MakeControllerCommand::class,
         'MakeEvent' => MakeEventCommand::class,
