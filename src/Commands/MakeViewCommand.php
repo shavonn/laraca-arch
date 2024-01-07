@@ -32,26 +32,10 @@ class MakeViewCommand extends ViewMakeCommand
             ->replaceFirst('App/', 'app/')
             ->append('Test.php')
             ->value();
-        // echo base_path($testBasePath)."\n\n";
-        // echo $this->getConfigPathWithOptions('test')."\n\n";
-        // echo $this->getConfigPathWithOptions('test')."/$testBasePath"."\n\n";
 
         return base_path($testBasePath);
     }
 
-    /**
-     * Create the matching test case if requested.
-     *
-     * @param  string  $path
-     */
-    // protected function handleTestCreation($path): bool
-    // {
-    //     $path = $this->formatName($this->getNameInput());
-
-    //     echo "$path\n\n";
-
-    //     return $this->makeTest($path);
-    // }
     /**
      * Get the class fully qualified name for the test.
      *

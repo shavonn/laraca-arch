@@ -27,13 +27,6 @@ class LaracaGeneratorCommand extends Command
     protected $type;
 
     /**
-     * Config key.
-     *
-     * @var string
-     */
-    protected $configKey;
-
-    /**
      * Generated files.
      *
      * @var array<string>

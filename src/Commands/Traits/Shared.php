@@ -12,6 +12,13 @@ trait Shared
     use GetsConfigValues;
 
     /**
+     * Config key.
+     *
+     * @var string
+     */
+    protected $configKey;
+
+    /**
      * Create a new controller creator command instance.
      *
      * @return void
@@ -20,6 +27,9 @@ trait Shared
     {
         parent::__construct($files);
 
+        $this->configKey = strtolower($this->type);
+        $this->files = $files;
+
         if (in_array(CreatesMatchingTest::class, class_uses_recursive($this))) {
             $this->addTestOptions();
         }
@@ -27,9 +37,6 @@ trait Shared
         if (in_array(Directable::class, class_uses_recursive($this))) {
             $this->addDirectableOptions();
         }
-        $this->configKey = strtolower($this->type);
-
-        $this->files = $files;
     }
 
     /**
