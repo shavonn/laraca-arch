@@ -25,7 +25,7 @@ trait Shared
      */
     public function __construct(Filesystem $files)
     {
-        parent::__construct($files);
+        parent::__construct(...func_get_args());
 
         $this->configKey = strtolower($this->type);
         $this->files = $files;
