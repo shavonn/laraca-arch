@@ -9,7 +9,7 @@ use function Pest\Laravel\artisan;
 describe('make:value', function () {
     it('should create Value and test in config path', function (string $class) {
         Config::set('laraca.struct.value.path', 'Test/Data/Values');
-        Config::set('laraca.struct.test.path', 'test/tests');
+        Config::set('laraca.struct.test.path', 'Test/tests');
 
         artisan('make:value', ['name' => $class, '--test' => true]);
         $output = Artisan::output();
@@ -26,7 +26,7 @@ describe('make:value', function () {
         );
 
         $classTest = getName($class)->finish('Test');
-        $valueTestPath = base_path("test/tests/Feature/$classTest.php");
+        $valueTestPath = base_path("Test/tests/Feature/$classTest.php");
 
         expect($valueTestPath)
             ->toBeFile("File not created at expected path:\n$valueTestPath\n\nOutput results:\n$output\n=====\n");

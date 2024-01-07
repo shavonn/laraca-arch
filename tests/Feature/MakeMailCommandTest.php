@@ -9,7 +9,7 @@ use function Pest\Laravel\artisan;
 describe('make:mail', function () {
     it('should create Mail and test in config path', function (string $class) {
         Config::set('laraca.struct.mail.path', 'Test/Mail');
-        Config::set('laraca.struct.test.path', 'test/tests');
+        Config::set('laraca.struct.test.path', 'Test/tests');
 
         artisan('make:mail', ['name' => $class, '--test' => true]);
         $output = Artisan::output();
@@ -26,7 +26,7 @@ describe('make:mail', function () {
         );
 
         $classTest = getName($class)->finish('Test');
-        $mailTestPath = base_path("test/tests/Feature/$classTest.php");
+        $mailTestPath = base_path("Test/tests/Feature/$classTest.php");
 
         expect($mailTestPath)
             ->toBeFile("File not created at expected path:\n$mailTestPath\n\nOutput results:\n$output\n=====\n");

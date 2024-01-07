@@ -9,7 +9,7 @@ use function Pest\Laravel\artisan;
 describe('make:notification', function () {
     it('should create Notification and test in config path', function (string $class) {
         Config::set('laraca.struct.notification.path', 'Test/Notifications');
-        Config::set('laraca.struct.test.path', 'test/tests');
+        Config::set('laraca.struct.test.path', 'Test/tests');
 
         artisan('make:notification', ['name' => $class, '--test' => true]);
         $output = Artisan::output();
@@ -26,7 +26,7 @@ describe('make:notification', function () {
         );
 
         $classTest = getName($class)->finish('Test');
-        $notificationTestPath = base_path("test/tests/Feature/$classTest.php");
+        $notificationTestPath = base_path("Test/tests/Feature/$classTest.php");
 
         expect($notificationTestPath)
             ->toBeFile("File not created at expected path:\n$notificationTestPath\n\nOutput results:\n$output\n=====\n");

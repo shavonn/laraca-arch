@@ -28,6 +28,7 @@ class MakeViewCommand extends ViewMakeCommand
     {
         $testBasePath = Str::of($this->testClassFullyQualifiedName())
             ->replace('\\', '/')
+            // ->replaceFirst('Test/Tests/Feature', 'test/tests/Feature')
             ->replaceFirst('Tests/Feature', 'tests/Feature')
             ->replaceFirst('App/', 'app/')
             ->append('Test.php')

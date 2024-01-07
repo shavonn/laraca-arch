@@ -9,7 +9,7 @@ use function Pest\Laravel\artisan;
 describe('make:listener', function () {
     it('should create Listener and test in config path', function (string $class) {
         Config::set('laraca.struct.listener.path', 'Test/Listeners');
-        Config::set('laraca.struct.test.path', 'test/tests');
+        Config::set('laraca.struct.test.path', 'Test/tests');
 
         artisan('make:listener', ['name' => $class, '--test' => true]);
         $output = Artisan::output();
@@ -26,7 +26,7 @@ describe('make:listener', function () {
         );
 
         $classTest = getName($class)->finish('Test');
-        $listenerTestPath = base_path("test/tests/Feature/$classTest.php");
+        $listenerTestPath = base_path("Test/tests/Feature/$classTest.php");
 
         expect($listenerTestPath)
             ->toBeFile("File not created at expected path:\n$listenerTestPath\n\nOutput results:\n$output\n=====\n");

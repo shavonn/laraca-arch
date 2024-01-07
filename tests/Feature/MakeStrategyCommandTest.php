@@ -9,7 +9,7 @@ use function Pest\Laravel\artisan;
 describe('make:strategy', function () {
     it('should create Strategy and test in config path', function (string $class) {
         Config::set('laraca.struct.strategy.path', 'Test/Strategy');
-        Config::set('laraca.struct.test.path', 'test/tests');
+        Config::set('laraca.struct.test.path', 'Test/tests');
 
         artisan('make:strategy', ['name' => $class, '--test' => true]);
         $output = Artisan::output();
@@ -36,7 +36,7 @@ describe('make:strategy', function () {
         );
 
         $classTest = getName($class)->start('Type')->finish('StrategyTest');
-        $strategyTestPath = base_path("test/tests/Feature/$classTest.php");
+        $strategyTestPath = base_path("Test/tests/Feature/$classTest.php");
 
         expect($strategyTestPath)
             ->toBeFile("File not created at expected path:\n$strategyTestPath\n\nOutput results:\n$output\n=====\n");

@@ -9,7 +9,7 @@ use function Pest\Laravel\artisan;
 describe('make:component', function () {
     it('should create Component and test in config path', function (string $class) {
         Config::set('laraca.struct.component.path', 'Test/View/Components');
-        Config::set('laraca.struct.test.path', 'test/tests');
+        Config::set('laraca.struct.test.path', 'Test/tests');
         Config::set('laraca.struct.view.path', 'test/resources/views');
 
         artisan('make:component', ['name' => $class, '--test' => true]);
@@ -27,7 +27,7 @@ describe('make:component', function () {
         );
 
         $classTest = getName($class)->finish('Test');
-        $componentTestPath = base_path("test/tests/Feature/$classTest.php");
+        $componentTestPath = base_path("Test/tests/Feature/$classTest.php");
 
         expect($componentTestPath)
             ->toBeFile("File not created at expected path:\n$componentTestPath\n\nOutput results:\n$output\n=====\n");

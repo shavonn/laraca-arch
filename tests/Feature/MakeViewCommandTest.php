@@ -9,7 +9,7 @@ use function Pest\Laravel\artisan;
 describe('make:view', function () {
     it('should create View and test in config path', function (string $class) {
         Config::set('laraca.struct.view.path', 'test/resources/views');
-        Config::set('laraca.struct.test.path', 'test/tests');
+        Config::set('laraca.struct.test.path', 'Test/tests');
 
         artisan('make:view', ['name' => $class, '--test' => true]);
         $output = Artisan::output();
@@ -21,8 +21,9 @@ describe('make:view', function () {
 
         expect(File::get($viewPath))->toContain('<div>');
 
+        $class = strtolower($class);
         $classTest = getName($class)->finish('Test');
-        $viewTestPath = base_path("test/tests/Feature/View/$classTest.php");
+        $viewTestPath = base_path("Test/tests/Feature/View/$classTest.php");
 
         expect($viewTestPath)
             ->toBeFile("File not created at expected path:\n$viewTestPath\n\nOutput results:\n$output\n=====\n");

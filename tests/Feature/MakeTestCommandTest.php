@@ -8,13 +8,13 @@ use function Pest\Laravel\artisan;
 
 describe('make:test', function () {
     it('should create Test in config path', function (string $class) {
-        Config::set('laraca.struct.test.path', 'test/tests');
+        Config::set('laraca.struct.test.path', 'Test/tests');
 
         artisan('make:test', ['name' => $class]);
         $output = Artisan::output();
 
         $class = getName($class);
-        $testPath = base_path("test/tests/Feature/$class.php");
+        $testPath = base_path("Test/tests/Feature/$class.php");
 
         expect($testPath)
             ->toBeFile("File not created at expected path:\n$testPath\n\nOutput results:\n$output\n=====\n");
@@ -26,14 +26,14 @@ describe('make:test', function () {
     })->with('classes');
 
     it('sshould create Test in config path with unit option', function (string $class) {
-        Config::set('laraca.struct.test.path', 'test/tests');
+        Config::set('laraca.struct.test.path', 'Test/tests');
 
         artisan('make:test', ['name' => $class, '--unit' => true]);
         $output = Artisan::output();
 
         $class = getName($class);
 
-        $testPath = base_path("test/tests/Unit/$class.php");
+        $testPath = base_path("Test/tests/Unit/$class.php");
 
         expect($testPath)
             ->toBeFile("File not created at expected path:\n$testPath\n\nOutput results:\n$output\n=====\n");

@@ -9,7 +9,7 @@ use function Pest\Laravel\artisan;
 describe('make:model', function () {
     it('should create Model and test in config path', function (string $class) {
         Config::set('laraca.struct.model.path', 'Test/Data/Models');
-        Config::set('laraca.struct.test.path', 'test/tests');
+        Config::set('laraca.struct.test.path', 'Test/tests');
 
         artisan('make:model', ['name' => $class, '--test' => true]);
         $output = Artisan::output();
@@ -26,7 +26,7 @@ describe('make:model', function () {
         );
 
         $classTest = getName($class)->finish('Test');
-        $modelTestPath = base_path("test/tests/Feature/$classTest.php");
+        $modelTestPath = base_path("Test/tests/Feature/$classTest.php");
 
         expect($modelTestPath)
             ->toBeFile("File not created at expected path:\n$modelTestPath\n\nOutput results:\n$output\n=====\n");
