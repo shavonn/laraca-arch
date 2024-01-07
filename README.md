@@ -2,6 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/handsomebrown/laraca-arch.svg?style=flat-square)](https://packagist.org/packages/handsomebrown/laraca-arch)
 [![Total Downloads](https://img.shields.io/packagist/dt/handsomebrown/laraca-arch.svg?style=flat-square)](https://packagist.org/packages/handsomebrown/laraca-arch)
+[![Test Coverage](https://raw.githubusercontent.com/Hi-Folks/array/main/badge-coverage.svg)](https://packagist.org/packages/hi-folks/array)
 ![GitHub Actions](https://github.com/handsomebrown/laraca-arch/actions/workflows/main.yml/badge.svg)
 
 The goal of this package is a _configurable_ Laravel application structure with a few niceties thrown in. And I swear only tiny bits of my personal opinion made it into the default configuration. ;)
