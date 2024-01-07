@@ -9,6 +9,7 @@ use function Pest\Laravel\artisan;
 describe('make:job', function () {
     it('should create Job and test in config path', function (string $class) {
         Config::set('laraca.struct.job.path', 'Test/Jobs');
+        Config::set('laraca.struct.test.path', 'test/tests');
 
         artisan('make:job', ['name' => $class, '--test' => true]);
         $output = Artisan::output();
@@ -25,13 +26,13 @@ describe('make:job', function () {
         );
 
         $classTest = getName($class)->finish('Test');
-        $jobTestPath = base_path("tests/Feature/$classTest.php");
+        $jobTestPath = base_path("test/tests/Feature/$classTest.php");
 
         expect($jobTestPath)
             ->toBeFile("File not created at expected path:\n$jobTestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($jobTestPath))->toContain(
-            'namespace Tests\Feature;',
+            'namespace Test\Tests\Feature;',
             "class $classTest",
         );
     })->with('classes');

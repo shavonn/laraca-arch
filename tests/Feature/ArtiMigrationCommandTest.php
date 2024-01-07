@@ -59,6 +59,8 @@ describe('arti:migration', function () {
         artisan('arti:migration', ['name' => $class, '--domain' => $domain]);
         $output = Artisan::output();
 
+        $domain = getName($domain);
+
         $now = now();
         $subSecond = $now->copy()->subSecond()->format('Y_m_d_His');
         $now = $now->format('Y_m_d_His');
@@ -81,6 +83,8 @@ describe('arti:migration', function () {
         artisan('arti:migration', ['name' => $class, '--service' => $service]);
         $output = Artisan::output();
 
+        $service = getName($service);
+
         $now = now();
         $subSecond = $now->copy()->subSecond()->format('Y_m_d_His');
         $now = $now->format('Y_m_d_His');
@@ -102,6 +106,9 @@ describe('arti:migration', function () {
 
         artisan('arti:migration', ['name' => $class, '--domain' => $domain, '--service' => $service]);
         $output = Artisan::output();
+
+        $domain = getName($domain);
+        $service = getName($service);
 
         $now = now();
         $subSecond = $now->copy()->subSecond()->format('Y_m_d_His');

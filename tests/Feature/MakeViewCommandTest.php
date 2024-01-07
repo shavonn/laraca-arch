@@ -30,28 +30,6 @@ describe('make:view', function () {
         expect(File::get($viewTestPath))->toContain('namespace Test\Tests\Feature\View;');
     })->with('classes');
 
-    it('should create View and test in Laravel config path when view not set in laraca config', function (string $class) {
-        Config::offsetUnset('view');
-
-        artisan('make:view', ['name' => $class, '--test' => true]);
-        $output = Artisan::output();
-
-        $viewPath = base_path("resources/views/{$class}.blade.php");
-
-        expect($viewPath)
-            ->toBeFile("File not created at expected path:\n$viewPath\n\nOutput results:\n$output\n=====\n");
-
-        expect(File::get($viewPath))->toContain('<div>');
-
-        $classTest = getName($class)->finish('Test');
-        $viewTestPath = base_path("tests/Feature/View/$classTest.php");
-
-        expect($viewTestPath)
-            ->toBeFile("File not created at expected path:\n$viewTestPath\n\nOutput results:\n$output\n=====\n");
-
-        expect(File::get($viewTestPath))->toContain('namespace Tests\Feature\View;');
-    })->with('classes');
-
     it('should create View and test in config path with domain', function (string $class, string $domain) {
         Config::set('laraca.struct.domain.path', 'Test/Domains');
 

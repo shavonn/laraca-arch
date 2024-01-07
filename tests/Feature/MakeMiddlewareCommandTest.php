@@ -9,6 +9,7 @@ use function Pest\Laravel\artisan;
 describe('make:middleware', function () {
     it('should create Middleware and test in config path', function (string $class) {
         Config::set('laraca.struct.middleware.path', 'Test/Http/Middleware');
+        Config::set('laraca.struct.test.path', 'test/tests');
 
         artisan('make:middleware', ['name' => $class, '--test' => true]);
         $output = Artisan::output();
@@ -25,13 +26,13 @@ describe('make:middleware', function () {
         );
 
         $classTest = getName($class)->finish('Test');
-        $middlewareTestPath = base_path("tests/Feature/$classTest.php");
+        $middlewareTestPath = base_path("test/tests/Feature/$classTest.php");
 
         expect($middlewareTestPath)
             ->toBeFile("File not created at expected path:\n$middlewareTestPath\n\nOutput results:\n$output\n=====\n");
 
         expect(File::get($middlewareTestPath))->toContain(
-            'namespace Tests\Feature;',
+            'namespace Test\Tests\Feature;',
             "class $classTest",
         );
     })->with('classes');
