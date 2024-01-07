@@ -3,11 +3,34 @@
 namespace HandsomeBrown\Laraca\Commands\Traits;
 
 use HandsomeBrown\Laraca\Traits\GetsConfigValues;
+use Illuminate\Console\Concerns\CreatesMatchingTest;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 
 trait Shared
 {
     use GetsConfigValues;
+
+    /**
+     * Create a new controller creator command instance.
+     *
+     * @return void
+     */
+    public function __construct(Filesystem $files)
+    {
+        parent::__construct($files);
+
+        if (in_array(CreatesMatchingTest::class, class_uses_recursive($this))) {
+            $this->addTestOptions();
+        }
+
+        if (in_array(Directable::class, class_uses_recursive($this))) {
+            $this->addDirectableOptions();
+        }
+        $this->configKey = strtolower($this->type);
+
+        $this->files = $files;
+    }
 
     /**
      * Get the class name
@@ -61,6 +84,16 @@ trait Shared
     }
 
     /**
+     * Get the path with the possibility of domain or service flags
+     */
+    protected function getConfigPathWithOptions(string $key, bool $withRoot = true): string
+    {
+        [$domain, $service] = $this->getPathAssets();
+
+        return self::getConfigPath($key, $domain, $service, $withRoot);
+    }
+
+    /**
      * Create the matching test case if requested.
      *
      * @param  string  $path
@@ -90,15 +123,5 @@ trait Shared
         }
 
         return $this->callSilent('make:test', $args) == 0;
-    }
-
-    /**
-     * Get the path with the possibility of domain or service flags
-     */
-    protected function getConfigPathWithOptions(string $key, bool $withRoot = true): string
-    {
-        [$domain, $service] = $this->getPathAssets();
-
-        return self::getConfigPath($key, $domain, $service, $withRoot);
     }
 }

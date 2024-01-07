@@ -7,26 +7,24 @@ use Symfony\Component\Console\Input\InputOption;
 trait Directable
 {
     /**
-     * Get the console command options.
+     * Add the domain and service options where applicable
      *
-     * @return array<int,array<int,int|string>>
+     * @return void
      */
-    protected function getOptions()
+    protected function addDirectableOptions()
     {
-        $options = parent::getOptions();
-
         if (self::domainsEnabled()) {
-            $options = array_merge($options, [
-                ['domain', 'dom', InputOption::VALUE_REQUIRED, 'The name of the domain.'],
-            ]);
+            $this->getDefinition()->addOption(new InputOption(
+                'domain', 'dom', InputOption::VALUE_REQUIRED,
+                "The name of the domain {$this->type} will be added to."
+            ));
         }
 
         if (self::microservicesEnabled() && $this->type !== 'Microservice') {
-            $options = array_merge($options, [
-                ['service', 'serv', InputOption::VALUE_REQUIRED, 'The name of the service.'],
-            ]);
+            $this->getDefinition()->addOption(new InputOption(
+                'service', 'serv', InputOption::VALUE_REQUIRED,
+                "The name of the service {$this->type} will be added to."
+            ));
         }
-
-        return $options;
     }
 }

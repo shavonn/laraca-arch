@@ -4,7 +4,6 @@ namespace HandsomeBrown\Laraca\Commands;
 
 use HandsomeBrown\Laraca\Commands\Traits\Shared;
 use Illuminate\Console\Command;
-use Illuminate\Console\Concerns\CreatesMatchingTest;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
@@ -40,23 +39,6 @@ class LaracaGeneratorCommand extends Command
      * @var array<string>
      */
     protected $generated = [];
-
-    /**
-     * Create a new controller creator command instance.
-     *
-     * @return void
-     */
-    public function __construct(Filesystem $files)
-    {
-        parent::__construct();
-
-        if (in_array(CreatesMatchingTest::class, class_uses_recursive($this))) {
-            $this->addTestOptions();
-        }
-
-        $this->configKey = strtolower($this->type);
-        $this->files = $files;
-    }
 
     /**
      * Execute the console command.
